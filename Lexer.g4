@@ -43,6 +43,9 @@ TEXT
 IMAGE
     : 'image'
     ;
+SEMI_COLON
+    : ';'
+    ;
 LIST
     : 'list'
     ;
@@ -67,6 +70,49 @@ BOOLEAN
     | 'true'
     | 'false'
     ;
+
+CASE
+    : 'case'
+    ;
+
+METHOD
+    : 'post'
+    | 'delete'
+    | 'get'
+    ;
+
+DEFAULT
+    : 'dafaultl'
+    ;
+
+FORM
+    : 'form'
+    ;
+
+TEXT_FIELD
+    : 'textField'
+    ;
+
+DATE
+    : 'date'
+    ;
+
+CHECKBOX
+    : 'checkbox'
+    ;
+
+SELCTION
+    : 'selection'
+    ;
+
+RADIO
+    :'radio'
+    ;
+
+SWITCH
+    :'switch'
+    ;
+
 OPEN_CURLY_BRACE : '{';
 CLOSE_CURLY_BRACE : '}';
 OPEN_BRACE:'(';

@@ -28,12 +28,60 @@ out_element_attributes
       IMAGE BRACKET_OPEN image|
       BUTTON BRACKET_OPEN button|
     ;
+form
+    : FORM BRACKET_OPEN METHOD COMMA STRING COMMA extra_attributes? BRACKET_CLOSE CURLEY_BRACKET_OPEN form_body? CURLEY_BRACKET_OPEN
+    ;
+
+form_body
+    :  out_element
+    | statement
+    | STRING
+    ;
+
+text_field
+    : TEXT_FIELD BRACKET_OPEN STRING COMMA STRING COMMA STRING COMMA extra_attributes? BRACKET_CLOSE
+    ;
+
+date
+    : DATE BRACKET_OPEN STRING COMMA STRING COMMA STRING COMMA extra_attributes? BRACKET_CLOSE
+    ;
+
+check_box
+    : CHECKBOX BRACKET_OPEN extra_attributes? BRACKET_CLOSE CURLEY_BRACKET_OPEN check_box_body CURLEY_BRACKET_CLOSE
+    ;
+
+check_box_body
+    : STRING
+    ;
+
+selection
+    : SELCTION BRACKET_OPEN BOOLEAN COMMA extra_attributes? BRACKET_CLOSE  CURLEY_BRACKET_OPEN selection_body CURLEY_BRACKET_CLOSE
+    ;
+
+selection_body
+    : STRING (COLON STRING)?
+    ;
+
+radio
+    : RADIO BRACKET_OPEN extra_attributes? BRACKET_CLOSE CURLEY_BRACKET_OPEN radio_body CURLEY_BRACKET_CLOSE
+    ;
+
+radio_body
+     : STRING (COLON STRING)?
+     ;
+
+switch
+    : SWITCH BRACKET_OPEN (expression) BRACKET_CLOSE CURLEY_BRACKET_OPEN switch_body CURLEY_BRACKET_CLOSE
+    ;
+
+switch_body
+    : (CASE COLON expression SEMI_COLON)? (DEFAULT COLON expression)?
+    ;
+
 extra_attributes
     : (COMMA key_value_array)? COMMA?
     ;
-string
-    : (DOUBLE_QUOTE_STRING|SINGLE_QUOTE_STRING)
-    ;
+
 text
     : string COMMA DECIMAL COMMA HEXCHARS
     ;
