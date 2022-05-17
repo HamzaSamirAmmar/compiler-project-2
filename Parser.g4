@@ -10,6 +10,15 @@ out_element_with_attributes_without_body |out_element_without_attributes_with_bo
 out_element_without_attributes_with_body: table;
 out_element_with_attributes_with_body: list extra_attributes BRACKET_CLOSE body;
 
+in_element
+    : form
+    | text_field
+    | date
+    | check_box
+    | selection
+    | radio
+    ;
+
 
 
 out_element_with_attributes_without_body
@@ -26,7 +35,7 @@ out_element_with_attributes_without_body
 out_element_attributes
     : TEXT BRACKET_OPEN text |
       IMAGE BRACKET_OPEN image|
-      BUTTON BRACKET_OPEN button|
+      BUTTON BRACKET_OPEN button
     ;
 form
     : FORM BRACKET_OPEN METHOD COMMA STRING COMMA extra_attributes? BRACKET_CLOSE CURLEY_BRACKET_OPEN form_body? CURLEY_BRACKET_OPEN
@@ -83,16 +92,16 @@ extra_attributes
     ;
 
 text
-    : string COMMA DECIMAL COMMA HEXCHARS
+    : STRING COMMA DECIMAL COMMA HEXCHARS
     ;
 image
-    : string COMMA DECIMAL COMMA DECIMAL
+    : STRING COMMA DECIMAL COMMA DECIMAL
     ;
 list
     : LIST BRACKET_OPEN BOOLEAN
     ;
 button
-    : string COMMA string
+    : STRING COMMA STRING
     /** text on button string? action string?**/
     ;
 table
@@ -103,7 +112,7 @@ key_value_array
     : SQUARE_OPEN array_value(COMMA array_value)* COMMA? SQUARE_CLOSE
     ;
 array_value
-    : (DOUBLE_QUOTE_STRING|SINGLE_QUOTE_STRING) ARROW (DOUBLE_QUOTE_STRING|SINGLE_QUOTE_STRING)
+    : STRING ARROW STRING
     ;
 table_body
     :CURLEY_BRACKET_OPEN HEADER COLON table_map BODY COLON table_map
@@ -117,10 +126,10 @@ table_map_value
 
 body: map;
 map
-    :CURLEY_BRACKET_OPEN string COLON map_value (string COLON map_value COMMA)* COMMA? CURLEY_BRACKET_CLOSE ;
+    :CURLEY_BRACKET_OPEN STRING COLON map_value (STRING COLON map_value COMMA)* COMMA? CURLEY_BRACKET_CLOSE ;
 
 map_value
-    : string |DECIMAL
+    : STRING |DECIMAL
     // 'id?' 'string?' 'expression?'
     ;
 program:
@@ -130,32 +139,77 @@ start_page:
     page
     ;
 page:
-    PAGE ID head (EXTENDS (ID COMMA?)*)? OPEN_CURLY_BRACE page_body* CLOSE_CURLY_BRACE
+    PAGE ID head (EXTENDS (ID COMMA?)*)? CURLEY_BRACKET_OPEN page_body* CURLEY_BRACKET_CLOSE
     ;
 head:
-    HEAD OPEN_BRACE title ClOSE_BRACE
+    HEAD BRACKET_OPEN title BRACKET_CLOSE
     ;
 title:
     STRING;
 page_body:
-    input
-    | output
+    in_element
+    | out_element
     | statement//statements include logics(for, if , switch),declaretions,directives
     ;
 controller:
-    CONTROLLER ID CONTROLES ID OPEN_CURLY_BRACE controller_body CLOSE_CURLY_BRACE
+    CONTROLLER ID CONTROLES ID CURLEY_BRACKET_OPEN controller_body CURLEY_BRACKET_CLOSE
     ;
-controller_body:
+controller_body:8
     | statement//statements include logics(for, if , switch),declaretions,directives
-    | CHECK_AUTH OPEN_BRACE  CLOSE_BRACE
-    | CHECK_VALID OPEN_BRACE STRING COMMA STRING  CLOSE_BRACE
-    | CHECK_ROLE OPEN_BRACE STRING CLOSE_BRACE
+    | CHECK_AUTH BRACKET_OPEN  BRACKET_CLOSE
+    | CHECK_VALID BRACKET_OPEN STRING COMMA STRING  BRACKET_CLOSE
+    | CHECK_ROLE BRACKET_OPEN STRING BRACKET_CLOSE
     | REDIRECT ID
     ;
 statement:
-    IF OPEN_BRACE expression CLOSE_BRACE  OPEN_CURLY_BRACE page_body CLOSE_CURLY_BRACE
+    IF BRACKET_OPEN expression BRACKET_CLOSE  CURLEY_BRACKET_OPEN page_body CURLEY_BRACKET_CLOSE
     ;
 
+anythingInLife
+        : expression
+        ;
 
+authentication
+        : AT_AUTH anythingInLife (ELSE anythingInLife)? AT_END_AUTH
+        | AT_GUEST anythingInLife (ELSE anythingInLife)? AT_END_GUEST
+        ;
+
+autherization
+        : AT_ROLE BRACKET_OPEN SQUARE_OPEN (expression COMMA)* expression COMMA? SQUARE_CLOSE BRACKET_CLOSE anythingInLife (ELSE anythingInLife)? AT_END_ROLE
+        | AT_INVERSE_ROLE BRACKET_OPEN SQUARE_OPEN (expression COMMA)* expression COMMA? SQUARE_CLOSE BRACKET_CLOSE anythingInLife (ELSE anythingInLife)? AT_END_INVERSE_ROLE
+        ;
+
+rawphp
+    : AT_RAW_PHP anythingInLife AT_END_RAW_PHP
+    ;
+
+layoutInheritance
+      : AT_SECTION BRACKET_OPEN expression BRACKET_CLOSE anythingInLife AT_END_SECTION
+      | AT_YIELD BRACKET_OPEN expression BRACKET_CLOSE
+      ;
+
+forLoop
+    : FOR BRACKET_OPEN FOR_INDEX SEMI_COLON expression SEMI_COLON expression BRACKET_CLOSE CURLEY_BRACKET_OPEN anythingInLife CURLEY_BRACKET_CLOSE
+    ;
+
+expression
+//       : expression DOT expression                                    #VariableConcatExpression
+//       | expression NG_OPERATOR_TWO_OPERAND expression                #TwoOperandsConditionExpression
+//       | expression CONDITIONAL_CONCAT_OPERATOR expression            #ConcatConditionExpression
+//       | expression QUESTION_MARK expression COLON expression         #TernaryExpression
+//       | expression MULTIPLICATIVE_OPERATOR expression                #MathematicalExpression
+//       | expression ADDITIVE_OPERATOR expression                      #MathematicalExpression
+//       | NG_ID                                                        #VariableNameExpression
+//       | NG_DECIMAL                                                   #LiteralNumericExpression
+//       | NG_CHAR                                                      #LiteralCharExpression
+//       | NG_STRING                                                    #LiteralStringExpression
+//       | NG_BOOLEAN                                                   #LiteralBooleanExpression
+//       | expression (SQUARE_OPEN expression SQUARE_CLOSE)             #IndexedVariableExpression
+//       | NG_ONE_LOGICAL_OPERAND expression                           #OneOperandConditionExpression
+//       | NG_ONE_VALUABLE_OPERAND expression                             #OneOperandValuableExpression
+//       | expression NG_ONE_VALUABLE_OPERAND                             #OneOperandValuableExpression
+//       | BRACKET_OPEN expression BRACKET_CLOSE                        #ParenthesizedExpression
+        : FOR
+       ;
 
 

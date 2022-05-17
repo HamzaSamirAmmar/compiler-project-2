@@ -113,10 +113,6 @@ SWITCH
     :'switch'
     ;
 
-OPEN_CURLY_BRACE : '{';
-CLOSE_CURLY_BRACE : '}';
-OPEN_BRACE:'(';
-ClOSE_BRACE:')';
 DECIMAL
     :[0-9]+
     ;
@@ -128,6 +124,85 @@ STRING
      | '\'' ~[<']* '\''
      ;
 
+
+AT_AUTH
+    : '@auth'
+    ;
+
+AT_GUEST
+    : '@guest'
+    ;
+
+AT_ROLE
+    : '@role'
+    ;
+
+AT_INVERSE_ROLE
+    : '@inverserole'
+    ;
+
+AT_RAW_PHP
+    :'@rawphp'
+    ;
+
+
+AT_SECTION
+    :'@section'
+    ;
+
+AT_YIELD
+    :'@yield'
+    ;
+
+FOR
+    :'for'
+    ;
+
+
+
+// tag declarations
+
+ELSE
+    :'@else'
+    ;
+
+AT_END_AUTH
+    :'@endauth'
+    ;
+
+AT_END_GUEST
+    :'@endguest'
+    ;
+
+/// names ? string : var
+
+
+AT_END_ROLE
+    :'@endrole'
+    ;
+
+
+AT_END_INVERSE_ROLE
+    :'@endinverserole'
+    ;
+
+AT_END_RAW_PHP
+    :'@endrawphp'
+    ;
+
+AT_END_SECTION
+    :'@endsection'
+    ;
+
+
+
+FOR_INDEX
+    : [a-zA-Z_] ([a-zA-Z0-9_])*
+    ;
+
+REDIRECT
+: 'redirect'
+;
 
 
 
