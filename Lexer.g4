@@ -34,6 +34,12 @@ COMMA
 COLON
     : ':'
     ;
+EQUAL:
+    '='
+    ;
+HASHTAG:
+    '#'
+    ;
 ARROW
     : '=>'
     ;
@@ -61,9 +67,6 @@ HEADER
 BODY
     : 'body'
     ;
-ROW
-    : 'row'
-    ;
 BOOLEAN
     : 'TRUE'
     | 'FALSE'
@@ -79,6 +82,11 @@ METHOD
     : 'post'
     | 'delete'
     | 'get'
+    | 'put'
+    | 'POST'
+    | 'GET'
+    | 'DELETE'
+    | 'PUT'
     ;
 
 DEFAULT
@@ -111,6 +119,9 @@ RADIO
 
 SWITCH
     :'switch'
+    ;
+LINK:
+    'link'
     ;
 
 DECIMAL

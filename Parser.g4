@@ -1,14 +1,128 @@
 parser grammar Parser;
 
 options { tokenVocab=Lexer; }
-out_element:
-out_element_with_attributes_without_body |out_element_without_attributes_with_body
-|out_element_with_attributes_with_body
- /*out_element_with_body*/
+program:
+     start_page page* controller*
+     ;
+start_page:
+    page
+    ;
+page:
+    PAGE ID head (EXTENDS  ID (COMMA ID )*)? CURLEY_BRACKET_OPEN body* CURLEY_BRACKET_CLOSE
+    ;
+body:
+        in_element
+        | out_element
+        | statement //statements include logics(for, if , switch),declaretions,directives
+        | authentication
+        | authorization
+        | layoutInheritance
+        ;
+statement:
+       if
+       | switch
+       |for
+       |variable_declaration
+       | rawphp
+       ;
+if :
+IF BRACKET_OPEN expression BRACKET_CLOSE  CURLEY_BRACKET_OPEN body* CURLEY_BRACKET_CLOSE
+;
+switch
+    : SWITCH BRACKET_OPEN expression BRACKET_CLOSE CURLEY_BRACKET_OPEN switch_body CURLEY_BRACKET_CLOSE
     ;
 
-out_element_without_attributes_with_body: table;
-out_element_with_attributes_with_body: list extra_attributes BRACKET_CLOSE body;
+switch_body
+    : (CASE expression COLON body* SEMI_COLON)? (DEFAULT COLON body*)?
+    ;
+variable_declaration:
+    HASHTAG ID EQUAL expression
+    ;
+for
+    : FOR BRACKET_OPEN for_index SEMI_COLON expression SEMI_COLON expression BRACKET_CLOSE CURLEY_BRACKET_OPEN body CURLEY_BRACKET_CLOSE
+    ;
+for_index:
+    variable_declaration
+    ;
+
+ authentication
+         : AT_AUTH body (ELSE body)? AT_END_AUTH
+         | AT_GUEST body (ELSE body)? AT_END_GUEST
+         ;
+
+ authorization
+         : AT_ROLE BRACKET_OPEN SQUARE_OPEN (STRING COMMA)* STRING COMMA? SQUARE_CLOSE BRACKET_CLOSE body (ELSE body)? AT_END_ROLE
+         | AT_INVERSE_ROLE BRACKET_OPEN SQUARE_OPEN (STRING COMMA)* STRING COMMA? SQUARE_CLOSE BRACKET_CLOSE body (ELSE body)? AT_END_INVERSE_ROLE
+         ;
+
+ rawphp
+     : AT_RAW_PHP  AT_END_RAW_PHP //TODO raw php body any string of character
+     ;
+
+ layoutInheritance
+       : AT_SECTION BRACKET_OPEN STRING BRACKET_CLOSE body AT_END_SECTION
+       | AT_YIELD BRACKET_OPEN STRING BRACKET_CLOSE
+       ;
+
+out_element
+    : text
+    | table
+    | button
+    | image
+    | list
+    | link
+    ;
+
+text
+    : TEXT BRACKET_OPEN text_attributes (COMMA  extra_attributes)? BRACKET_CLOSE
+    ;
+
+text_attributes
+    : STRING COMMA DECIMAL COMMA HEXCHARS
+    ;
+
+image
+    :  IMAGE BRACKET_OPEN image_attributes (COMMA extra_attributes)? BRACKET_CLOSE
+    ;
+
+image_attributes
+    :  STRING COMMA DECIMAL COMMA DECIMAL
+    ;
+
+button
+    : BUTTON BRACKET_OPEN button_attributes (COMMA extra_attributes)? BRACKET_CLOSE
+    ;
+
+button_attributes
+    : STRING COMMA STRING
+    ;
+list
+    : LIST BRACKET_OPEN list_attributes (COMMA extra_attributes)? BRACKET_CLOSE CURLEY_BRACKET_OPEN options* CURLEY_BRACKET_CLOSE
+    ;
+list_attributes
+    : BOOLEAN
+    ;
+
+
+table
+    :
+    TABLE BRACKET_OPEN BRACKET_CLOSE CURLEY_BRACKET_OPEN table_body CURLEY_BRACKET_CLOSE
+    ;
+
+link:
+    LINK BRACKET_OPEN link_attributes (COMMA extra_attributes)? BRACKET_CLOSE
+    ;
+
+link_attributes:
+    STRING
+    ;
+
+options
+    : text
+    | image
+    | link
+    | list
+    ;
 
 in_element
     : form
@@ -20,39 +134,30 @@ in_element
     ;
 
 
-
-out_element_with_attributes_without_body
-    :  out_element_attributes extra_attributes BRACKET_CLOSE
-    ;
- // element_name BRACKET_OPEN main_attributes extra_attributes BRACKET_CLOSE // compare element_name with main_attributes
-/*out_element_with_body
-    :  out_element_without_body BRACKET_CLOSE body
-    ;*/
-
-/*body
-    :
-    ;*/
-out_element_attributes
-    : TEXT BRACKET_OPEN text |
-      IMAGE BRACKET_OPEN image|
-      BUTTON BRACKET_OPEN button
-    ;
 form
-    : FORM BRACKET_OPEN METHOD COMMA STRING COMMA extra_attributes? BRACKET_CLOSE CURLEY_BRACKET_OPEN form_body? CURLEY_BRACKET_OPEN
+    : FORM BRACKET_OPEN form_attributes (COMMA extra_attributes)? BRACKET_CLOSE CURLEY_BRACKET_OPEN form_body? CURLEY_BRACKET_OPEN
+    ;
+form_attributes
+    : METHOD COMMA STRING
     ;
 
 form_body
-    :  out_element
-    | statement
-    | STRING
+    :  body
     ;
 
 text_field
-    : TEXT_FIELD BRACKET_OPEN STRING COMMA STRING COMMA STRING COMMA extra_attributes? BRACKET_CLOSE
+    : TEXT_FIELD BRACKET_OPEN text_field_attributes (COMMA extra_attributes)? BRACKET_CLOSE
+    ;
+text_field_attributes
+    : STRING COMMA STRING COMMA STRING
     ;
 
 date
-    : DATE BRACKET_OPEN STRING COMMA STRING COMMA STRING COMMA extra_attributes? BRACKET_CLOSE
+    : DATE BRACKET_OPEN date_attributes (COMMA extra_attributes)? BRACKET_CLOSE
+    ;
+
+date_attributes
+    : STRING COMMA STRING COMMA STRING
     ;
 
 check_box
@@ -60,15 +165,18 @@ check_box
     ;
 
 check_box_body
-    : STRING
+    : options (COLON options)*
     ;
 
 selection
-    : SELCTION BRACKET_OPEN BOOLEAN COMMA extra_attributes? BRACKET_CLOSE  CURLEY_BRACKET_OPEN selection_body CURLEY_BRACKET_CLOSE
+    : SELCTION BRACKET_OPEN selection_attribute (COMMA extra_attributes)? BRACKET_CLOSE  CURLEY_BRACKET_OPEN selection_body CURLEY_BRACKET_CLOSE
+    ;
+selection_attribute
+    : BOOLEAN
     ;
 
 selection_body
-    : STRING (COLON STRING)?
+    : options (COLON options)*
     ;
 
 radio
@@ -76,120 +184,39 @@ radio
     ;
 
 radio_body
-     : STRING (COLON STRING)?
+    : options (COLON options)*
      ;
 
-switch
-    : SWITCH BRACKET_OPEN (expression) BRACKET_CLOSE CURLEY_BRACKET_OPEN switch_body CURLEY_BRACKET_CLOSE
-    ;
-
-switch_body
-    : (CASE COLON expression SEMI_COLON)? (DEFAULT COLON expression)?
-    ;
 
 extra_attributes
-    : (COMMA key_value_array)? COMMA?
+    :  SQUARE_OPEN array_value (COMMA array_value)* SQUARE_CLOSE
     ;
 
-text
-    : STRING COMMA DECIMAL COMMA HEXCHARS
-    ;
-image
-    : STRING COMMA DECIMAL COMMA DECIMAL
-    ;
-list
-    : LIST BRACKET_OPEN BOOLEAN
-    ;
-button
-    : STRING COMMA STRING
-    /** text on button string? action string?**/
-    ;
-table
-    :
-    TABLE BRACKET_OPEN BRACKET_CLOSE table_body // body or normal map?
-    ;
-key_value_array
-    : SQUARE_OPEN array_value(COMMA array_value)* COMMA? SQUARE_CLOSE
-    ;
 array_value
     : STRING ARROW STRING
     ;
 table_body
-    :CURLEY_BRACKET_OPEN HEADER COLON table_map BODY COLON table_map
+    : HEADER COLON CURLEY_BRACKET_OPEN table_header_body CURLEY_BRACKET_CLOSE COMMA BODY COLON CURLEY_BRACKET_OPEN options (COMMA options)* CURLEY_BRACKET_CLOSE
     ;
-table_map
-    : CURLEY_BRACKET_OPEN (table_map_value)*  CURLEY_BRACKET_CLOSE COMMA? ;
-
-table_map_value
-    :ROW COLON map_value  (COMMA ROW COLON map_value )* COMMA?
+table_header_body
+    : STRING (COMMA STRING)*
     ;
 
-body: map;
-map
-    :CURLEY_BRACKET_OPEN STRING COLON map_value (STRING COLON map_value COMMA)* COMMA? CURLEY_BRACKET_CLOSE ;
-
-map_value
-    : STRING |DECIMAL
-    // 'id?' 'string?' 'expression?'
-    ;
-program:
-     start_page page* controller*
-     ;
-start_page:
-    page
-    ;
-page:
-    PAGE ID head (EXTENDS (ID COMMA?)*)? CURLEY_BRACKET_OPEN page_body* CURLEY_BRACKET_CLOSE
-    ;
 head:
     HEAD BRACKET_OPEN title BRACKET_CLOSE
     ;
 title:
     STRING;
-page_body:
-    in_element
-    | out_element
-    | statement//statements include logics(for, if , switch),declaretions,directives
-    ;
+
 controller:
     CONTROLLER ID CONTROLES ID CURLEY_BRACKET_OPEN controller_body CURLEY_BRACKET_CLOSE
     ;
-controller_body:8
+controller_body:
     | statement//statements include logics(for, if , switch),declaretions,directives
     | CHECK_AUTH BRACKET_OPEN  BRACKET_CLOSE
     | CHECK_VALID BRACKET_OPEN STRING COMMA STRING  BRACKET_CLOSE
     | CHECK_ROLE BRACKET_OPEN STRING BRACKET_CLOSE
     | REDIRECT ID
-    ;
-statement:
-    IF BRACKET_OPEN expression BRACKET_CLOSE  CURLEY_BRACKET_OPEN page_body CURLEY_BRACKET_CLOSE
-    ;
-
-anythingInLife
-        : expression
-        ;
-
-authentication
-        : AT_AUTH anythingInLife (ELSE anythingInLife)? AT_END_AUTH
-        | AT_GUEST anythingInLife (ELSE anythingInLife)? AT_END_GUEST
-        ;
-
-autherization
-        : AT_ROLE BRACKET_OPEN SQUARE_OPEN (expression COMMA)* expression COMMA? SQUARE_CLOSE BRACKET_CLOSE anythingInLife (ELSE anythingInLife)? AT_END_ROLE
-        | AT_INVERSE_ROLE BRACKET_OPEN SQUARE_OPEN (expression COMMA)* expression COMMA? SQUARE_CLOSE BRACKET_CLOSE anythingInLife (ELSE anythingInLife)? AT_END_INVERSE_ROLE
-        ;
-
-rawphp
-    : AT_RAW_PHP anythingInLife AT_END_RAW_PHP
-    ;
-
-layoutInheritance
-      : AT_SECTION BRACKET_OPEN expression BRACKET_CLOSE anythingInLife AT_END_SECTION
-      | AT_YIELD BRACKET_OPEN expression BRACKET_CLOSE
-      ;
-
-forLoop
-    : FOR BRACKET_OPEN FOR_INDEX SEMI_COLON expression SEMI_COLON expression BRACKET_CLOSE CURLEY_BRACKET_OPEN anythingInLife CURLEY_BRACKET_CLOSE
     ;
 
 expression
