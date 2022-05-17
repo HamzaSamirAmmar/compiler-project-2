@@ -220,23 +220,20 @@ controller_body:
     ;
 
 expression
-//       : expression DOT expression                                    #VariableConcatExpression
-//       | expression NG_OPERATOR_TWO_OPERAND expression                #TwoOperandsConditionExpression
-//       | expression CONDITIONAL_CONCAT_OPERATOR expression            #ConcatConditionExpression
-//       | expression QUESTION_MARK expression COLON expression         #TernaryExpression
-//       | expression MULTIPLICATIVE_OPERATOR expression                #MathematicalExpression
-//       | expression ADDITIVE_OPERATOR expression                      #MathematicalExpression
-//       | NG_ID                                                        #VariableNameExpression
-//       | NG_DECIMAL                                                   #LiteralNumericExpression
-//       | NG_CHAR                                                      #LiteralCharExpression
-//       | NG_STRING                                                    #LiteralStringExpression
-//       | NG_BOOLEAN                                                   #LiteralBooleanExpression
-//       | expression (SQUARE_OPEN expression SQUARE_CLOSE)             #IndexedVariableExpression
-//       | NG_ONE_LOGICAL_OPERAND expression                           #OneOperandConditionExpression
-//       | NG_ONE_VALUABLE_OPERAND expression                             #OneOperandValuableExpression
-//       | expression NG_ONE_VALUABLE_OPERAND                             #OneOperandValuableExpression
-//       | BRACKET_OPEN expression BRACKET_CLOSE                        #ParenthesizedExpression
-        : FOR
+       : expression OPERATOR_TWO_OPERAND expression                #TwoOperandsConditionExpression
+       | expression CONDITIONAL_CONCAT_OPERATOR expression            #ConcatConditionExpression
+       | expression MULTIPLICATIVE_OPERATOR expression                #MathematicalExpression
+       | expression ADDITIVE_OPERATOR expression                      #MathematicalExpression
+       | ID                                                        #VariableNameExpression
+       | DECIMAL                                                   #LiteralNumericExpression
+       | CHAR                                                      #LiteralCharExpression
+       | STRING                                                    #LiteralStringExpression
+       | BOOLEAN                                                   #LiteralBooleanExpression
+       | expression (SQUARE_OPEN expression SQUARE_CLOSE)             #IndexedVariableExpression
+       | ONE_LOGICAL_OPERAND expression                           #OneOperandConditionExpression
+       | ONE_VALUABLE_OPERAND expression                             #OneOperandValuableExpression
+       | expression ONE_VALUABLE_OPERAND                             #OneOperandValuableExpression
+       | BRACKET_OPEN expression BRACKET_CLOSE                        #ParenthesizedExpression
        ;
 
 

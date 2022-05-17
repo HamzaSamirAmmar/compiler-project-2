@@ -34,6 +34,30 @@ COMMA
 COLON
     : ':'
     ;
+OPERATOR_TWO_OPERAND
+     : '<'
+     | '>'
+     | '<='
+     | '>='
+     | '=='
+     ;
+              CONDITIONAL_CONCAT_OPERATOR
+              : '&&'
+              | '||'
+              ;
+                       ONE_LOGICAL_OPERAND
+                       : '!'
+                       ;
+                                ONE_VALUABLE_OPERAND
+                                : '++'
+                                | '--'
+                                ;
+                       ADDITIVE_OPERATOR
+                       : '+' | '-' | '+=' | '-='
+                       ;
+                       MULTIPLICATIVE_OPERATOR
+                       : '*' | '/' | '%' | '*=' | '/=' | '%='
+                       ;
 EQUAL:
     '='
     ;
@@ -130,6 +154,9 @@ DECIMAL
 HEXCHARS
     : '#' [0-9a-fA-F]+
     ;
+           CHAR
+             : '\'' ([a-zA-Z0-9_] |'-' | '/'|'+'| ',' | '?' | '=' | ':' | ';' | '#' | ' ') '\''
+             ;
 STRING
      : '"' ~[<"]* '"'
      | '\'' ~[<']* '\''
@@ -214,6 +241,8 @@ FOR_INDEX
 REDIRECT
 : 'redirect'
 ;
+
+
 
 
 
