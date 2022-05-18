@@ -7,7 +7,7 @@ ids : id (',' id) *
 header : 
 data : '#' id ('=' (anything))?
 
-page p1  header(title, metaData, [others]) {
+page p1  head(title) {
 
     #data-name=value
     
