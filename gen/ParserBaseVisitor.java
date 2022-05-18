@@ -52,7 +52,7 @@ public class ParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitBody(Parser.BodyContext ctx) { return visitChildren(ctx); }
+	@Override public T visitBody_element(Parser.Body_elementContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -66,14 +66,14 @@ public class ParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitIf(Parser.IfContext ctx) { return visitChildren(ctx); }
+	@Override public T visitIf_statement(Parser.If_statementContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitSwitch(Parser.SwitchContext ctx) { return visitChildren(ctx); }
+	@Override public T visitSwitch_statement(Parser.Switch_statementContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -94,7 +94,7 @@ public class ParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitFor(Parser.ForContext ctx) { return visitChildren(ctx); }
+	@Override public T visitFor_statement(Parser.For_statementContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

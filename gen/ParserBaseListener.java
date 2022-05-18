@@ -76,13 +76,13 @@ public class ParserBaseListener implements ParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterBody(Parser.BodyContext ctx) { }
+	@Override public void enterBody_element(Parser.Body_elementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitBody(Parser.BodyContext ctx) { }
+	@Override public void exitBody_element(Parser.Body_elementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -100,25 +100,25 @@ public class ParserBaseListener implements ParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterIf(Parser.IfContext ctx) { }
+	@Override public void enterIf_statement(Parser.If_statementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitIf(Parser.IfContext ctx) { }
+	@Override public void exitIf_statement(Parser.If_statementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSwitch(Parser.SwitchContext ctx) { }
+	@Override public void enterSwitch_statement(Parser.Switch_statementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSwitch(Parser.SwitchContext ctx) { }
+	@Override public void exitSwitch_statement(Parser.Switch_statementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -148,13 +148,13 @@ public class ParserBaseListener implements ParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFor(Parser.ForContext ctx) { }
+	@Override public void enterFor_statement(Parser.For_statementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFor(Parser.ForContext ctx) { }
+	@Override public void exitFor_statement(Parser.For_statementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

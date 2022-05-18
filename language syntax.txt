@@ -9,14 +9,16 @@ data : '#' id ('=' (anything))?
 
 page p1  head(title) {
 
-    #data-name=value
+    @data-name=value
     
-    link(href ,[other attributes]){ link-body}
+    link('href' ,[other=> attributes]){ link-body}
     //out
     text (text-string ,fontSize,color, [other attributes])
     image(imgReference ,width,height, [other attributes])
     list(isOrderd,[other attributes]){
         text() or image or link
+        Text()
+        Text()
     }
     }
     table(){
@@ -27,19 +29,17 @@ page p1  head(title) {
                          body {
                              'rana' , '777', '' :
                                                      }}
-    button(text , action on clicked,[other attributes] )
+    button(text , action on clicked,[other attributes] )//TODO what we meant by action on clicked? because that would be JS and we don't want to process JS :)
     //in
     form (method, action ,[other attributes]){ form body}
     textField(name,label,value,[other])
     date(name,label,value,[other])
-    checkbox([other attributes]){
-        option1 : option2
+    checkbox(name,value,label[other attributes])
+    selection (isMultiple,name, [other]){
+        option1_label , option1_value  : option2_label , option2_value
     }
-    selection (isMultiple, [other ]){
-        option1 : option2
-    }
-    radio ([other ]){
-        option1 : option2
+    radio (name,[other ]){
+        option1_label , option1_value  : option2_label , option2_value
     }
     // logic
     if (condition){ if-body } (else { else-body })?

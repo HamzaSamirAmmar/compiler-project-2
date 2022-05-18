@@ -58,15 +58,15 @@ public interface ParserListener extends ParseTreeListener {
 	 */
 	void exitTitle(Parser.TitleContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link Parser#body}.
+	 * Enter a parse tree produced by {@link Parser#body_element}.
 	 * @param ctx the parse tree
 	 */
-	void enterBody(Parser.BodyContext ctx);
+	void enterBody_element(Parser.Body_elementContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link Parser#body}.
+	 * Exit a parse tree produced by {@link Parser#body_element}.
 	 * @param ctx the parse tree
 	 */
-	void exitBody(Parser.BodyContext ctx);
+	void exitBody_element(Parser.Body_elementContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link Parser#statement}.
 	 * @param ctx the parse tree
@@ -78,25 +78,25 @@ public interface ParserListener extends ParseTreeListener {
 	 */
 	void exitStatement(Parser.StatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link Parser#if}.
+	 * Enter a parse tree produced by {@link Parser#if_statement}.
 	 * @param ctx the parse tree
 	 */
-	void enterIf(Parser.IfContext ctx);
+	void enterIf_statement(Parser.If_statementContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link Parser#if}.
+	 * Exit a parse tree produced by {@link Parser#if_statement}.
 	 * @param ctx the parse tree
 	 */
-	void exitIf(Parser.IfContext ctx);
+	void exitIf_statement(Parser.If_statementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link Parser#switch}.
+	 * Enter a parse tree produced by {@link Parser#switch_statement}.
 	 * @param ctx the parse tree
 	 */
-	void enterSwitch(Parser.SwitchContext ctx);
+	void enterSwitch_statement(Parser.Switch_statementContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link Parser#switch}.
+	 * Exit a parse tree produced by {@link Parser#switch_statement}.
 	 * @param ctx the parse tree
 	 */
-	void exitSwitch(Parser.SwitchContext ctx);
+	void exitSwitch_statement(Parser.Switch_statementContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link Parser#switch_body}.
 	 * @param ctx the parse tree
@@ -118,15 +118,15 @@ public interface ParserListener extends ParseTreeListener {
 	 */
 	void exitVariable_declaration(Parser.Variable_declarationContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link Parser#for}.
+	 * Enter a parse tree produced by {@link Parser#for_statement}.
 	 * @param ctx the parse tree
 	 */
-	void enterFor(Parser.ForContext ctx);
+	void enterFor_statement(Parser.For_statementContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link Parser#for}.
+	 * Exit a parse tree produced by {@link Parser#for_statement}.
 	 * @param ctx the parse tree
 	 */
-	void exitFor(Parser.ForContext ctx);
+	void exitFor_statement(Parser.For_statementContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link Parser#for_index}.
 	 * @param ctx the parse tree

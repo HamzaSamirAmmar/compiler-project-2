@@ -41,11 +41,11 @@ public interface ParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitTitle(Parser.TitleContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link Parser#body}.
+	 * Visit a parse tree produced by {@link Parser#body_element}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitBody(Parser.BodyContext ctx);
+	T visitBody_element(Parser.Body_elementContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link Parser#statement}.
 	 * @param ctx the parse tree
@@ -53,17 +53,17 @@ public interface ParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStatement(Parser.StatementContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link Parser#if}.
+	 * Visit a parse tree produced by {@link Parser#if_statement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitIf(Parser.IfContext ctx);
+	T visitIf_statement(Parser.If_statementContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link Parser#switch}.
+	 * Visit a parse tree produced by {@link Parser#switch_statement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSwitch(Parser.SwitchContext ctx);
+	T visitSwitch_statement(Parser.Switch_statementContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link Parser#switch_body}.
 	 * @param ctx the parse tree
@@ -77,11 +77,11 @@ public interface ParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitVariable_declaration(Parser.Variable_declarationContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link Parser#for}.
+	 * Visit a parse tree produced by {@link Parser#for_statement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFor(Parser.ForContext ctx);
+	T visitFor_statement(Parser.For_statementContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link Parser#for_index}.
 	 * @param ctx the parse tree
