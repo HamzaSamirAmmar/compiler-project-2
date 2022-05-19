@@ -1,4 +1,5 @@
-// Generated from D:/Damascus university-IT/4th year/second semestere/compiler-project/compiler-project-2\Lexer.g4 by ANTLR 4.9.2
+// Generated from D:/Damascus university-IT/4th year/second semestere/compiler-project/compiler-project-2/grammers\LanguageLexer.g4 by ANTLR 4.9.2
+package generated;
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;
@@ -9,7 +10,7 @@ import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.misc.*;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
-public class Lexer extends Lexer {
+public class LanguageLexer extends Lexer {
 	static { RuntimeMetaData.checkVersion("4.9.2", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
@@ -122,13 +123,13 @@ public class Lexer extends Lexer {
 	}
 
 
-	public Lexer(CharStream input) {
+	public LanguageLexer(CharStream input) {
 		super(input);
 		_interp = new LexerATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 
 	@Override
-	public String getGrammarFileName() { return "Lexer.g4"; }
+	public String getGrammarFileName() { return "LanguageLexer.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }

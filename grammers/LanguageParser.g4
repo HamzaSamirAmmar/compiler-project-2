@@ -1,6 +1,6 @@
-parser grammar Parser;
+parser grammar LanguageParser;
 
-options { tokenVocab=Lexer; }
+options { tokenVocab=LanguageLexer; }
 
 program
      : start_page page* controller*
@@ -20,7 +20,7 @@ title
 body_element
     : in_element
     | out_element
-    | statement //statements include logics(for, if , switch),declaretions,directives,expressions
+    | statement //statements include logics(for, if , switch),declaretions,expressions
     | authentication
     | authorization
     | layoutInheritance
@@ -182,10 +182,10 @@ table_header_body
     : text (COMMA text)*
     ;
 controller
-    : CONTROLLER ID CONTROLES ID CURLEY_BRACKET_OPEN controller_body CURLEY_BRACKET_CLOSE
+    : CONTROLLER ID CONTROLES ID CURLEY_BRACKET_OPEN controller_body_element* CURLEY_BRACKET_CLOSE
     ;
-controller_body
-    : statement//statements include logics(for, if , switch),declaretions,directives,expressions
+controller_body_element
+    : statement//statements include logics(for, if , switch),declaretions,expressions
     | CHECK_AUTH BRACKET_OPEN  BRACKET_CLOSE
     | CHECK_VALID BRACKET_OPEN expression COMMA expression  BRACKET_CLOSE
     | CHECK_ROLE BRACKET_OPEN expression BRACKET_CLOSE
