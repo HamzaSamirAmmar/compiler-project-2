@@ -1,7 +1,7 @@
 package ast.nodes.basicNodes.expressions.literals;
 
-import ast.nodes.expressions.Expression;
-import ast.nodes.expressions.Valuable;
+import ast.nodes.basicNodes.expressions.Expression;
+import ast.nodes.basicNodes.expressions.Valuable;
 import ast.nodes.util.Formatter;
 
 public class CharNode extends Expression implements Valuable {

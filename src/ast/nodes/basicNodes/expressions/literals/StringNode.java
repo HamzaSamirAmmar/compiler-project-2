@@ -1,7 +1,8 @@
 package ast.nodes.basicNodes.expressions.literals;
 
-import ast.nodes.expressions.Expression;
-import ast.nodes.expressions.Valuable;
+import ast.nodes.basicNodes.expressions.Iterable;
+import ast.nodes.basicNodes.expressions.Expression;
+import ast.nodes.basicNodes.expressions.Valuable;
 import ast.nodes.util.Formatter;
 
 public class StringNode extends Expression implements Iterable, Valuable {

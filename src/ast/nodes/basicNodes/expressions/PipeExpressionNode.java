@@ -1,6 +1,6 @@
 package ast.nodes.basicNodes.expressions;
 
-import ast.nodes.expressions.literals.FunctionCallNode;
+import ast.nodes.basicNodes.expressions.literals.FunctionCallNode;
 import ast.nodes.util.Formatter;
 
 public class PipeExpressionNode extends Expression implements Valuable,Numeric,Iterable,Logical,Concatable,FunctionCallable{

@@ -1,6 +1,6 @@
 package ast.nodes.basicNodes.expressions.conditions;
 
-import ast.nodes.expressions.*;
+import ast.nodes.basicNodes.expressions.*;
 import ast.nodes.util.Formatter;
 
 public class TwoOperandCondition extends Condition  {

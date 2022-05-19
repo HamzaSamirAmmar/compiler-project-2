@@ -1,7 +1,7 @@
 package ast.nodes.basicNodes.expressions.conditions;
 
-import ast.nodes.expressions.Expression;
-import ast.nodes.expressions.Logical;
+import ast.nodes.basicNodes.expressions.Expression;
+import ast.nodes.basicNodes.expressions.Logical;
 import ast.nodes.util.Formatter;
 
 public class OneOperandCondition extends Condition {

@@ -1,7 +1,7 @@
 package ast.nodes.basicNodes.expressions.Math;
 
-import ast.nodes.expressions.*;
-import ast.nodes.expressions.literals.VariableNode;
+import ast.nodes.basicNodes.expressions.*;
+import ast.nodes.basicNodes.expressions.literals.VariableNode;
 import ast.nodes.util.Formatter;
 
 public class OneOperandMathematicalNode extends Expression implements Valuable, Numeric {

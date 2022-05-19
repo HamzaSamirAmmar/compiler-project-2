@@ -1,6 +1,6 @@
 package ast.nodes.basicNodes.expressions.literals;
 
-import ast.nodes.expressions.Expression;
+import ast.nodes.basicNodes.expressions.Expression;
 import ast.nodes.util.Formatter;
 
 public class MapPairNode extends Expression {

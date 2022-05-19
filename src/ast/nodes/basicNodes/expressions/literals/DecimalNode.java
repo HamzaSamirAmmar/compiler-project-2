@@ -1,8 +1,8 @@
 package ast.nodes.basicNodes.expressions.literals;
 
-import ast.nodes.expressions.Expression;
-import ast.nodes.expressions.Numeric;
-import ast.nodes.expressions.Valuable;
+import ast.nodes.basicNodes.expressions.Expression;
+import ast.nodes.basicNodes.expressions.Numeric;
+import ast.nodes.basicNodes.expressions.Valuable;
 import ast.nodes.util.Formatter;
 
 public class DecimalNode extends Expression implements Valuable, Numeric {

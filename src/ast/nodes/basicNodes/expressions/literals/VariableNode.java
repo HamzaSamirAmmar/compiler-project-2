@@ -1,7 +1,8 @@
 package ast.nodes.basicNodes.expressions.literals;
 
-import ast.nodes.expressions.*;
+import ast.nodes.basicNodes.expressions.*;
 import ast.nodes.util.Formatter;
+import ast.nodes.basicNodes.expressions.Iterable;
 
 public class VariableNode extends Expression implements Valuable,Numeric, Iterable, Logical, Concatable,FunctionCallable {
     String variableName;

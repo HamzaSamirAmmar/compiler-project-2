@@ -1,6 +1,6 @@
 package ast.nodes.basicNodes.expressions.Math;
 
-import ast.nodes.expressions.*;
+import ast.nodes.basicNodes.expressions.*;
 import ast.nodes.util.Formatter;
 
 public class MultiplicativeNode extends Expression implements Valuable,Numeric {
