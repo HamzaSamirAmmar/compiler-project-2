@@ -11,13 +11,22 @@ public class TextField extends Element {
     String name;
     String label;
     String value;
-    ArrayList<MapNode> otherAttributes;
+    MapNode extraAttributes;
 
-    public TextField(String name, String label, String value, ArrayList<MapNode> otherAttributes) {
+
+    public TextField(String name, String label, String value, MapNode extraAttributes) {
         this.name = name;
         this.label = label;
         this.value = value;
-        this.otherAttributes = otherAttributes;
+        this.extraAttributes = extraAttributes;
+    }
+
+    public MapNode getExtraAttributes() {
+        return extraAttributes;
+    }
+
+    public void setExtraAttributes(MapNode extraAttributes) {
+        this.extraAttributes = extraAttributes;
     }
 
     public String getName() {
@@ -44,14 +53,6 @@ public class TextField extends Element {
         this.value = value;
     }
 
-    public ArrayList<MapNode> getOtherAttributes() {
-        return otherAttributes;
-    }
-
-    public void setOtherAttributes(ArrayList<MapNode> otherAttributes) {
-        this.otherAttributes = otherAttributes;
-    }
-
     @Override
     protected String nodeName() {
         return "TextField Node";
@@ -62,7 +63,7 @@ public class TextField extends Element {
         formatter.addProperty("TextField Name", name);
         formatter.addProperty("TextField Value", value);
         formatter.addProperty("TextField Label", label);
-        formatter.array("TextFieldOtherAttributes", new ArrayList<>(otherAttributes));
+        formatter.object(extraAttributes.toString());
         return formatter;
     }
 }

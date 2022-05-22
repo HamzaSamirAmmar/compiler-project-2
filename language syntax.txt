@@ -10,9 +10,9 @@ data : '#' id ('=' (anything))?
 page p1  head(title) {
 
     @data-name=value
-    
-    link('href' ,[other=> attributes]){ link-body}
+
     //out
+    link('href' ,[other=> attributes]){ link-body}
     text (text-string ,fontSize,color, [other attributes])
     image(imgReference ,width,height, [other attributes])
     list(isOrderd,[other attributes]){

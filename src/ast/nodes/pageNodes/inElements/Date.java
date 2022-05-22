@@ -10,13 +10,21 @@ public class Date extends Element {
     String name;
     String label;
     String value;
-    ArrayList<MapNode> otherAttributes;
+    MapNode extraAttributes;
 
-    public Date(String name, String label, String value, ArrayList<MapNode> otherAttributes) {
+    public MapNode getExtraAttributes() {
+        return extraAttributes;
+    }
+
+    public Date(String name, String label, String value, MapNode extraAttributes) {
         this.name = name;
         this.label = label;
         this.value = value;
-        this.otherAttributes = otherAttributes;
+        this.extraAttributes = extraAttributes;
+    }
+
+    public void setExtraAttributes(MapNode extraAttributes) {
+        this.extraAttributes = extraAttributes;
     }
 
     public String getName() {
@@ -43,13 +51,6 @@ public class Date extends Element {
         this.value = value;
     }
 
-    public ArrayList<MapNode> getOtherAttributes() {
-        return otherAttributes;
-    }
-
-    public void setOtherAttributes(ArrayList<MapNode> otherAttributes) {
-        this.otherAttributes = otherAttributes;
-    }
 
     @Override
     protected String nodeName() {
@@ -58,10 +59,10 @@ public class Date extends Element {
 
     @Override
     protected Formatter nodeValue(Formatter formatter) {
-        formatter.addProperty("Date Name",name);
-        formatter.addProperty("Date Value",value);
-        formatter.addProperty("Date Label",label);
-        formatter.array("DateOtherAttributes", new ArrayList<>(otherAttributes));
+        formatter.addProperty("Date Name", name);
+        formatter.addProperty("Date Value", value);
+        formatter.addProperty("Date Label", label);
+        formatter.object(extraAttributes.toString());
         return formatter;
     }
 }

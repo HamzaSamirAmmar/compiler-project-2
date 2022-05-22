@@ -1,4 +1,4 @@
-// Generated from C:/Users/hamza/Desktop/compiler-project-2/grammers\LanguageParser.g4 by ANTLR 4.10.1
+// Generated from F:/Programming/compiler/compilerToPHPHTML/compiler-project-2/grammers\LanguageParser.g4 by ANTLR 4.9.1
 package generated;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -58,6 +58,12 @@ public interface LanguageParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitIf_statement(LanguageParser.If_statementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LanguageParser#elsebody}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitElsebody(LanguageParser.ElsebodyContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link LanguageParser#switch_statement}.
 	 * @param ctx the parse tree

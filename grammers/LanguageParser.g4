@@ -34,7 +34,10 @@ statement
     | rawphp
     ;
 if_statement
-    : IF BRACKET_OPEN expression BRACKET_CLOSE  CURLEY_BRACKET_OPEN body_element* CURLEY_BRACKET_CLOSE (ELSE CURLEY_BRACKET_OPEN body_element* CURLEY_BRACKET_CLOSE)?
+    : IF BRACKET_OPEN expression BRACKET_CLOSE  CURLEY_BRACKET_OPEN body_element* CURLEY_BRACKET_CLOSE (ELSE CURLEY_BRACKET_OPEN elsebody CURLEY_BRACKET_CLOSE)?
+    ;
+elsebody
+    : body_element*
     ;
 switch_statement
     : SWITCH BRACKET_OPEN expression BRACKET_CLOSE CURLEY_BRACKET_OPEN switch_body CURLEY_BRACKET_CLOSE
@@ -108,7 +111,7 @@ table
     : TABLE BRACKET_OPEN BRACKET_CLOSE CURLEY_BRACKET_OPEN table_body CURLEY_BRACKET_CLOSE
     ;
 link
-    : LINK BRACKET_OPEN link_attributes (COMMA extra_attributes)? BRACKET_CLOSE CURLEY_BRACKET_OPEN body_options CURLEY_BRACKET_CLOSE
+    : LINK BRACKET_OPEN link_attributes (COMMA extra_attributes)? BRACKET_CLOSE CURLEY_BRACKET_OPEN body_options* CURLEY_BRACKET_CLOSE
     ;
 link_attributes
     : STRING
@@ -170,7 +173,7 @@ option
     : ID COMMA expression
     ;
 radio
-    : RADIO BRACKET_OPEN extra_attributes? BRACKET_CLOSE CURLEY_BRACKET_OPEN selection_body CURLEY_BRACKET_CLOSE
+    : RADIO ID BRACKET_OPEN extra_attributes? BRACKET_CLOSE CURLEY_BRACKET_OPEN selection_body CURLEY_BRACKET_CLOSE
     ;
 //radio_body
 //    : body_options(COLON body_options)*

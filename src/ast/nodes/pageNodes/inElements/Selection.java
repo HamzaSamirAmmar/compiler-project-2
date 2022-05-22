@@ -10,14 +10,24 @@ public class Selection extends Element {
 
     boolean isMultiple;
     String name;
-    ArrayList<MapNode> otherAttributes;
+    MapNode extraAttributes;
     ArrayList<String> options;
 
-    public Selection(boolean isMultiple, String name, ArrayList<MapNode> otherAttributes, ArrayList<String> options) {
+    public Selection(boolean isMultiple, String name, MapNode extraAttributes, ArrayList<String> options) {
         this.isMultiple = isMultiple;
         this.name = name;
-        this.otherAttributes = otherAttributes;
+        this.extraAttributes = extraAttributes;
         this.options = options;
+    }
+
+
+
+    public MapNode getExtraAttributes() {
+        return extraAttributes;
+    }
+
+    public void setExtraAttributes(MapNode extraAttributes) {
+        this.extraAttributes = extraAttributes;
     }
 
     public boolean isMultiple() {
@@ -36,14 +46,6 @@ public class Selection extends Element {
         this.name = name;
     }
 
-    public ArrayList<MapNode> getOtherAttributes() {
-        return otherAttributes;
-    }
-
-    public void setOtherAttributes(ArrayList<MapNode> otherAttributes) {
-        this.otherAttributes = otherAttributes;
-    }
-
     public ArrayList<String> getOptions() {
         return options;
     }
@@ -60,7 +62,7 @@ public class Selection extends Element {
     @Override
     protected Formatter nodeValue(Formatter formatter) {
         formatter.addProperty("Selection Name",name);
-        formatter.array("SelectionOtherAttributes", new ArrayList<>(otherAttributes));
+        formatter.object(extraAttributes.toString());
         formatter.array("SelectionOptions", new ArrayList<>(options));
         return formatter;
     }

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Radio extends Element {
 
     String name;
-    ArrayList<MapNode> otherAttributes;
+    MapNode extraAttributes;
     ArrayList<String> options;
 
     public String getName() {
@@ -20,18 +20,18 @@ public class Radio extends Element {
         this.name = name;
     }
 
-    public ArrayList<MapNode> getOtherAttributes() {
-        return otherAttributes;
+    public MapNode getExtraAttributes() {
+        return extraAttributes;
     }
 
-    public void setOtherAttributes(ArrayList<MapNode> otherAttributes) {
-        this.otherAttributes = otherAttributes;
-    }
-
-    public Radio(String name, ArrayList<MapNode> otherAttributes, ArrayList<String> options) {
+    public Radio(String name, MapNode extraAttributes, ArrayList<String> options) {
         this.name = name;
-        this.otherAttributes = otherAttributes;
+        this.extraAttributes = extraAttributes;
         this.options = options;
+    }
+
+    public void setExtraAttributes(MapNode extraAttributes) {
+        this.extraAttributes = extraAttributes;
     }
 
     public ArrayList<String> getOptions() {
@@ -50,7 +50,7 @@ public class Radio extends Element {
     @Override
     protected Formatter nodeValue(Formatter formatter) {
         formatter.addProperty("Radio Name",name);
-        formatter.array("RadioOtherAttributes", new ArrayList<>(otherAttributes));
+        formatter.object(extraAttributes.toString());
         formatter.array("RadioOptions", new ArrayList<>(options));
         return formatter;
     }

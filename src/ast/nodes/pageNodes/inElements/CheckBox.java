@@ -10,14 +10,24 @@ public class CheckBox extends Element {
     String name;
     String label;
     String value;
-    ArrayList<MapNode> otherAttributes;
-
-    public CheckBox(String name, String label, String value, ArrayList<MapNode> otherAttributes) {
+    MapNode extraAttributes;
+    public CheckBox(String name, String label, String value, MapNode extraAttributes) {
         this.name = name;
         this.label = label;
         this.value = value;
-        this.otherAttributes = otherAttributes;
+        this.extraAttributes = extraAttributes;
     }
+
+    public MapNode getExtraAttributes() {
+        return extraAttributes;
+    }
+
+    public void setExtraAttributes(MapNode extraAttributes) {
+        this.extraAttributes = extraAttributes;
+    }
+
+
+
 
     public String getName() {
         return name;
@@ -43,13 +53,6 @@ public class CheckBox extends Element {
         this.value = value;
     }
 
-    public ArrayList<MapNode> getOtherAttributes() {
-        return otherAttributes;
-    }
-
-    public void setOtherAttributes(ArrayList<MapNode> otherAttributes) {
-        this.otherAttributes = otherAttributes;
-    }
 
     @Override
     protected String nodeName() {
@@ -61,7 +64,7 @@ public class CheckBox extends Element {
         formatter.addProperty("CheckBox Name", name);
         formatter.addProperty("CheckBox Value", value);
         formatter.addProperty("CheckBox Label", label);
-        formatter.array("CheckBoxOtherAttributes", new ArrayList<>(otherAttributes));
+        formatter.object(extraAttributes.toString());
         return formatter;
     }
 }

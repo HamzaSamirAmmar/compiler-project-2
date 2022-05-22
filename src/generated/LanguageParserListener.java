@@ -1,4 +1,4 @@
-// Generated from C:/Users/hamza/Desktop/compiler-project-2/grammers\LanguageParser.g4 by ANTLR 4.10.1
+// Generated from F:/Programming/compiler/compilerToPHPHTML/compiler-project-2/grammers\LanguageParser.g4 by ANTLR 4.9.1
 package generated;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -87,6 +87,16 @@ public interface LanguageParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitIf_statement(LanguageParser.If_statementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LanguageParser#elsebody}.
+	 * @param ctx the parse tree
+	 */
+	void enterElsebody(LanguageParser.ElsebodyContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LanguageParser#elsebody}.
+	 * @param ctx the parse tree
+	 */
+	void exitElsebody(LanguageParser.ElsebodyContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link LanguageParser#switch_statement}.
 	 * @param ctx the parse tree
