@@ -148,6 +148,30 @@ public class LanguageParserBaseListener implements LanguageParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterSwitch_case(LanguageParser.Switch_caseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSwitch_case(LanguageParser.Switch_caseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSwitch_default(LanguageParser.Switch_defaultContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSwitch_default(LanguageParser.Switch_defaultContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterVariable_declaration(LanguageParser.Variable_declarationContext ctx) { }
 	/**
 	 * {@inheritDoc}
