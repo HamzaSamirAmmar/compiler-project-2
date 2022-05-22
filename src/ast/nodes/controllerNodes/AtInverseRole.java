@@ -8,15 +8,15 @@ import java.util.List;
 public class AtInverseRole extends AbstractNode {
     List<String> roles;
 
-//    List<BodyElement> bodyElements;
+//    List<Element> bodyElements;
 //
-//    List<BodyElement> elseBodyElements;
+//    List<Element> elseBodyElements;
 
-    //    public void setBodyElements(List<BodyElement> bodyElements) {
+    //    public void setBodyElements(List<Element> bodyElements) {
 //        this.bodyElements = bodyElements;
 //    }
 
-//    public void setElseBodyElements(List<BodyElement> bodyElements) {
+//    public void setElseBodyElements(List<Element> bodyElements) {
 //        this.elseBodyElements = bodyElements;
 //    }
 

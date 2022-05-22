@@ -6,8 +6,8 @@ import ast.nodes.util.Formatter;
 public class Section extends AbstractNode {
     String name;
 
-    //    List<BodyElement> bodyElements;
-    //    public void setBodyElements(List<BodyElement> bodyElements) {
+    //    List<Element> bodyElements;
+    //    public void setBodyElements(List<Element> bodyElements) {
 //        this.bodyElements = bodyElements;
 //    }
 

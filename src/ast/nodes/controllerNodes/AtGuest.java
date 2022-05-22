@@ -4,14 +4,14 @@ import ast.nodes.AbstractNode;
 import ast.nodes.util.Formatter;
 
 public class AtGuest extends AbstractNode {
-    //    List<BodyElement> bodyElements;
-//    List<BodyElement> elseBodyElements;
+    //    List<Element> bodyElements;
+//    List<Element> elseBodyElements;
 
-//    public void setBodyElements(List<BodyElement> bodyElements) {
+//    public void setBodyElements(List<Element> bodyElements) {
 //        this.bodyElements = bodyElements;
 //    }
 
-//    public void setElseBodyElements(List<BodyElement> bodyElements) {
+//    public void setElseBodyElements(List<Element> bodyElements) {
 //        this.elseBodyElements = bodyElements;
 //    }
 
