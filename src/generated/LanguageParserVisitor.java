@@ -1,4 +1,4 @@
-// Generated from D:/Damascus university-IT/4th year/second semestere/compiler-project/compiler-project-2/grammers\LanguageParser.g4 by ANTLR 4.9.2
+// Generated from C:/Users/hamza/Desktop/compiler-project-2/grammers\LanguageParser.g4 by ANTLR 4.10.1
 package generated;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -70,6 +70,18 @@ public interface LanguageParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitSwitch_body(LanguageParser.Switch_bodyContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LanguageParser#switch_case}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSwitch_case(LanguageParser.Switch_caseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LanguageParser#switch_default}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSwitch_default(LanguageParser.Switch_defaultContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link LanguageParser#variable_declaration}.
 	 * @param ctx the parse tree

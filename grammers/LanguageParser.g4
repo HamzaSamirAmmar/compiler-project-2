@@ -40,7 +40,13 @@ switch_statement
     : SWITCH BRACKET_OPEN expression BRACKET_CLOSE CURLEY_BRACKET_OPEN switch_body CURLEY_BRACKET_CLOSE
     ;
 switch_body
-    : (CASE expression COLON body_element* SEMI_COLON)* (DEFAULT COLON body_element*)?
+    : switch_case* switch_default?
+    ;
+switch_case
+    :CASE expression COLON body_element* SEMI_COLON
+    ;
+switch_default
+    : DEFAULT COLON body_element*
     ;
 variable_declaration
     : AT ID EQUAL expression

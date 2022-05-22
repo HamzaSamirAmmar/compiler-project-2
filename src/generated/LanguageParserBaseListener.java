@@ -1,4 +1,4 @@
-// Generated from D:/Damascus university-IT/4th year/second semestere/compiler-project/compiler-project-2/grammers\LanguageParser.g4 by ANTLR 4.9.2
+// Generated from C:/Users/hamza/Desktop/compiler-project-2/grammers\LanguageParser.g4 by ANTLR 4.10.1
 package generated;
 
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -131,6 +131,30 @@ public class LanguageParserBaseListener implements LanguageParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitSwitch_body(LanguageParser.Switch_bodyContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSwitch_case(LanguageParser.Switch_caseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSwitch_case(LanguageParser.Switch_caseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSwitch_default(LanguageParser.Switch_defaultContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSwitch_default(LanguageParser.Switch_defaultContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

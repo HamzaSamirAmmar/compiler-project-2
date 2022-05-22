@@ -21,6 +21,16 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
     }
 
     @Override
+    public AbstractNode visitSwitch_case(LanguageParser.Switch_caseContext ctx) {
+        return super.visitSwitch_case(ctx);
+    }
+
+    @Override
+    public AbstractNode visitSwitch_default(LanguageParser.Switch_defaultContext ctx) {
+        return super.visitSwitch_default(ctx);
+    }
+
+    @Override
     public AbstractNode visitHead(LanguageParser.HeadContext ctx) {
         return super.visitHead(ctx);
     }
