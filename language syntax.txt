@@ -1,5 +1,4 @@
-
-
-page p1  head(title) {
-
+page p1  head("title") {
+    @var=3
+    
 }

@@ -100,13 +100,47 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
     @Override//should contain all cases in if elses
     public AbstractNode visitBody_element(LanguageParser.Body_elementContext ctx) {
         System.out.println("In visit body element");
-        return visit(ctx);
+        if(ctx.in_element()!=null){
+            return visit(ctx.in_element());
+        }else if(ctx.out_element()!=null)
+        {
+            return visit(ctx.out_element());
+        }else if(ctx.statement()!=null)
+        {
+            return visit(ctx.statement());
+        }
+        else if (ctx.authentication()!=null)
+        {
+            return visit(ctx.authentication());
+        }else if(ctx.authorization()!=null){
+            return visit(ctx.authorization());
+        }else {
+            return visit(ctx.layoutInheritance());
+        }
+
     }
 
     @Override//should contain all cases in if elses
     public AbstractNode visitStatement(LanguageParser.StatementContext ctx) {
         System.out.println("In visit statement");
-        return visit(ctx);
+        if(ctx.if_statement()!=null){
+            return visit(ctx.if_statement());
+        }else if(ctx.switch_statement()!=null)
+        {
+            return visit(ctx.switch_statement());
+        }else if(ctx.for_statement()!=null)
+        {
+            return visit(ctx.for_statement());
+        }
+        else if (ctx.variable_declaration()!=null)
+        {
+            return visit(ctx.variable_declaration());
+        }else if(ctx.expression()!=null){
+            return visit(ctx.expression());
+        }else {
+            return visit(ctx.rawphp());
+        }
+
     }
 
     @Override

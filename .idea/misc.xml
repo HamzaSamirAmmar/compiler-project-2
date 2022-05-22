@@ -46,7 +46,7 @@
         <PerGrammarGenerationSettings>
           <option name="fileName" value="$PROJECT_DIR$/grammers/LanguageParser.g4" />
           <option name="autoGen" value="true" />
-          <option name="outputDir" value="C:\Users\hamza\Desktop\compiler-project-2\src" />
+          <option name="outputDir" value="D:\Damascus university-IT\4th year\second semestere\compiler-project\compiler-project-2\src" />
           <option name="libDir" value="" />
           <option name="encoding" value="" />
           <option name="pkg" value="generated" />
