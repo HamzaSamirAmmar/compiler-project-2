@@ -112,6 +112,18 @@ public class LanguageParserBaseListener implements LanguageParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterElsebody(LanguageParser.ElsebodyContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitElsebody(LanguageParser.ElsebodyContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterSwitch_statement(LanguageParser.Switch_statementContext ctx) { }
 	/**
 	 * {@inheritDoc}

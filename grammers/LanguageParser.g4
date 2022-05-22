@@ -34,7 +34,10 @@ statement
     | rawphp
     ;
 if_statement
-    : IF BRACKET_OPEN expression BRACKET_CLOSE  CURLEY_BRACKET_OPEN body_element* CURLEY_BRACKET_CLOSE (ELSE CURLEY_BRACKET_OPEN body_element* CURLEY_BRACKET_CLOSE)?
+    : IF BRACKET_OPEN expression BRACKET_CLOSE  CURLEY_BRACKET_OPEN body_element* CURLEY_BRACKET_CLOSE (ELSE CURLEY_BRACKET_OPEN elsebody CURLEY_BRACKET_CLOSE)?
+    ;
+elsebody
+    : body_element*
     ;
 switch_statement
     : SWITCH BRACKET_OPEN expression BRACKET_CLOSE CURLEY_BRACKET_OPEN switch_body CURLEY_BRACKET_CLOSE
