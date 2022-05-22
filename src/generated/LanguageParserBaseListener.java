@@ -112,6 +112,18 @@ public class LanguageParserBaseListener implements LanguageParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterElsebody(LanguageParser.ElsebodyContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitElsebody(LanguageParser.ElsebodyContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterSwitch_statement(LanguageParser.Switch_statementContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -131,6 +143,30 @@ public class LanguageParserBaseListener implements LanguageParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitSwitch_body(LanguageParser.Switch_bodyContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSwitch_case(LanguageParser.Switch_caseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSwitch_case(LanguageParser.Switch_caseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSwitch_default(LanguageParser.Switch_defaultContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSwitch_default(LanguageParser.Switch_defaultContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
