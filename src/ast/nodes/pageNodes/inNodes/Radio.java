@@ -1,4 +1,4 @@
-package ast.nodes.pageNodes.inElements;
+package ast.nodes.pageNodes.inNodes;
 
 import ast.nodes.Element;
 import ast.nodes.basicNodes.expressions.literals.MapNode;
@@ -10,7 +10,7 @@ public class Radio extends Element {
 
     String name;
     MapNode extraAttributes;
-    ArrayList<String> options;
+    ArrayList<Option> options;
 
     public String getName() {
         return name;
@@ -24,7 +24,7 @@ public class Radio extends Element {
         return extraAttributes;
     }
 
-    public Radio(String name, MapNode extraAttributes, ArrayList<String> options) {
+    public Radio(String name, MapNode extraAttributes, ArrayList<Option> options) {
         this.name = name;
         this.extraAttributes = extraAttributes;
         this.options = options;
@@ -34,11 +34,11 @@ public class Radio extends Element {
         this.extraAttributes = extraAttributes;
     }
 
-    public ArrayList<String> getOptions() {
+    public ArrayList<Option> getOptions() {
         return options;
     }
 
-    public void setOptions(ArrayList<String> options) {
+    public void setOptions(ArrayList<Option> options) {
         this.options = options;
     }
 

@@ -1,8 +1,11 @@
 package ast.nodes.basicNodes.statement;
 
 import ast.nodes.AbstractNode;
+import ast.nodes.Element;
 import ast.nodes.basicNodes.expressions.Expression;
 import ast.nodes.util.Formatter;
+
+import java.util.ArrayList;
 
 public class ForStatement extends AbstractNode {
 
@@ -12,28 +15,40 @@ public class ForStatement extends AbstractNode {
 
     Expression stepExpression;
 
-//    List<BodyElement> bodyElements;
+    ArrayList<Element> bodyElements;
 
-    public ForStatement() {
+
+    public VariableDeclaration getVariableDeclaration() {
+        return variableDeclaration;
     }
-
-
 
     public void setVariableDeclaration(VariableDeclaration variableDeclaration) {
         this.variableDeclaration = variableDeclaration;
     }
 
-    public void setConditionExpression(Expression expression) {
-        this.conditionExpression = expression;
+    public Expression getConditionExpression() {
+        return conditionExpression;
     }
 
-    public void setStepExpression(Expression expression) {
-        this.stepExpression = expression;
+    public void setConditionExpression(Expression conditionExpression) {
+        this.conditionExpression = conditionExpression;
     }
 
-//    public void setBodyElements(List<BodyElement> bodyElements) {
-//        this.bodyElements = bodyElements;
-//    }
+    public Expression getStepExpression() {
+        return stepExpression;
+    }
+
+    public void setStepExpression(Expression stepExpression) {
+        this.stepExpression = stepExpression;
+    }
+
+    public ArrayList<Element> getBodyElements() {
+        return bodyElements;
+    }
+
+    public void setBodyElements(ArrayList<Element> bodyElements) {
+        this.bodyElements = bodyElements;
+    }
 
     @Override
     protected String nodeName() {
@@ -42,7 +57,7 @@ public class ForStatement extends AbstractNode {
 
     @Override
     protected Formatter nodeValue(Formatter formatter) {
-            return formatter;
+        return formatter;
 
     }
 }

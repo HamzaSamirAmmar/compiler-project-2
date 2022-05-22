@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class Switch extends Element {
 
     Expression expression;
-    ArrayList<SwitchCase> switchCases = new ArrayList<>();
+    ArrayList<SwitchCase> switchCases;
 
     public Switch(Expression expression, ArrayList<SwitchCase> switchCaseExpressions) {
         this.expression = expression;

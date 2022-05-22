@@ -7,17 +7,22 @@ import ast.nodes.basicNodes.IfStatement;
 import ast.nodes.basicNodes.Switch;
 import ast.nodes.basicNodes.SwitchCase;
 import ast.nodes.basicNodes.expressions.Expression;
+import ast.nodes.basicNodes.expressions.IndexedExpressionNode;
+import ast.nodes.basicNodes.expressions.Math.AdditiveNode;
+import ast.nodes.basicNodes.expressions.Math.OneOperandMathematicalNode;
+import ast.nodes.basicNodes.expressions.Numeric;
+import ast.nodes.basicNodes.expressions.conditions.ConditionConcatenation;
+import ast.nodes.basicNodes.expressions.conditions.OneOperandCondition;
+import ast.nodes.basicNodes.expressions.conditions.TwoOperandCondition;
+import ast.nodes.basicNodes.expressions.literals.*;
 import ast.nodes.controllerNodes.Controller;
 import ast.nodes.controllerNodes.contollerElements.AuthCheck;
 import ast.nodes.controllerNodes.contollerElements.Redirect;
 import ast.nodes.controllerNodes.contollerElements.RoleCheck;
 import ast.nodes.controllerNodes.contollerElements.ValidCheck;
 import ast.nodes.pageNodes.Page;
-import ast.nodes.basicNodes.expressions.literals.MapNode;
-import ast.nodes.basicNodes.expressions.literals.MapPairNode;
-import ast.nodes.pageNodes.inElements.*;
+import ast.nodes.pageNodes.inNodes.*;
 import ast.nodes.pageNodes.outNodes.*;
-import ast.nodes.basicNodes.expressions.Expression;
 import ast.nodes.basicNodes.statement.ForStatement;
 import ast.nodes.basicNodes.statement.VariableDeclaration;
 import ast.nodes.controllerNodes.*;
@@ -76,27 +81,32 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
 
     @Override
     public AbstractNode visitSwitch_default(LanguageParser.Switch_defaultContext ctx) {
+        System.out.println("In switch default");
         return super.visitSwitch_default(ctx);
     }
 
     @Override
     public AbstractNode visitHead(LanguageParser.HeadContext ctx) {
+        System.out.println("In visit head");
         return visit(ctx.title());
     }
 
     @Override//not used
     public AbstractNode visitTitle(LanguageParser.TitleContext ctx) {
+        System.out.println("In visit title");
         return super.visitTitle(ctx);
     }
 
     @Override//should contain all cases in if elses
     public AbstractNode visitBody_element(LanguageParser.Body_elementContext ctx) {
-        return super.visitBody_element(ctx);
+        System.out.println("In visit body element");
+        return visit(ctx);
     }
 
     @Override//should contain all cases in if elses
     public AbstractNode visitStatement(LanguageParser.StatementContext ctx) {
-        return super.visitStatement(ctx);
+        System.out.println("In visit statement");
+        return visit(ctx);
     }
 
     @Override
@@ -129,11 +139,20 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
         for (int i = 0; i < ctx.switch_body().switch_case().size(); i++) {
             switchCases.add((SwitchCase) visit(ctx.switch_body().switch_case(i)));
         }
+        if (ctx.switch_body().switch_default() != null) {
+            ArrayList<Element> elements = new ArrayList<>();
+            for (int i = 0; i < ctx.switch_body().switch_default().body_element().size(); i++) {
+                elements.add((Element) visit(ctx.switch_body().switch_default().body_element().get(i)));
+
+            }
+            switchCases.add(new SwitchCase(null, elements));
+        }
         return new Switch(expression, switchCases);
     }
 
     @Override
     public AbstractNode visitSwitch_body(LanguageParser.Switch_bodyContext ctx) {
+        System.out.println("In visit switch body");
         return super.visitSwitch_body(ctx);
     }
 
@@ -153,11 +172,11 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
         forStatement.setVariableDeclaration((VariableDeclaration) visit(ctx.for_index()));
         forStatement.setConditionExpression((Expression) visit(ctx.expression(0)));
         forStatement.setStepExpression((Expression) visit(ctx.expression(1)));
-//        ArrayList<Element> bodyElements = new ArrayList<Element>();
-        for (int i = 0; i<ctx.body_element().size();i++){
-//            bodyElements.add((Element) visit(ctx.body_element(i)));
+        ArrayList<Element> bodyElements = new ArrayList<>();
+        for (int i = 0; i < ctx.body_element().size(); i++) {
+            bodyElements.add((Element) visit(ctx.body_element(i)));
         }
-//        forStatement.setBodyElements(bodyElements);
+        forStatement.setBodyElements(bodyElements);
         return forStatement;
     }
 
@@ -169,28 +188,28 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
     @Override
     public AbstractNode visitAuthentication(LanguageParser.AuthenticationContext ctx) {
         System.out.println("in Authentication visitor");
-//        ArrayList<Element> bodyElements = new ArrayList<Element>();
-//        ArrayList<Element> elseBodyElements = new ArrayList<Element>();
+        ArrayList<Element> bodyElements = new ArrayList<Element>();
+        ArrayList<Element> elseBodyElements = new ArrayList<Element>();
         if (ctx.AT_AUTH() != null) {
 
             AtAuth atAuth = new AtAuth();
             if (ctx.ELSE() != null) {
                 int i;
                 for (i = 1; i < ctx.children.indexOf(ctx.ELSE()); i++) {
-//                    bodyElements.add((Element) visit(ctx.getChild(i)));
+                    bodyElements.add((Element) visit(ctx.getChild(i)));
                 }
                 for (i = ctx.children.indexOf(ctx.ELSE()) + 1; i < ctx.children.indexOf(ctx.AT_END_AUTH()); i++) {
-//                    elseBodyElements.add((Element) visit(ctx.getChild(i)));
+                    elseBodyElements.add((Element) visit(ctx.getChild(i)));
                 }
-//                atAuth.setBodyElements(bodyElements);
-//                atAuth.setElseBodyElements(elseBodyElements);
+                atAuth.setBodyElements(bodyElements);
+                atAuth.setElseBodyElements(elseBodyElements);
                 return atAuth;
             } else {
                 int i;
                 for (i = 1; i < ctx.body_element().size(); i++) {
-//                    bodyElements.add((Element) visit(ctx.body_element(i)));
+                    bodyElements.add((Element) visit(ctx.body_element(i)));
                 }
-//                atAuth.setBodyElements(bodyElements);
+                atAuth.setBodyElements(bodyElements);
                 return atAuth;
             }
         } else {
@@ -198,20 +217,20 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
             if (ctx.ELSE() != null) {
                 int i;
                 for (i = 1; i < ctx.children.indexOf(ctx.ELSE()); i++) {
-//                    bodyElements.add((Element) visit(ctx.getChild(i)));
+                    bodyElements.add((Element) visit(ctx.getChild(i)));
                 }
                 for (i = ctx.children.indexOf(ctx.ELSE()) + 1; i < ctx.children.indexOf(ctx.AT_END_GUEST()); i++) {
-//                    elseBodyElements.add((Element) visit(ctx.getChild(i)));
+                    elseBodyElements.add((Element) visit(ctx.getChild(i)));
                 }
-//                atGuest.setBodyElements(bodyElements);
-//                atGuest.setElseBodyElements(elseBodyElements);
+                atGuest.setBodyElements(bodyElements);
+                atGuest.setElseBodyElements(elseBodyElements);
                 return atGuest;
             } else {
                 int i;
                 for (i = 1; i < ctx.body_element().size(); i++) {
-//                    bodyElements.add((Element) visit(ctx.body_element(i)));
+                    bodyElements.add((Element) visit(ctx.body_element(i)));
                 }
-//                atGuest.setBodyElements(bodyElements);
+                atGuest.setBodyElements(bodyElements);
                 return atGuest;
             }
         }
@@ -220,8 +239,8 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
     @Override
     public AbstractNode visitAuthorization(LanguageParser.AuthorizationContext ctx) {
         System.out.println("in Authorization visitor");
-//        ArrayList<Element> bodyElements = new ArrayList<Element>();
-//        ArrayList<Element> elseBodyElements = new ArrayList<Element>();
+        ArrayList<Element> bodyElements = new ArrayList<Element>();
+        ArrayList<Element> elseBodyElements = new ArrayList<Element>();
         ArrayList<String> roles = new ArrayList<>();
         for (int i = 0; i < ctx.STRING().size(); i++) {
             roles.add(ctx.STRING(i).toString());
@@ -235,20 +254,20 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
                 int i;
 
                 for (i = ctx.children.indexOf(ctx.BRACKET_CLOSE()) + 1; i < ctx.children.indexOf(ctx.ELSE()); i++) {
-//                    bodyElements.add((Element) visit(ctx.getChild(i)));
+                    bodyElements.add((Element) visit(ctx.getChild(i)));
                 }
                 for (i = ctx.children.indexOf(ctx.ELSE()) + 1; i < ctx.children.indexOf(ctx.AT_END_ROLE()); i++) {
-//                    elseBodyElements.add((Element) visit(ctx.getChild(i)));
+                    elseBodyElements.add((Element) visit(ctx.getChild(i)));
                 }
-//                atRole.setBodyElements(bodyElements);
-//                atRole.setElseBodyElements(elseBodyElements);
+                atRole.setBodyElements(bodyElements);
+                atRole.setElseBodyElements(elseBodyElements);
                 return atRole;
             } else {
                 int i;
                 for (i = 0; i < ctx.body_element().size(); i++) {
-//                    bodyElements.add((Element) visit(ctx.body_element(i)));
+                    bodyElements.add((Element) visit(ctx.body_element(i)));
                 }
-//                atAuth.setBodyElements(bodyElements);
+                atRole.setBodyElements(bodyElements);
                 return atRole;
             }
         } else {
@@ -257,20 +276,20 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
             if (ctx.ELSE() != null) {
                 int i;
                 for (i = ctx.children.indexOf(ctx.BRACKET_CLOSE()) + 1; i < ctx.children.indexOf(ctx.ELSE()); i++) {
-//                    bodyElements.add((Element) visit(ctx.getChild(i)));
+                    bodyElements.add((Element) visit(ctx.getChild(i)));
                 }
                 for (i = ctx.children.indexOf(ctx.ELSE()) + 1; i < ctx.children.indexOf(ctx.AT_END_INVERSE_ROLE()); i++) {
-//                    elseBodyElements.add((Element) visit(ctx.getChild(i)));
+                    elseBodyElements.add((Element) visit(ctx.getChild(i)));
                 }
-//                atGuest.setBodyElements(bodyElements);
-//                atGuest.setElseBodyElements(elseBodyElements);
+                atInverseRole.setBodyElements(bodyElements);
+                atInverseRole.setElseBodyElements(elseBodyElements);
                 return atInverseRole;
             } else {
                 int i;
                 for (i = 0; i < ctx.body_element().size(); i++) {
-//                    bodyElements.add((Element) visit(ctx.body_element(i)));
+                    bodyElements.add((Element) visit(ctx.body_element(i)));
                 }
-//                atGuest.setBodyElements(bodyElements);
+                atInverseRole.setBodyElements(bodyElements);
                 return atInverseRole;
             }
         }
@@ -287,21 +306,21 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
     public AbstractNode visitLayoutInheritance(LanguageParser.LayoutInheritanceContext ctx) {
         if (ctx.AT_SECTION() != null) {
             Section section = new Section();
-            section.setName(ctx.STRING().toString());
-            //        ArrayList<Element> bodyElements=new ArrayList<BodyElement>();
+            section.setName(ctx.STRING().getText());
+            ArrayList<Element> bodyElements = new ArrayList<>();
             for (int i = 0; i < ctx.body_element().size(); i++) {
-//                    bodyElements.add((Element) visit(ctx.body_element(i)));
+                bodyElements.add((Element) visit(ctx.body_element(i)));
             }
-//            section.setBodyElements(bodyElements);
+            section.setBodyElements(bodyElements);
             return section;
         } else {
             Yield yield = new Yield();
-            yield.setName(ctx.STRING().toString());
+            yield.setName(ctx.STRING().getText());
             return yield;
         }
     }
 
-    @Override//should contain all cases in if elses
+    @Override//should contain all cases in if else
     public AbstractNode visitOut_element(LanguageParser.Out_elementContext ctx) {
         System.out.println("in out element");
         if (ctx.button() != null) return visit(ctx.button());
@@ -431,10 +450,6 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
 
     @Override
     public AbstractNode visitLink(LanguageParser.LinkContext ctx) {
-        /*OutNode referenceElement;
-    String linkReference;
-    OutNode linkBody;
-    ArrayList <MapPairNode> extraAttributes;*/
         Link link;
         MapNode extraAttributes;
         ArrayList<OutNode> linkBody = new ArrayList<>();
@@ -461,12 +476,12 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
 
     @Override
     public AbstractNode visitBody_options(LanguageParser.Body_optionsContext ctx) {
-        return super.visitBody_options(ctx);
+        return visit(ctx);
     }
 
     @Override//should contain all cases in if elses
     public AbstractNode visitIn_element(LanguageParser.In_elementContext ctx) {
-        return super.visitIn_element(ctx);
+        return visit(ctx);
     }
 
     @Override
@@ -499,6 +514,7 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
 
     @Override
     public AbstractNode visitForm_body(LanguageParser.Form_bodyContext ctx) {
+        System.out.println("In visit form body");
         return super.visitForm_body(ctx);
     }
 
@@ -583,7 +599,7 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
     public AbstractNode visitSelection(LanguageParser.SelectionContext ctx) {
         Selection selection;
         MapNode extraAttributes;
-        ArrayList<String> selectionBody = new ArrayList<>();
+        ArrayList<Option> selectionBody = new ArrayList<>();
         System.out.println("in selection in element visitor");
         if (ctx.selection_attribute() != null) {
             selection = (Selection) visitSelection_attribute(ctx.selection_attribute());
@@ -592,7 +608,7 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
                 selection.setExtraAttributes(extraAttributes);
             }
             for (int i = 0; i < ctx.selection_body().option().size(); i++) {
-                selectionBody.add(ctx.selection_body().option().get(i).getText());
+                selectionBody.add((Option) visit(ctx.selection_body().option().get(i)));
             }
             selection.setOptions(selectionBody);
             return selection;
@@ -609,27 +625,30 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
 
     @Override
     public AbstractNode visitSelection_body(LanguageParser.Selection_bodyContext ctx) {
+
         return super.visitSelection_body(ctx);
     }
 
     @Override
     public AbstractNode visitOption(LanguageParser.OptionContext ctx) {
-        return super.visitOption(ctx);
+        String label = ctx.STRING().getText();
+        Expression expression = (Expression) visit(ctx.expression());
+        return new Option(expression, label);
     }
 
     @Override
     public AbstractNode visitRadio(LanguageParser.RadioContext ctx) {
         Radio radio = new Radio(null, null, null);
         MapNode extraAttributes;
-        ArrayList<String> radioOptions = new ArrayList<>();
+        ArrayList<Option> radioOptions = new ArrayList<>();
         System.out.println("in selection in element visitor");
-        radio.setName(ctx.getText());
+        radio.setName(ctx.ID().getText());
         if (ctx.extra_attributes() != null) {
             extraAttributes = (MapNode) visit(ctx.extra_attributes());
             radio.setExtraAttributes(extraAttributes);
         }
         for (int i = 0; i < ctx.selection_body().option().size(); i++) {
-            radioOptions.add(ctx.selection_body().option().get(i).getText());
+            radioOptions.add((Option) visit(ctx.selection_body().option().get(i)));
         }
         radio.setOptions(radioOptions);
         return radio;
@@ -656,11 +675,13 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
 
     @Override
     public AbstractNode visitTable_body(LanguageParser.Table_bodyContext ctx) {
+        System.out.println("Visit in table body");
         return super.visitTable_body(ctx);
     }
 
     @Override
     public AbstractNode visitTable_header_body(LanguageParser.Table_header_bodyContext ctx) {
+        System.out.println("Visit in header body");
         return super.visitTable_header_body(ctx);
     }
 
@@ -698,61 +719,104 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
 
     @Override
     public AbstractNode visitParenthesizedExpression(LanguageParser.ParenthesizedExpressionContext ctx) {
-        return super.visitParenthesizedExpression(ctx);
+        System.out.println("in Parenthesized Expression visitor");
+        return visit(ctx.expression());
     }
 
     @Override
     public AbstractNode visitLiteralStringExpression(LanguageParser.LiteralStringExpressionContext ctx) {
-        return super.visitLiteralStringExpression(ctx);
+        System.out.println("in literal string expression visitor");
+        String fullText = ctx.STRING().getText();
+        return new StringNode(fullText.substring(1, fullText.length() - 1));
     }
 
     @Override
     public AbstractNode visitTwoOperandsConditionExpression(LanguageParser.TwoOperandsConditionExpressionContext ctx) {
-        return super.visitTwoOperandsConditionExpression(ctx);
+        System.out.println("in two operands condition visitor");
+        Expression leftOperand = (Expression) visit(ctx.expression(0));
+        Expression rightOperand = (Expression) visit(ctx.expression(1));
+        String operator = ctx.OPERATOR_TWO_OPERAND().getText();
+
+        return new TwoOperandCondition(leftOperand, rightOperand, operator);
     }
 
     @Override
     public AbstractNode visitConcatConditionExpression(LanguageParser.ConcatConditionExpressionContext ctx) {
-        return super.visitConcatConditionExpression(ctx);
+        System.out.println("in Condition Concatenation visitor");
+        Expression leftOperand = (Expression) visit(ctx.expression(0));
+        Expression rightOperand = (Expression) visit(ctx.expression(1));
+        String operator = ctx.CONDITIONAL_CONCAT_OPERATOR().getText();
+
+        return new ConditionConcatenation(operator, leftOperand, rightOperand);
     }
 
     @Override
     public AbstractNode visitMathematicalExpression(LanguageParser.MathematicalExpressionContext ctx) {
-        return super.visitMathematicalExpression(ctx);
+        System.out.println("Math is Math, and nothing else");
+        if (ctx.ADDITIVE_OPERATOR() != null) {
+            System.out.println("Additive");
+            String operator = ctx.ADDITIVE_OPERATOR().getText();
+            Expression leftOperand = (Expression) visit(ctx.expression(0));
+            Expression rightOperand = (Expression) visit(ctx.expression(1));
+            return new AdditiveNode(leftOperand, rightOperand, operator);
+        } else {
+            System.out.println("Multiplication");
+            String operator = ctx.MULTIPLICATIVE_OPERATOR().getText();
+            Expression leftOperand = (Expression) visit(ctx.expression(0));
+            Expression rightOperand = (Expression) visit(ctx.expression(1));
+            return new AdditiveNode(leftOperand, rightOperand, operator);
+        }
     }
 
     @Override
     public AbstractNode visitIndexedVariableExpression(LanguageParser.IndexedVariableExpressionContext ctx) {
-        return super.visitIndexedVariableExpression(ctx);
+        System.out.println("in indexed variable expression visitor");
+        if (ctx.SQUARE_OPEN() != null && ctx.SQUARE_CLOSE() != null) {
+            Expression indexed = (Expression) visit(ctx.expression(0));
+            Expression index = (Expression) visit(ctx.expression(1));
+            if (indexed instanceof Iterable && index instanceof Numeric)
+                return new IndexedExpressionNode(indexed, index);
+        }
+        throw new RuntimeException("Invalid Indexed Variable Expression");
     }
 
     @Override
     public AbstractNode visitOneOperandValuableExpression(LanguageParser.OneOperandValuableExpressionContext ctx) {
-        return super.visitOneOperandValuableExpression(ctx);
+        System.out.println("One operand valuable");
+        boolean operandIsLeft = (ctx.children.get(0) == ctx.ONE_VALUABLE_OPERAND());
+        String operator = ctx.ONE_VALUABLE_OPERAND().getText();
+        Expression operand = (Expression) visit(ctx.expression());
+        return new OneOperandMathematicalNode(operandIsLeft, operator, operand);
     }
 
     @Override
     public AbstractNode visitLiteralBooleanExpression(LanguageParser.LiteralBooleanExpressionContext ctx) {
-        return super.visitLiteralBooleanExpression(ctx);
+        System.out.println("in literal boolean expression visitor");
+        return new BooleanNode(Boolean.parseBoolean(ctx.BOOLEAN().getText()));
     }
 
     @Override
     public AbstractNode visitOneOperandConditionExpression(LanguageParser.OneOperandConditionExpressionContext ctx) {
-        return super.visitOneOperandConditionExpression(ctx);
+        System.out.println("in one operand condition visitor");
+        Expression operand = (Expression) visit(ctx.expression());
+        return new OneOperandCondition(operand);
     }
 
     @Override
     public AbstractNode visitVariableNameExpression(LanguageParser.VariableNameExpressionContext ctx) {
-        return super.visitVariableNameExpression(ctx);
+        System.out.println("in variable name expression visitor");
+        return new VariableNode(ctx.ID().getText());
     }
 
     @Override
     public AbstractNode visitLiteralNumericExpression(LanguageParser.LiteralNumericExpressionContext ctx) {
-        return super.visitLiteralNumericExpression(ctx);
+        System.out.println("in literal numeric expression visitor");
+        return new DecimalNode(Double.parseDouble(ctx.DECIMAL().getText()));
     }
 
     @Override
     public AbstractNode visitLiteralCharExpression(LanguageParser.LiteralCharExpressionContext ctx) {
-        return super.visitLiteralCharExpression(ctx);
+        System.out.println("in literal char expression visitor");
+        return new CharNode(ctx.CHAR().getText().charAt(1));
     }
 }

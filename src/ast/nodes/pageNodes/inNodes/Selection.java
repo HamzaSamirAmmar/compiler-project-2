@@ -1,6 +1,7 @@
-package ast.nodes.pageNodes.inElements;
+package ast.nodes.pageNodes.inNodes;
 
 import ast.nodes.Element;
+import ast.nodes.basicNodes.expressions.Expression;
 import ast.nodes.basicNodes.expressions.literals.MapNode;
 import ast.nodes.util.Formatter;
 
@@ -11,16 +12,23 @@ public class Selection extends Element {
     boolean isMultiple;
     String name;
     MapNode extraAttributes;
-    ArrayList<String> options;
+    ArrayList<Option> options;
 
-    public Selection(boolean isMultiple, String name, MapNode extraAttributes, ArrayList<String> options) {
+
+    public Selection(boolean isMultiple, String name, MapNode extraAttributes, ArrayList<Option> options) {
         this.isMultiple = isMultiple;
         this.name = name;
         this.extraAttributes = extraAttributes;
         this.options = options;
     }
 
+    public ArrayList<Option> getOptions() {
+        return options;
+    }
 
+    public void setOptions(ArrayList<Option> options) {
+        this.options = options;
+    }
 
     public MapNode getExtraAttributes() {
         return extraAttributes;
@@ -46,13 +54,7 @@ public class Selection extends Element {
         this.name = name;
     }
 
-    public ArrayList<String> getOptions() {
-        return options;
-    }
 
-    public void setOptions(ArrayList<String> options) {
-        this.options = options;
-    }
 
     @Override
     protected String nodeName() {

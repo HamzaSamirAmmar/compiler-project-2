@@ -1,17 +1,18 @@
-package ast.nodes.pageNodes.inElements;
+package ast.nodes.pageNodes.inNodes;
 
 import ast.nodes.Element;
 import ast.nodes.basicNodes.expressions.literals.MapNode;
 import ast.nodes.util.Formatter;
 
-import java.util.ArrayList;
+public class TextField extends Element {
 
-public class CheckBox extends Element {
     String name;
     String label;
     String value;
     MapNode extraAttributes;
-    public CheckBox(String name, String label, String value, MapNode extraAttributes) {
+
+
+    public TextField(String name, String label, String value, MapNode extraAttributes) {
         this.name = name;
         this.label = label;
         this.value = value;
@@ -25,9 +26,6 @@ public class CheckBox extends Element {
     public void setExtraAttributes(MapNode extraAttributes) {
         this.extraAttributes = extraAttributes;
     }
-
-
-
 
     public String getName() {
         return name;
@@ -53,17 +51,16 @@ public class CheckBox extends Element {
         this.value = value;
     }
 
-
     @Override
     protected String nodeName() {
-        return "CheckBox Node";
+        return "TextField Node";
     }
 
     @Override
     protected Formatter nodeValue(Formatter formatter) {
-        formatter.addProperty("CheckBox Name", name);
-        formatter.addProperty("CheckBox Value", value);
-        formatter.addProperty("CheckBox Label", label);
+        formatter.addProperty("TextField Name", name);
+        formatter.addProperty("TextField Value", value);
+        formatter.addProperty("TextField Label", label);
         formatter.object(extraAttributes.toString());
         return formatter;
     }

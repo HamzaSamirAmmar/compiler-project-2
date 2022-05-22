@@ -1,4 +1,4 @@
-package ast.nodes.pageNodes.inElements;
+package ast.nodes.pageNodes.inNodes;
 
 import ast.nodes.Element;
 import ast.nodes.basicNodes.expressions.literals.MapNode;

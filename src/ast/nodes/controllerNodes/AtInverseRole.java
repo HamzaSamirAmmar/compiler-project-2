@@ -1,26 +1,28 @@
 package ast.nodes.controllerNodes;
 
 import ast.nodes.AbstractNode;
+import ast.nodes.Element;
 import ast.nodes.util.Formatter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AtInverseRole extends AbstractNode {
-    List<String> roles;
+    ArrayList<String> roles;
 
-//    List<Element> bodyElements;
-//
-//    List<Element> elseBodyElements;
+    ArrayList<Element> bodyElements;
 
-    //    public void setBodyElements(List<Element> bodyElements) {
-//        this.bodyElements = bodyElements;
-//    }
+    ArrayList<Element> elseBodyElements;
 
-//    public void setElseBodyElements(List<Element> bodyElements) {
-//        this.elseBodyElements = bodyElements;
-//    }
+    public void setBodyElements(ArrayList<Element> bodyElements) {
+        this.bodyElements = bodyElements;
+    }
 
-    public void setRoles(List<String> roles) {
+    public void setElseBodyElements(ArrayList<Element> bodyElements) {
+        this.elseBodyElements = bodyElements;
+    }
+
+    public void setRoles(ArrayList<String> roles) {
         this.roles = roles;
     }
 

@@ -1,17 +1,21 @@
 package ast.nodes.controllerNodes;
 
 import ast.nodes.AbstractNode;
+import ast.nodes.Element;
 import ast.nodes.util.Formatter;
+
+import java.util.ArrayList;
 
 public class Section extends AbstractNode {
     String name;
 
-    //    List<Element> bodyElements;
-    //    public void setBodyElements(List<Element> bodyElements) {
-//        this.bodyElements = bodyElements;
-//    }
+    ArrayList<Element> bodyElements;
 
-    public void setName(String  name) {
+    public void setBodyElements(ArrayList<Element> bodyElements) {
+        this.bodyElements = bodyElements;
+    }
+
+    public void setName(String name) {
         this.name = name;
     }
 

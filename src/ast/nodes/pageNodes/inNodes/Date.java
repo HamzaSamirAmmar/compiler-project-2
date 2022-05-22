@@ -1,28 +1,24 @@
-package ast.nodes.pageNodes.inElements;
+package ast.nodes.pageNodes.inNodes;
 
 import ast.nodes.Element;
 import ast.nodes.basicNodes.expressions.literals.MapNode;
 import ast.nodes.util.Formatter;
 
-import java.util.ArrayList;
-
-public class TextField extends Element {
-
+public class Date extends Element {
     String name;
     String label;
     String value;
     MapNode extraAttributes;
 
+    public MapNode getExtraAttributes() {
+        return extraAttributes;
+    }
 
-    public TextField(String name, String label, String value, MapNode extraAttributes) {
+    public Date(String name, String label, String value, MapNode extraAttributes) {
         this.name = name;
         this.label = label;
         this.value = value;
         this.extraAttributes = extraAttributes;
-    }
-
-    public MapNode getExtraAttributes() {
-        return extraAttributes;
     }
 
     public void setExtraAttributes(MapNode extraAttributes) {
@@ -53,16 +49,17 @@ public class TextField extends Element {
         this.value = value;
     }
 
+
     @Override
     protected String nodeName() {
-        return "TextField Node";
+        return "Date Node";
     }
 
     @Override
     protected Formatter nodeValue(Formatter formatter) {
-        formatter.addProperty("TextField Name", name);
-        formatter.addProperty("TextField Value", value);
-        formatter.addProperty("TextField Label", label);
+        formatter.addProperty("Date Name", name);
+        formatter.addProperty("Date Value", value);
+        formatter.addProperty("Date Label", label);
         formatter.object(extraAttributes.toString());
         return formatter;
     }

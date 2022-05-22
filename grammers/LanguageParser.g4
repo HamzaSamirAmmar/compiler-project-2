@@ -170,7 +170,7 @@ selection_body
     : option? (COLON option)*
     ;
 option
-    : ID COMMA expression
+    : STRING COMMA expression
     ;
 radio
     : RADIO ID BRACKET_OPEN extra_attributes? BRACKET_CLOSE CURLEY_BRACKET_OPEN selection_body CURLEY_BRACKET_CLOSE

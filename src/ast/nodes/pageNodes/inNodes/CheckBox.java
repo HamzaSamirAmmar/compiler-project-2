@@ -1,31 +1,31 @@
-package ast.nodes.pageNodes.inElements;
+package ast.nodes.pageNodes.inNodes;
 
 import ast.nodes.Element;
 import ast.nodes.basicNodes.expressions.literals.MapNode;
 import ast.nodes.util.Formatter;
 
-import java.util.ArrayList;
-
-public class Date extends Element {
+public class CheckBox extends Element {
     String name;
     String label;
     String value;
     MapNode extraAttributes;
-
-    public MapNode getExtraAttributes() {
-        return extraAttributes;
-    }
-
-    public Date(String name, String label, String value, MapNode extraAttributes) {
+    public CheckBox(String name, String label, String value, MapNode extraAttributes) {
         this.name = name;
         this.label = label;
         this.value = value;
         this.extraAttributes = extraAttributes;
     }
 
+    public MapNode getExtraAttributes() {
+        return extraAttributes;
+    }
+
     public void setExtraAttributes(MapNode extraAttributes) {
         this.extraAttributes = extraAttributes;
     }
+
+
+
 
     public String getName() {
         return name;
@@ -54,14 +54,14 @@ public class Date extends Element {
 
     @Override
     protected String nodeName() {
-        return "Date Node";
+        return "CheckBox Node";
     }
 
     @Override
     protected Formatter nodeValue(Formatter formatter) {
-        formatter.addProperty("Date Name", name);
-        formatter.addProperty("Date Value", value);
-        formatter.addProperty("Date Label", label);
+        formatter.addProperty("CheckBox Name", name);
+        formatter.addProperty("CheckBox Value", value);
+        formatter.addProperty("CheckBox Label", label);
         formatter.object(extraAttributes.toString());
         return formatter;
     }
