@@ -1,8 +1,14 @@
 package ast.visitors;
 
 import ast.nodes.AbstractNode;
+import ast.nodes.basicNodes.expressions.Expression;
+import ast.nodes.basicNodes.expressions.literals.MapNode;
+import ast.nodes.basicNodes.expressions.literals.MapPairNode;
+import ast.nodes.pageNodes.outNodes.*;
 import generated.LanguageParser;
 import generated.LanguageParserBaseVisitor;
+
+import java.util.ArrayList;
 
 public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
     @Override
@@ -92,62 +98,166 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
 
     @Override
     public AbstractNode visitOut_element(LanguageParser.Out_elementContext ctx) {
-        return super.visitOut_element(ctx);
+        System.out.println("in out element");
+        if (ctx.button() != null)
+            return visit(ctx.button());
+        else if (ctx.image() != null)
+            return visit(ctx.image());
+        else if (ctx.link() != null)
+            return visit(ctx.link());
+        else if (ctx.list() != null)
+            return visit(ctx.list());
+        else if (ctx.table() != null)
+            return visit(ctx.table());
+        else //if (ctx.text()!=null)
+            return visit(ctx.text());
     }
 
     @Override
     public AbstractNode visitText(LanguageParser.TextContext ctx) {
-        return super.visitText(ctx);
+        Text text;
+        MapNode extraAttributes;
+        System.out.println("in text out element visitor");
+        if (ctx.text_attributes() != null) {
+            text = (Text) visitText_attributes(ctx.text_attributes());
+            if (ctx.extra_attributes() != null) {
+                extraAttributes = (MapNode) visitExtra_attributes(ctx.extra_attributes());
+                text.setExtraAttributes(extraAttributes);
+            }
+            return text;
+        }
+        throw new RuntimeException("Invalid text");
     }
 
     @Override
     public AbstractNode visitText_attributes(LanguageParser.Text_attributesContext ctx) {
-        return super.visitText_attributes(ctx);
+        Expression text = (Expression) visit(ctx.expression());
+        Integer fontSize = Integer.parseInt(ctx.DECIMAL().getText());
+        String color = ctx.HEXCHARS().getText();
+        Text textElement = new Text(text, fontSize, color, null);
+        return textElement;
     }
 
     @Override
     public AbstractNode visitImage(LanguageParser.ImageContext ctx) {
-        return super.visitImage(ctx);
+        Image image;
+        MapNode extraAttributes;
+        System.out.println("in image out element visitor");
+        if (ctx.image_attributes() != null) {
+            image = (Image) visitImage_attributes(ctx.image_attributes());
+            if (ctx.extra_attributes() != null) {
+                extraAttributes = (MapNode) visitExtra_attributes(ctx.extra_attributes());
+                image.setExtraAttributes(extraAttributes);
+            }
+            return image;
+        }
+        throw new RuntimeException("Invalid text");
     }
 
     @Override
     public AbstractNode visitImage_attributes(LanguageParser.Image_attributesContext ctx) {
-        return super.visitImage_attributes(ctx);
+        String imgReference = ctx.STRING().getText();
+        Integer height = Integer.parseInt(ctx.DECIMAL().get(0).getText());
+        Integer width = Integer.parseInt(ctx.DECIMAL().get(1).getText());
+        return new Image(imgReference, height, width, null);
     }
 
     @Override
     public AbstractNode visitButton(LanguageParser.ButtonContext ctx) {
-        return super.visitButton(ctx);
+        Button button;
+        MapNode extraAttributes;
+        System.out.println("in image out element visitor");
+        if (ctx.button_attributes() != null) {
+            button = (Button) visitButton_attributes(ctx.button_attributes());
+            if (ctx.extra_attributes() != null) {
+                extraAttributes = (MapNode) visitExtra_attributes(ctx.extra_attributes());
+                button.setExtraAttributes(extraAttributes);
+            }
+            return button;
+        }
+        throw new RuntimeException("Invalid text");
     }
 
     @Override
     public AbstractNode visitButton_attributes(LanguageParser.Button_attributesContext ctx) {
-        return super.visitButton_attributes(ctx);
+        String text = ctx.STRING().get(0).getText();
+        String action = ctx.STRING().get(1).getText();
+        return new Button(text, action, null);
     }
 
     @Override
     public AbstractNode visitList(LanguageParser.ListContext ctx) {
-        return super.visitList(ctx);
+        List list;
+        MapNode extraAttributes;
+        ArrayList<OutNode> listBody = new ArrayList<>();
+        System.out.println("in list out element visitor");
+        if (ctx.list_attributes() != null) {
+            list = (List) visitList_attributes(ctx.list_attributes());
+            if (ctx.extra_attributes() != null) {
+                extraAttributes = (MapNode) visitExtra_attributes(ctx.extra_attributes());
+                list.setExtraAttributes(extraAttributes);
+            }
+            for (int i = 0; i < ctx.body_options().size(); i++) {
+                listBody.add((OutNode) visit(ctx.body_options().get(i))); // need to check what is the body
+            }
+            list.setListBody(listBody);
+            return list;
+        }
+        throw new RuntimeException("Invalid text");
     }
 
     @Override
     public AbstractNode visitList_attributes(LanguageParser.List_attributesContext ctx) {
-        return super.visitList_attributes(ctx);
+        Boolean isOrdered = Boolean.parseBoolean(ctx.BOOLEAN().getText());
+        return new List(isOrdered, null, null);
     }
 
     @Override
     public AbstractNode visitTable(LanguageParser.TableContext ctx) {
-        return super.visitTable(ctx);
+        System.out.println("in table out element visitor");
+        ArrayList<Text> headers= new ArrayList<>();
+        ArrayList<OutNode> tableBody = new ArrayList<>();
+        if (ctx.table_body().table_header_body() != null) {
+            for (int i = 0; i < ctx.table_body().table_header_body().text().size(); i++) {
+                headers.add((Text) visit(ctx.table_body().table_header_body().text().get(i)));
+            }
+        }else throw new RuntimeException("Invalid table");
+        for(int i=0;i<ctx.table_body().body_options().size();i++){
+            tableBody.add( (OutNode)visit(ctx.table_body().body_options().get(i)));
+        }
+        return new Table(headers,tableBody);
     }
 
     @Override
     public AbstractNode visitLink(LanguageParser.LinkContext ctx) {
-        return super.visitLink(ctx);
+        /*OutNode referenceElement;
+    String linkReference;
+    OutNode linkBody;
+    ArrayList <MapPairNode> extraAttributes;*/
+        Link link;
+        MapNode extraAttributes;
+        ArrayList<OutNode> linkBody = new ArrayList<>();
+        System.out.println("in link out element visitor");
+        if (ctx.link_attributes() != null) {
+            link = (Link) visitLink_attributes(ctx.link_attributes());
+            if (ctx.extra_attributes() != null) {
+                extraAttributes = (MapNode) visitExtra_attributes(ctx.extra_attributes());
+                link.setExtraAttributes(extraAttributes);
+            }
+        }
+        else
+            throw new RuntimeException("invalid link");
+        for(int i=0;i<ctx.body_options().size();i++){
+            linkBody.add( (OutNode)visit(ctx.body_options().get(i)));
+        }
+        link.setLinkBody(linkBody);
+        return link;
     }
 
     @Override
     public AbstractNode visitLink_attributes(LanguageParser.Link_attributesContext ctx) {
-        return super.visitLink_attributes(ctx);
+        String linkReference = ctx.STRING().getText();
+        return new Link(linkReference,null,null);
     }
 
     @Override
@@ -232,12 +342,20 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
 
     @Override
     public AbstractNode visitExtra_attributes(LanguageParser.Extra_attributesContext ctx) {
-        return super.visitExtra_attributes(ctx);
+        ArrayList<MapPairNode> array_values = new ArrayList<>();
+        for (int i=0;i<ctx.array_value().size();i++) {
+            array_values.add((MapPairNode)visitArray_value(ctx.array_value().get(i)));
+        }
+        return new MapNode(array_values);
     }
 
     @Override
     public AbstractNode visitArray_value(LanguageParser.Array_valueContext ctx) {
-        return super.visitArray_value(ctx);
+       System.out.println("in array_value (key => value) node");
+       String key = ctx.STRING().getText();
+       Expression value =(Expression) visit(ctx.expression());
+       MapPairNode pairNode = new MapPairNode(key,value);
+       return  pairNode;
     }
 
     @Override
