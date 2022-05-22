@@ -1,8 +1,14 @@
 package ast.visitors;
 
 import ast.nodes.AbstractNode;
+import ast.nodes.basicNodes.expressions.Expression;
+import ast.nodes.basicNodes.statement.ForStatement;
+import ast.nodes.basicNodes.statement.VariableDeclaration;
+import ast.nodes.controllerNodes.*;
 import generated.LanguageParser;
 import generated.LanguageParserBaseVisitor;
+
+import java.util.ArrayList;
 
 public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
     @Override
@@ -57,37 +63,167 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
 
     @Override
     public AbstractNode visitVariable_declaration(LanguageParser.Variable_declarationContext ctx) {
-        return super.visitVariable_declaration(ctx);
+        System.out.println("in Variable_declaration visitor");
+        VariableDeclaration variableDeclaration = new VariableDeclaration();
+        variableDeclaration.setId(ctx.ID().toString());
+        variableDeclaration.setValue((Expression) visit(ctx.expression()));
+        return variableDeclaration;
     }
 
     @Override
     public AbstractNode visitFor_statement(LanguageParser.For_statementContext ctx) {
-        return super.visitFor_statement(ctx);
+        System.out.println("in For_statement visitor");
+        ForStatement forStatement = new ForStatement();
+        forStatement.setVariableDeclaration((VariableDeclaration) visit(ctx.for_index()));
+        forStatement.setConditionExpression((Expression) visit(ctx.expression(0)));
+        forStatement.setStepExpression((Expression) visit(ctx.expression(1)));
+//        ArrayList<BodyStatement> bodyStatements = new ArrayList<BodyStatement>();
+//        for (int i = 0; i<ctx.body_element().size();i++){
+//            bodyStatements.add((BodyStatement) visit(ctx.body_element(i)));
+//        }
+//        forStatement.setBodyElements(bodyStatements);
+        return forStatement;
     }
 
     @Override
     public AbstractNode visitFor_index(LanguageParser.For_indexContext ctx) {
-        return super.visitFor_index(ctx);
+        return visitVariable_declaration(ctx.variable_declaration());
     }
 
     @Override
     public AbstractNode visitAuthentication(LanguageParser.AuthenticationContext ctx) {
-        return super.visitAuthentication(ctx);
+        System.out.println("in Authentication visitor");
+//        ArrayList<BodyElement> bodyElements = new ArrayList<BodyElement>();
+//        ArrayList<BodyElement> elseBodyElements = new ArrayList<BodyElement>();
+        if (ctx.AT_AUTH() != null) {
+
+            AtAuth atAuth = new AtAuth();
+            if (ctx.ELSE() != null) {
+                int i;
+                for (i = 1; i < ctx.children.indexOf(ctx.ELSE()); i++) {
+//                    bodyElements.add((BodyStatement) visit(ctx.getChild(i)));
+                }
+                for (i = ctx.children.indexOf(ctx.ELSE()) + 1; i < ctx.children.indexOf(ctx.AT_END_AUTH()); i++) {
+//                    elseBodyElements.add((BodyStatement) visit(ctx.getChild(i)));
+                }
+//                atAuth.setBodyElements(bodyElements);
+//                atAuth.setElseBodyElements(elseBodyElements);
+                return atAuth;
+            } else {
+                int i;
+                for (i = 1; i < ctx.body_element().size(); i++) {
+//                    bodyElements.add((BodyStatement) visit(ctx.body_element(i)));
+                }
+//                atAuth.setBodyElements(bodyElements);
+                return atAuth;
+            }
+        } else {
+            AtGuest atGuest = new AtGuest();
+            if (ctx.ELSE() != null) {
+                int i;
+                for (i = 1; i < ctx.children.indexOf(ctx.ELSE()); i++) {
+//                    bodyElements.add((BodyStatement) visit(ctx.getChild(i)));
+                }
+                for (i = ctx.children.indexOf(ctx.ELSE()) + 1; i < ctx.children.indexOf(ctx.AT_END_GUEST()); i++) {
+//                    elseBodyElements.add((BodyStatement) visit(ctx.getChild(i)));
+                }
+//                atGuest.setBodyElements(bodyElements);
+//                atGuest.setElseBodyElements(elseBodyElements);
+                return atGuest;
+            } else {
+                int i;
+                for (i = 1; i < ctx.body_element().size(); i++) {
+//                    bodyElements.add((BodyStatement) visit(ctx.body_element(i)));
+                }
+//                atGuest.setBodyElements(bodyElements);
+                return atGuest;
+            }
+        }
     }
 
     @Override
     public AbstractNode visitAuthorization(LanguageParser.AuthorizationContext ctx) {
-        return super.visitAuthorization(ctx);
+        System.out.println("in Authorization visitor");
+//        ArrayList<BodyElement> bodyElements = new ArrayList<BodyElement>();
+//        ArrayList<BodyElement> elseBodyElements = new ArrayList<BodyElement>();
+        ArrayList<String> roles = new ArrayList<>();
+//        ArrayList<BodyElement> bodyElements=new ArrayList<BodyElement>();
+        for (int i = 0; i < ctx.STRING().size(); i++) {
+            roles.add(ctx.STRING(i).toString());
+        }
+        if (ctx.AT_ROLE() != null) {
+
+            AtRole atRole = new AtRole();
+            atRole.setRoles(roles);
+            if (ctx.ELSE() != null) {
+
+                int i;
+
+                for (i = ctx.children.indexOf(ctx.BRACKET_CLOSE()) + 1; i < ctx.children.indexOf(ctx.ELSE()); i++) {
+//                    bodyElements.add((BodyStatement) visit(ctx.getChild(i)));
+                }
+                for (i = ctx.children.indexOf(ctx.ELSE()) + 1; i < ctx.children.indexOf(ctx.AT_END_ROLE()); i++) {
+//                    elseBodyElements.add((BodyStatement) visit(ctx.getChild(i)));
+                }
+//                atRole.setBodyElements(bodyElements);
+//                atRole.setElseBodyElements(elseBodyElements);
+                return atRole;
+            } else {
+                int i;
+                for (i = 0; i < ctx.body_element().size(); i++) {
+//                    bodyElements.add((BodyStatement) visit(ctx.body_element(i)));
+                }
+//                atAuth.setBodyElements(bodyElements);
+                return atRole;
+            }
+        } else {
+            AtInverseRole atInverseRole = new AtInverseRole();
+            atInverseRole.setRoles(roles);
+            if (ctx.ELSE() != null) {
+                int i;
+                for (i = ctx.children.indexOf(ctx.BRACKET_CLOSE()) + 1; i < ctx.children.indexOf(ctx.ELSE()); i++) {
+//                    bodyElements.add((BodyStatement) visit(ctx.getChild(i)));
+                }
+                for (i = ctx.children.indexOf(ctx.ELSE()) + 1; i < ctx.children.indexOf(ctx.AT_END_INVERSE_ROLE()); i++) {
+//                    elseBodyElements.add((BodyStatement) visit(ctx.getChild(i)));
+                }
+//                atGuest.setBodyElements(bodyElements);
+//                atGuest.setElseBodyElements(elseBodyElements);
+                return atInverseRole;
+            } else {
+                int i;
+                for (i = 0; i < ctx.body_element().size(); i++) {
+//                    bodyElements.add((BodyStatement) visit(ctx.body_element(i)));
+                }
+//                atGuest.setBodyElements(bodyElements);
+                return atInverseRole;
+            }
+        }
     }
 
     @Override
     public AbstractNode visitRawphp(LanguageParser.RawphpContext ctx) {
-        return super.visitRawphp(ctx);
+        RawPHP rawPHP = new RawPHP();
+        rawPHP.setRawPhp(ctx.AT_END_RAW_PHP().toString().split("@endrawphp")[0]);
+        return rawPHP;
     }
 
     @Override
     public AbstractNode visitLayoutInheritance(LanguageParser.LayoutInheritanceContext ctx) {
-        return super.visitLayoutInheritance(ctx);
+        if (ctx.AT_SECTION() != null) {
+            Section section = new Section();
+            section.setName(ctx.STRING().toString());
+            //        ArrayList<BodyElement> bodyElements=new ArrayList<BodyElement>();
+            for (int i = 0; i < ctx.body_element().size(); i++) {
+//                    bodyElements.add((BodyStatement) visit(ctx.body_element(i)));
+            }
+//            section.setBodyElements(bodyElements);
+            return section;
+        } else {
+            Yield yield = new Yield();
+            yield.setName(ctx.STRING().toString());
+            return yield;
+        }
     }
 
     @Override
