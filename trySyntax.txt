@@ -1,0 +1,26 @@
+page start_page head ("the first") { }
+controller first controles start_page  { @id = 5}
+
+// reality
+<h1>My First Heading</h1>p
+<>My first paragraph.</p>
+
+//actual result
+page second head ("the secod page") {
+text ("My First Heading" ,24,#0000, ["heading tag"=>'h1'])
+text ("My first paragraph." ,10,#0000, ['Paragraph'=> 'p'])
+}
+
+// reality
+<h1>My first PHP page</h1>
+
+<?php
+echo "Hello World!";
+?>
+
+// actual result
+page second head ("the secod page") {
+text ("My First PHP page" ,24,#0000, ["heading tag"=>'h1'])
+}
+controller second controles second  {@rawphp echo "Hello World!"; @endrawphp}
+
