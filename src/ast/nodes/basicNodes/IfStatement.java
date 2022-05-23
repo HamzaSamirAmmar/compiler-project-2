@@ -7,7 +7,7 @@ import ast.nodes.util.Formatter;
 import java.util.ArrayList;
 
 public class IfStatement  extends BasicElement {
-    Expression condition;
+    Expression condition;//TODO should implement logical
     ArrayList<Element> bodyElements;
     ArrayList<Element> elseBodyElements;
 
@@ -37,12 +37,15 @@ public class IfStatement  extends BasicElement {
     @Override
     protected Formatter nodeValue(Formatter formatter) {
         formatter.addProperty("condition",condition.toString());
-        for (Element element:bodyElements) {
-            formatter.object(element.toString());
-        }
-        for (Element element:elseBodyElements) {
-            formatter.object(element.toString());
-        }
+        formatter.array("if body elements",new ArrayList<>(this.bodyElements));
+        formatter.array("else body elements",new ArrayList<>(this.elseBodyElements));
+
+//        for (Element element:bodyElements) {
+//            formatter.object(element.toString());
+//        }
+//        for (Element element:elseBodyElements) {
+//            formatter.object(element.toString());
+//        }
         return formatter;
     }
 }

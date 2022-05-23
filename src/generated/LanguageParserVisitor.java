@@ -1,5 +1,4 @@
-// Generated from D:/Damascus university-IT/4th year/second semestere/compiler-project/compiler-project-2/grammers\LanguageParser.g4 by
-// ANTLR 4.9.2
+// Generated from D:/Damascus university-IT/4th year/second semestere/compiler-project/compiler-project-2/grammers\LanguageParser.g4 by ANTLR 4.9.2
 package generated;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -53,6 +52,12 @@ public interface LanguageParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitStatement(LanguageParser.StatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LanguageParser#element}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitElement(LanguageParser.ElementContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link LanguageParser#if_statement}.
 	 * @param ctx the parse tree

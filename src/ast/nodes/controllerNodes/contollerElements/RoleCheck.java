@@ -9,7 +9,7 @@ import ast.nodes.controllerNodes.ControllerCallable;
 import ast.nodes.util.Formatter;
 
 public class RoleCheck extends Element implements ControllerCallable, Logical, Valuable, Numeric {
-    Expression role;
+    Expression role;//TODO either string,or a variable name
 
     public RoleCheck(Expression role) {
         this.role = role;

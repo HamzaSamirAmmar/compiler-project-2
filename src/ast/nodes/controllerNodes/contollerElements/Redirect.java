@@ -5,7 +5,7 @@ import ast.nodes.controllerNodes.ControllerCallable;
 import ast.nodes.util.Formatter;
 
 public class Redirect  extends Element implements ControllerCallable {
-    String goalPageId;
+    String goalPageId;//TODO semantic check the page id is mentioned before
 
     public Redirect(String goalPageId) {
         this.goalPageId = goalPageId;

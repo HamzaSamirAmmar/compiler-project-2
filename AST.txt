@@ -1,13 +1,47 @@
 program: {
-	page: {
-		ID: p1,
-		title: "title",
-		variableDeclaration: {
-			id: var,
-			indexValue(decimalValue): {
-				decimalValue: 3.0,
-			},
-		},
-		extended pages IDs: [],
-	},
+	pages: [
+		page: {
+			ID: p1,
+			title: "title",
+			page body element: [],
+			extended pages IDs: [],
+		}
+	],
+	controllers: [
+		controller: {
+			controlled page ID: p1,
+			ID: c1,
+			controller body element: [
+				if statement: {
+					condition: TwoOperandCondition: {
+					operator: >,
+					leftOperand(decimalValue): {
+						decimalValue: 3.0,
+					},
+					rightOperand(decimalValue): {
+						decimalValue: 2.0,
+					},
+				},
+					if body elements: [
+						Role check: {
+							check role : string: {
+							stringValue: admin,
+						},
+						},
+						redirection: {
+							redirect to: p1,
+						},
+						OneOperandMathematicalNode: {
+							operand: variable/functionName: {
+							name: x,
+						},
+							operator: ++,
+						},
+						Auth check: {}
+					],
+					else body elements: [],
+				}
+			],
+		}
+	],
 }

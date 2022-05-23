@@ -30,12 +30,8 @@ public class Program extends AbstractNode{
 
     @Override
     protected Formatter nodeValue(Formatter formatter) {
-        for (Page page: pages) {
-            formatter.object(page.toString());
-        }
-        for (Controller controller: controllers) {
-            formatter.object(controller.toString());
-        }
+        formatter.array("pages",new ArrayList<>(this.pages));
+        formatter.array("controllers",new ArrayList<>(this.controllers));
         return formatter;
     }
 }

@@ -6,7 +6,7 @@ import ast.nodes.util.Formatter;
 
 public class VariableDeclaration extends BasicElement {
     String id;
-    Expression value;
+    Expression value;//TODO should implement valuable
 
     public void setId(String id) {
         this.id = id;
@@ -23,6 +23,6 @@ public class VariableDeclaration extends BasicElement {
 
     @Override
     protected Formatter nodeValue(Formatter formatter) {
-        return formatter.addProperty("id",id).object(value.toString("indexValue"));
+        return formatter.addProperty("id",id).object(value.toString("value"));
     }
 }

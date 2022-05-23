@@ -1,4 +1,11 @@
 page p1  head("title") {
-    @var=3
-    
+}
+
+controller c1 controles p1{
+if(3>2){
+checkRole('admin')
+    redirect p1
+    @x++
+    checkAuthenticated()
+}
 }

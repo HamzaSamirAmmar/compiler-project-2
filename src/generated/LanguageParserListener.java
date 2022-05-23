@@ -78,6 +78,16 @@ public interface LanguageParserListener extends ParseTreeListener {
 	 */
 	void exitStatement(LanguageParser.StatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link LanguageParser#element}.
+	 * @param ctx the parse tree
+	 */
+	void enterElement(LanguageParser.ElementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LanguageParser#element}.
+	 * @param ctx the parse tree
+	 */
+	void exitElement(LanguageParser.ElementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link LanguageParser#if_statement}.
 	 * @param ctx the parse tree
 	 */

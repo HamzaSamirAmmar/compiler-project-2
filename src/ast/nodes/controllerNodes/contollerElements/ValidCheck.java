@@ -9,8 +9,8 @@ import ast.nodes.controllerNodes.ControllerCallable;
 import ast.nodes.util.Formatter;
 
 public class ValidCheck extends Element implements ControllerCallable, Logical, Valuable, Numeric {
-    Expression uniqueIdentifier;//which could be email or username or something else
-    Expression password;
+    Expression uniqueIdentifier;//which could be email or username or something else TODO  either string,or a variable name
+    Expression password;//TODO either string,or a variable name
 
     public ValidCheck(Expression uniqueIdentifier, Expression password) {
         this.uniqueIdentifier = uniqueIdentifier;

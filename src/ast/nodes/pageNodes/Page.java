@@ -45,9 +45,7 @@ public class Page extends AbstractNode {
         formatter.addProperty("ID",id);
         formatter.addProperty("title",title);
         formatter.array("extended pages IDs",new ArrayList<>(extendedPagesIds));
-        for (Element element:bodyElements) {
-            formatter.object(element.toString());
-        }
+        formatter.array("page body element",new ArrayList<>(this.bodyElements));
         return formatter;
     }
 }
