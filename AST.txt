@@ -2,6 +2,12 @@ program: {
 	page: {
 		ID: p1,
 		title: "title",
+		variableDeclaration: {
+			id: var,
+			indexValue(decimalValue): {
+				decimalValue: 3.0,
+			},
+		},
 		extended pages IDs: [],
 	},
 }

@@ -1,5 +1,5 @@
 package ast.nodes.controllerNodes;
 
-public interface ControlCallable {
+public interface ControllerCallable {
 
 }

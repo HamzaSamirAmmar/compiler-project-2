@@ -5,10 +5,10 @@ import ast.nodes.basicNodes.expressions.Expression;
 import ast.nodes.basicNodes.expressions.Logical;
 import ast.nodes.basicNodes.expressions.Numeric;
 import ast.nodes.basicNodes.expressions.Valuable;
-import ast.nodes.controllerNodes.ControlCallable;
+import ast.nodes.controllerNodes.ControllerCallable;
 import ast.nodes.util.Formatter;
 
-public class RoleCheck extends Element implements ControlCallable, Logical, Valuable, Numeric {
+public class RoleCheck extends Element implements ControllerCallable, Logical, Valuable, Numeric {
     Expression role;
 
     public RoleCheck(Expression role) {

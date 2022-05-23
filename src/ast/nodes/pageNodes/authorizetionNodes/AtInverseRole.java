@@ -1,20 +1,21 @@
-package ast.nodes.controllerNodes;
+package ast.nodes.pageNodes.authorizetionNodes;
 
 import ast.nodes.AbstractNode;
 import ast.nodes.Element;
+import ast.nodes.pageNodes.PageCallable;
 import ast.nodes.util.Formatter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AtRole extends AbstractNode {
-    List<String> roles;
+public class AtInverseRole extends Element implements PageCallable {
+    ArrayList<String> roles;
 
     ArrayList<Element> bodyElements;
 
     ArrayList<Element> elseBodyElements;
 
-        public void setBodyElements(ArrayList<Element> bodyElements) {
+    public void setBodyElements(ArrayList<Element> bodyElements) {
         this.bodyElements = bodyElements;
     }
 
@@ -22,19 +23,18 @@ public class AtRole extends AbstractNode {
         this.elseBodyElements = bodyElements;
     }
 
-    public void setRoles(List<String> roles) {
+    public void setRoles(ArrayList<String> roles) {
         this.roles = roles;
     }
 
     @Override
     protected String nodeName() {
-        return "@Role";
+        return "@inverseRole";
     }
 
     @Override
     protected Formatter nodeValue(Formatter formatter) {
         return null;
     }
-
 
 }
