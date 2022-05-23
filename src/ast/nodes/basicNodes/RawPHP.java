@@ -1,11 +1,12 @@
-package ast.nodes.controllerNodes;
+package ast.nodes.basicNodes;
 
 import ast.nodes.AbstractNode;
+import ast.nodes.Element;
 import ast.nodes.util.Formatter;
 
 import java.util.List;
 
-public class RawPHP extends AbstractNode {
+public class RawPHP extends BasicElement {
     String rawPhp;
 
     public void setRawPhp(String  rawPhp) {

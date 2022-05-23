@@ -2,9 +2,10 @@ package ast.nodes.pageNodes.inNodes;
 
 import ast.nodes.Element;
 import ast.nodes.basicNodes.expressions.literals.MapNode;
+import ast.nodes.pageNodes.PageCallable;
 import ast.nodes.util.Formatter;
 
-public class Date extends Element {
+public class Date extends Element implements PageCallable {
     String name;
     String label;
     String value;

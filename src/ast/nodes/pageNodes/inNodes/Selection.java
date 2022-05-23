@@ -3,11 +3,12 @@ package ast.nodes.pageNodes.inNodes;
 import ast.nodes.Element;
 import ast.nodes.basicNodes.expressions.Expression;
 import ast.nodes.basicNodes.expressions.literals.MapNode;
+import ast.nodes.pageNodes.PageCallable;
 import ast.nodes.util.Formatter;
 
 import java.util.ArrayList;
 
-public class Selection extends Element {
+public class Selection extends Element implements PageCallable {
 
     boolean isMultiple;
     String name;

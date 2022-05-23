@@ -4,10 +4,10 @@ import ast.nodes.Element;
 import ast.nodes.basicNodes.expressions.Logical;
 import ast.nodes.basicNodes.expressions.Numeric;
 import ast.nodes.basicNodes.expressions.Valuable;
-import ast.nodes.controllerNodes.ControlCallable;
+import ast.nodes.controllerNodes.ControllerCallable;
 import ast.nodes.util.Formatter;
 
-public class AuthCheck extends Element implements ControlCallable, Logical, Valuable, Numeric {
+public class AuthCheck extends Element implements ControllerCallable, Logical, Valuable, Numeric {
 
     @Override
     protected String nodeName() {

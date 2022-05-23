@@ -2,13 +2,11 @@ package ast.nodes.basicNodes;
 
 import ast.nodes.Element;
 import ast.nodes.basicNodes.expressions.Expression;
-import ast.nodes.controllerNodes.ControlCallable;
-import ast.nodes.pageNodes.PageCallable;
 import ast.nodes.util.Formatter;
 
 import java.util.ArrayList;
 
-public class IfStatement  extends Element implements ControlCallable, PageCallable {
+public class IfStatement  extends BasicElement {
     Expression condition;
     ArrayList<Element> bodyElements;
     ArrayList<Element> elseBodyElements;

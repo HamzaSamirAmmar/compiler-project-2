@@ -1,10 +1,10 @@
-package ast.nodes.basicNodes.statement;
+package ast.nodes.basicNodes;
 
-import ast.nodes.AbstractNode;
+import ast.nodes.Element;
 import ast.nodes.basicNodes.expressions.Expression;
 import ast.nodes.util.Formatter;
 
-public class VariableDeclaration extends AbstractNode {
+public class VariableDeclaration extends BasicElement {
     String id;
     Expression value;
 

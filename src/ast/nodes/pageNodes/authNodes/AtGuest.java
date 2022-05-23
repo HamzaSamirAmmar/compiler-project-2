@@ -1,12 +1,13 @@
-package ast.nodes.controllerNodes;
+package ast.nodes.pageNodes.authNodes;
 
 import ast.nodes.AbstractNode;
 import ast.nodes.Element;
+import ast.nodes.pageNodes.PageCallable;
 import ast.nodes.util.Formatter;
 
 import java.util.ArrayList;
 
-public class AtGuest extends AbstractNode {
+public class AtGuest extends Element implements PageCallable {
     ArrayList<Element> bodyElements;
     ArrayList<Element> elseBodyElements;
 

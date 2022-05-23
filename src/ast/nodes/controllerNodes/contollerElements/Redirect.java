@@ -1,10 +1,10 @@
 package ast.nodes.controllerNodes.contollerElements;
 
 import ast.nodes.Element;
-import ast.nodes.controllerNodes.ControlCallable;
+import ast.nodes.controllerNodes.ControllerCallable;
 import ast.nodes.util.Formatter;
 
-public class Redirect  extends Element implements ControlCallable  {
+public class Redirect  extends Element implements ControllerCallable {
     String goalPageId;
 
     public Redirect(String goalPageId) {

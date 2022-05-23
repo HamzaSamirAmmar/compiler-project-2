@@ -2,11 +2,12 @@ package ast.nodes.pageNodes.inNodes;
 
 import ast.nodes.Element;
 import ast.nodes.basicNodes.expressions.literals.MapNode;
+import ast.nodes.pageNodes.PageCallable;
 import ast.nodes.util.Formatter;
 
 import java.util.ArrayList;
 
-public class Form extends Element {
+public class Form extends Element implements PageCallable {
     String method;
     String action;
     MapNode extraAttributes;

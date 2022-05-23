@@ -5,10 +5,10 @@ import ast.nodes.basicNodes.expressions.Expression;
 import ast.nodes.basicNodes.expressions.Logical;
 import ast.nodes.basicNodes.expressions.Numeric;
 import ast.nodes.basicNodes.expressions.Valuable;
-import ast.nodes.controllerNodes.ControlCallable;
+import ast.nodes.controllerNodes.ControllerCallable;
 import ast.nodes.util.Formatter;
 
-public class ValidCheck extends Element implements ControlCallable, Logical, Valuable, Numeric {
+public class ValidCheck extends Element implements ControllerCallable, Logical, Valuable, Numeric {
     Expression uniqueIdentifier;//which could be email or username or something else
     Expression password;
 
