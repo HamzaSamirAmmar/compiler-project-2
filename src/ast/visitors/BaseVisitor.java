@@ -249,7 +249,7 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
                 return atAuth;
             } else {
                 int i;
-                for (i = 1; i < ctx.body_element().size(); i++) {
+                for (i = 0; i < ctx.body_element().size(); i++) {
                     bodyElements.add((Element) visit(ctx.body_element(i)));
                 }
                 atAuth.setBodyElements(bodyElements);
@@ -270,7 +270,7 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
                 return atGuest;
             } else {
                 int i;
-                for (i = 1; i < ctx.body_element().size(); i++) {
+                for (i = 0; i < ctx.body_element().size(); i++) {
                     bodyElements.add((Element) visit(ctx.body_element(i)));
                 }
                 atGuest.setBodyElements(bodyElements);

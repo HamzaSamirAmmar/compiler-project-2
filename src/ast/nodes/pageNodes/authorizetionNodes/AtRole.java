@@ -11,9 +11,9 @@ import java.util.List;
 public class AtRole extends Element implements PageCallable {
     List<String> roles;
 
-    ArrayList<Element> bodyElements;
+    ArrayList<Element> bodyElements=new ArrayList<>();
 
-    ArrayList<Element> elseBodyElements;
+    ArrayList<Element> elseBodyElements=new ArrayList<>();
 
         public void setBodyElements(ArrayList<Element> bodyElements) {
         this.bodyElements = bodyElements;

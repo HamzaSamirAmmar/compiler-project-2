@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AtInverseRole extends Element implements PageCallable {
-    ArrayList<String> roles;
+    ArrayList<String> roles = new ArrayList<>();
 
-    ArrayList<Element> bodyElements;
+    ArrayList<Element> bodyElements=new ArrayList<>();
 
-    ArrayList<Element> elseBodyElements;
+    ArrayList<Element> elseBodyElements = new ArrayList<>();
 
     public void setBodyElements(ArrayList<Element> bodyElements) {
         this.bodyElements = bodyElements;

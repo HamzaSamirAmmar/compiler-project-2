@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class Section extends Element implements PageCallable {
     String name;
 
-    ArrayList<Element> bodyElements;
+    ArrayList<Element> bodyElements=new ArrayList<>();
 
     public void setBodyElements(ArrayList<Element> bodyElements) {
         this.bodyElements = bodyElements;
