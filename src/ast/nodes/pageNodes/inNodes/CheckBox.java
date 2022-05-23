@@ -2,9 +2,10 @@ package ast.nodes.pageNodes.inNodes;
 
 import ast.nodes.Element;
 import ast.nodes.basicNodes.expressions.literals.MapNode;
+import ast.nodes.pageNodes.PageCallable;
 import ast.nodes.util.Formatter;
 
-public class CheckBox extends Element {
+public class CheckBox extends Element implements PageCallable {
     String name;
     String label;
     String value;
@@ -62,7 +63,8 @@ public class CheckBox extends Element {
         formatter.addProperty("CheckBox Name", name);
         formatter.addProperty("CheckBox Value", value);
         formatter.addProperty("CheckBox Label", label);
-        formatter.object(extraAttributes.toString());
+        if(extraAttributes!=null)
+            formatter.object(extraAttributes.toString());
         return formatter;
     }
 }

@@ -7,7 +7,7 @@ import ast.nodes.util.Formatter;
 
 import java.util.ArrayList;
 
-public class Switch extends Element {
+public class Switch extends BasicElement {
 
     Expression expression;
     ArrayList<SwitchCase> switchCases;

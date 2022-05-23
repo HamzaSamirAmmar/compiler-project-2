@@ -1,17 +1,14 @@
-package ast.nodes.controllerNodes;
+package ast.nodes.pageNodes.authNodes;
 
 import ast.nodes.AbstractNode;
 import ast.nodes.Element;
+import ast.nodes.pageNodes.PageCallable;
 import ast.nodes.util.Formatter;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class AtInverseRole extends AbstractNode {
-    ArrayList<String> roles;
-
+public class AtGuest extends Element implements PageCallable {
     ArrayList<Element> bodyElements;
-
     ArrayList<Element> elseBodyElements;
 
     public void setBodyElements(ArrayList<Element> bodyElements) {
@@ -22,28 +19,19 @@ public class AtInverseRole extends AbstractNode {
         this.elseBodyElements = bodyElements;
     }
 
-    public void setRoles(ArrayList<String> roles) {
-        this.roles = roles;
-    }
-
     @Override
     protected String nodeName() {
-        return "@inverseRole";
+        return "@Guest";
     }
 
     @Override
     protected Formatter nodeValue(Formatter formatter) {
-
-        for (int i =0 ; i < roles.size();i++){
-            formatter.object(roles.get(i));
-        }
         for (int i =0 ; i < bodyElements.size();i++){
-            formatter.object(bodyElements.get(i).toString());
+            formatter.object(bodyElements.toString());
         }
         for (int i =0 ; i < elseBodyElements.size();i++){
-            formatter.object(elseBodyElements.get(i).toString());
+            formatter.object(elseBodyElements.toString());
         }
         return formatter;
     }
-
 }

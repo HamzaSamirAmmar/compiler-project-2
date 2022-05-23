@@ -33,11 +33,15 @@ statement
     | expression
     | rawphp
     ;
+element//either a page body element(ins,outs,auth,authorizations,statements,layout inheritance) or a controller element
+    : body_element
+    | controller_body_element
+    ;
 if_statement
-    : IF BRACKET_OPEN expression BRACKET_CLOSE  CURLEY_BRACKET_OPEN body_element* CURLEY_BRACKET_CLOSE (ELSE CURLEY_BRACKET_OPEN elsebody CURLEY_BRACKET_CLOSE)?
+    : IF BRACKET_OPEN expression BRACKET_CLOSE  CURLEY_BRACKET_OPEN element* CURLEY_BRACKET_CLOSE (ELSE CURLEY_BRACKET_OPEN elsebody CURLEY_BRACKET_CLOSE)?
     ;
 elsebody
-    : body_element*
+    : element*
     ;
 switch_statement
     : SWITCH BRACKET_OPEN expression BRACKET_CLOSE CURLEY_BRACKET_OPEN switch_body CURLEY_BRACKET_CLOSE
@@ -46,16 +50,16 @@ switch_body
     : switch_case* switch_default?
     ;
 switch_case
-    :CASE expression COLON body_element* SEMI_COLON
+    :CASE expression COLON element* SEMI_COLON
     ;
 switch_default
-    : DEFAULT COLON body_element*
+    : DEFAULT COLON element*
     ;
 variable_declaration
     : AT ID EQUAL expression
     ;
 for_statement
-    : FOR BRACKET_OPEN for_index SEMI_COLON expression SEMI_COLON expression BRACKET_CLOSE CURLEY_BRACKET_OPEN body_element* CURLEY_BRACKET_CLOSE
+    : FOR BRACKET_OPEN for_index SEMI_COLON expression SEMI_COLON expression BRACKET_CLOSE CURLEY_BRACKET_OPEN element* CURLEY_BRACKET_CLOSE
     ;
 for_index
     : variable_declaration
@@ -157,9 +161,6 @@ check_box
 check_box_attributes
     : STRING COMMA expression COMMA STRING
     ;
-//check_box_body
-//    : body_options(COLON body_options)*
-//    ;
 selection
     : SELCTION BRACKET_OPEN selection_attribute (COMMA extra_attributes)? BRACKET_CLOSE  CURLEY_BRACKET_OPEN selection_body CURLEY_BRACKET_CLOSE
     ;
@@ -175,9 +176,6 @@ option
 radio
     : RADIO ID BRACKET_OPEN extra_attributes? BRACKET_CLOSE CURLEY_BRACKET_OPEN selection_body CURLEY_BRACKET_CLOSE
     ;
-//radio_body
-//    : body_options(COLON body_options)*
-//    ;
 extra_attributes
     :  SQUARE_OPEN array_value (COMMA array_value)* SQUARE_CLOSE
     ;
@@ -191,11 +189,10 @@ table_header_body
     : text (COMMA text)*
     ;
 controller
-    : CONTROLLER ID CONTROLES ID CURLEY_BRACKET_OPEN controller_body_element* CURLEY_BRACKET_CLOSE
+    : CONTROLLER ID CONTROLES ID CURLEY_BRACKET_OPEN (controller_body_element|statement)* CURLEY_BRACKET_CLOSE
     ;
 controller_body_element
-    : statement//statements include logics(for, if , switch),declaretions,expressions
-    | CHECK_AUTH BRACKET_OPEN  BRACKET_CLOSE
+    : CHECK_AUTH BRACKET_OPEN  BRACKET_CLOSE
     | CHECK_VALID BRACKET_OPEN expression COMMA expression  BRACKET_CLOSE
     | CHECK_ROLE BRACKET_OPEN expression BRACKET_CLOSE
     | REDIRECT ID

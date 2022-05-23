@@ -2,9 +2,10 @@ package ast.nodes.pageNodes.inNodes;
 
 import ast.nodes.Element;
 import ast.nodes.basicNodes.expressions.literals.MapNode;
+import ast.nodes.pageNodes.PageCallable;
 import ast.nodes.util.Formatter;
 
-public class Date extends Element {
+public class Date extends Element implements PageCallable {
     String name;
     String label;
     String value;
@@ -60,7 +61,8 @@ public class Date extends Element {
         formatter.addProperty("Date Name", name);
         formatter.addProperty("Date Value", value);
         formatter.addProperty("Date Label", label);
-        formatter.object(extraAttributes.toString());
+        if(extraAttributes!=null)
+            formatter.object(extraAttributes.toString());
         return formatter;
     }
 }

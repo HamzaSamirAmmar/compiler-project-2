@@ -2,9 +2,10 @@ package ast.nodes.pageNodes.inNodes;
 
 import ast.nodes.Element;
 import ast.nodes.basicNodes.expressions.literals.MapNode;
+import ast.nodes.pageNodes.PageCallable;
 import ast.nodes.util.Formatter;
 
-public class TextField extends Element {
+public class TextField extends Element implements PageCallable {
 
     String name;
     String label;
@@ -61,7 +62,8 @@ public class TextField extends Element {
         formatter.addProperty("TextField Name", name);
         formatter.addProperty("TextField Value", value);
         formatter.addProperty("TextField Label", label);
-        formatter.object(extraAttributes.toString());
+        if(extraAttributes!=null)
+            formatter.object(extraAttributes.toString());
         return formatter;
     }
 }

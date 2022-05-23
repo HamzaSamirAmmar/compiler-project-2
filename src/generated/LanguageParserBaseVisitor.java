@@ -1,4 +1,4 @@
-// Generated from C:/Users/hamza/Desktop/compiler-project-2/grammers\LanguageParser.g4 by ANTLR 4.10.1
+// Generated from D:/Damascus university-IT/4th year/second semestere/compiler-project/compiler-project-2/grammers\LanguageParser.g4 by ANTLR 4.9.2
 package generated;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
@@ -60,6 +60,13 @@ public class LanguageParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> im
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitStatement(LanguageParser.StatementContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitElement(LanguageParser.ElementContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

@@ -7,9 +7,9 @@ import ast.nodes.util.Formatter;
 import java.util.ArrayList;
 
 public class Controller extends AbstractNode {
-    String controlledPageId;
-    String id;
-    ArrayList<Element> bodyElements;
+    String controlledPageId;//TODO semantic check the page id is mentioned before
+    String id;//TODO semantic check id is unique
+    ArrayList<Element> bodyElements;//TODO should implement controllerCallable
 
     public Controller(String controlledPageId, String id, ArrayList<Element> bodyElements) {
         this.controlledPageId = controlledPageId;
@@ -38,9 +38,7 @@ public class Controller extends AbstractNode {
     protected Formatter nodeValue(Formatter formatter) {
         formatter.addProperty("ID",id);
         formatter.addProperty("controlled page ID",controlledPageId);
-        for (Element element:bodyElements) {
-            formatter.object(element.toString());
-        }
+        formatter.array("controller body element",new ArrayList<>(this.bodyElements));
         return formatter;
     }
 }

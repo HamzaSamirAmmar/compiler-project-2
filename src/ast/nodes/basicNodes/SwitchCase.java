@@ -1,12 +1,13 @@
 package ast.nodes.basicNodes;
 
+import ast.nodes.AbstractNode;
 import ast.nodes.Element;
 import ast.nodes.basicNodes.expressions.Expression;
 import ast.nodes.util.Formatter;
 
 import java.util.ArrayList;
 
-public class SwitchCase extends Element {
+public class SwitchCase extends AbstractNode {
 
     Expression expression;
     ArrayList<Element> body;

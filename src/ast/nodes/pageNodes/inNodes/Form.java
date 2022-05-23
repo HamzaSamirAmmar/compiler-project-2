@@ -2,11 +2,12 @@ package ast.nodes.pageNodes.inNodes;
 
 import ast.nodes.Element;
 import ast.nodes.basicNodes.expressions.literals.MapNode;
+import ast.nodes.pageNodes.PageCallable;
 import ast.nodes.util.Formatter;
 
 import java.util.ArrayList;
 
-public class Form extends Element {
+public class Form extends Element implements PageCallable {
     String method;
     String action;
     MapNode extraAttributes;
@@ -61,7 +62,8 @@ public class Form extends Element {
     protected Formatter nodeValue(Formatter formatter) {
         formatter.addProperty("Form method", method);
         formatter.addProperty("Form Action", action);
-        formatter.object(extraAttributes.toString());
+        if(extraAttributes!=null)
+            formatter.object(extraAttributes.toString());
         formatter.array("FromBody", new ArrayList<>(fromBody));
         return formatter;
     }

@@ -2,11 +2,12 @@ package ast.nodes.pageNodes.inNodes;
 
 import ast.nodes.Element;
 import ast.nodes.basicNodes.expressions.literals.MapNode;
+import ast.nodes.pageNodes.PageCallable;
 import ast.nodes.util.Formatter;
 
 import java.util.ArrayList;
 
-public class Radio extends Element {
+public class Radio extends Element implements PageCallable {
 
     String name;
     MapNode extraAttributes;
@@ -50,7 +51,8 @@ public class Radio extends Element {
     @Override
     protected Formatter nodeValue(Formatter formatter) {
         formatter.addProperty("Radio Name",name);
-        formatter.object(extraAttributes.toString());
+        if(extraAttributes!=null)
+            formatter.object(extraAttributes.toString());
         formatter.array("RadioOptions", new ArrayList<>(options));
         return formatter;
     }

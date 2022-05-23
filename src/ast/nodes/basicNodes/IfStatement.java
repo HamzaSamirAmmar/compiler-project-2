@@ -2,14 +2,12 @@ package ast.nodes.basicNodes;
 
 import ast.nodes.Element;
 import ast.nodes.basicNodes.expressions.Expression;
-import ast.nodes.controllerNodes.ControlCallable;
-import ast.nodes.pageNodes.PageCallable;
 import ast.nodes.util.Formatter;
 
 import java.util.ArrayList;
 
-public class IfStatement  extends Element implements ControlCallable, PageCallable {
-    Expression condition;
+public class IfStatement  extends BasicElement {
+    Expression condition;//TODO should implement logical
     ArrayList<Element> bodyElements;
     ArrayList<Element> elseBodyElements;
 
@@ -39,12 +37,15 @@ public class IfStatement  extends Element implements ControlCallable, PageCallab
     @Override
     protected Formatter nodeValue(Formatter formatter) {
         formatter.addProperty("condition",condition.toString());
-        for (Element element:bodyElements) {
-            formatter.object(element.toString());
-        }
-        for (Element element:elseBodyElements) {
-            formatter.object(element.toString());
-        }
+        formatter.array("if body elements",new ArrayList<>(this.bodyElements));
+        formatter.array("else body elements",new ArrayList<>(this.elseBodyElements));
+
+//        for (Element element:bodyElements) {
+//            formatter.object(element.toString());
+//        }
+//        for (Element element:elseBodyElements) {
+//            formatter.object(element.toString());
+//        }
         return formatter;
     }
 }

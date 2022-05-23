@@ -54,7 +54,8 @@ public class Button extends OutNode  /*why not? it can be in href for example*/ 
     protected Formatter nodeValue(Formatter formatter) {
         formatter.addProperty("text ",text);
         formatter.addProperty("action ",action);
-        formatter.object(extraAttributes.toString());
+        if(extraAttributes!=null)
+            formatter.object(extraAttributes.toString());
         return formatter ;
     }
 }

@@ -1,13 +1,12 @@
-package ast.nodes.basicNodes.statement;
+package ast.nodes.basicNodes;
 
-import ast.nodes.AbstractNode;
 import ast.nodes.Element;
 import ast.nodes.basicNodes.expressions.Expression;
 import ast.nodes.util.Formatter;
 
 import java.util.ArrayList;
 
-public class ForStatement extends AbstractNode {
+public class ForStatement extends BasicElement {
 
     VariableDeclaration variableDeclaration;
 

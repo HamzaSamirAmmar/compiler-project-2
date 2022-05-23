@@ -1,12 +1,12 @@
-package ast.nodes.basicNodes.statement;
+package ast.nodes.basicNodes;
 
-import ast.nodes.AbstractNode;
+import ast.nodes.Element;
 import ast.nodes.basicNodes.expressions.Expression;
 import ast.nodes.util.Formatter;
 
-public class VariableDeclaration extends AbstractNode {
+public class VariableDeclaration extends BasicElement {
     String id;
-    Expression value;
+    Expression value;//TODO should implement valuable
 
     public void setId(String id) {
         this.id = id;
@@ -23,6 +23,6 @@ public class VariableDeclaration extends AbstractNode {
 
     @Override
     protected Formatter nodeValue(Formatter formatter) {
-        return formatter.addProperty("id",id).object(value.toString("indexValue"));
+        return formatter.addProperty("id",id).object(value.toString("value"));
     }
 }

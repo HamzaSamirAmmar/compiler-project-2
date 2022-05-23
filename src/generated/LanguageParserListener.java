@@ -1,4 +1,4 @@
-// Generated from C:/Users/hamza/Desktop/compiler-project-2/grammers\LanguageParser.g4 by ANTLR 4.10.1
+// Generated from D:/Damascus university-IT/4th year/second semestere/compiler-project/compiler-project-2/grammers\LanguageParser.g4 by ANTLR 4.9.2
 package generated;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -77,6 +77,16 @@ public interface LanguageParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitStatement(LanguageParser.StatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LanguageParser#element}.
+	 * @param ctx the parse tree
+	 */
+	void enterElement(LanguageParser.ElementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LanguageParser#element}.
+	 * @param ctx the parse tree
+	 */
+	void exitElement(LanguageParser.ElementContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link LanguageParser#if_statement}.
 	 * @param ctx the parse tree

@@ -1,7 +1,7 @@
 package ast.nodes.basicNodes.expressions;
 
-import ast.nodes.Element;
+import ast.nodes.basicNodes.BasicElement;
 
-public abstract class Expression extends Element
+public abstract class Expression extends BasicElement
 {
 }
