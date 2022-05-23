@@ -62,7 +62,8 @@ public class Form extends Element implements PageCallable {
     protected Formatter nodeValue(Formatter formatter) {
         formatter.addProperty("Form method", method);
         formatter.addProperty("Form Action", action);
-        formatter.object(extraAttributes.toString());
+        if(extraAttributes!=null)
+            formatter.object(extraAttributes.toString());
         formatter.array("FromBody", new ArrayList<>(fromBody));
         return formatter;
     }

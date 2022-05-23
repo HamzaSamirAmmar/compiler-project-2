@@ -49,7 +49,8 @@ public class List extends OutNode {
     protected Formatter nodeValue(Formatter formatter) {
         formatter.addProperty("isOrdered ",isOrdered.toString());
         formatter.array("listBody",new ArrayList<>(listBody));
-        formatter.object(extraAttributes.toString());
+        if(extraAttributes!=null)
+            formatter.object(extraAttributes.toString());
         return formatter ;
     }
 }

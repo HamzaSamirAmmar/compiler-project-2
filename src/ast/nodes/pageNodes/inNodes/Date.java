@@ -61,7 +61,8 @@ public class Date extends Element implements PageCallable {
         formatter.addProperty("Date Name", name);
         formatter.addProperty("Date Value", value);
         formatter.addProperty("Date Label", label);
-        formatter.object(extraAttributes.toString());
+        if(extraAttributes!=null)
+            formatter.object(extraAttributes.toString());
         return formatter;
     }
 }

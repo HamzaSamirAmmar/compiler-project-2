@@ -65,7 +65,8 @@ public class Selection extends Element implements PageCallable {
     @Override
     protected Formatter nodeValue(Formatter formatter) {
         formatter.addProperty("Selection Name",name);
-        formatter.object(extraAttributes.toString());
+        if(extraAttributes!=null)
+            formatter.object(extraAttributes.toString());
         formatter.array("SelectionOptions", new ArrayList<>(options));
         return formatter;
     }

@@ -64,7 +64,8 @@ public class Text extends OutNode {
         formatter.object(text.toString());
         formatter.addProperty("fontSize ",fontSize.toString());
         formatter.addProperty("color ",color);
-        formatter.object(extraAttributes.toString());
+        if(extraAttributes!=null)
+            formatter.object(extraAttributes.toString());
         return formatter ;
     }
 }

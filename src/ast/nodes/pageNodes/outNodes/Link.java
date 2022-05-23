@@ -50,7 +50,8 @@ public class Link extends OutNode {
     protected Formatter nodeValue(Formatter formatter) {
         formatter.addProperty("linkReference ",linkReference);
         formatter.array( "linkBody",new ArrayList<>(linkBody)) ;
-        formatter.object(extraAttributes.toString());
+        if(extraAttributes!=null)
+            formatter.object(extraAttributes.toString());
         return formatter ;
     }
 }
