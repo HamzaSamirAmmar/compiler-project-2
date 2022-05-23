@@ -33,7 +33,17 @@ public class AtRole extends AbstractNode {
 
     @Override
     protected Formatter nodeValue(Formatter formatter) {
-        return null;
+
+        for (int i =0 ; i < roles.size();i++){
+            formatter.object(roles.get(i));
+        }
+        for (int i =0 ; i < bodyElements.size();i++){
+            formatter.object(bodyElements.get(i).toString());
+        }
+        for (int i =0 ; i < elseBodyElements.size();i++){
+            formatter.object(elseBodyElements.get(i).toString());
+        }
+            return formatter;
     }
 
 

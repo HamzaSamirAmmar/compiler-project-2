@@ -57,7 +57,12 @@ public class ForStatement extends AbstractNode {
 
     @Override
     protected Formatter nodeValue(Formatter formatter) {
+        formatter.object(variableDeclaration.toString()).object(conditionExpression.toString("condition")).object(
+                stepExpression.toString("step")
+        );
+        for (int i =0 ; i < bodyElements.size();i++){
+            formatter.object(bodyElements.get(i).toString());
+        }
         return formatter;
-
     }
 }

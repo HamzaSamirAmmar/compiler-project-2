@@ -17,6 +17,6 @@ public class Yield extends AbstractNode {
 
     @Override
     protected Formatter nodeValue(Formatter formatter) {
-        return null;
+        return formatter.addProperty("name",name);
     }
 }

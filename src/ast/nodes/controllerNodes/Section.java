@@ -26,7 +26,11 @@ public class Section extends AbstractNode {
 
     @Override
     protected Formatter nodeValue(Formatter formatter) {
-        return null;
+            formatter.addProperty("name",name);
+        for (int i =0 ; i < bodyElements.size();i++) {
+            formatter.object(bodyElements.get(i).toString());
+        }
+        return formatter;
     }
 
 }
