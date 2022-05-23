@@ -3,6 +3,8 @@ package ast.nodes.pageNodes.outNodes;
 import ast.nodes.basicNodes.expressions.literals.MapNode;
 import ast.nodes.util.Formatter;
 
+import java.util.regex.Pattern;
+
 public class Image extends OutNode {
 
     String imgReference;
@@ -15,9 +17,9 @@ public class Image extends OutNode {
     }
 
     public void setImgReference(String imgReference) {
-        if(!(imgReference.endsWith(".jpg")|| imgReference.endsWith(".png") || imgReference.endsWith(".jpeg")
-                || imgReference.endsWith(".gif")))
-            throw new RuntimeException("invalid image");
+        // check if the image url is ending with jpg or gif or png or jpeg
+       /* if(!Pattern.compile("[^\"]" + "\\.(?:jpg|gif|png|jpeg)").matcher(imgReference).find())
+            throw new RuntimeException("invalid image");*/
         this.imgReference = imgReference;
     }
 
@@ -46,9 +48,9 @@ public class Image extends OutNode {
     }
 
     public Image(String imgReference, Integer height, Integer width,MapNode extraAttributes) {
-        if(!(imgReference.endsWith(".jpg")|| imgReference.endsWith(".png") || imgReference.endsWith(".jpeg")
-                || imgReference.endsWith(".gif")))
-            throw new RuntimeException("invalid image");
+        // check if the image url is ending with jpg or gif or png or jpeg
+       /* if(!Pattern.compile("[^\"]" + "\\.(?:jpg|gif|png|jpeg)").matcher(imgReference).find())
+            throw new RuntimeException("invalid image");*/
         this.imgReference = imgReference;
         this.height = height;
         this.width = width;
@@ -65,6 +67,7 @@ public class Image extends OutNode {
         formatter.addProperty("imgReference ",imgReference);
         formatter.addProperty("height ",height.toString());
         formatter.addProperty("width ",width.toString());
+        if(extraAttributes!=null)
         formatter.object(extraAttributes.toString());
         return formatter ;
     }

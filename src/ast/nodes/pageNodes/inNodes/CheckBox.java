@@ -63,7 +63,8 @@ public class CheckBox extends Element implements PageCallable {
         formatter.addProperty("CheckBox Name", name);
         formatter.addProperty("CheckBox Value", value);
         formatter.addProperty("CheckBox Label", label);
-        formatter.object(extraAttributes.toString());
+        if(extraAttributes!=null)
+            formatter.object(extraAttributes.toString());
         return formatter;
     }
 }

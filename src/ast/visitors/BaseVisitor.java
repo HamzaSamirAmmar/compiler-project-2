@@ -460,7 +460,7 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
                 list.setExtraAttributes(extraAttributes);
             }
             for (int i = 0; i < ctx.body_options().size(); i++) {
-                listBody.add((OutNode) visit(ctx.body_options().get(i))); // need to check what is the body
+                listBody.add((OutNode) visit(ctx.body_options().get(i).getChild(0))); // need to check what is the body
             }
             list.setListBody(listBody);
             return list;
@@ -486,7 +486,7 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
             }
         } else throw new RuntimeException("Invalid table");
         for (int i = 0; i < ctx.table_body().body_options().size(); i++) {
-            tableBody.add((OutNode) visit(ctx.table_body().body_options().get(i)));
+            tableBody.add((OutNode) visit(ctx.table_body().body_options().get(i).getChild(0)));
         }
         return new Table(headers, tableBody);
     }
@@ -505,7 +505,7 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
             }
         } else throw new RuntimeException("invalid link");
         for (int i = 0; i < ctx.body_options().size(); i++) {
-            linkBody.add((OutNode) visit(ctx.body_options().get(i)));
+            linkBody.add((OutNode) visit(ctx.body_options().get(i).getChild(0)));
         }
         link.setLinkBody(linkBody);
         return link;

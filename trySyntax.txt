@@ -24,3 +24,24 @@ text ("My First PHP page" ,24,#0000, ["heading tag"=>'h1'])
 }
 controller second controles second  {@rawphp echo "Hello World!"; @endrawphp}
 
+page p1  head("title") {
+    table(){header:{ text ("names" ,15,#0000),  text ("pictures" ,15,#0000), text ("degrees" ,15,#0000, ["italic"=>"true"]) }
+            ,body :{
+                  link('href' ,["_blank"=> "homepage"]){
+                        text ("first name" ,15,#0000, ["head"=>"h2"])
+                        text ("last name" ,15,#0000, ["bold"=>"true","italic"=>"true"])
+                      },
+                   image("person.jpg" ,224,420),
+                   list(true,["numbers"=>"true"]){
+                             image("certificate.png" ,1080,924)
+                             text ("certificate in compiler" ,15,#0000)
+                             link('https://coursera.com/7v5sU2DB6942' ,["_blank"=> "new page"]){
+                             text ("certificate in compiler" ,15,#0000)
+                            }
+                         }
+
+          }}
+
+}
+
+
