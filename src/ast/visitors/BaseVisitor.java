@@ -101,21 +101,17 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
     @Override
     public AbstractNode visitBody_element(LanguageParser.Body_elementContext ctx) {
         System.out.println("In visit body element");
-        if(ctx.in_element()!=null){
+        if (ctx.in_element() != null) {
             return visit(ctx.in_element());
-        }else if(ctx.out_element()!=null)
-        {
+        } else if (ctx.out_element() != null) {
             return visit(ctx.out_element());
-        }else if(ctx.statement()!=null)
-        {
+        } else if (ctx.statement() != null) {
             return visit(ctx.statement());
-        }
-        else if (ctx.authentication()!=null)
-        {
+        } else if (ctx.authentication() != null) {
             return visit(ctx.authentication());
-        }else if(ctx.authorization()!=null){
+        } else if (ctx.authorization() != null) {
             return visit(ctx.authorization());
-        }else {
+        } else {
             return visit(ctx.layoutInheritance());
         }
 
@@ -124,21 +120,17 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
     @Override
     public AbstractNode visitStatement(LanguageParser.StatementContext ctx) {
         System.out.println("In visit statement");
-        if(ctx.if_statement()!=null){
+        if (ctx.if_statement() != null) {
             return visit(ctx.if_statement());
-        }else if(ctx.switch_statement()!=null)
-        {
+        } else if (ctx.switch_statement() != null) {
             return visit(ctx.switch_statement());
-        }else if(ctx.for_statement()!=null)
-        {
+        } else if (ctx.for_statement() != null) {
             return visit(ctx.for_statement());
-        }
-        else if (ctx.variable_declaration()!=null)
-        {
+        } else if (ctx.variable_declaration() != null) {
             return visit(ctx.variable_declaration());
-        }else if(ctx.expression()!=null){
+        } else if (ctx.expression() != null) {
             return visit(ctx.expression());
-        }else {
+        } else {
             return visit(ctx.rawphp());
         }
 
@@ -146,7 +138,7 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
 
     @Override
     public AbstractNode visitElement(LanguageParser.ElementContext ctx) {
-        if(ctx.body_element()!=null)
+        if (ctx.body_element() != null)
             return visit(ctx.body_element());
         else
             return visit(ctx.controller_body_element());
@@ -524,7 +516,14 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
 
     @Override
     public AbstractNode visitIn_element(LanguageParser.In_elementContext ctx) {
-        return visit(ctx);
+        System.out.println("Visit in element");
+        if (ctx.check_box() != null) return visit(ctx.check_box());
+        else if (ctx.form() != null) return visit(ctx.form());
+        else if (ctx.text_field() != null) return visit(ctx.text_field());
+        else if (ctx.date() != null) return visit(ctx.date());
+        else if (ctx.radio() != null) return visit(ctx.radio());
+        else
+            return visit(ctx.selection());
     }
 
     @Override
@@ -735,7 +734,7 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
         ArrayList<Element> bodyElements = new ArrayList<>();
         id = ctx.ID(0).getText();
         controlledPageId = ctx.ID(1).getText();
-        for (int i = ctx.children.indexOf(ctx.CURLEY_BRACKET_OPEN())+1; i < ctx.children.indexOf(ctx.CURLEY_BRACKET_CLOSE()); i++) {
+        for (int i = ctx.children.indexOf(ctx.CURLEY_BRACKET_OPEN()) + 1; i < ctx.children.indexOf(ctx.CURLEY_BRACKET_CLOSE()); i++) {
             bodyElements.add((Element) visit(ctx.getChild(i)));
         }
         return new Controller(controlledPageId, id, bodyElements);
