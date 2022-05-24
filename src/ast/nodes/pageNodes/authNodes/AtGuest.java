@@ -8,8 +8,8 @@ import ast.nodes.util.Formatter;
 import java.util.ArrayList;
 
 public class AtGuest extends Element implements PageCallable {
-    ArrayList<Element> bodyElements;
-    ArrayList<Element> elseBodyElements;
+    ArrayList<Element> bodyElements=new ArrayList<>();
+    ArrayList<Element> elseBodyElements=new ArrayList<>();
 
     public void setBodyElements(ArrayList<Element> bodyElements) {
         this.bodyElements = bodyElements;

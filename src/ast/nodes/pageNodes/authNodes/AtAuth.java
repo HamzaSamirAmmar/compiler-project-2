@@ -9,8 +9,8 @@ import java.util.ArrayList;
 
 public class AtAuth extends Element implements PageCallable {
 
-    ArrayList<Element> bodyElements;
-    ArrayList<Element> elseBodyElements;
+    ArrayList<Element> bodyElements=new ArrayList<>();
+    ArrayList<Element> elseBodyElements=new ArrayList<>();
 
     public void setBodyElements(ArrayList<Element> bodyElements) {
         this.bodyElements = bodyElements;
@@ -28,10 +28,10 @@ public class AtAuth extends Element implements PageCallable {
     @Override
     protected Formatter nodeValue(Formatter formatter) {
         for (int i =0 ; i < bodyElements.size();i++){
-            formatter.object(bodyElements.get(i).toString());
+            formatter.object(bodyElements.get(i).toString("body"));
         }
         for (int i =0 ; i < elseBodyElements.size();i++){
-            formatter.object(elseBodyElements.get(i).toString());
+            formatter.object(elseBodyElements.get(i).toString("elseBody"));
         }
         return formatter;
 

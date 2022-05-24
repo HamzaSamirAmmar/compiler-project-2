@@ -14,7 +14,7 @@ public class ForStatement extends BasicElement {
 
     Expression stepExpression;
 
-    ArrayList<Element> bodyElements;
+    ArrayList<Element> bodyElements=new ArrayList<>();
 
 
     public VariableDeclaration getVariableDeclaration() {
