@@ -9,7 +9,7 @@ start_page
     : page
     ;
 page
-    : PAGE  ID head (EXTENDS  ID (COMMA ID )*)? CURLEY_BRACKET_OPEN body_element* CURLEY_BRACKET_CLOSE
+    : PAGE  ID head (EXTENDS  ID )? CURLEY_BRACKET_OPEN body_element* CURLEY_BRACKET_CLOSE
     ;
 head
     : HEAD BRACKET_OPEN title BRACKET_CLOSE

@@ -7,6 +7,9 @@ public  class Main {
       String imgReference = "pic.jpeg";
        /* System.out.println((imgReference.endsWith(".jpg")|| imgReference.endsWith(".png") || imgReference.endsWith(".jpeg")
         || imgReference.endsWith(".gif")));*/
+        for(int a=0;a<10;a=a+1){
+
+        }
 
 
     }

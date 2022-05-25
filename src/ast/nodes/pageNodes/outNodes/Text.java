@@ -6,7 +6,7 @@ import ast.nodes.util.Formatter;
 
 
 public class Text extends OutNode {
-    Expression text;
+    Expression text;//TODO valuable
     Integer fontSize;
     String color;
     MapNode extraAttributes;

@@ -10,13 +10,13 @@ public class Page extends AbstractNode {
     String id;
     String title;
     ArrayList<Element> bodyElements;
-    ArrayList<String> extendedPagesIds;
+    String extendedPageId;
 
-    public Page(String id, String title, ArrayList<Element> bodyElements, ArrayList<String> extendedPagesIds) {
+    public Page(String id, String title, ArrayList<Element> bodyElements, String extendedPageId) {
         this.id = id;
         this.title = title;
         this.bodyElements = bodyElements;
-        this.extendedPagesIds = extendedPagesIds;
+        this.extendedPageId = extendedPageId;
     }
 
     public void setId(String id) {
@@ -31,8 +31,8 @@ public class Page extends AbstractNode {
         this.bodyElements = bodyElements;
     }
 
-    public void setExtendedPagesIds(ArrayList<String> extendedPagesIds) {
-        this.extendedPagesIds = extendedPagesIds;
+    public void setExtendedPageId(String extendedPageId) {
+        this.extendedPageId = extendedPageId;
     }
 
     @Override
@@ -44,7 +44,7 @@ public class Page extends AbstractNode {
     protected Formatter nodeValue(Formatter formatter) {
         formatter.addProperty("ID",id);
         formatter.addProperty("title",title);
-        formatter.array("extended pages IDs",new ArrayList<>(extendedPagesIds));
+        formatter.addProperty("extended page ID",extendedPageId);
         formatter.array("page body element",new ArrayList<>(this.bodyElements));
         return formatter;
     }

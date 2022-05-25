@@ -10,9 +10,9 @@ public class ForStatement extends BasicElement {
 
     VariableDeclaration variableDeclaration;
 
-    Expression conditionExpression;
+    Expression conditionExpression;//TODO logical
 
-    Expression stepExpression;
+    Expression stepExpression;//TODO OneOperandValuableExpression
 
     ArrayList<Element> bodyElements=new ArrayList<>();
 

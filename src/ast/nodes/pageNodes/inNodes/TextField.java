@@ -9,7 +9,7 @@ public class TextField extends Element implements PageCallable {
 
     String name;
     String label;
-    String value;
+    String value;//TODO expression valuable
     MapNode extraAttributes;
 
 

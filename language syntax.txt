@@ -1,11 +1,10 @@
-page p1  head("title") {
+page p1 head("title") {
 }
+page p2 head("no head") {
+}
+controller c1 controles p1 {
 
-controller c1 controles p1{
-if(3>2){
-checkRole('admin')
-    redirect p1
-    @x++
-    checkAuthenticated()
 }
+controller c2 controles p2 {
+
 }

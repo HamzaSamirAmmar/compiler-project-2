@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class Switch extends BasicElement {
 
-    Expression expression;
+    Expression expression;//TODO Variable ,indexed,concat
     ArrayList<SwitchCase> switchCases;
 
     public Switch(Expression expression, ArrayList<SwitchCase> switchCaseExpressions) {

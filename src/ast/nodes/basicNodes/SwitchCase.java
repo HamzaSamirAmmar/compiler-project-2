@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class SwitchCase extends AbstractNode {
 
-    Expression expression;
+    Expression expression;//string, decimal,char,boolean
     ArrayList<Element> body;
 
 

@@ -32,7 +32,18 @@ import generated.LanguageParserBaseVisitor;
 
 import java.util.ArrayList;
 
+/**
+ * in base visitor we travers the parse tree and we detect semantic errors that relate to type checking
+ * */
+
 public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
+    ArrayList<String> errors;
+    public BaseVisitor() {
+    }
+    public BaseVisitor(ArrayList<String> errors) {
+        this.errors = errors;
+    }
+
     @Override
     public Program visitProgram(LanguageParser.ProgramContext ctx) {
         ArrayList<Page> pages = new ArrayList<>();
@@ -57,16 +68,15 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
         String id;
         String title;
         ArrayList<Element> bodyElements = new ArrayList<>();
-        ArrayList<String> extendedPagesIds = new ArrayList<>();
         id = ctx.ID(0).getText();
+        String extendedPageId=null;
+        if(ctx.ID(1)!=null)
+             extendedPageId=ctx.ID(1).getText();
         title = ctx.head().title().getText();
-        for (int i = 1; i < ctx.ID().size(); i++) {
-            extendedPagesIds.add(ctx.ID(i).getText());
-        }
         for (int i = 0; i < ctx.body_element().size(); i++) {
             bodyElements.add((Element) visit(ctx.body_element(i)));
         }
-        return new Page(id, title, bodyElements, extendedPagesIds);
+        return new Page(id, title, bodyElements, extendedPageId);
     }
 
     @Override
