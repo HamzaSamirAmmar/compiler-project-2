@@ -1,6 +1,7 @@
 page p1 head("title") {
 }
 page p2 head("no head") {
+@yield("content")
 }
 controller c1 controles p1 {
 

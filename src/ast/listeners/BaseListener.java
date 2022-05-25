@@ -3,9 +3,7 @@ package ast.listeners;
 import generated.LanguageParser;
 import generated.LanguageParserBaseListener;
 import symbolTable.SymbolTable;
-import symbolTable.symbols.ControllerSymbol;
-import symbolTable.symbols.PageSymbol;
-import symbolTable.symbols.Symbol;
+import symbolTable.symbols.*;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
@@ -29,206 +27,227 @@ public class BaseListener extends LanguageParserBaseListener {
 
     @Override
     public void enterProgram(LanguageParser.ProgramContext ctx) {
-        //getting all symbols
         ArrayList<Symbol> symbols=new ArrayList<>();
-        //looping through pages and adding page symbols
-        symbols.add(new PageSymbol(ctx.start_page().page().ID(0).getText()));
-        for (int i = 0; i <ctx.page().size() ; i++) {
-            if(ctx.page().get(i).ID(1)!=null)
-                symbols.add(new PageSymbol(ctx.page().get(i).ID(0).getText(),ctx.page().get(i).ID(1).getText()));
-            else
-                symbols.add(new PageSymbol(ctx.page().get(i).ID(0).getText()));
-        }
-        //looping through pages and adding controller symbols
-        for (int i = 0; i <ctx.controller().size() ; i++) {
-            symbols.add(new ControllerSymbol(ctx.controller().get(i).ID(0).getText(),ctx.controller().get(i).ID(1).getText()));
-        }
-        //making the scope pair
+        //making the new scope pair
         AbstractMap.SimpleEntry<String,ArrayList<Symbol>> scope=new AbstractMap.SimpleEntry("program",symbols);
         //pushing the scope into the symbol table
-        symbolTable.symbolTable.push(scope);
+        symbolTable.pushNewScope(scope);
     }
 
     @Override
     public void exitProgram(LanguageParser.ProgramContext ctx) {
-        symbolTable.symbolTable.pop();
+        System.out.println("the stack before exiting program "+this.symbolTable.symbolTable);
+        symbolTable.popCurrentScope();
     }
 
     @Override
     public void enterStart_page(LanguageParser.Start_pageContext ctx) {
-        super.enterStart_page(ctx);
+        PageSymbol symbol=new PageSymbol(ctx.page().ID(0).getText(),null);
+        symbolTable.addSymbolToCurrentScope(symbol);
+        //push new page scope
+        ArrayList<Symbol> symbols=new ArrayList<>();
+        AbstractMap.SimpleEntry<String,ArrayList<Symbol>> scope=new AbstractMap.SimpleEntry("page",symbols);
+        symbolTable.pushNewScope(scope);
     }
 
     @Override
     public void exitStart_page(LanguageParser.Start_pageContext ctx) {
-        super.exitStart_page(ctx);
+        symbolTable.popCurrentScope();
     }
 
     @Override
     public void enterPage(LanguageParser.PageContext ctx) {
-        super.enterPage(ctx);
+        PageSymbol symbol=null;
+        if(ctx.ID(1)==null)
+             symbol=new PageSymbol(ctx.ID(0).getText(),null);
+        else
+            symbol=new PageSymbol(ctx.ID(0).getText(),ctx.ID(1).getText());
+        symbolTable.addSymbolToCurrentScope(symbol);
+        //push new page scope
+        ArrayList<Symbol> symbols=new ArrayList<>();
+        AbstractMap.SimpleEntry<String,ArrayList<Symbol>> scope=new AbstractMap.SimpleEntry("page",symbols);
+        symbolTable.pushNewScope(scope);
     }
 
     @Override
     public void exitPage(LanguageParser.PageContext ctx) {
-        super.exitPage(ctx);
+        symbolTable.popCurrentScope();
     }
 
+    @Override
+    public void enterLayoutInheritance(LanguageParser.LayoutInheritanceContext ctx) {
+        if(ctx.AT_YIELD()!=null)
+        {
+            String parentId=((LanguageParser.PageContext)((ctx.parent).parent)).ID(0).getText();
+            YieldSymbol symbol=new YieldSymbol(ctx.STRING().getText(),parentId);
+            symbolTable.addSymbolToFirstScope(symbol);
+        }else if(ctx.AT_SECTION()!=null)
+        {
+            //push new section scope
+            ArrayList<Symbol> symbols=new ArrayList<>();
+            AbstractMap.SimpleEntry<String,ArrayList<Symbol>> scope=new AbstractMap.SimpleEntry("section",symbols);
+            symbolTable.pushNewScope(scope);
+        }
+    }
+
+    @Override
+    public void exitLayoutInheritance(LanguageParser.LayoutInheritanceContext ctx) {
+        if(symbolTable.getCurrentScopeName()=="section")
+            symbolTable.popCurrentScope();
+    }
+
+    @Override
+    public void enterVariable_declaration(LanguageParser.Variable_declarationContext ctx) {
+        VariableSymbol symbol=new VariableSymbol(ctx.ID().getText(),true);
+        symbolTable.addSymbolToCurrentScope(symbol);
+    }
 
     @Override
     public void enterIf_statement(LanguageParser.If_statementContext ctx) {
-        super.enterIf_statement(ctx);
+        //push new if scope
+        ArrayList<Symbol> symbols=new ArrayList<>();
+        AbstractMap.SimpleEntry<String,ArrayList<Symbol>> scope=new AbstractMap.SimpleEntry("if",symbols);
+        symbolTable.pushNewScope(scope);
     }
 
     @Override
     public void exitIf_statement(LanguageParser.If_statementContext ctx) {
-        super.exitIf_statement(ctx);
+        symbolTable.popCurrentScope();
     }
 
     @Override
     public void enterElsebody(LanguageParser.ElsebodyContext ctx) {
-        super.enterElsebody(ctx);
+        //push new else scope
+        ArrayList<Symbol> symbols=new ArrayList<>();
+        AbstractMap.SimpleEntry<String,ArrayList<Symbol>> scope=new AbstractMap.SimpleEntry("else",symbols);
+        symbolTable.pushNewScope(scope);
     }
 
     @Override
     public void exitElsebody(LanguageParser.ElsebodyContext ctx) {
-        super.exitElsebody(ctx);
+        symbolTable.popCurrentScope();
     }
 
     @Override
     public void enterSwitch_statement(LanguageParser.Switch_statementContext ctx) {
-        super.enterSwitch_statement(ctx);
+        //push new switch scope
+        ArrayList<Symbol> symbols=new ArrayList<>();
+        AbstractMap.SimpleEntry<String,ArrayList<Symbol>> scope=new AbstractMap.SimpleEntry("switch",symbols);
+        symbolTable.pushNewScope(scope);
     }
 
     @Override
     public void exitSwitch_statement(LanguageParser.Switch_statementContext ctx) {
-        super.exitSwitch_statement(ctx);
+        symbolTable.popCurrentScope();
     }
 
-    @Override
-    public void enterSwitch_body(LanguageParser.Switch_bodyContext ctx) {
-        super.enterSwitch_body(ctx);
-    }
-
-    @Override
-    public void exitSwitch_body(LanguageParser.Switch_bodyContext ctx) {
-        super.exitSwitch_body(ctx);
-    }
 
     @Override
     public void enterSwitch_case(LanguageParser.Switch_caseContext ctx) {
-        super.enterSwitch_case(ctx);
+        //push new case scope
+        ArrayList<Symbol> symbols=new ArrayList<>();
+        AbstractMap.SimpleEntry<String,ArrayList<Symbol>> scope=new AbstractMap.SimpleEntry("case",symbols);
+        symbolTable.pushNewScope(scope);
     }
 
     @Override
     public void exitSwitch_case(LanguageParser.Switch_caseContext ctx) {
-        super.exitSwitch_case(ctx);
+        symbolTable.popCurrentScope();
     }
 
     @Override
     public void enterSwitch_default(LanguageParser.Switch_defaultContext ctx) {
-        super.enterSwitch_default(ctx);
+        //push new case scope
+        ArrayList<Symbol> symbols=new ArrayList<>();
+        AbstractMap.SimpleEntry<String,ArrayList<Symbol>> scope=new AbstractMap.SimpleEntry("case",symbols);
+        symbolTable.pushNewScope(scope);
     }
 
     @Override
     public void exitSwitch_default(LanguageParser.Switch_defaultContext ctx) {
-        super.exitSwitch_default(ctx);
+        symbolTable.popCurrentScope();
     }
 
     @Override
     public void enterFor_statement(LanguageParser.For_statementContext ctx) {
-        super.enterFor_statement(ctx);
+        //push new for loop scope
+        ArrayList<Symbol> symbols=new ArrayList<>();
+        AbstractMap.SimpleEntry<String,ArrayList<Symbol>> scope=new AbstractMap.SimpleEntry("for",symbols);
+        symbolTable.pushNewScope(scope);
     }
 
     @Override
     public void exitFor_statement(LanguageParser.For_statementContext ctx) {
-        super.exitFor_statement(ctx);
+        symbolTable.popCurrentScope();
     }
 
     @Override
     public void enterAuthentication(LanguageParser.AuthenticationContext ctx) {
-        super.enterAuthentication(ctx);
+        //push new auth loop scope
+        ArrayList<Symbol> symbols=new ArrayList<>();
+        AbstractMap.SimpleEntry<String,ArrayList<Symbol>> scope=new AbstractMap.SimpleEntry("auth",symbols);
+        symbolTable.pushNewScope(scope);
+        if(ctx.ELSE()!=null)
+        {   //push new else scope
+            ArrayList<Symbol> newSymbols=new ArrayList<>();
+            AbstractMap.SimpleEntry<String,ArrayList<Symbol>> newScope=new AbstractMap.SimpleEntry("else",newSymbols);
+            symbolTable.pushNewScope(newScope);
+        }
     }
 
     @Override
     public void exitAuthentication(LanguageParser.AuthenticationContext ctx) {
-        super.exitAuthentication(ctx);
+        if(symbolTable.getCurrentScopeName()=="else")
+            symbolTable.popCurrentScope();
+        symbolTable.popCurrentScope();
     }
 
     @Override
     public void enterAuthorization(LanguageParser.AuthorizationContext ctx) {
-        super.enterAuthorization(ctx);
+        //push new auth loop scope
+        ArrayList<Symbol> symbols=new ArrayList<>();
+        AbstractMap.SimpleEntry<String,ArrayList<Symbol>> scope=new AbstractMap.SimpleEntry("authorization",symbols);
+        symbolTable.pushNewScope(scope);
+        if(ctx.ELSE()!=null)
+        {   //push new else scope
+            ArrayList<Symbol> newSymbols=new ArrayList<>();
+            AbstractMap.SimpleEntry<String,ArrayList<Symbol>> newScope=new AbstractMap.SimpleEntry("else",newSymbols);
+            symbolTable.pushNewScope(newScope);
+        }
     }
 
     @Override
     public void exitAuthorization(LanguageParser.AuthorizationContext ctx) {
-        super.exitAuthorization(ctx);
-    }
-
-
-    @Override
-    public void enterList(LanguageParser.ListContext ctx) {
-        super.enterList(ctx);
+        if(symbolTable.getCurrentScopeName()=="else")
+            symbolTable.popCurrentScope();
+        symbolTable.popCurrentScope();
     }
 
     @Override
-    public void exitList(LanguageParser.ListContext ctx) {
-        super.exitList(ctx);
+    public void enterForm_body(LanguageParser.Form_bodyContext ctx) {
+        //push new form scope
+        ArrayList<Symbol> symbols=new ArrayList<>();
+        AbstractMap.SimpleEntry<String,ArrayList<Symbol>> scope=new AbstractMap.SimpleEntry("form",symbols);
+        symbolTable.pushNewScope(scope);
     }
 
     @Override
-    public void enterTable(LanguageParser.TableContext ctx) {
-        super.enterTable(ctx);
+    public void exitForm_body(LanguageParser.Form_bodyContext ctx) {
+        symbolTable.popCurrentScope();
     }
 
-    @Override
-    public void exitTable(LanguageParser.TableContext ctx) {
-        super.exitTable(ctx);
-    }
-
-    @Override
-    public void enterLink(LanguageParser.LinkContext ctx) {
-        super.enterLink(ctx);
-    }
-
-    @Override
-    public void exitLink(LanguageParser.LinkContext ctx) {
-        super.exitLink(ctx);
-    }
-    @Override
-    public void enterForm(LanguageParser.FormContext ctx) {
-        super.enterForm(ctx);
-    }
-
-    @Override
-    public void exitForm(LanguageParser.FormContext ctx) {
-        super.exitForm(ctx);
-    }
-    @Override
-    public void enterSelection(LanguageParser.SelectionContext ctx) {
-        super.enterSelection(ctx);
-    }
-
-    @Override
-    public void exitSelection(LanguageParser.SelectionContext ctx) {
-        super.exitSelection(ctx);
-    }
-    @Override
-    public void enterRadio(LanguageParser.RadioContext ctx) {
-        super.enterRadio(ctx);
-    }
-
-    @Override
-    public void exitRadio(LanguageParser.RadioContext ctx) {
-        super.exitRadio(ctx);
-    }
     @Override
     public void enterController(LanguageParser.ControllerContext ctx) {
-        super.enterController(ctx);
+        ControllerSymbol symbol=new ControllerSymbol(ctx.ID(0).getText(),ctx.ID(1).getText());
+        symbolTable.addSymbolToCurrentScope(symbol);
+        //push new page scope
+        ArrayList<Symbol> symbols=new ArrayList<>();
+        AbstractMap.SimpleEntry<String,ArrayList<Symbol>> scope=new AbstractMap.SimpleEntry("controller",symbols);
+        symbolTable.pushNewScope(scope);
     }
 
     @Override
     public void exitController(LanguageParser.ControllerContext ctx) {
-        super.exitController(ctx);
+        symbolTable.popCurrentScope();
     }
 }

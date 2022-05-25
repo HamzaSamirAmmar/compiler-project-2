@@ -2,11 +2,11 @@ package symbolTable.symbols;
 
 public class VariableSymbol extends Symbol {
     String name;
-    String value;
+    boolean isInitiated;
 
-    public VariableSymbol(String name, String value) {
+    public VariableSymbol(String name, boolean isInitiated) {
         this.name = name;
-        this.value = value;
+        this.isInitiated = isInitiated;
     }
 
     public String getName() {
@@ -17,11 +17,11 @@ public class VariableSymbol extends Symbol {
         this.name = name;
     }
 
-    public String getValue() {
-        return value;
+    public boolean getValue() {
+        return isInitiated;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setValue(boolean isInitiated) {
+        this.isInitiated = isInitiated;
     }
 }

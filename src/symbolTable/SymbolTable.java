@@ -27,6 +27,28 @@ public class SymbolTable {
     }
     /**
     * methods
-     * ADD HERE WHATEVER FACILITIES searching,accessing....etc  THIS SYMBOL TABLE
+     * ADD HERE WHATEVER FACILITATES searching,accessing,adding,deleting....etc
     **/
+    public String getCurrentScopeName(){
+        return this.symbolTable.peek().getKey();
+    }
+    public ArrayList<Symbol> getCurrentScopeSymbols(){
+        return this.symbolTable.peek().getValue();
+    }
+    public void addSymbolToCurrentScope(Symbol symbol)
+    {
+        this.getCurrentScopeSymbols().add(symbol);
+    }
+    public void addSymbolToFirstScope(Symbol symbol)
+    {
+        this.symbolTable.elementAt(0).getValue().add(symbol);
+    }
+    public void pushNewScope(AbstractMap.SimpleEntry<String,ArrayList<Symbol>> scope)
+    {
+        this.symbolTable.push(scope);
+    }
+    public void popCurrentScope()
+    {
+        this.symbolTable.pop();
+    }
 }

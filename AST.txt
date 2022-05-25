@@ -10,7 +10,11 @@ program: {
 			extended page ID: null,
 			ID: p2,
 			title: "no head",
-			page body element: [],
+			page body element: [
+				@Yield: {
+					name: "content",
+				}
+			],
 		}
 	],
 	controllers: [
