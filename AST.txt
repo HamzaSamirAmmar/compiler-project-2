@@ -13,6 +13,9 @@ program: {
 			page body element: [
 				@Yield: {
 					name: "content",
+				},
+				@Yield: {
+					name: "content",
 				}
 			],
 		}

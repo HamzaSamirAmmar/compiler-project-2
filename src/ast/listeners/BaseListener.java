@@ -2,6 +2,7 @@ package ast.listeners;
 
 import generated.LanguageParser;
 import generated.LanguageParserBaseListener;
+import semanticExceptions.DefiningDuplicateYieldsException;
 import symbolTable.SymbolTable;
 import symbolTable.symbols.*;
 
@@ -80,6 +81,14 @@ public class BaseListener extends LanguageParserBaseListener {
         {
             String parentId=((LanguageParser.PageContext)((ctx.parent).parent)).ID(0).getText();
             YieldSymbol symbol=new YieldSymbol(ctx.STRING().getText(),parentId);
+            //this will check if the yield name has been defined before at the same page:
+            // & if so the error message will be added to errors arraylist
+            boolean isYielded=symbolTable.checkIfYieldedBefore(symbol);
+            if(isYielded)
+            {
+                Exception yieldedException= new DefiningDuplicateYieldsException(ctx.AT_YIELD().getSymbol().getLine(),ctx.AT_YIELD().getSymbol().getCharPositionInLine());
+                this.errors.add(yieldedException.toString());
+            }
             symbolTable.addSymbolToFirstScope(symbol);
         }else if(ctx.AT_SECTION()!=null)
         {

@@ -2,6 +2,7 @@ package symbolTable;
 
 import org.antlr.v4.runtime.misc.Pair;
 import symbolTable.symbols.Symbol;
+import symbolTable.symbols.YieldSymbol;
 
 import java.util.*;
 
@@ -35,6 +36,9 @@ public class SymbolTable {
     public ArrayList<Symbol> getCurrentScopeSymbols(){
         return this.symbolTable.peek().getValue();
     }
+    public ArrayList<Symbol> getFirstScopeSymbols(){
+        return this.symbolTable.elementAt(0).getValue();
+    }
     public void addSymbolToCurrentScope(Symbol symbol)
     {
         this.getCurrentScopeSymbols().add(symbol);
@@ -50,5 +54,17 @@ public class SymbolTable {
     public void popCurrentScope()
     {
         this.symbolTable.pop();
+    }
+    public boolean checkIfYieldedBefore(YieldSymbol newYield){
+        for (Symbol symbol:this.getFirstScopeSymbols()) {
+            if(symbol instanceof YieldSymbol){
+                if(((YieldSymbol) symbol).getIncludingPageId().equals(newYield.getIncludingPageId()))
+                {
+                    if(((YieldSymbol) symbol).getName().equals(newYield.getName()))
+                        return true;
+                }
+            }
+        }
+        return false;
     }
 }
