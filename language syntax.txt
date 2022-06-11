@@ -5,6 +5,9 @@ page p2 head("no head") {
 @yield("content")
 }
 controller c1 controles p1 {
+if("wrong condition")
+    {
+    }
 
 }
 controller c2 controles p2 {

@@ -86,7 +86,7 @@ public class BaseListener extends LanguageParserBaseListener {
             boolean isYielded=symbolTable.checkIfYieldedBefore(symbol);
             if(isYielded)
             {
-                Exception yieldedException= new DefiningDuplicateYieldsException(ctx.AT_YIELD().getSymbol().getLine(),ctx.AT_YIELD().getSymbol().getCharPositionInLine());
+                Exception yieldedException= new DefiningDuplicateYieldsException(ctx.STRING().getSymbol().getLine(),ctx.STRING().getSymbol().getCharPositionInLine());
                 this.errors.add(yieldedException.toString());
             }
             symbolTable.addSymbolToFirstScope(symbol);

@@ -6,6 +6,7 @@ import ast.nodes.Program;
 import ast.nodes.basicNodes.*;
 import ast.nodes.basicNodes.expressions.Expression;
 import ast.nodes.basicNodes.expressions.IndexedExpressionNode;
+import ast.nodes.basicNodes.expressions.Logical;
 import ast.nodes.basicNodes.expressions.Math.AdditiveNode;
 import ast.nodes.basicNodes.expressions.Math.OneOperandMathematicalNode;
 import ast.nodes.basicNodes.expressions.Numeric;
@@ -29,6 +30,7 @@ import ast.nodes.pageNodes.layoutNodes.Yield;
 import ast.nodes.pageNodes.outNodes.*;
 import generated.LanguageParser;
 import generated.LanguageParserBaseVisitor;
+import semanticExceptions.IncompatibleExpressionTypeException;
 
 import java.util.ArrayList;
 
@@ -160,6 +162,12 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
         ArrayList<Element> bodyElements = new ArrayList<>();
         ArrayList<Element> elseBodyElements = new ArrayList<>();
         condition = (Expression) visit(ctx.expression());
+        //check the type of the expression
+        if(! (condition instanceof Logical)){
+            Exception typeException=new IncompatibleExpressionTypeException(ctx.IF().getSymbol().getLine(),ctx.IF().getSymbol().getCharPositionInLine(),
+                    "LogicalNode",condition.getClass().getSimpleName());
+            this.errors.add(typeException.toString());
+        }
         for (int i = 0; i < ctx.element().size(); i++) {
             bodyElements.add((Element) visit(ctx.element(i)));
         }

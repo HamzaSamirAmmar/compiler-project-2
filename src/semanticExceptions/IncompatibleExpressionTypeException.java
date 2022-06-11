@@ -9,6 +9,10 @@ public class IncompatibleExpressionTypeException extends SemanticException{
         super(message,line,col);
         this.givenType=givenType;
         this.requiredType=requiredType;
-        message=message+"required"+requiredType+" given "+givenType;
+        message=message+" required :"+requiredType+" given :"+givenType;
+    }
+    @Override
+    public String getMessage() {
+        return "line "+line+" at column "+col+": "+message;
     }
 }

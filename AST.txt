@@ -24,7 +24,15 @@ program: {
 		controller: {
 			controlled page ID: p1,
 			ID: c1,
-			controller body element: [],
+			controller body element: [
+				if statement: {
+					condition: string: {
+					stringValue: wrong condition,
+				},
+					if body elements: [],
+					else body elements: [],
+				}
+			],
 		},
 		controller: {
 			controlled page ID: p2,
