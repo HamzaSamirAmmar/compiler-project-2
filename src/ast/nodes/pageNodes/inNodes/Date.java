@@ -1,6 +1,7 @@
 package ast.nodes.pageNodes.inNodes;
 
 import ast.nodes.Element;
+import ast.nodes.basicNodes.expressions.Expression;
 import ast.nodes.basicNodes.expressions.literals.MapNode;
 import ast.nodes.pageNodes.PageCallable;
 import ast.nodes.util.Formatter;
@@ -8,14 +9,14 @@ import ast.nodes.util.Formatter;
 public class Date extends Element implements PageCallable {
     String name;
     String label;
-    String value;//TODO expression valuable
+    Expression value;
     MapNode extraAttributes;
 
     public MapNode getExtraAttributes() {
         return extraAttributes;
     }
 
-    public Date(String name, String label, String value, MapNode extraAttributes) {
+    public Date(String name, String label, Expression value, MapNode extraAttributes) {
         this.name = name;
         this.label = label;
         this.value = value;
@@ -42,14 +43,14 @@ public class Date extends Element implements PageCallable {
         this.label = label;
     }
 
-    public String getValue() {
+
+    public Expression getValue() {
         return value;
     }
 
-    public void setValue(String value) {
+    public void setValue(Expression value) {
         this.value = value;
     }
-
 
     @Override
     protected String nodeName() {
@@ -59,9 +60,9 @@ public class Date extends Element implements PageCallable {
     @Override
     protected Formatter nodeValue(Formatter formatter) {
         formatter.addProperty("Date Name", name);
-        formatter.addProperty("Date Value", value);
+        formatter.addProperty("Date Value", value.toString());
         formatter.addProperty("Date Label", label);
-        if(extraAttributes!=null)
+        if (extraAttributes != null)
             formatter.object(extraAttributes.toString());
         return formatter;
     }

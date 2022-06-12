@@ -190,6 +190,10 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
         Expression expression;
         ArrayList<SwitchCase> switchCases = new ArrayList<>();
         expression = (Expression) visit(ctx.expression());
+        if (!(expression instanceof Valuable) || !(expression instanceof Concatable)) {
+            Exception typeException = new IncompatibleExpressionTypeException(ctx.expression().start.getLine(), ctx.expression().start.getCharPositionInLine(), "Valuable or Contactable", expression.getClass().getSimpleName());
+            this.errors.add(typeException.toString());
+        }
         for (int i = 0; i < ctx.switch_body().switch_case().size(); i++) {
             switchCases.add((SwitchCase) visit(ctx.switch_body().switch_case(i)));
         }
@@ -614,7 +618,7 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
 
         String name = ctx.STRING().get(0).getText();
         String label = ctx.STRING().get(1).getText();
-        String value = ctx.STRING().get(2).getText();
+        Expression value = (Expression) visit(ctx.expression());
         TextField textField = new TextField(name, label, value, null);
         return textField;
     }
@@ -640,7 +644,7 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
 
         String name = ctx.STRING().get(0).getText();
         String label = ctx.STRING().get(1).getText();
-        String value = ctx.STRING().get(2).getText();
+        Expression value = (Expression) visit(ctx.expression());
         Date date = new Date(name, label, value, null);
         return date;
     }
@@ -665,8 +669,8 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
     public AbstractNode visitCheck_box_attributes(LanguageParser.Check_box_attributesContext ctx) {
         String name = ctx.STRING().get(0).getText();
         String label = ctx.STRING().get(1).getText();
-        String value = ctx.STRING().get(2).getText();
-        CheckBox checkBox = new CheckBox(name, label, value, null);
+        Expression expression = (Expression) visit(ctx.expression());
+        CheckBox checkBox = new CheckBox(name, label, expression, null);
         return checkBox;
     }
 
