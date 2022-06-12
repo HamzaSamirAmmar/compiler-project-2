@@ -1,13 +1,12 @@
 page p1 head("title") {
+for(@i=0;@i++;@i>3)
+{}
 }
 page p2 head("no head") {
 @yield("content")
-@yield("content")
 }
 controller c1 controles p1 {
-if("wrong condition")
-    {
-    }
+
 
 }
 controller c2 controles p2 {

@@ -1,8 +1,7 @@
 package symbolTable;
 
 import org.antlr.v4.runtime.misc.Pair;
-import symbolTable.symbols.Symbol;
-import symbolTable.symbols.YieldSymbol;
+import symbolTable.symbols.*;
 
 import java.util.*;
 
@@ -63,6 +62,86 @@ public class SymbolTable {
                     if(((YieldSymbol) symbol).getName().equals(newYield.getName()))
                         return true;
                 }
+            }
+        }
+        return false;
+    }
+    public boolean checkIfVariableInitializedBefore(VariableSymbol variableSymbol) {
+        for (Symbol symbol : this.getCurrentScopeSymbols()) {
+            if (symbol instanceof VariableSymbol) {
+                if (((VariableSymbol) symbol).getName().equals(variableSymbol.getName())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean checkIfPageScope() {
+        if (this.symbolTable.elementAt(1).getKey() == "page")
+            return true;
+        return false;
+    }
+
+    public boolean checkIfControllerScope() {
+        if (this.symbolTable.elementAt(1).getKey() == "controller")
+            return true;
+        return false;
+    }
+    public boolean checkExistPageIdBefore(Symbol newSymbol){
+        for (Symbol symbol:this.getFirstScopeSymbols()) {
+            // defining a page that is already defined
+            if(symbol instanceof PageSymbol && newSymbol instanceof PageSymbol){
+                if(((PageSymbol) symbol).getName().equals(((PageSymbol) newSymbol).getName()))
+                    return true;
+            }
+            // control a page that is already defined
+            else if (symbol instanceof PageSymbol && newSymbol instanceof  ControllerSymbol){
+                if(((PageSymbol) symbol).getName().
+                        equals(((ControllerSymbol)newSymbol).getControllingPageId()))
+                    return true;
+            }
+        }
+        return false;
+    }
+    public boolean checkFormAction(String action) {
+        // action is controller id
+        for (Symbol symbol:this.getFirstScopeSymbols()) {
+            //TODO : only pages shown controllers are not shown and yields also?
+            System.out.println(" out scop symbols"+symbol);
+            if(symbol instanceof ControllerSymbol){
+                if(action.equals(((ControllerSymbol) symbol).getName()))
+                    return true;
+            }
+        }
+        return false;
+    }
+    public boolean checkIfPageIDIsExist(String extendedPageID) {
+        final ArrayList<Symbol> programSymbols = symbolTable.get(0).getValue();
+        for (Symbol symbol : programSymbols) {
+            if (symbol instanceof PageSymbol) {
+                if (Objects.equals(((PageSymbol) symbol).getName(), extendedPageID)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    public boolean checkIfControllerIDUsedBefore(String controllerID) {
+        final ArrayList<Symbol> programSymbols = symbolTable.get(0).getValue();
+        for (Symbol symbol : programSymbols) {
+            if (symbol instanceof ControllerSymbol) {
+                if (Objects.equals(((ControllerSymbol) symbol).getName(), controllerID)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    public Boolean checkExistPageIdToRedirect(String pageID) {
+        for (Symbol symbol:this.getFirstScopeSymbols()) {
+            if(((PageSymbol) symbol).getName().equals(pageID)){
+                return  true;
             }
         }
         return false;

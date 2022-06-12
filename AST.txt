@@ -4,16 +4,37 @@ program: {
 			extended page ID: null,
 			ID: p1,
 			title: "title",
-			page body element: [],
+			page body element: [
+				forStatment: {
+					variableDeclaration: {
+						id: i,
+						value(decimalValue): {
+							decimalValue: 0.0,
+						},
+					},
+					condition(OneOperandMathematicalNode): {
+						operand: variable/functionName: {
+						name: i,
+					},
+						operator: ++,
+					},
+					step(TwoOperandCondition): {
+						operator: >,
+						leftOperand(variable/functionName): {
+							name: i,
+						},
+						rightOperand(decimalValue): {
+							decimalValue: 3.0,
+						},
+					},
+				}
+			],
 		},
 		page: {
 			extended page ID: null,
 			ID: p2,
 			title: "no head",
 			page body element: [
-				@Yield: {
-					name: "content",
-				},
 				@Yield: {
 					name: "content",
 				}
@@ -24,15 +45,7 @@ program: {
 		controller: {
 			controlled page ID: p1,
 			ID: c1,
-			controller body element: [
-				if statement: {
-					condition: string: {
-					stringValue: wrong condition,
-				},
-					if body elements: [],
-					else body elements: [],
-				}
-			],
+			controller body element: [],
 		},
 		controller: {
 			controlled page ID: p2,

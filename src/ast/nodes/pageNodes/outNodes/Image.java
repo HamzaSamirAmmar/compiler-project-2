@@ -18,8 +18,6 @@ public class Image extends OutNode {
 
     public void setImgReference(String imgReference) {
         // check if the image url is ending with jpg or gif or png or jpeg
-       /* if(!Pattern.compile("[^\"]" + "\\.(?:jpg|gif|png|jpeg)").matcher(imgReference).find())
-            throw new RuntimeException("invalid image");*/
         this.imgReference = imgReference;
     }
 

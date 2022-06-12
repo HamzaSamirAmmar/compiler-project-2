@@ -6,6 +6,7 @@ import generated.LanguageParser;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
+import symbolTable.SymbolTable;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -20,6 +21,7 @@ public class Compiler {
 	
 	public static void main(String[] argv) {
 		CharStream cs;
+		SymbolTable symbolTable =new SymbolTable();
 		final ArrayList<String> errorMessages = new ArrayList<>();
 		try {
 			cs = CharStreams.fromFileName(filePath);
@@ -35,11 +37,11 @@ public class Compiler {
 			});
 			//base visitor
 			ParseTree parseTree = parser.program();
-			BaseVisitor visitor = new BaseVisitor(errorMessages);
+			BaseVisitor visitor = new BaseVisitor(symbolTable,errorMessages);
 			AbstractNode document = (AbstractNode) visitor.visit(parseTree);
 			//base listener
 			ParseTreeWalker walker = new ParseTreeWalker();
-			BaseListener listener = new BaseListener(errorMessages);
+			BaseListener listener = new BaseListener(symbolTable,errorMessages);
 			walker.walk(listener,parseTree);
 			FileWriter resultFile = new FileWriter(ASTPath);
 			resultFile.write(document.toString());
