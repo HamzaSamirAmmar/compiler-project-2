@@ -1,9 +1,11 @@
-package ast.nodes.controllerNodes;
+package ast.nodes.pageNodes.layoutNodes;
 
 import ast.nodes.AbstractNode;
+import ast.nodes.Element;
+import ast.nodes.pageNodes.PageCallable;
 import ast.nodes.util.Formatter;
 
-public class Yield extends AbstractNode {
+public class Yield extends Element implements PageCallable {
     String name;
 
     public void setName(String  name) {
@@ -17,6 +19,6 @@ public class Yield extends AbstractNode {
 
     @Override
     protected Formatter nodeValue(Formatter formatter) {
-        return null;
+        return formatter.addProperty("name",name);
     }
 }

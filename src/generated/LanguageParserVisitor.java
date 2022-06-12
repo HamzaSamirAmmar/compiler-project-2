@@ -53,11 +53,23 @@ public interface LanguageParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStatement(LanguageParser.StatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link LanguageParser#element}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitElement(LanguageParser.ElementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link LanguageParser#if_statement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitIf_statement(LanguageParser.If_statementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LanguageParser#elsebody}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitElsebody(LanguageParser.ElsebodyContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link LanguageParser#switch_statement}.
 	 * @param ctx the parse tree
@@ -70,6 +82,18 @@ public interface LanguageParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitSwitch_body(LanguageParser.Switch_bodyContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LanguageParser#switch_case}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSwitch_case(LanguageParser.Switch_caseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LanguageParser#switch_default}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSwitch_default(LanguageParser.Switch_defaultContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link LanguageParser#variable_declaration}.
 	 * @param ctx the parse tree

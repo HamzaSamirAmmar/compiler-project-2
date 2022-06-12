@@ -78,6 +78,16 @@ public interface LanguageParserListener extends ParseTreeListener {
 	 */
 	void exitStatement(LanguageParser.StatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link LanguageParser#element}.
+	 * @param ctx the parse tree
+	 */
+	void enterElement(LanguageParser.ElementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LanguageParser#element}.
+	 * @param ctx the parse tree
+	 */
+	void exitElement(LanguageParser.ElementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link LanguageParser#if_statement}.
 	 * @param ctx the parse tree
 	 */
@@ -87,6 +97,16 @@ public interface LanguageParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitIf_statement(LanguageParser.If_statementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LanguageParser#elsebody}.
+	 * @param ctx the parse tree
+	 */
+	void enterElsebody(LanguageParser.ElsebodyContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LanguageParser#elsebody}.
+	 * @param ctx the parse tree
+	 */
+	void exitElsebody(LanguageParser.ElsebodyContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link LanguageParser#switch_statement}.
 	 * @param ctx the parse tree
@@ -107,6 +127,26 @@ public interface LanguageParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitSwitch_body(LanguageParser.Switch_bodyContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LanguageParser#switch_case}.
+	 * @param ctx the parse tree
+	 */
+	void enterSwitch_case(LanguageParser.Switch_caseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LanguageParser#switch_case}.
+	 * @param ctx the parse tree
+	 */
+	void exitSwitch_case(LanguageParser.Switch_caseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link LanguageParser#switch_default}.
+	 * @param ctx the parse tree
+	 */
+	void enterSwitch_default(LanguageParser.Switch_defaultContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LanguageParser#switch_default}.
+	 * @param ctx the parse tree
+	 */
+	void exitSwitch_default(LanguageParser.Switch_defaultContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link LanguageParser#variable_declaration}.
 	 * @param ctx the parse tree
