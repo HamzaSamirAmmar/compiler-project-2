@@ -6,6 +6,7 @@ import ast.nodes.Program;
 import ast.nodes.basicNodes.*;
 import ast.nodes.basicNodes.expressions.*;
 import ast.nodes.basicNodes.expressions.Math.AdditiveNode;
+import ast.nodes.basicNodes.expressions.Math.MultiplicativeNode;
 import ast.nodes.basicNodes.expressions.Math.OneOperandMathematicalNode;
 import ast.nodes.basicNodes.expressions.conditions.ConditionConcatenation;
 import ast.nodes.basicNodes.expressions.conditions.OneOperandCondition;
@@ -805,6 +806,9 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
     public AbstractNode visitLiteralStringExpression(LanguageParser.LiteralStringExpressionContext ctx) {
         System.out.println("in literal string expression visitor");
         String fullText = ctx.STRING().getText();
+        if(ctx.STRING().getText().length()==3){
+            return new CharNode(fullText.charAt(1));
+        }
         return new StringNode(fullText.substring(1, fullText.length() - 1));
     }
 
@@ -842,7 +846,7 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
             String operator = ctx.MULTIPLICATIVE_OPERATOR().getText();
             Expression leftOperand = (Expression) visit(ctx.expression(0));
             Expression rightOperand = (Expression) visit(ctx.expression(1));
-            return new AdditiveNode(leftOperand, rightOperand, operator);
+            return new MultiplicativeNode(leftOperand, rightOperand, operator);
         }
     }
 

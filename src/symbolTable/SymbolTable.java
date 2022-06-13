@@ -66,15 +66,27 @@ public class SymbolTable {
         }
         return false;
     }
-    public boolean checkIfVariableInitializedBefore(VariableSymbol variableSymbol) {
+    public int checkIfVariableInitializedBefore(VariableSymbol variableSymbol) {
+        // change this so a global variable is shown by this method
+        // 0 is not initializes , 1 is local variable, 2 is global variable
         for (Symbol symbol : this.getCurrentScopeSymbols()) {
             if (symbol instanceof VariableSymbol) {
                 if (((VariableSymbol) symbol).getName().equals(variableSymbol.getName())) {
-                    return true;
+                    return 1;
                 }
             }
         }
-        return false;
+        for (int j = 1; j <symbolTable.size() ; j++) {
+            for (Symbol symbol : this.symbolTable.elementAt(j).getValue()) {
+                if (symbol instanceof VariableSymbol) {
+                    if (((VariableSymbol) symbol).getName().equals(variableSymbol.getName())) {
+                        return 2;
+                    }
+                }
+            }
+        }
+
+        return 0;
     }
 
     public boolean checkIfPageScope() {
@@ -110,7 +122,8 @@ public class SymbolTable {
             //TODO : only pages shown controllers are not shown and yields also?
             System.out.println(" out scop symbols"+symbol);
             if(symbol instanceof ControllerSymbol){
-                if(action.equals(((ControllerSymbol) symbol).getName()))
+              //  System.out.println("action "+ action.substring(1,action.length()-1) + " controller name " + ((ControllerSymbol) symbol).getName());
+                if(action.substring(1,action.length()-1).equals(((ControllerSymbol) symbol).getName()))
                     return true;
             }
         }
