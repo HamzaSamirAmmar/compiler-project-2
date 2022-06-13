@@ -95,9 +95,9 @@ public class BaseListener extends LanguageParserBaseListener {
 
     @Override
     public void enterLayoutInheritance(LanguageParser.LayoutInheritanceContext ctx) {
+        String includingPageId = ((LanguageParser.PageContext) ((ctx.parent).parent)).ID(0).getText();
         if (ctx.AT_YIELD() != null) {
-            String parentId = ((LanguageParser.PageContext) ((ctx.parent).parent)).ID(0).getText();
-            YieldSymbol symbol = new YieldSymbol(ctx.STRING().getText(), parentId);
+            YieldSymbol symbol = new YieldSymbol(ctx.STRING().getText(), includingPageId);
             //this will check if the yield name has been defined before at the same page:
             // & if so the error message will be added to errors arraylist
             boolean isYielded = symbolTable.checkIfYieldedBefore(symbol);
@@ -107,6 +107,10 @@ public class BaseListener extends LanguageParserBaseListener {
             }
             symbolTable.addSymbolToFirstScope(symbol);
         } else if (ctx.AT_SECTION() != null) {
+            String parentPageId = ((LanguageParser.PageContext) ((ctx.parent).parent)).ID(1).getText();
+            SectionSymbol symbol=new SectionSymbol(ctx.STRING().getText(),includingPageId,parentPageId);
+            //add symbol to current scope
+            symbolTable.addSymbolToCurrentScope(symbol);
             //push new section scope
             ArrayList<Symbol> symbols = new ArrayList<>();
             AbstractMap.SimpleEntry<String, ArrayList<Symbol>> scope = new AbstractMap.SimpleEntry("section", symbols);
