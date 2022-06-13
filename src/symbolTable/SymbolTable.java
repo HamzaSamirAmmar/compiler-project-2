@@ -1,5 +1,6 @@
 package symbolTable;
 
+import ast.nodes.pageNodes.Page;
 import org.antlr.v4.runtime.misc.Pair;
 import symbolTable.symbols.*;
 
@@ -64,7 +65,25 @@ public class SymbolTable {
                 }
             }
         }
-        return false;
+        String parentPageId=this.getPageParentId(newYield);
+        //recursion stop condition
+        if(parentPageId==null)
+            return false;
+        return this.checkIfYieldedBefore(new YieldSymbol(newYield.getName(),parentPageId));
+    }
+    public String getPageParentId(Symbol symbol){
+        //yield case
+        String currentPageId=((YieldSymbol)symbol).getIncludingPageId();
+        String parentPageId=null;
+        //search for the page symbol
+        for (Symbol firstScopeSymbol:this.getFirstScopeSymbols()) {
+            if(firstScopeSymbol instanceof PageSymbol) {
+                if(((PageSymbol)firstScopeSymbol).getName().equals(currentPageId)) {
+                    parentPageId = ((PageSymbol) firstScopeSymbol).getExtendedPageId();
+                }
+            }
+        }
+        return parentPageId;
     }
     public int checkIfVariableInitializedBefore(VariableSymbol variableSymbol) {
         // change this so a global variable is shown by this method
@@ -119,10 +138,7 @@ public class SymbolTable {
     public boolean checkFormAction(String action) {
         // action is controller id
         for (Symbol symbol:this.getFirstScopeSymbols()) {
-            //TODO : only pages shown controllers are not shown and yields also?
-            System.out.println(" out scop symbols"+symbol);
             if(symbol instanceof ControllerSymbol){
-              //  System.out.println("action "+ action.substring(1,action.length()-1) + " controller name " + ((ControllerSymbol) symbol).getName());
                 if(action.substring(1,action.length()-1).equals(((ControllerSymbol) symbol).getName()))
                     return true;
             }

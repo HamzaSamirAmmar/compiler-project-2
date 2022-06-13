@@ -1,12 +1,15 @@
-page p1 head("title") {
-for(@i=0;@i++;@i>3)
-{}
+page p0 head("title") {
+
 }
-page p2 head("no head") {
+page p1 head("title") extends p0 {
+
+}
+page p2 head("no head") extends p1 {
 @yield("content")
+@go=5
 }
 controller c1 controles p1 {
-
+checkRole(3>4)
 
 }
 controller c2 controles p2 {

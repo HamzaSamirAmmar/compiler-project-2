@@ -2,41 +2,29 @@ program: {
 	pages: [
 		page: {
 			extended page ID: null,
-			ID: p1,
+			ID: p0,
 			title: "title",
-			page body element: [
-				forStatment: {
-					variableDeclaration: {
-						id: i,
-						value(decimalValue): {
-							decimalValue: 0.0,
-						},
-					},
-					condition(OneOperandMathematicalNode): {
-						operand: variable/functionName: {
-						name: i,
-					},
-						operator: ++,
-					},
-					step(TwoOperandCondition): {
-						operator: >,
-						leftOperand(variable/functionName): {
-							name: i,
-						},
-						rightOperand(decimalValue): {
-							decimalValue: 3.0,
-						},
-					},
-				}
-			],
+			page body element: [],
 		},
 		page: {
-			extended page ID: null,
+			extended page ID: p0,
+			ID: p1,
+			title: "title",
+			page body element: [],
+		},
+		page: {
+			extended page ID: p1,
 			ID: p2,
 			title: "no head",
 			page body element: [
 				@Yield: {
 					name: "content",
+				},
+				variableDeclaration: {
+					id: go,
+					value(decimalValue): {
+						decimalValue: 5.0,
+					},
 				}
 			],
 		}
@@ -45,7 +33,19 @@ program: {
 		controller: {
 			controlled page ID: p1,
 			ID: c1,
-			controller body element: [],
+			controller body element: [
+				Role check: {
+					check role : TwoOperandCondition: {
+					operator: >,
+					leftOperand(decimalValue): {
+						decimalValue: 3.0,
+					},
+					rightOperand(decimalValue): {
+						decimalValue: 4.0,
+					},
+				},
+				}
+			],
 		},
 		controller: {
 			controlled page ID: p2,

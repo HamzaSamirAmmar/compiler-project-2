@@ -70,13 +70,15 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
     @Override
     public Page visitPage(LanguageParser.PageContext ctx) {
         String id;
-        String title;
+        String title=null;
         ArrayList<Element> bodyElements = new ArrayList<>();
         id = ctx.ID(0).getText();
         String extendedPageId=null;
         if(ctx.ID(1)!=null)
              extendedPageId=ctx.ID(1).getText();
-        title = ctx.head().title().getText();
+        if(ctx.head().HEAD()!=null) {
+            title = ctx.head().title().getText();
+        }
         for (int i = 0; i < ctx.body_element().size(); i++) {
             bodyElements.add((Element) visit(ctx.body_element(i)));
         }
@@ -785,9 +787,28 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
         } else if (ctx.CHECK_VALID() != null) {
             Expression uniqueIdentifier = (Expression) visit(ctx.expression(0));
             Expression password = (Expression) visit(ctx.expression(1));
+            // both uniqueIdentifier and password should either be literal string or variable names only
+            if(! (uniqueIdentifier instanceof StringNode) && ! (uniqueIdentifier instanceof VariableNode))
+            {
+                Exception typeException= new IncompatibleExpressionTypeException(ctx.expression(0).start.getLine(),
+                        ctx.expression(0).start.getCharPositionInLine(),"String or variable name" , uniqueIdentifier.getClass().getSimpleName());
+                errors.add(typeException.toString());
+            }
+            if(! (password instanceof StringNode) && ! (password instanceof VariableNode))
+            {
+                Exception typeException= new IncompatibleExpressionTypeException(ctx.expression(1).start.getLine(),
+                        ctx.expression(1).start.getCharPositionInLine(),"String or variable name" , password.getClass().getSimpleName());
+                errors.add(typeException.toString());
+            }
             return new ValidCheck(uniqueIdentifier, password);
         } else if (ctx.CHECK_ROLE() != null) {
             Expression role = (Expression) visit(ctx.expression(0));
+            if(! (role instanceof StringNode) && ! (role instanceof VariableNode))
+            {
+                Exception typeException= new IncompatibleExpressionTypeException(ctx.expression(0).start.getLine(),
+                        ctx.expression(0).start.getCharPositionInLine(),"String or variable name" , role.getClass().getSimpleName());
+                errors.add(typeException.toString());
+            }
             return new RoleCheck(role);
         } else if (ctx.REDIRECT() != null) {
             String goalPageId = ctx.ID().getText();
