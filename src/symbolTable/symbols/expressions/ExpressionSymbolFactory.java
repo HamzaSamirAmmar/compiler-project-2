@@ -76,11 +76,10 @@ public class ExpressionSymbolFactory {
                 expression instanceof LanguageParser.LiteralNumericExpressionContext){
             System.out.println("inside literal expression got: " + expression.getClass().getSimpleName());
             String className = expression.getClass().getSimpleName();
-            String value = expression.getText();
             if(expression instanceof LanguageParser.LiteralStringExpressionContext)
                 if(((LanguageParser.LiteralStringExpressionContext) expression).STRING().getText().length()==3)
                     className = LanguageParser.LiteralCharExpressionContext.class.getSimpleName();
-            return new LiteralExpressionSymbol(className,value);
+            return new LiteralExpressionSymbol(className);
         }
         else return null;
     }

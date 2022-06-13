@@ -9,11 +9,6 @@ public class LiteralExpressionSymbol extends ExpressionSymbol {
         this.type = type;
     }
 
-    public LiteralExpressionSymbol(String type, String value) {
-        this.type = type;
-        this.value = value;
-    }
-
     public String getType() {
         return type;
     }
