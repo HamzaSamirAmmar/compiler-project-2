@@ -6,8 +6,7 @@ import ast.nodes.util.Formatter;
 
 public class Option extends AbstractNode {
 
-    Expression expression;//TODO valuable
-
+    Expression expression;
     public Option(Expression expression, String label) {
         this.expression = expression;
         this.label = label;

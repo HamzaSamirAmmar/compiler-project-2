@@ -25,7 +25,7 @@ public class BaseListener extends LanguageParserBaseListener {
     public BaseListener() {
     }
 
-    public BaseListener(SymbolTable symbolTable,ArrayList<String> errors) {
+    public BaseListener(SymbolTable symbolTable, ArrayList<String> errors) {
         this.symbolTable = symbolTable;
         this.errors = errors;
     }
@@ -33,20 +33,19 @@ public class BaseListener extends LanguageParserBaseListener {
     @Override
     public void enterProgram(LanguageParser.ProgramContext ctx) {
         //getting all symbols
-        ArrayList<Symbol> symbols=new ArrayList<>();
+        ArrayList<Symbol> symbols = new ArrayList<>();
         //making the scope pair
-        AbstractMap.SimpleEntry<String,ArrayList<Symbol>> scope=new AbstractMap.SimpleEntry("program",symbols);
+        AbstractMap.SimpleEntry<String, ArrayList<Symbol>> scope = new AbstractMap.SimpleEntry("program", symbols);
         //pushing the scope into the symbol table
         symbolTable.symbolTable.push(scope);
         //looping through pages and adding page symbols
         symbolTable.addSymbolToCurrentScope(new PageSymbol(ctx.start_page().page().ID(0).getText()));
         PageSymbol symbol = null;
-        for (int i = 0; i <ctx.page().size() ; i++) {
-            if(ctx.page().get(i).ID(1)==null){
-                 symbol = new PageSymbol(ctx.page().get(i).ID(0).getText());
-            }
-            else{
-                symbol = new PageSymbol(ctx.page().get(i).ID(0).getText(),ctx.page().get(i).ID(1).getText());
+        for (int i = 0; i < ctx.page().size(); i++) {
+            if (ctx.page().get(i).ID(1) == null) {
+                symbol = new PageSymbol(ctx.page().get(i).ID(0).getText());
+            } else {
+                symbol = new PageSymbol(ctx.page().get(i).ID(0).getText(), ctx.page().get(i).ID(1).getText());
                 boolean isExtendedPageIdExist = symbolTable.checkIfPageIDIsExist(symbol.getExtendedPageId());
                 if (!isExtendedPageIdExist) {
                     Exception pageException = new ExtendingUndefinedPageException(ctx.page().get(i).ID(1).getSymbol().getLine(), ctx.page().get(i).ID(1).getSymbol().getCharPositionInLine());
@@ -60,14 +59,14 @@ public class BaseListener extends LanguageParserBaseListener {
             symbolTable.addSymbolToCurrentScope(symbol);
         }
         //looping through controllers and adding controller symbols
-        for (int i = 0; i <ctx.controller().size() ; i++) {
+        for (int i = 0; i < ctx.controller().size(); i++) {
             ControllerSymbol controllerSymbol = new ControllerSymbol(ctx.controller().get(i).ID(0).getText(), ctx.controller().get(i).ID(1).getText());
             boolean isControllerIDUsed = symbolTable.checkIfControllerIDUsedBefore(controllerSymbol.getName());
             if (isControllerIDUsed) {
                 Exception controllerIdException = new TakenControllerIdException(ctx.controller().get(i).ID(1).getSymbol().getLine(), ctx.controller().get(i).ID(1).getSymbol().getCharPositionInLine());
                 this.errors.add(controllerIdException.toString());
             }
-            symbolTable.addSymbolToCurrentScope(new ControllerSymbol(ctx.controller().get(i).ID(0).getText(),ctx.controller().get(i).ID(1).getText()));
+            symbolTable.addSymbolToCurrentScope(new ControllerSymbol(ctx.controller().get(i).ID(0).getText(), ctx.controller().get(i).ID(1).getText()));
         }
 
     }
@@ -108,7 +107,12 @@ public class BaseListener extends LanguageParserBaseListener {
             symbolTable.addSymbolToFirstScope(symbol);
         } else if (ctx.AT_SECTION() != null) {
             String parentPageId = ((LanguageParser.PageContext) ((ctx.parent).parent)).ID(1).getText();
-            SectionSymbol symbol=new SectionSymbol(ctx.STRING().getText(),includingPageId,parentPageId);
+            SectionSymbol symbol = new SectionSymbol(ctx.STRING().getText(), includingPageId, parentPageId);
+//            boolean isYieldExist = checkIfYieldIsExist(symbol);
+//            if (!isYieldExist) {
+//                Exception sectionException = new UsingUndefinedYieldException(ctx.STRING().getSymbol().getLine(), ctx.STRING().getSymbol().getCharPositionInLine());
+//                this.errors.add(sectionException.toString());
+//            }
             //add symbol to current scope
             symbolTable.addSymbolToCurrentScope(symbol);
             //push new section scope
@@ -126,13 +130,12 @@ public class BaseListener extends LanguageParserBaseListener {
 
     @Override
     public void enterVariable_declaration(LanguageParser.Variable_declarationContext ctx) {
-        ExpressionSymbol expressionSymbol = ExpressionSymbolFactory.expressionLiteralResult(ctx.expression(),symbolTable);
+        ExpressionSymbol expressionSymbol = ExpressionSymbolFactory.expressionLiteralResult(ctx.expression(), symbolTable);
         VariableSymbol symbol;
-        if(expressionSymbol instanceof LiteralExpressionSymbol){
-             symbol = new VariableSymbol(ctx.ID().getText(),((LiteralExpressionSymbol) expressionSymbol).getType(), true);
-            System.out.println("hello i am the variable *** :: "+ctx.ID().getText() +" " +((LiteralExpressionSymbol) expressionSymbol).getType());
-        }
-        else symbol = new VariableSymbol(ctx.ID().getText(), true); //this line should not happen
+        if (expressionSymbol instanceof LiteralExpressionSymbol) {
+            symbol = new VariableSymbol(ctx.ID().getText(), ((LiteralExpressionSymbol) expressionSymbol).getType(), true);
+            System.out.println("hello i am the variable *** :: " + ctx.ID().getText() + " " + ((LiteralExpressionSymbol) expressionSymbol).getType());
+        } else symbol = new VariableSymbol(ctx.ID().getText(), true); //this line should not happen
         symbolTable.addSymbolToCurrentScope(symbol);
     }
 
@@ -165,19 +168,19 @@ public class BaseListener extends LanguageParserBaseListener {
     @Override
     public void enterSwitch_statement(LanguageParser.Switch_statementContext ctx) {
         //push new switch scope
-        System.out.println(" lets try this before :)))"+ ctx.expression().getClass());
-        ExpressionSymbol switchExpressionSymbol = ExpressionSymbolFactory.expressionLiteralResult(ctx.expression(),symbolTable);
-        System.out.println("switchExpressionSymbol is "+/*((LiteralExpressionSymbol)*/ switchExpressionSymbol/*).getType()*/);
+        System.out.println(" lets try this before :)))" + ctx.expression().getClass());
+        ExpressionSymbol switchExpressionSymbol = ExpressionSymbolFactory.expressionLiteralResult(ctx.expression(), symbolTable);
+        System.out.println("switchExpressionSymbol is " +/*((LiteralExpressionSymbol)*/ switchExpressionSymbol/*).getType()*/);
         for (int i = 0; i < ctx.switch_body().switch_case().size(); i++) {
-            System.out.println(" lets try this case :)))"+ ctx.switch_body().switch_case(i).expression().getClass());
-            ExpressionSymbol caseExpressionSymbol = ExpressionSymbolFactory.expressionLiteralResult(ctx.switch_body().switch_case(i).expression(),symbolTable);
-            System.out.println("caseExpressionSymbol is "+/*((LiteralExpressionSymbol)*/ caseExpressionSymbol/*).getType()*/);
-            if(switchExpressionSymbol instanceof  LiteralExpressionSymbol && caseExpressionSymbol instanceof LiteralExpressionSymbol){
-                if(!(((LiteralExpressionSymbol) switchExpressionSymbol).getType().equals(((LiteralExpressionSymbol) caseExpressionSymbol).getType()))){
+            System.out.println(" lets try this case :)))" + ctx.switch_body().switch_case(i).expression().getClass());
+            ExpressionSymbol caseExpressionSymbol = ExpressionSymbolFactory.expressionLiteralResult(ctx.switch_body().switch_case(i).expression(), symbolTable);
+            System.out.println("caseExpressionSymbol is " +/*((LiteralExpressionSymbol)*/ caseExpressionSymbol/*).getType()*/);
+            if (switchExpressionSymbol instanceof LiteralExpressionSymbol && caseExpressionSymbol instanceof LiteralExpressionSymbol) {
+                if (!(((LiteralExpressionSymbol) switchExpressionSymbol).getType().equals(((LiteralExpressionSymbol) caseExpressionSymbol).getType()))) {
                     Exception incompatibleSwitchTypeWithCase =
                             new IncompatibleExpressionTypeException(ctx.switch_body().switch_case(i).expression().start.getLine(),
                                     ctx.switch_body().switch_case(i).expression().start.getCharPositionInLine(),
-                                    ((LiteralExpressionSymbol) switchExpressionSymbol).getType(),((LiteralExpressionSymbol) caseExpressionSymbol).getType());
+                                    ((LiteralExpressionSymbol) switchExpressionSymbol).getType(), ((LiteralExpressionSymbol) caseExpressionSymbol).getType());
                     this.errors.add(incompatibleSwitchTypeWithCase.toString());
                 }
             }
@@ -288,8 +291,8 @@ public class BaseListener extends LanguageParserBaseListener {
 
     @Override
     public void enterController(LanguageParser.ControllerContext ctx) {
-       // symbolTable.addSymbolToCurrentScope(symbol);
-       //push new controller scope
+        // symbolTable.addSymbolToCurrentScope(symbol);
+        //push new controller scope
         ArrayList<Symbol> symbols = new ArrayList<>();
         AbstractMap.SimpleEntry<String, ArrayList<Symbol>> scope = new AbstractMap.SimpleEntry("controller", symbols);
         symbolTable.pushNewScope(scope);
@@ -304,7 +307,7 @@ public class BaseListener extends LanguageParserBaseListener {
     public void enterVariableNameExpression(LanguageParser.VariableNameExpressionContext ctx) {
         VariableSymbol symbol = new VariableSymbol(ctx.ID().getText(), true);
         int isInitialized = symbolTable.checkIfVariableInitializedBefore(symbol);
-        if (isInitialized==0) {
+        if (isInitialized == 0) {
             Exception uninitializedVariableException = new UsingUninitializedVariableException(ctx.ID().getSymbol().getLine(), ctx.ID().getSymbol().getCharPositionInLine());
             this.errors.add(uninitializedVariableException.toString());
         }

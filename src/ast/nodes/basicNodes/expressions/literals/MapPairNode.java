@@ -5,7 +5,7 @@ import ast.nodes.util.Formatter;
 
 public class MapPairNode extends Expression {
     String key;
-    Expression value;//TODO valuable
+    Expression value;
 
     public MapPairNode() {
     }
