@@ -9,48 +9,34 @@ program: {
 		page: {
 			extended page ID: p0,
 			ID: p1,
-			title: "title",
+			title: "title2",
 			page body element: [],
 		},
 		page: {
 			extended page ID: p1,
 			ID: p2,
 			title: "no head",
+			page body element: [],
+		},
+		page: {
+			extended page ID: p2,
+			ID: p3,
+			title: "no head",
+			page body element: [],
+		},
+		page: {
+			extended page ID: p3,
+			ID: p4,
+			title: "no head",
 			page body element: [
 				@Yield: {
-					name: "content",
+					name: "title",
 				},
-				variableDeclaration: {
-					id: go,
-					value(decimalValue): {
-						decimalValue: 5.0,
-					},
+				@Section: {
+					name: "title",
 				}
 			],
 		}
 	],
-	controllers: [
-		controller: {
-			controlled page ID: p1,
-			ID: c1,
-			controller body element: [
-				Role check: {
-					check role : TwoOperandCondition: {
-					operator: >,
-					leftOperand(decimalValue): {
-						decimalValue: 3.0,
-					},
-					rightOperand(decimalValue): {
-						decimalValue: 4.0,
-					},
-				},
-				}
-			],
-		},
-		controller: {
-			controlled page ID: p2,
-			ID: c2,
-			controller body element: [],
-		}
-	],
+	controllers: [],
 }

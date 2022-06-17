@@ -186,8 +186,30 @@ public class SymbolTable {
         return false;
     }
 
-//    public boolean checkIfYieldIsExist(SectionSymbol sectionSymbol) {
-//        final ArrayList<Symbol> programSymbols = symbolTable.get(0).getValue();
-//        if (sectionSymbol.getParentPageId() == null) return false;
-//    }
+    public boolean checkIfYieldIsExist(SectionSymbol sectionSymbol, boolean first) {
+        final ArrayList<Symbol> programSymbols = symbolTable.get(0).getValue();
+        final ArrayList<YieldSymbol> yieldSymbols = new ArrayList<>();
+        for (Symbol symbol : programSymbols) {
+            if (symbol instanceof YieldSymbol) {
+                yieldSymbols.add((YieldSymbol) symbol);
+            }
+        }
+        for (Symbol symbol : programSymbols) {
+            if (symbol instanceof PageSymbol) {
+                if (Objects.equals(((PageSymbol) symbol).getName(), sectionSymbol.getParentPageId())) {
+                    for (YieldSymbol yieldSymbol : yieldSymbols) {
+                        if (Objects.equals(yieldSymbol.getIncludingPageId(), ((PageSymbol) symbol).getName())) {
+                            if (yieldSymbol.getName().equals(sectionSymbol.getName())) {
+                                return true;
+                            }
+                        }
+                    }
+                    if (((PageSymbol) symbol).getExtendedPageId() != null) {
+                        return this.checkIfYieldIsExist(new SectionSymbol(sectionSymbol.getName(), ((PageSymbol) symbol).getName(), ((PageSymbol) symbol).getExtendedPageId()), false);
+                    }
+                }
+            }
+        }
+        return false;
+    }
 }

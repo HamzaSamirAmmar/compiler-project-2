@@ -108,11 +108,11 @@ public class BaseListener extends LanguageParserBaseListener {
         } else if (ctx.AT_SECTION() != null) {
             String parentPageId = ((LanguageParser.PageContext) ((ctx.parent).parent)).ID(1).getText();
             SectionSymbol symbol = new SectionSymbol(ctx.STRING().getText(), includingPageId, parentPageId);
-//            boolean isYieldExist = checkIfYieldIsExist(symbol);
-//            if (!isYieldExist) {
-//                Exception sectionException = new UsingUndefinedYieldException(ctx.STRING().getSymbol().getLine(), ctx.STRING().getSymbol().getCharPositionInLine());
-//                this.errors.add(sectionException.toString());
-//            }
+            boolean isYieldExist = symbolTable.checkIfYieldIsExist(symbol,true);
+            if (!isYieldExist) {
+                Exception sectionException = new UsingUndefinedYieldException(ctx.STRING().getSymbol().getLine(), ctx.STRING().getSymbol().getCharPositionInLine());
+                this.errors.add(sectionException.toString());
+            }
             //add symbol to current scope
             symbolTable.addSymbolToCurrentScope(symbol);
             //push new section scope

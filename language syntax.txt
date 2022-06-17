@@ -1,17 +1,15 @@
 page p0 head("title") {
 
 }
-page p1 head("title") extends p0 {
+page p1 head("title2") extends p0 {
 
 }
 page p2 head("no head") extends p1 {
-@yield("content")
-@go=5
-}
-controller c1 controles p1 {
-checkRole(3>4)
 
 }
-controller c2 controles p2 {
+page p3 head("no head") extends p2 {
 
+}
+page p4 head("no head") extends p3 {
+@section("title")
 }
