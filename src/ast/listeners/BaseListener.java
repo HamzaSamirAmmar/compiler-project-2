@@ -38,19 +38,27 @@ public class BaseListener extends LanguageParserBaseListener {
         AbstractMap.SimpleEntry<String, ArrayList<Symbol>> scope = new AbstractMap.SimpleEntry("program", symbols);
         //pushing the scope into the symbol table
         symbolTable.symbolTable.push(scope);
+        //adding first page
+        if (ctx.start_page().page().ID(1) == null) {
+            symbolTable.addSymbolToCurrentScope(new PageSymbol(ctx.start_page().page().ID(0).getText()));
+        } else {
+            Exception pageException = new ExtendingUndefinedPageException(ctx.start_page().page().ID(1).getSymbol().getLine(), ctx.start_page().page().ID(1).getSymbol().getCharPositionInLine());
+            errors.add(pageException.toString());
+        }
+
         //looping through pages and adding page symbols
-        symbolTable.addSymbolToCurrentScope(new PageSymbol(ctx.start_page().page().ID(0).getText()));
         PageSymbol symbol = null;
         for (int i = 0; i < ctx.page().size(); i++) {
+
             if (ctx.page().get(i).ID(1) == null) {
                 symbol = new PageSymbol(ctx.page().get(i).ID(0).getText());
             } else {
-                symbol = new PageSymbol(ctx.page().get(i).ID(0).getText(), ctx.page().get(i).ID(1).getText());
-                boolean isExtendedPageIdExist = symbolTable.checkIfPageIDIsExist(symbol.getExtendedPageId());
+                boolean isExtendedPageIdExist = symbolTable.checkIfPageIDIsExist(ctx.page().get(i).ID(1).getText());
                 if (!isExtendedPageIdExist) {
                     Exception pageException = new ExtendingUndefinedPageException(ctx.page().get(i).ID(1).getSymbol().getLine(), ctx.page().get(i).ID(1).getSymbol().getCharPositionInLine());
                     errors.add(pageException.toString());
                 }
+                symbol = new PageSymbol(ctx.page().get(i).ID(0).getText(), ctx.page().get(i).ID(1).getText());
             }
             if (symbolTable.checkExistPageIdBefore(symbol)) {
                 Exception duplicatedPageIdException = new TakenPageIdException(ctx.page().get(i).ID(i).getSymbol().getLine(), ctx.page().get(i).ID(i).getSymbol().getCharPositionInLine());
@@ -108,7 +116,7 @@ public class BaseListener extends LanguageParserBaseListener {
         } else if (ctx.AT_SECTION() != null) {
             String parentPageId = ((LanguageParser.PageContext) ((ctx.parent).parent)).ID(1).getText();
             SectionSymbol symbol = new SectionSymbol(ctx.STRING().getText(), includingPageId, parentPageId);
-            boolean isYieldExist = symbolTable.checkIfYieldIsExist(symbol,true);
+            boolean isYieldExist = symbolTable.checkIfYieldIsExist(symbol, true);
             if (!isYieldExist) {
                 Exception sectionException = new UsingUndefinedYieldException(ctx.STRING().getSymbol().getLine(), ctx.STRING().getSymbol().getCharPositionInLine());
                 this.errors.add(sectionException.toString());

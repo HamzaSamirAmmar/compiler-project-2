@@ -179,8 +179,10 @@ public class SymbolTable {
 
     public Boolean checkExistPageIdToRedirect(String pageID) {
         for (Symbol symbol : this.getFirstScopeSymbols()) {
-            if (((PageSymbol) symbol).getName().equals(pageID)) {
-                return true;
+            if (symbol instanceof PageSymbol) {
+                if (((PageSymbol) symbol).getName().equals(pageID)) {
+                    return true;
+                }
             }
         }
         return false;

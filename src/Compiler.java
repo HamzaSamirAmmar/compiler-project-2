@@ -1,5 +1,7 @@
 import ast.listeners.BaseListener;
 import ast.nodes.AbstractNode;
+import ast.nodes.controllerNodes.Controller;
+import ast.nodes.pageNodes.Page;
 import ast.visitors.BaseVisitor;
 import generated.LanguageLexer;
 import generated.LanguageParser;
@@ -18,11 +20,13 @@ public class Compiler {
 	static String ASTPath = "AST.txt";
 	static String ErrorFilePath="errors.txt";
 
-	
+
 	public static void main(String[] argv) {
 		CharStream cs;
 		SymbolTable symbolTable =new SymbolTable();
 		final ArrayList<String> errorMessages = new ArrayList<>();
+		ArrayList<Page> pageNodes=new ArrayList<>();
+		ArrayList<Controller> controllerNodes=new ArrayList<>();
 		try {
 			cs = CharStreams.fromFileName(filePath);
 			LanguageLexer lexer = new LanguageLexer(cs);
@@ -37,8 +41,10 @@ public class Compiler {
 			});
 			//base visitor
 			ParseTree parseTree = parser.program();
-			BaseVisitor visitor = new BaseVisitor(symbolTable,errorMessages);
+			BaseVisitor visitor = new BaseVisitor(symbolTable,errorMessages,pageNodes,controllerNodes);
 			AbstractNode document = (AbstractNode) visitor.visit(parseTree);
+			System.out.println("the length of pages arraylist is "+pageNodes.size());
+			System.out.println("the length of controllers arraylist is "+controllerNodes.size());
 			//base listener
 			ParseTreeWalker walker = new ParseTreeWalker();
 			BaseListener listener = new BaseListener(symbolTable,errorMessages);
@@ -52,5 +58,5 @@ public class Compiler {
 			e.printStackTrace();
 		}
 	}
-	
+
 }

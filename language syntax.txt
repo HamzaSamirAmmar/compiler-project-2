@@ -13,3 +13,12 @@ page p3 head("no head") extends p2 {
 page p4 head("no head") extends p3 {
 @section("title")
 }
+
+controller c1 controles p0{
+}
+
+controller c2 controles p0{
+}
+
+controller c3 controles p0{
+}

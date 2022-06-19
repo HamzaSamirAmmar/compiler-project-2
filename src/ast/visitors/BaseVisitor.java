@@ -42,12 +42,19 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
     SymbolTable symbolTable;
     ArrayList<String> errors;
 
+    ArrayList<Page> pageNodes = new ArrayList<>();
+
+    ArrayList<Controller> controllerNodes = new ArrayList<>();
+
     public BaseVisitor() {
     }
 
-    public BaseVisitor(SymbolTable symbolTable, ArrayList<String> errors) {
+    public BaseVisitor(SymbolTable symbolTable, ArrayList<String> errors, ArrayList<Page> pageNodes, ArrayList<Controller> controllerNodes) {
         this.symbolTable = symbolTable;
         this.errors = errors;
+        this.pageNodes = pageNodes;
+        this.controllerNodes = controllerNodes;
+
     }
 
     @Override
@@ -61,6 +68,10 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
         for (int i = 0; i < ctx.controller().size(); i++) {
             controllers.add((Controller) visit(ctx.controller(i)));
         }
+        pageNodes.addAll(pages);
+        controllerNodes.addAll(controllers);
+        System.out.println("length of controller list is " + controllerNodes.size());
+        System.out.println("length of page list is " + pageNodes.size());
         return new Program(pages, controllers);
     }
 
