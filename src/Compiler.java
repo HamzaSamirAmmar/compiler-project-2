@@ -43,8 +43,6 @@ public class Compiler {
 			ParseTree parseTree = parser.program();
 			BaseVisitor visitor = new BaseVisitor(symbolTable,errorMessages,pageNodes,controllerNodes);
 			AbstractNode document = (AbstractNode) visitor.visit(parseTree);
-			System.out.println("the length of pages arraylist is "+pageNodes.size());
-			System.out.println("the length of controllers arraylist is "+controllerNodes.size());
 			//base listener
 			ParseTreeWalker walker = new ParseTreeWalker();
 			BaseListener listener = new BaseListener(symbolTable,errorMessages);
@@ -54,6 +52,17 @@ public class Compiler {
 			resultFile.close();
 			//printing errors
 			System.err.println("errorMessages: " + errorMessages);
+			//code generation if there are errors
+			if(errorMessages.isEmpty()){
+				for (Page page:pageNodes) {
+					//make new html file
+					//generate code
+				}
+				for (Controller controller:controllerNodes) {
+					//make new php file
+					//generate code
+				}
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
