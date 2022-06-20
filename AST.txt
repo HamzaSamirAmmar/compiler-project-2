@@ -4,7 +4,26 @@ program: {
 			extended page ID: null,
 			ID: p0,
 			title: "title",
-			page body element: [],
+			page body element: [
+				variableDeclaration: {
+					id: x,
+					value(decimalValue): {
+						decimalValue: 3.0,
+					},
+				},
+				variableDeclaration: {
+					id: v,
+					value(variable/functionName): {
+						name: x,
+					},
+				},
+				variableDeclaration: {
+					id: g,
+					value(string): {
+						stringValue: this is a string,
+					},
+				}
+			],
 		},
 		page: {
 			extended page ID: p0,
@@ -28,11 +47,7 @@ program: {
 			extended page ID: p3,
 			ID: p4,
 			title: "no head",
-			page body element: [
-				@Section: {
-					name: "title",
-				}
-			],
+			page body element: [],
 		}
 	],
 	controllers: [

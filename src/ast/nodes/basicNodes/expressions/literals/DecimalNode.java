@@ -29,4 +29,8 @@ public class DecimalNode extends Expression implements Valuable, Numeric {
     protected Formatter nodeValue(Formatter formatter) {
         return formatter.addProperty("decimalValue",decimalValue.toString()) ;
     }
+    @Override
+    public String toCode(){
+        return String.valueOf(decimalValue);
+    }
 }

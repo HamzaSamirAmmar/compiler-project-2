@@ -25,4 +25,18 @@ public class VariableDeclaration extends BasicElement {
     protected Formatter nodeValue(Formatter formatter) {
         return formatter.addProperty("id",id).object(value.toString("value"));
     }
+
+    @Override
+    public String toHtmlCode() {
+        String code="<?php $_SESSION['"+id+"']="+value.toHtmlCode()
+                +" ?>\n";
+        return code;
+    }
+
+    @Override
+    public String toPhpCode() {
+        String code="$_SESSION['"+id+"']="+value.toPhpCode();
+        return code;
+    }
+
 }

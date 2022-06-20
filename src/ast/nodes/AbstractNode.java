@@ -36,8 +36,8 @@ public abstract class AbstractNode {
         formatter.prefix(prefix);
         return format(formatter);
     }
-    public abstract String toHtmlCode();
-    public abstract String toPhpCode();
+    public  String toHtmlCode(){return "";}
+    public  String toPhpCode(){return "";}
 
     @Override
     public String toString() {

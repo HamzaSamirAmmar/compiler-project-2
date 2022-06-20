@@ -28,4 +28,9 @@ public class VariableNode extends Expression implements Valuable,Numeric, Iterab
     protected Formatter nodeValue(Formatter formatter) {
         return formatter.addProperty("name",variableName);
     }
+    @Override
+    public String toCode(){
+        return  "$_SESSION['"+variableName+"']";
+
+    }
 }

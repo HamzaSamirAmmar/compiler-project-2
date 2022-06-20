@@ -1,5 +1,7 @@
 page p0 head("title") {
-
+@x=3
+@v=@x
+@g="this is a string"
 }
 page p1 head("title2") extends p0 {
 
@@ -11,7 +13,7 @@ page p3 head("no head") extends p2 {
 
 }
 page p4 head("no head") extends p3 {
-@section("title")
+
 }
 
 controller c1 controles p0{

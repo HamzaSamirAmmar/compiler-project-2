@@ -10,6 +10,7 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import symbolTable.SymbolTable;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -52,17 +53,32 @@ public class Compiler {
 			resultFile.close();
 			//printing errors
 			System.err.println("errorMessages: " + errorMessages);
-			//code generation if there are errors
+			//code generation if there are no errors
 			if(errorMessages.isEmpty()){
 				for (Page page:pageNodes) {
 					//make new html file
+					String fileName="generatedCode/"+page.getId()+".html";
+					File file = new File(fileName); //initialize File object and passing path as argument
+					file.createNewFile();
+					FileWriter htmlFile = new FileWriter(fileName);
 					//generate code
+					htmlFile.write(page.toHtmlCode());
+					htmlFile.close();
 				}
 				for (Controller controller:controllerNodes) {
 					//make new php file
+					String fileName="generatedCode/"+controller.getId()+".php";
+					File file = new File(fileName); //initialize File object and passing path as argument
+					file.createNewFile();
+					FileWriter phpFile = new FileWriter(fileName);
 					//generate code
+					phpFile.write(controller.toPhpCode());
+					phpFile.close();
 				}
+				System.out.println("code files has been generated :)");
 			}
+
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
