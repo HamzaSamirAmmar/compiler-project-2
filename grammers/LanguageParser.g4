@@ -197,6 +197,15 @@ controller_body_element
     | CHECK_ROLE BRACKET_OPEN expression BRACKET_CLOSE
     | REDIRECT ID
     ;
+array
+    : SQUARE_OPEN (expression COMMA)* expression COMMA? SQUARE_CLOSE
+    ;
+map_value
+    : ID COLON expression
+    ;
+map
+    : CURLEY_BRACKET_OPEN map_value(COMMA map_value)* COMMA? CURLEY_BRACKET_CLOSE
+    ;
 expression
    : expression OPERATOR_TWO_OPERAND expression                #TwoOperandsConditionExpression
    | expression CONDITIONAL_CONCAT_OPERATOR expression         #ConcatConditionExpression
@@ -207,6 +216,8 @@ expression
    | CHAR                                                      #LiteralCharExpression
    | STRING                                                    #LiteralStringExpression
    | BOOLEAN                                                   #LiteralBooleanExpression
+   | array                                                     #LiteralArrayExpression
+   | map                                                       #LiteralObjectExpression
    | expression (SQUARE_OPEN expression SQUARE_CLOSE)          #IndexedVariableExpression
    | ONE_LOGICAL_OPERAND expression                            #OneOperandConditionExpression
    | ONE_VALUABLE_OPERAND expression                           #OneOperandValuableExpression

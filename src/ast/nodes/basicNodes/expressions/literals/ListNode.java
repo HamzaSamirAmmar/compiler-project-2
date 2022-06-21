@@ -31,4 +31,17 @@ public class ListNode extends Expression implements Iterable {
             formatter.array("list",new ArrayList<>(elements));
         return formatter ;
     }
+
+    @Override
+    public String toCode() {
+        StringBuilder code= new StringBuilder("[");
+        for (int i = 0; i < elements.size(); i++) {
+            Expression element = elements.get(i);
+            code.append(element.toCode());
+            if(i!= elements.size()-1)
+                code.append(" , ");
+        }
+        code.append(" ]");
+        return code.toString();
+    }
 }

@@ -37,4 +37,28 @@ public class AtAuth extends Element implements PageCallable {
 
     }
 
+    @Override
+    public String toHtmlCode() {
+        StringBuilder innerBodyElementCode= new StringBuilder("");
+        for (Element element:bodyElements) {
+            innerBodyElementCode.append(element.toHtmlCode());
+        }
+        StringBuilder innerElseBodyElementCode= new StringBuilder("");
+        for (Element element:elseBodyElements) {
+            innerElseBodyElementCode.append(element.toHtmlCode());
+        }
+        StringBuilder code=new StringBuilder(
+                "<?php\n" +
+                "include 'util/checkAuth.php';\n" +
+                "if(checkAuth()){?>\n" );
+        code.append(innerBodyElementCode);
+
+        if(!elseBodyElements.isEmpty()){
+            code.append("<?php  } else { ?>\n");
+            code.append(innerElseBodyElementCode);
+        }
+        code.append("<?php } ?>\n");
+
+        return code.toString();
+    }
 }

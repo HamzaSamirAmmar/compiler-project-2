@@ -47,5 +47,36 @@ public class AtRole extends Element implements PageCallable {
             return formatter;
     }
 
+    @Override
+    public String toHtmlCode() {
+        StringBuilder rolesArray=new StringBuilder("[ ");
+        for (int i = 0; i < roles.size() ; i++) {
+            String role=roles.get(i);
+            rolesArray.append(role);
+            if(i!= roles.size()-1)
+             rolesArray.append(" , ");
+        }
+        rolesArray.append(" ] ");
+        StringBuilder innerBodyElementCode= new StringBuilder("");
+        for (Element element:bodyElements) {
+            innerBodyElementCode.append(element.toHtmlCode());
+        }
+        StringBuilder innerElseBodyElementCode= new StringBuilder("");
+        for (Element element:elseBodyElements) {
+            innerElseBodyElementCode.append(element.toHtmlCode());
+        }
+        StringBuilder code=new StringBuilder(
+                "<?php\n" +
+                        "include 'util/checkInRoles.php';\n" +
+                        "if(checkInRoles( "+rolesArray+" )){?>\n" );
+        code.append(innerBodyElementCode);
 
+        if(!elseBodyElements.isEmpty()){
+            code.append("<?php  } else { ?>\n");
+            code.append(innerElseBodyElementCode);
+        }
+        code.append("<?php } ?>\n");
+
+        return code.toString();
+    }
 }

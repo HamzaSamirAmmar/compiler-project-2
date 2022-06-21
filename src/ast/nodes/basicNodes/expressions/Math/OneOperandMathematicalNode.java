@@ -8,6 +8,7 @@ public class OneOperandMathematicalNode extends Expression implements Valuable, 
     boolean operandIsLeft;
     String operator;
     Expression operand;//should be valuable
+    boolean isSolStatement=true;
 
     public OneOperandMathematicalNode(boolean operandIsLeft, String operator, Expression operand)
     {
@@ -18,7 +19,10 @@ public class OneOperandMathematicalNode extends Expression implements Valuable, 
         } else {
             throw new RuntimeException("Invalid one operand mathematical");
         }
+    }
 
+    public void setSolStatement(boolean solStatement) {
+        isSolStatement = solStatement;
     }
 
     public boolean isOperandIsLeft() {
@@ -45,6 +49,7 @@ public class OneOperandMathematicalNode extends Expression implements Valuable, 
         this.operand = operand;
     }
 
+
     @Override
     protected String nodeName() {
         return "OneOperandMathematicalNode";
@@ -56,11 +61,53 @@ public class OneOperandMathematicalNode extends Expression implements Valuable, 
                 .addProperty("operator", operator);
     }
     //TODO we can't use this as a single statement in pages
+    //TODO don't call toCode
+//    @Override
+//    public String toCode(){
+//       if(operandIsLeft) {
+//           if(isSolStatement)
+//               return operator + operand.toCode()+";";
+//           else
+//                return operator + operand.toCode();
+//       }
+//       else {
+//           if(isSolStatement)
+//                 return operand.toCode() + operator + ";";
+//           else
+//               return operand.toCode() + operator ;
+//       }
+//    }
     @Override
-    public String toCode(){
-       if(operandIsLeft)
-           return operator+operand.toCode();
-       else
-           return operand.toCode()+operator;
+    public String toHtmlCode() {
+        System.out.println("*********************************"+this.operandIsLeft);
+        System.out.println("i am in ########################" +this);
+        if(operandIsLeft) {
+            if(isSolStatement)
+                return "<?php "+operator + operand.toCode()+"; ?>\n";
+            else
+                return operator + operand.toCode();
+        }
+        else {
+            if(isSolStatement)
+                return  "<?php "+operand.toCode() + operator + "; ?>\n";
+            else
+                return operand.toCode() + operator ;
+        }
+    }
+
+    @Override
+    public String toPhpCode() {
+        if(operandIsLeft) {
+            if(isSolStatement)
+                return operator + operand.toCode()+";\n";
+            else
+                return operator + operand.toCode();
+        }
+        else {
+            if(isSolStatement)
+                return operand.toCode() + operator + ";\n";
+            else
+                return operand.toCode() + operator ;
+        }
     }
 }

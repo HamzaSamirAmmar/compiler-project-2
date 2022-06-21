@@ -4,10 +4,17 @@ page p0 head("title") {
 @g="this is a string"
 }
 page p1 head("title2") extends p0 {
-
+@x=[1,2,3,4]
+@auth
+@x++
+@else
+--@x
+@endauth
 }
 page p2 head("no head") extends p1 {
-
+@role(['admin','user'])
+@x=[1,2,3,4,5]
+@endrole
 }
 page p3 head("no head") extends p2 {
 

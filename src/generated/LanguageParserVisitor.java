@@ -1,4 +1,4 @@
-// Generated from F:/Programming/compiler/compiler_project_12_6/compiler-project-2/grammers\LanguageParser.g4 by ANTLR 4.9.1
+// Generated from C:/Users/ASUS/Desktop/cloned compiler/compiler-project-2/grammers\LanguageParser.g4 by ANTLR 4.9.2
 package generated;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -341,6 +341,24 @@ public interface LanguageParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitController_body_element(LanguageParser.Controller_body_elementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link LanguageParser#array}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArray(LanguageParser.ArrayContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LanguageParser#map_value}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMap_value(LanguageParser.Map_valueContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link LanguageParser#map}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMap(LanguageParser.MapContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code ParenthesizedExpression}
 	 * labeled alternative in {@link LanguageParser#expression}.
 	 * @param ctx the parse tree
@@ -348,12 +366,12 @@ public interface LanguageParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitParenthesizedExpression(LanguageParser.ParenthesizedExpressionContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code LiteralStringExpression}
+	 * Visit a parse tree produced by the {@code LiteralArrayExpression}
 	 * labeled alternative in {@link LanguageParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitLiteralStringExpression(LanguageParser.LiteralStringExpressionContext ctx);
+	T visitLiteralArrayExpression(LanguageParser.LiteralArrayExpressionContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code TwoOperandsConditionExpression}
 	 * labeled alternative in {@link LanguageParser#expression}.
@@ -361,13 +379,6 @@ public interface LanguageParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitTwoOperandsConditionExpression(LanguageParser.TwoOperandsConditionExpressionContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code ConcatConditionExpression}
-	 * labeled alternative in {@link LanguageParser#expression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitConcatConditionExpression(LanguageParser.ConcatConditionExpressionContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code MathematicalExpression}
 	 * labeled alternative in {@link LanguageParser#expression}.
@@ -383,13 +394,6 @@ public interface LanguageParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIndexedVariableExpression(LanguageParser.IndexedVariableExpressionContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code OneOperandValuableExpression}
-	 * labeled alternative in {@link LanguageParser#expression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitOneOperandValuableExpression(LanguageParser.OneOperandValuableExpressionContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code LiteralBooleanExpression}
 	 * labeled alternative in {@link LanguageParser#expression}.
 	 * @param ctx the parse tree
@@ -404,19 +408,47 @@ public interface LanguageParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitOneOperandConditionExpression(LanguageParser.OneOperandConditionExpressionContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code VariableNameExpression}
-	 * labeled alternative in {@link LanguageParser#expression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitVariableNameExpression(LanguageParser.VariableNameExpressionContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code LiteralNumericExpression}
 	 * labeled alternative in {@link LanguageParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitLiteralNumericExpression(LanguageParser.LiteralNumericExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code LiteralObjectExpression}
+	 * labeled alternative in {@link LanguageParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLiteralObjectExpression(LanguageParser.LiteralObjectExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code LiteralStringExpression}
+	 * labeled alternative in {@link LanguageParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLiteralStringExpression(LanguageParser.LiteralStringExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ConcatConditionExpression}
+	 * labeled alternative in {@link LanguageParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitConcatConditionExpression(LanguageParser.ConcatConditionExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code OneOperandValuableExpression}
+	 * labeled alternative in {@link LanguageParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOneOperandValuableExpression(LanguageParser.OneOperandValuableExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code VariableNameExpression}
+	 * labeled alternative in {@link LanguageParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVariableNameExpression(LanguageParser.VariableNameExpressionContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code LiteralCharExpression}
 	 * labeled alternative in {@link LanguageParser#expression}.

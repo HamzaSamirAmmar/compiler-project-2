@@ -29,13 +29,74 @@ program: {
 			extended page ID: p0,
 			ID: p1,
 			title: "title2",
-			page body element: [],
+			page body element: [
+				variableDeclaration: {
+					id: x,
+					value(list): {
+						list: [
+							decimalValue: {
+								decimalValue: 1.0,
+							},
+							decimalValue: {
+								decimalValue: 2.0,
+							},
+							decimalValue: {
+								decimalValue: 3.0,
+							},
+							decimalValue: {
+								decimalValue: 4.0,
+							}
+						],
+					},
+				},
+				@Auth: {
+					body(OneOperandMathematicalNode): {
+						operand: variable/functionName: {
+						name: x,
+					},
+						operator: ++,
+					},
+					elseBody(OneOperandMathematicalNode): {
+						operand: variable/functionName: {
+						name: x,
+					},
+						operator: --,
+					},
+				}
+			],
 		},
 		page: {
 			extended page ID: p1,
 			ID: p2,
 			title: "no head",
-			page body element: [],
+			page body element: [
+				@Role: {
+					'admin',
+					'user',
+					variableDeclaration: {
+						id: x,
+						value(list): {
+							list: [
+								decimalValue: {
+									decimalValue: 1.0,
+								},
+								decimalValue: {
+									decimalValue: 2.0,
+								},
+								decimalValue: {
+									decimalValue: 3.0,
+								},
+								decimalValue: {
+									decimalValue: 4.0,
+								},
+								decimalValue: {
+									decimalValue: 5.0,
+								}
+							],
+						},
+					},
+				}
+			],
 		},
 		page: {
 			extended page ID: p2,

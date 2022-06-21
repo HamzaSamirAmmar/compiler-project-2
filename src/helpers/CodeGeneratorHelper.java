@@ -8,6 +8,7 @@ public class CodeGeneratorHelper {
     public static void generateControllersMutualFiles(){
        generateCheckValidFile();
        generateCheckRoleFile();
+       generateCheckInRolesFile();
        generateCheckAuthFile();
        generateRedirectFile();
        //generateConfigFiles();
@@ -43,16 +44,48 @@ public class CodeGeneratorHelper {
         try {
             file.createNewFile();
             fileWriter = new FileWriter(fileName);
-            fileWriter.write("<?php\n" +
+            fileWriter.write(
+                    "<?php\n" +
                     "include 'rolesConfig.php';\n" +
                     "\n" +
                     "function checkRole($role) {\n" +
                     "    $usersRoles=$GLOBALS['usersRoles'];\n" +
                     "    $authorized=false;\n" +
-                    "    if(in_array($role,$usersRoles[$_SESSION['user']]))\n" +
-                    "    {\n" +
-                    "        $authorized=true;\n" +
+                    "    if(isset($_SESSION['user']){\n" +
+                    "     if(in_array($role,$usersRoles[$_SESSION['user']]))\n" +
+                    "        {\n" +
+                    "            $authorized=true;\n" +
+                    "        }\n" +
                     "    }\n" +
+                    "    return $authorized;\n" +
+                    "}");
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    protected static void generateCheckInRolesFile(){
+        String fileName="generatedCode/util/checkInRoles.php";
+        File file = new File(fileName);
+        FileWriter fileWriter=null;
+        try {
+            file.createNewFile();
+            fileWriter = new FileWriter(fileName);
+            fileWriter.write("<?php\n" +
+                    "include 'rolesConfig.php';\n" +
+                    "\n" +
+                    "function checkInRoles($roles) {\n" +
+                    "    $usersRoles=$GLOBALS['usersRoles'];\n" +
+                    "    $authorized=false;\n" +
+                    "    foreach($roles as $role){\n" +
+                    "        if(isset($_SESSION['user']))\n" +
+                    "        { \n" +
+                    "            if(in_array($role,$usersRoles[$_SESSION['user']]))\n" +
+                    "            {\n" +
+                    "                $authorized=true;\n" +
+                    "            }\n" +
+                    "        }\n" +
+                    "    }   \n" +
                     "    return $authorized;\n" +
                     "}");
             fileWriter.close();
