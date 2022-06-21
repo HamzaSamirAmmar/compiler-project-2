@@ -55,4 +55,12 @@ public class OneOperandMathematicalNode extends Expression implements Valuable, 
         return formatter.addProperty("operand", operand.toString())
                 .addProperty("operator", operator);
     }
+    //TODO we can't use this as a single statement in pages
+    @Override
+    public String toCode(){
+       if(operandIsLeft)
+           return operator+operand.toCode();
+       else
+           return operand.toCode()+operator;
+    }
 }

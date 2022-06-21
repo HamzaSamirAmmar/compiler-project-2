@@ -58,4 +58,9 @@ public class MultiplicativeNode extends Expression implements Valuable,Numeric {
                 .addProperty("rightOperand", rightOperand.toString())
                 ;
     }
+    @Override
+    public String toCode(){
+        return rightOperand.toCode()+operator+leftOperand.toCode();
+
+    }
 }

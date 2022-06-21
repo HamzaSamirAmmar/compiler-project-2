@@ -43,4 +43,12 @@ public class MapPairNode extends Expression {
         formatter.addProperty("value",value.toString());
         return formatter;
     }
+    //TODO make sure when we use this?
+    @Override
+    public String toCode(){
+        if(! (value instanceof StringNode))
+            return key.substring(1,key.length()-1)+"\""+value.toCode()+"\"";
+        else
+            return key.substring(1,key.length()-1)+value.toCode();
+    }
 }

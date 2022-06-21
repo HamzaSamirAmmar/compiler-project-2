@@ -6,6 +6,7 @@ import ast.nodes.util.Formatter;
 
 public class VariableDeclaration extends BasicElement {
     String id;
+    //TODO rn it doesn't accept checkRole or checkValid or checkAuth
     Expression value;//TODO should implement valuable
 
     public void setId(String id) {

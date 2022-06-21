@@ -5,6 +5,7 @@ import ast.nodes.pageNodes.Page;
 import ast.visitors.BaseVisitor;
 import generated.LanguageLexer;
 import generated.LanguageParser;
+import helpers.CodeGeneratorHelper;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
@@ -65,6 +66,8 @@ public class Compiler {
 					htmlFile.write(page.toHtmlCode());
 					htmlFile.close();
 				}
+				//generate php helper files and methods
+				CodeGeneratorHelper.generateControllersMutualFiles();
 				for (Controller controller:controllerNodes) {
 					//make new php file
 					String fileName="generatedCode/"+controller.getId()+".php";

@@ -36,4 +36,9 @@ public class OneOperandCondition extends Condition {
         formatter.object(operand.toString("operand"));
         return formatter;
     }
+
+    @Override
+    public String toCode() {
+        return "!"+operand.toCode();
+    }
 }

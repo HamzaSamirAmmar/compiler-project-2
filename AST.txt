@@ -54,7 +54,15 @@ program: {
 		controller: {
 			controlled page ID: p0,
 			ID: c1,
-			controller body element: [],
+			controller body element: [
+				Auth check: {},
+				@RawPhp: {
+					rawPHP: 
+				    $s=5;
+				    echo "i am here";
+				    ,
+				}
+			],
 		},
 		controller: {
 			controlled page ID: p0,

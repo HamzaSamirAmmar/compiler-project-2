@@ -18,4 +18,8 @@ public class AuthCheck extends Element implements ControllerCallable, Logical, V
     protected Formatter nodeValue(Formatter formatter) {
         return formatter.name(nodeName());
     }
+    @Override
+    public String toPhpCode() {
+        return "checkAuth()\n";
+    }
 }

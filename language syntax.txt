@@ -17,6 +17,11 @@ page p4 head("no head") extends p3 {
 }
 
 controller c1 controles p0{
+    checkAuthenticated()
+    @rawphp
+    $s=5;
+    echo "i am here";
+    @endrawphp
 }
 
 controller c2 controles p0{

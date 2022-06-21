@@ -36,4 +36,8 @@ public class ValidCheck extends Element implements ControllerCallable, Logical, 
          formatter.addProperty("password",password.toString());
          return formatter;
     }
+    @Override
+    public String toPhpCode() {
+        return "checkValid("+uniqueIdentifier.toCode()+" , "+password.toCode()+" )\n";
+    }
 }

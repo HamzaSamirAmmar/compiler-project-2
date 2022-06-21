@@ -28,4 +28,9 @@ public class RoleCheck extends Element implements ControllerCallable, Logical, V
     protected Formatter nodeValue(Formatter formatter) {
         return formatter.addProperty("check role ",role.toString());
     }
+
+    @Override
+    public String toPhpCode() {
+        return "checkRole("+role.toCode()+")\n";
+    }
 }
