@@ -29,4 +29,8 @@ public class BooleanNode extends Expression implements Logical, Valuable {
     protected Formatter nodeValue(Formatter formatter) {
         return formatter.addProperty("boolValue", boolValue.toString()) ;
     }
+    @Override
+    public String toCode(){
+        return String.valueOf(boolValue);
+    }
 }

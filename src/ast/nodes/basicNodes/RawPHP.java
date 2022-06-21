@@ -23,4 +23,13 @@ public class RawPHP extends BasicElement {
         return formatter.addProperty("rawPHP",rawPhp);
     }
 
+    @Override
+    public String toHtmlCode() {
+        return "<?php "+rawPhp +" ?>\n";
+    }
+
+    @Override
+    public String toPhpCode() {
+        return rawPhp;
+    }
 }

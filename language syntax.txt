@@ -1,71 +1,26 @@
-program : start-page pages controllers
-
-pages: page*
-
-page: 'page' id  header? ('extends' ids)? 
-ids : id (',' id) *
-header : 
-data : '#' id ('=' (anything))?
-
-page p1  head(title) {
-
-    @data-name=value
-    
-    link('href' ,[other=> attributes]){ link-body}
-    //out
-    text (text-string ,fontSize,color, [other attributes])
-    image(imgReference ,width,height, [other attributes])
-    list(isOrderd,[other attributes]){
-        text() or image or link
-        Text()
-        Text()
-    }
-    }
-    table(){
-                        header : {row} ,
-                         body :{row : row :}
-                         }
-    table(){header:{'name;, 'age'.'' } 
-                         body {
-                             'rana' , '777', '' :
-                                                     }}
-    button(text , action on clicked,[other attributes] )//TODO what we meant by action on clicked? because that would be JS and we don't want to process JS :)
-    //in
-    form (method, action ,[other attributes]){ form body}
-    textField(name,label,value,[other])
-    date(name,label,value,[other])
-    checkbox(name,value,label[other attributes])
-    selection (isMultiple,name, [other]){
-        option1_label , option1_value  : option2_label , option2_value
-    }
-    radio (name,[other ]){
-        option1_label , option1_value  : option2_label , option2_value
-    }
-    // logic
-    if (condition){ if-body } (else { else-body })?
-    for (index ; condition ; step+/-///*  ){ body}
-    //example
-    for (x ; x<3;x++){
-        // body contains in out or other logic
-        text(x,2,red)
-    }
-    switch (condition){case name : case-body ; (default:default-body)?}
-    //authentication
-    @auth anything: logic/items (@else anything)? @endauth
-    @guest anything: logic/items (@else anything)? @endguest
-    //authorization
-    @role([role name])   anything: logic/items (@else anything)? @endrole
-    @inverseRole([role name])   anything: logic/items (@else @endinverserole
-    @rawphp php code @endrawphp 
-    //layout inheretance
-    @section(name)//child @endsection
-    @yield(name) //parent 
+page p0 head("title") {
+@x=3
+@v=@x
+@g="this is a string"
 }
-contoller id controles page {
-    //data decleration , logic
-    //additional
-    isauthenticated()
-    valid(email,password)
-    hasRole()
-    redirect (newPageID)
+page p1 head("title2") extends p0 {
+
+}
+page p2 head("no head") extends p1 {
+
+}
+page p3 head("no head") extends p2 {
+
+}
+page p4 head("no head") extends p3 {
+
+}
+
+controller c1 controles p0{
+}
+
+controller c2 controles p0{
+}
+
+controller c3 controles p0{
 }

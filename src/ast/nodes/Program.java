@@ -24,6 +24,16 @@ public class Program extends AbstractNode{
     }
 
     @Override
+    public String toHtmlCode() {
+        return null;
+    }
+
+    @Override
+    public String toPhpCode() {
+        return null;
+    }
+
+    @Override
     protected String nodeName() {
         return "program";
     }

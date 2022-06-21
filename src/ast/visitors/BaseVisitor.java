@@ -4,12 +4,10 @@ import ast.nodes.AbstractNode;
 import ast.nodes.Element;
 import ast.nodes.Program;
 import ast.nodes.basicNodes.*;
-import ast.nodes.basicNodes.expressions.Expression;
-import ast.nodes.basicNodes.expressions.IndexedExpressionNode;
-import ast.nodes.basicNodes.expressions.LogicalNode;
+import ast.nodes.basicNodes.expressions.*;
 import ast.nodes.basicNodes.expressions.Math.AdditiveNode;
+import ast.nodes.basicNodes.expressions.Math.MultiplicativeNode;
 import ast.nodes.basicNodes.expressions.Math.OneOperandMathematicalNode;
-import ast.nodes.basicNodes.expressions.Numeric;
 import ast.nodes.basicNodes.expressions.conditions.ConditionConcatenation;
 import ast.nodes.basicNodes.expressions.conditions.OneOperandCondition;
 import ast.nodes.basicNodes.expressions.conditions.TwoOperandCondition;
@@ -30,19 +28,33 @@ import ast.nodes.pageNodes.layoutNodes.Yield;
 import ast.nodes.pageNodes.outNodes.*;
 import generated.LanguageParser;
 import generated.LanguageParserBaseVisitor;
+import semanticExceptions.IncompatibleExpressionTypeException;
+import symbolTable.SymbolTable;
 
+import java.lang.Iterable;
 import java.util.ArrayList;
 
 /**
  * in base visitor we travers the parse tree and we detect semantic errors that relate to type checking
- * */
+ */
 
 public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
+    SymbolTable symbolTable;
     ArrayList<String> errors;
+
+    ArrayList<Page> pageNodes = new ArrayList<>();
+
+    ArrayList<Controller> controllerNodes = new ArrayList<>();
+
     public BaseVisitor() {
     }
-    public BaseVisitor(ArrayList<String> errors) {
+
+    public BaseVisitor(SymbolTable symbolTable, ArrayList<String> errors, ArrayList<Page> pageNodes, ArrayList<Controller> controllerNodes) {
+        this.symbolTable = symbolTable;
         this.errors = errors;
+        this.pageNodes = pageNodes;
+        this.controllerNodes = controllerNodes;
+
     }
 
     @Override
@@ -56,6 +68,10 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
         for (int i = 0; i < ctx.controller().size(); i++) {
             controllers.add((Controller) visit(ctx.controller(i)));
         }
+        pageNodes.addAll(pages);
+        controllerNodes.addAll(controllers);
+        System.out.println("length of controller list is " + controllerNodes.size());
+        System.out.println("length of page list is " + pageNodes.size());
         return new Program(pages, controllers);
     }
 
@@ -67,13 +83,15 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
     @Override
     public Page visitPage(LanguageParser.PageContext ctx) {
         String id;
-        String title;
+        String title = null;
         ArrayList<Element> bodyElements = new ArrayList<>();
         id = ctx.ID(0).getText();
-        String extendedPageId=null;
-        if(ctx.ID(1)!=null)
-             extendedPageId=ctx.ID(1).getText();
-        title = ctx.head().title().getText();
+        String extendedPageId = null;
+        if (ctx.ID(1) != null)
+            extendedPageId = ctx.ID(1).getText();
+        if (ctx.head().HEAD() != null) {
+            title = ctx.head().title().getText();
+        }
         for (int i = 0; i < ctx.body_element().size(); i++) {
             bodyElements.add((Element) visit(ctx.body_element(i)));
         }
@@ -161,6 +179,12 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
         ArrayList<Element> bodyElements = new ArrayList<>();
         ArrayList<Element> elseBodyElements = new ArrayList<>();
         condition = (Expression) visit(ctx.expression());
+        //check the type of the expression
+        if (!(condition instanceof Logical)) {
+            Exception typeException = new IncompatibleExpressionTypeException(ctx.IF().getSymbol().getLine(), ctx.IF().getSymbol().getCharPositionInLine(),
+                    "LogicalNode", condition.getClass().getSimpleName());
+            this.errors.add(typeException.toString());
+        }
         for (int i = 0; i < ctx.element().size(); i++) {
             bodyElements.add((Element) visit(ctx.element(i)));
         }
@@ -182,6 +206,10 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
         Expression expression;
         ArrayList<SwitchCase> switchCases = new ArrayList<>();
         expression = (Expression) visit(ctx.expression());
+        if (!(expression instanceof Valuable) || !(expression instanceof Concatable)) {
+            Exception typeException = new IncompatibleExpressionTypeException(ctx.expression().start.getLine(), ctx.expression().start.getCharPositionInLine(), "Valuable or Contactable", expression.getClass().getSimpleName());
+            this.errors.add(typeException.toString());
+        }
         for (int i = 0; i < ctx.switch_body().switch_case().size(); i++) {
             switchCases.add((SwitchCase) visit(ctx.switch_body().switch_case(i)));
         }
@@ -216,8 +244,18 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
         System.out.println("in For_statement visitor");
         ForStatement forStatement = new ForStatement();
         forStatement.setVariableDeclaration((VariableDeclaration) visit(ctx.for_index()));
-        forStatement.setConditionExpression((LogicalNode) visit(ctx.expression(0)));
-        forStatement.setStepExpression((OneOperandMathematicalNode) visit(ctx.expression(1)));
+        forStatement.setConditionExpression((Expression) visit(ctx.expression(0)));
+        if (!(forStatement.getConditionExpression() instanceof Logical)) {
+            Exception typeException = new IncompatibleExpressionTypeException(ctx.expression(0).stop.getLine(), ctx.expression(0).stop.getCharPositionInLine(),
+                    "LogicalNode", forStatement.getConditionExpression().getClass().getSimpleName());
+            this.errors.add(typeException.toString());
+        }
+        forStatement.setStepExpression((Expression) visit(ctx.expression(1)));
+        if (!(forStatement.getStepExpression() instanceof OneOperandMathematicalNode)) {
+            Exception typeException = new IncompatibleExpressionTypeException(ctx.expression(1).stop.getLine(), ctx.expression(1).stop.getCharPositionInLine(),
+                    "OneOperandMathematicalNode", forStatement.getStepExpression().getClass().getSimpleName());
+            this.errors.add(typeException.toString());
+        }
         ArrayList<Element> bodyElements = new ArrayList<>();
         for (int i = 0; i < ctx.element().size(); i++) {
             bodyElements.add((Element) visit(ctx.element(i)));
@@ -397,6 +435,10 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
     @Override
     public AbstractNode visitText_attributes(LanguageParser.Text_attributesContext ctx) {
         Expression text = (Expression) visit(ctx.expression());
+        if (!(text instanceof Valuable)) {
+            errors.add(new IncompatibleExpressionTypeException(ctx.expression().start.getLine()
+                    , ctx.expression().start.getCharPositionInLine(), "valuable", text.getClass().getSimpleName()).toString());
+        }
         Integer fontSize = Integer.parseInt(ctx.DECIMAL().getText());
         String color = ctx.HEXCHARS().getText();
         Text textElement = new Text(text, fontSize, color, null);
@@ -592,7 +634,12 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
 
         String name = ctx.STRING().get(0).getText();
         String label = ctx.STRING().get(1).getText();
-        String value = ctx.STRING().get(2).getText();
+        Expression value = (Expression) visit(ctx.expression());
+        if (!(value instanceof Valuable)) {
+            Exception typeException = new IncompatibleExpressionTypeException(ctx.expression().start.getLine(),
+                    ctx.expression().start.getCharPositionInLine(), "Valuable", value.getClass().getSimpleName());
+            errors.add(typeException.toString());
+        }
         TextField textField = new TextField(name, label, value, null);
         return textField;
     }
@@ -618,7 +665,12 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
 
         String name = ctx.STRING().get(0).getText();
         String label = ctx.STRING().get(1).getText();
-        String value = ctx.STRING().get(2).getText();
+        Expression value = (Expression) visit(ctx.expression());
+        if (!(value instanceof Valuable)) {
+            Exception typeException = new IncompatibleExpressionTypeException(ctx.expression().start.getLine(),
+                    ctx.expression().start.getCharPositionInLine(), "Valuable", value.getClass().getSimpleName());
+            errors.add(typeException.toString());
+        }
         Date date = new Date(name, label, value, null);
         return date;
     }
@@ -643,8 +695,13 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
     public AbstractNode visitCheck_box_attributes(LanguageParser.Check_box_attributesContext ctx) {
         String name = ctx.STRING().get(0).getText();
         String label = ctx.STRING().get(1).getText();
-        String value = ctx.STRING().get(2).getText();
-        CheckBox checkBox = new CheckBox(name, label, value, null);
+        Expression expression = (Expression) visit(ctx.expression());
+        if (!(expression instanceof Valuable)) {
+            Exception typeException = new IncompatibleExpressionTypeException(ctx.expression().start.getLine(),
+                    ctx.expression().start.getCharPositionInLine(), "Valuable", expression.getClass().getSimpleName());
+            errors.add(typeException.toString());
+        }
+        CheckBox checkBox = new CheckBox(name, label, expression, null);
         return checkBox;
     }
 
@@ -686,6 +743,11 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
     public AbstractNode visitOption(LanguageParser.OptionContext ctx) {
         String label = ctx.STRING().getText();
         Expression expression = (Expression) visit(ctx.expression());
+        if (!(expression instanceof Valuable)) {
+            Exception typeException = new IncompatibleExpressionTypeException(ctx.expression().start.getLine(),
+                    ctx.expression().start.getCharPositionInLine(), "Valuable", expression.getClass().getSimpleName());
+            errors.add(typeException.toString());
+        }
         return new Option(expression, label);
     }
 
@@ -722,6 +784,11 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
         System.out.println("in array_value (key => value) node");
         String key = ctx.STRING().getText();
         Expression value = (Expression) visit(ctx.expression());
+        if (!(value instanceof Valuable)) {
+            Exception typeException = new IncompatibleExpressionTypeException(ctx.expression().start.getLine(),
+                    ctx.expression().start.getCharPositionInLine(), "Valuable", value.getClass().getSimpleName());
+            errors.add(typeException.toString());
+        }
         MapPairNode pairNode = new MapPairNode(key, value);
         return pairNode;
     }
@@ -758,9 +825,25 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
         } else if (ctx.CHECK_VALID() != null) {
             Expression uniqueIdentifier = (Expression) visit(ctx.expression(0));
             Expression password = (Expression) visit(ctx.expression(1));
+            // both uniqueIdentifier and password should either be literal string or variable names only
+            if (!(uniqueIdentifier instanceof StringNode) && !(uniqueIdentifier instanceof VariableNode)) {
+                Exception typeException = new IncompatibleExpressionTypeException(ctx.expression(0).start.getLine(),
+                        ctx.expression(0).start.getCharPositionInLine(), "String or variable name", uniqueIdentifier.getClass().getSimpleName());
+                errors.add(typeException.toString());
+            }
+            if (!(password instanceof StringNode) && !(password instanceof VariableNode)) {
+                Exception typeException = new IncompatibleExpressionTypeException(ctx.expression(1).start.getLine(),
+                        ctx.expression(1).start.getCharPositionInLine(), "String or variable name", password.getClass().getSimpleName());
+                errors.add(typeException.toString());
+            }
             return new ValidCheck(uniqueIdentifier, password);
         } else if (ctx.CHECK_ROLE() != null) {
             Expression role = (Expression) visit(ctx.expression(0));
+            if (!(role instanceof StringNode) && !(role instanceof VariableNode)) {
+                Exception typeException = new IncompatibleExpressionTypeException(ctx.expression(0).start.getLine(),
+                        ctx.expression(0).start.getCharPositionInLine(), "String or variable name", role.getClass().getSimpleName());
+                errors.add(typeException.toString());
+            }
             return new RoleCheck(role);
         } else if (ctx.REDIRECT() != null) {
             String goalPageId = ctx.ID().getText();
@@ -779,6 +862,9 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
     public AbstractNode visitLiteralStringExpression(LanguageParser.LiteralStringExpressionContext ctx) {
         System.out.println("in literal string expression visitor");
         String fullText = ctx.STRING().getText();
+        if (ctx.STRING().getText().length() == 3) {
+            return new CharNode(fullText.charAt(1));
+        }
         return new StringNode(fullText.substring(1, fullText.length() - 1));
     }
 
@@ -816,7 +902,7 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
             String operator = ctx.MULTIPLICATIVE_OPERATOR().getText();
             Expression leftOperand = (Expression) visit(ctx.expression(0));
             Expression rightOperand = (Expression) visit(ctx.expression(1));
-            return new AdditiveNode(leftOperand, rightOperand, operator);
+            return new MultiplicativeNode(leftOperand, rightOperand, operator);
         }
     }
 

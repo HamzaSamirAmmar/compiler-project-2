@@ -1,6 +1,7 @@
 package ast.nodes.pageNodes.inNodes;
 
 import ast.nodes.Element;
+import ast.nodes.basicNodes.expressions.Expression;
 import ast.nodes.basicNodes.expressions.literals.MapNode;
 import ast.nodes.pageNodes.PageCallable;
 import ast.nodes.util.Formatter;
@@ -8,9 +9,10 @@ import ast.nodes.util.Formatter;
 public class CheckBox extends Element implements PageCallable {
     String name;
     String label;
-    String value;
+    Expression value;
     MapNode extraAttributes;
-    public CheckBox(String name, String label, String value, MapNode extraAttributes) {
+
+    public CheckBox(String name, String label, Expression value, MapNode extraAttributes) {
         this.name = name;
         this.label = label;
         this.value = value;
@@ -24,8 +26,6 @@ public class CheckBox extends Element implements PageCallable {
     public void setExtraAttributes(MapNode extraAttributes) {
         this.extraAttributes = extraAttributes;
     }
-
-
 
 
     public String getName() {
@@ -44,14 +44,13 @@ public class CheckBox extends Element implements PageCallable {
         this.label = label;
     }
 
-    public String getValue() {
+    public Expression getValue() {
         return value;
     }
 
-    public void setValue(String value) {
+    public void setValue(Expression value) {
         this.value = value;
     }
-
 
     @Override
     protected String nodeName() {
@@ -61,9 +60,9 @@ public class CheckBox extends Element implements PageCallable {
     @Override
     protected Formatter nodeValue(Formatter formatter) {
         formatter.addProperty("CheckBox Name", name);
-        formatter.addProperty("CheckBox Value", value);
+        formatter.addProperty("CheckBox Value", value.toString());
         formatter.addProperty("CheckBox Label", label);
-        if(extraAttributes!=null)
+        if (extraAttributes != null)
             formatter.object(extraAttributes.toString());
         return formatter;
     }

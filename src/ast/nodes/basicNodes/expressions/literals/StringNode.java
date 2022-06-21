@@ -29,4 +29,8 @@ public class StringNode extends Expression implements Iterable, Valuable {
     protected Formatter nodeValue(Formatter formatter) {
         return formatter.addProperty("stringValue",stringValue);
     }
+    @Override
+    public String toCode(){
+        return "'"+ stringValue+"'";
+    }
 }

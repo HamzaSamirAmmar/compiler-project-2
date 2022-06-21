@@ -2,8 +2,6 @@ package ast.nodes.basicNodes;
 
 import ast.nodes.Element;
 import ast.nodes.basicNodes.expressions.Expression;
-import ast.nodes.basicNodes.expressions.LogicalNode;
-import ast.nodes.basicNodes.expressions.Math.OneOperandMathematicalNode;
 import ast.nodes.util.Formatter;
 
 import java.util.ArrayList;
@@ -12,9 +10,9 @@ public class ForStatement extends BasicElement {
 
     VariableDeclaration variableDeclaration;
 
-    LogicalNode conditionExpression;//TODO logical
+    Expression conditionExpression;//TODO logical
 
-    OneOperandMathematicalNode stepExpression;//TODO OneOperandValuableExpression
+    Expression stepExpression;//TODO OneOperandValuableExpression
 
     ArrayList<Element> bodyElements=new ArrayList<>();
 
@@ -31,7 +29,7 @@ public class ForStatement extends BasicElement {
         return conditionExpression;
     }
 
-    public void setConditionExpression(LogicalNode conditionExpression) {
+    public void setConditionExpression(Expression conditionExpression) {
         this.conditionExpression = conditionExpression;
     }
 
@@ -39,7 +37,7 @@ public class ForStatement extends BasicElement {
         return stepExpression;
     }
 
-    public void setStepExpression(OneOperandMathematicalNode stepExpression) {
+    public void setStepExpression(Expression stepExpression) {
         this.stepExpression = stepExpression;
     }
 

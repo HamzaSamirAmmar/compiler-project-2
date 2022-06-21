@@ -12,8 +12,6 @@ public class Text extends OutNode {
     MapNode extraAttributes;
 
     public Text(Expression text, Integer fontSize, String color, MapNode extraAttributes) {
-        if( !color.startsWith("#"))
-                throw new RuntimeException("invalid color!");
         this.text = text;
         this.fontSize = fontSize;
         this.color = color;
@@ -41,8 +39,6 @@ public class Text extends OutNode {
     }
 
     public void setColor(String color) {
-        if( !color.startsWith("#"))
-            throw new RuntimeException("invalid color!");
         this.color = color;
     }
 

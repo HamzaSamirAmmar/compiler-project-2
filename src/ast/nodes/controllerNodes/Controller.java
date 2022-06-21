@@ -29,6 +29,18 @@ public class Controller extends AbstractNode {
         this.bodyElements = bodyElements;
     }
 
+    public String getControlledPageId() {
+        return controlledPageId;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public ArrayList<Element> getBodyElements() {
+        return bodyElements;
+    }
+
     @Override
     protected String nodeName() {
         return "controller";
@@ -40,5 +52,16 @@ public class Controller extends AbstractNode {
         formatter.addProperty("controlled page ID",controlledPageId);
         formatter.array("controller body element",new ArrayList<>(this.bodyElements));
         return formatter;
+    }
+
+    @Override
+    public String toPhpCode() {
+        StringBuilder innerElementCode= new StringBuilder("");
+        for (Element element:bodyElements) {
+            innerElementCode.append(element.toPhpCode());
+        }
+        String code=
+                "<?php "+innerElementCode;
+        return code;
     }
 }

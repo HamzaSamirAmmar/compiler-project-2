@@ -1,425 +1,70 @@
-htmlDocument: {
-	tagElement: {
-		tagName: div,
-		ng-app: {
-			appName: myApp,
+program: {
+	pages: [
+		page: {
+			extended page ID: null,
+			ID: p0,
+			title: "title",
+			page body element: [
+				variableDeclaration: {
+					id: x,
+					value(decimalValue): {
+						decimalValue: 3.0,
+					},
+				},
+				variableDeclaration: {
+					id: v,
+					value(variable/functionName): {
+						name: x,
+					},
+				},
+				variableDeclaration: {
+					id: g,
+					value(string): {
+						stringValue: this is a string,
+					},
+				}
+			],
 		},
-		htmlTagContent: {
-			tagElement: {
-				tagName: p,
-				forEach: {
-					iterator: x,
-					ListName: variable/functionName: {
-					name: t,
-				},
-				},
-				htmlTagContent: {
-					mustache: {
-						MustacheContent(variable/functionName): {
-							name: x,
-						},
-					},
-				},
-			},
-			tagElement: {
-				tagName: p,
-				forEach: {
-					iterator: x,
-					index name: i,
-					ListName: variable/functionName: {
-					name: t,
-				},
-					index value(variable/functionName): {
-						name: index,
-					},
-				},
-				htmlTagContent: {
-					text: {
-						textValue: , ,
-					},
-					mustache: {
-						MustacheContent(variable/functionName): {
-							name: x,
-						},
-					},
-					mustache: {
-						MustacheContent(variable/functionName): {
-							name: i,
-						},
-					},
-				},
-			},
-			tagElement: {
-				tagName: p,
-				forEach: {
-					iterator: x,
-					index name: i,
-					index value(variable/functionName): {
-						name: index,
-					},
-					list: [
-						charValue: {
-							charValue: 1,
-						},
-						charValue: {
-							charValue: 2,
-						},
-						charValue: {
-							charValue: 4,
-						}
-					],
-				},
-				htmlTagContent: {
-					text: {
-						textValue: , ,
-					},
-					mustache: {
-						MustacheContent(variable/functionName): {
-							name: x,
-						},
-					},
-					mustache: {
-						MustacheContent(variable/functionName): {
-							name: i,
-						},
-					},
-				},
-			},
-			tagElement: {
-				tagName: p,
-				mapLoop: {
-					keyIterator: k,
-					valueIterator: v,
-					map: variable/functionName: {
-					name: obj,
-				},
-				},
-				htmlTagContent: {
-					text: {
-						textValue: :,
-					},
-					mustache: {
-						MustacheContent(variable/functionName): {
-							name: k,
-						},
-					},
-					mustache: {
-						MustacheContent(variable/functionName): {
-							name: v,
-						},
-					},
-				},
-			},
-			scriptNode: {
-				scriptCode: 
-			        var obj = { name: 'Compiler', year: 2020, type: 'COVID'  }
-			    ,
-			},
-			tagElement: {
-				tagName: p,
-				mapLoop: {
-					keyIterator: k,
-					valueIterator: v,
-					map: {
-						pair: {
-							value: string: {
-							stringValue: Compiler,
-						},
-							key: name,
-						},
-						pair: {
-							value: decimalValue: {
-							decimalValue: 2020.0,
-						},
-							key: year,
-						},
-						pair: {
-							value: string: {
-							stringValue: COVID,
-						},
-							key: type,
-						},
-					},
-				},
-				htmlTagContent: {
-					text: {
-						textValue: :,
-					},
-					mustache: {
-						MustacheContent(variable/functionName): {
-							name: k,
-						},
-					},
-					mustache: {
-						MustacheContent(variable/functionName): {
-							name: v,
-						},
-					},
-				},
-			},
-			tagElement: {
-				tagName: container-element,
-				SwitchNode: {
-					switchValue: concatenatedNodes: {
-					leftOperand: variable/functionName: {
-					name: object,
-				},
-					rightOperand: variable/functionName: {
-					name: value,
-				},
-				},
-				},
-				htmlTagContent: {
-					tagElement: {
-						tagName: some-element,
-						SwitchCaseNode: {
-							switchCaseValue: variable/functionName: {
-							name: match_expression_1,
-						},
-						},
-						htmlTagContent: {
-							text: {
-								textValue: ...,
-							},
-						},
-					},
-					tagElement: {
-						tagName: some-element,
-						SwitchCaseNode: {
-							switchCaseValue: variable/functionName: {
-							name: match_expression_2,
-						},
-						},
-						htmlTagContent: {
-							text: {
-								textValue: ...,
-							},
-						},
-					},
-					tagElement: {
-						tagName: some-element,
-						NGSwitchDefault: {
-							NGSwitchDefault,
-						},
-						htmlTagContent: {
-							text: {
-								textValue: ...,
-							},
-						},
-					},
-				},
-			},
-			tagElement: {
-				tagName: p,
-				ng-showAttribute: {
-					condition: indexedExpression: {
-					indexed: concatenatedNodes: {
-					leftOperand: concatenatedNodes: {
-					leftOperand: variable/functionName: {
-					name: object,
-				},
-					rightOperand: variable/functionName: {
-					name: variable,
-				},
-				},
-					rightOperand: variable/functionName: {
-					name: var,
-				},
-				},
-					index: decimalValue: {
-					decimalValue: 2.0,
-				},
-				},
-				},
-				htmlTagContent: {},
-			},
-			tagElement: {
-				tagName: p,
-				ng-showAttribute: {
-					condition: concatenatedNodes: {
-					leftOperand: indexedExpression: {
-					indexed: variable/functionName: {
-					name: object,
-				},
-					index: decimalValue: {
-					decimalValue: 2.0,
-				},
-				},
-					rightOperand: variable/functionName: {
-					name: variable,
-				},
-				},
-				},
-				htmlTagContent: {},
-			},
-			tagElement: {
-				tagName: p,
-				ng-showAttribute: {
-					condition: indexedExpression: {
-					indexed: concatenatedNodes: {
-					leftOperand: concatenatedNodes: {
-					leftOperand: indexedExpression: {
-					indexed: variable/functionName: {
-					name: object,
-				},
-					index: decimalValue: {
-					decimalValue: 2.0,
-				},
-				},
-					rightOperand: variable/functionName: {
-					name: variable,
-				},
-				},
-					rightOperand: variable/functionName: {
-					name: var,
-				},
-				},
-					index: FunctionCall: {
-					functionName(indexedExpression): {
-						indexed: variable/functionName: {
-						name: q,
-					},
-						index: decimalValue: {
-						decimalValue: 2.0,
-					},
-					},
-					parameters: [],
-				},
-				},
-				},
-				htmlTagContent: {},
-			},
-			tagElement: {
-				tagName: p,
-				ng-HideAttribute: {
-					condition: TwoOperandCondition: {
-					operator: <,
-					leftOperand(FunctionCall): {
-						functionName(variable/functionName): {
-							name: myFunction,
-						},
-						parameters: [],
-					},
-					rightOperand(decimalValue): {
-						decimalValue: 4.0,
-					},
-				},
-				},
-				htmlTagContent: {},
-			},
-			tagElement: {
-				tagName: p,
-				ng-ifAttribute: {
-					condition: TwoOperandCondition: {
-					operator: >,
-					leftOperand(concatenatedNodes): {
-						leftOperand: variable/functionName: {
-						name: object,
-					},
-						rightOperand: variable/functionName: {
-						name: variable,
-					},
-					},
-					rightOperand(decimalValue): {
-						decimalValue: 2.0,
-					},
-				},
-				},
-				htmlTagContent: {},
-			},
-			tagElement: {
-				tagName: input,
-				ngType: {
-					ngType: text,
-				},
-				ngModel: {
-					variable/functionName: {
-						name: xx,
-					},
-				},
-			},
-			scriptNode: {
-				scriptCode: 
-			        var xx = 'Hi'
-			    ,
-			},
-			tagElement: {
-				tagName: input,
-				ngType: {
-					ngType: text,
-				},
-				ngModel: {
-					variable/functionName: {
-						name: xx,
-					},
-				},
-			},
-			tagElement: {
-				tagName: p,
-				htmlTagContent: {
-					text: {
-						textValue: 
-					    xx | myFormater:'yyyyMMdd'
-					    ,
-					},
-					mustache: {
-						MustacheContent(pipeExpression): {
-							functionCall: FunctionCall: {
-							functionName(variable/functionName): {
-								name: myFormater,
-							},
-							parameters: [
-								string: {
-									stringValue: yyyyMMdd,
-								}
-							],
-						},
-							piped: variable/functionName: {
-							name: xx,
-						},
-						},
-					},
-					mustache: {
-						MustacheContent(ternaryExpression): {
-							firstExpression: decimalValue: {
-							decimalValue: 2.0,
-						},
-							condition: variable/functionName: {
-							name: xx,
-						},
-							secondExpression: decimalValue: {
-							decimalValue: 1.0,
-						},
-						},
-					},
-				},
-			},
-			tagElement: {
-				tagName: span,
-				ng-eventAttribute: {
-					eventName: click,
-					FunctionCall: {
-						functionName(variable/functionName): {
-							name: myFunction,
-						},
-						parameters: [],
-					},
-				},
-				htmlTagContent: {},
-			},
-			tagElement: {
-				tagName: span,
-				ng-eventAttribute: {
-					eventName: mouseover,
-					FunctionCall: {
-						functionName(variable/functionName): {
-							name: myFunction,
-						},
-						parameters: [],
-					},
-				},
-				htmlTagContent: {},
-			},
+		page: {
+			extended page ID: p0,
+			ID: p1,
+			title: "title2",
+			page body element: [],
 		},
-	},
+		page: {
+			extended page ID: p1,
+			ID: p2,
+			title: "no head",
+			page body element: [],
+		},
+		page: {
+			extended page ID: p2,
+			ID: p3,
+			title: "no head",
+			page body element: [],
+		},
+		page: {
+			extended page ID: p3,
+			ID: p4,
+			title: "no head",
+			page body element: [],
+		}
+	],
+	controllers: [
+		controller: {
+			controlled page ID: p0,
+			ID: c1,
+			controller body element: [],
+		},
+		controller: {
+			controlled page ID: p0,
+			ID: c2,
+			controller body element: [],
+		},
+		controller: {
+			controlled page ID: p0,
+			ID: c3,
+			controller body element: [],
+		}
+	],
 }

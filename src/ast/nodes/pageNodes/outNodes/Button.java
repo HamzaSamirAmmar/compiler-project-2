@@ -12,8 +12,6 @@ public class Button extends OutNode  /*why not? it can be in href for example*/ 
     MapNode extraAttributes;
 
     public Button(String text, String action, MapNode extraAttributes) {
-        if(!(Pattern.compile("(\\(\\s*[a-zA-Z0-9]*(\\s*[,]\\s*[a-zA-Z0-9]*)*\\s*\\))$").matcher(action).find()))
-            throw new RuntimeException("invalid function call!");
         this.text = text;
         this.action = action;
         this.extraAttributes = extraAttributes;
@@ -32,8 +30,6 @@ public class Button extends OutNode  /*why not? it can be in href for example*/ 
     }
 
     public void setAction(String action) {
-        if(!(Pattern.compile("\\(\\s*[a-zA-Z0-9]*(\\s*[,]\\s*[a-zA-Z0-9]*)*\\s*\\)$").matcher(action).find()))
-            throw new RuntimeException("invalid function call!");
         this.action = action;
     }
 

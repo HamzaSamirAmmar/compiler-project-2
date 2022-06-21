@@ -1,9 +1,8 @@
 package symbolTable;
 
+import ast.nodes.pageNodes.Page;
 import org.antlr.v4.runtime.misc.Pair;
-import symbolTable.symbols.Symbol;
-import symbolTable.symbols.VariableSymbol;
-import symbolTable.symbols.YieldSymbol;
+import symbolTable.symbols.*;
 
 import java.util.*;
 
@@ -69,18 +68,49 @@ public class SymbolTable {
                 }
             }
         }
-        return false;
+        String parentPageId = this.getPageParentId(newYield);
+        //recursion stop condition
+        if (parentPageId == null)
+            return false;
+        return this.checkIfYieldedBefore(new YieldSymbol(newYield.getName(), parentPageId));
     }
 
-    public boolean checkIfVariableInitializedBefore(VariableSymbol variableSymbol) {
-        for (Symbol symbol : this.getCurrentScopeSymbols()) {
-            if (symbol instanceof VariableSymbol) {
-                if (((VariableSymbol) symbol).getName().equals(variableSymbol.getName())) {
-                        return true;
+    public String getPageParentId(Symbol symbol) {
+        //yield case
+        String currentPageId = ((YieldSymbol) symbol).getIncludingPageId();
+        String parentPageId = null;
+        //search for the page symbol
+        for (Symbol firstScopeSymbol : this.getFirstScopeSymbols()) {
+            if (firstScopeSymbol instanceof PageSymbol) {
+                if (((PageSymbol) firstScopeSymbol).getName().equals(currentPageId)) {
+                    parentPageId = ((PageSymbol) firstScopeSymbol).getExtendedPageId();
                 }
             }
         }
-        return false;
+        return parentPageId;
+    }
+
+    public int checkIfVariableInitializedBefore(VariableSymbol variableSymbol) {
+        // change this so a global variable is shown by this method
+        // 0 is not initializes , 1 is local variable, 2 is global variable
+        for (Symbol symbol : this.getCurrentScopeSymbols()) {
+            if (symbol instanceof VariableSymbol) {
+                if (((VariableSymbol) symbol).getName().equals(variableSymbol.getName())) {
+                    return 1;
+                }
+            }
+        }
+        for (int j = 1; j < symbolTable.size(); j++) {
+            for (Symbol symbol : this.symbolTable.elementAt(j).getValue()) {
+                if (symbol instanceof VariableSymbol) {
+                    if (((VariableSymbol) symbol).getName().equals(variableSymbol.getName())) {
+                        return 2;
+                    }
+                }
+            }
+        }
+
+        return 0;
     }
 
     public boolean checkIfPageScope() {
@@ -92,6 +122,96 @@ public class SymbolTable {
     public boolean checkIfControllerScope() {
         if (this.symbolTable.elementAt(1).getKey() == "controller")
             return true;
+        return false;
+    }
+
+    public boolean checkExistPageIdBefore(Symbol newSymbol) {
+        for (Symbol symbol : this.getFirstScopeSymbols()) {
+            // defining a page that is already defined
+            if (symbol instanceof PageSymbol && newSymbol instanceof PageSymbol) {
+                if (((PageSymbol) symbol).getName().equals(((PageSymbol) newSymbol).getName()))
+                    return true;
+            }
+            // control a page that is already defined
+            else if (symbol instanceof PageSymbol && newSymbol instanceof ControllerSymbol) {
+                if (((PageSymbol) symbol).getName().
+                        equals(((ControllerSymbol) newSymbol).getControllingPageId()))
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean checkFormAction(String action) {
+        // action is controller id
+        for (Symbol symbol : this.getFirstScopeSymbols()) {
+            if (symbol instanceof ControllerSymbol) {
+                if (action.substring(1, action.length() - 1).equals(((ControllerSymbol) symbol).getName()))
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean checkIfPageIDIsExist(String extendedPageID) {
+        final ArrayList<Symbol> programSymbols = symbolTable.get(0).getValue();
+        for (Symbol symbol : programSymbols) {
+            if (symbol instanceof PageSymbol) {
+                if (Objects.equals(((PageSymbol) symbol).getName(), extendedPageID)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean checkIfControllerIDUsedBefore(String controllerID) {
+        final ArrayList<Symbol> programSymbols = symbolTable.get(0).getValue();
+        for (Symbol symbol : programSymbols) {
+            if (symbol instanceof ControllerSymbol) {
+                if (Objects.equals(((ControllerSymbol) symbol).getName(), controllerID)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public Boolean checkExistPageIdToRedirect(String pageID) {
+        for (Symbol symbol : this.getFirstScopeSymbols()) {
+            if (symbol instanceof PageSymbol) {
+                if (((PageSymbol) symbol).getName().equals(pageID)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean checkIfYieldIsExist(SectionSymbol sectionSymbol, boolean first) {
+        final ArrayList<Symbol> programSymbols = symbolTable.get(0).getValue();
+        final ArrayList<YieldSymbol> yieldSymbols = new ArrayList<>();
+        for (Symbol symbol : programSymbols) {
+            if (symbol instanceof YieldSymbol) {
+                yieldSymbols.add((YieldSymbol) symbol);
+            }
+        }
+        for (Symbol symbol : programSymbols) {
+            if (symbol instanceof PageSymbol) {
+                if (Objects.equals(((PageSymbol) symbol).getName(), sectionSymbol.getParentPageId())) {
+                    for (YieldSymbol yieldSymbol : yieldSymbols) {
+                        if (Objects.equals(yieldSymbol.getIncludingPageId(), ((PageSymbol) symbol).getName())) {
+                            if (yieldSymbol.getName().equals(sectionSymbol.getName())) {
+                                return true;
+                            }
+                        }
+                    }
+                    if (((PageSymbol) symbol).getExtendedPageId() != null) {
+                        return this.checkIfYieldIsExist(new SectionSymbol(sectionSymbol.getName(), ((PageSymbol) symbol).getName(), ((PageSymbol) symbol).getExtendedPageId()), false);
+                    }
+                }
+            }
+        }
         return false;
     }
 }
