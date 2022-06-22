@@ -1,13 +1,13 @@
 package ast.nodes.basicNodes.expressions.literals;
 
 import ast.nodes.basicNodes.expressions.*;
-import ast.nodes.util.Formatter;
 import ast.nodes.basicNodes.expressions.Iterable;
+import ast.nodes.util.Formatter;
 
-public class VariableNode extends Expression implements Valuable,Numeric, Iterable, Logical, Concatable,FunctionCallable {
+public class FormDataNode extends Expression implements Valuable, Numeric, Iterable, Logical{
     String variableName;
 
-    public VariableNode(String variableName) {
+    public FormDataNode(String variableName) {
         this.variableName = variableName;
     }
 
@@ -21,16 +21,16 @@ public class VariableNode extends Expression implements Valuable,Numeric, Iterab
 
     @Override
     protected String nodeName() {
-        return "variable/functionName";
+        return "shared data node";
     }
 
     @Override
     protected Formatter nodeValue(Formatter formatter) {
         return formatter.addProperty("name",variableName);
     }
-    @Override
-    public String toCode(){
-        return  "$"+variableName+"";
 
+    @Override
+    public String toCode() {
+        return "$_POST['"+variableName+"']";
     }
 }

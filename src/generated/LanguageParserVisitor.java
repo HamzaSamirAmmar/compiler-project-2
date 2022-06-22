@@ -101,6 +101,12 @@ public interface LanguageParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitVariable_declaration(LanguageParser.Variable_declarationContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link LanguageParser#shared_data_declaration}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitShared_data_declaration(LanguageParser.Shared_data_declarationContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link LanguageParser#for_statement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -366,6 +372,13 @@ public interface LanguageParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitParenthesizedExpression(LanguageParser.ParenthesizedExpressionContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code LogicalControllerFunctionCall}
+	 * labeled alternative in {@link LanguageParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLogicalControllerFunctionCall(LanguageParser.LogicalControllerFunctionCallContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code LiteralArrayExpression}
 	 * labeled alternative in {@link LanguageParser#expression}.
 	 * @param ctx the parse tree
@@ -380,6 +393,13 @@ public interface LanguageParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitTwoOperandsConditionExpression(LanguageParser.TwoOperandsConditionExpressionContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code SharedVariableNameExpression}
+	 * labeled alternative in {@link LanguageParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSharedVariableNameExpression(LanguageParser.SharedVariableNameExpressionContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code MathematicalExpression}
 	 * labeled alternative in {@link LanguageParser#expression}.
 	 * @param ctx the parse tree
@@ -393,6 +413,13 @@ public interface LanguageParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitIndexedVariableExpression(LanguageParser.IndexedVariableExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code FormVariableNameExpression}
+	 * labeled alternative in {@link LanguageParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFormVariableNameExpression(LanguageParser.FormVariableNameExpressionContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code LiteralBooleanExpression}
 	 * labeled alternative in {@link LanguageParser#expression}.

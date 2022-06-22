@@ -158,6 +158,16 @@ public interface LanguageParserListener extends ParseTreeListener {
 	 */
 	void exitVariable_declaration(LanguageParser.Variable_declarationContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link LanguageParser#shared_data_declaration}.
+	 * @param ctx the parse tree
+	 */
+	void enterShared_data_declaration(LanguageParser.Shared_data_declarationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link LanguageParser#shared_data_declaration}.
+	 * @param ctx the parse tree
+	 */
+	void exitShared_data_declaration(LanguageParser.Shared_data_declarationContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link LanguageParser#for_statement}.
 	 * @param ctx the parse tree
 	 */
@@ -600,6 +610,18 @@ public interface LanguageParserListener extends ParseTreeListener {
 	 */
 	void exitParenthesizedExpression(LanguageParser.ParenthesizedExpressionContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code LogicalControllerFunctionCall}
+	 * labeled alternative in {@link LanguageParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterLogicalControllerFunctionCall(LanguageParser.LogicalControllerFunctionCallContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code LogicalControllerFunctionCall}
+	 * labeled alternative in {@link LanguageParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitLogicalControllerFunctionCall(LanguageParser.LogicalControllerFunctionCallContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code LiteralArrayExpression}
 	 * labeled alternative in {@link LanguageParser#expression}.
 	 * @param ctx the parse tree
@@ -624,6 +646,18 @@ public interface LanguageParserListener extends ParseTreeListener {
 	 */
 	void exitTwoOperandsConditionExpression(LanguageParser.TwoOperandsConditionExpressionContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code SharedVariableNameExpression}
+	 * labeled alternative in {@link LanguageParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterSharedVariableNameExpression(LanguageParser.SharedVariableNameExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code SharedVariableNameExpression}
+	 * labeled alternative in {@link LanguageParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitSharedVariableNameExpression(LanguageParser.SharedVariableNameExpressionContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code MathematicalExpression}
 	 * labeled alternative in {@link LanguageParser#expression}.
 	 * @param ctx the parse tree
@@ -647,6 +681,18 @@ public interface LanguageParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitIndexedVariableExpression(LanguageParser.IndexedVariableExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code FormVariableNameExpression}
+	 * labeled alternative in {@link LanguageParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterFormVariableNameExpression(LanguageParser.FormVariableNameExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code FormVariableNameExpression}
+	 * labeled alternative in {@link LanguageParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitFormVariableNameExpression(LanguageParser.FormVariableNameExpressionContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code LiteralBooleanExpression}
 	 * labeled alternative in {@link LanguageParser#expression}.

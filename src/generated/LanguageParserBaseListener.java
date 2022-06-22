@@ -196,6 +196,18 @@ public class LanguageParserBaseListener implements LanguageParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterShared_data_declaration(LanguageParser.Shared_data_declarationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitShared_data_declaration(LanguageParser.Shared_data_declarationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterFor_statement(LanguageParser.For_statementContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -724,6 +736,18 @@ public class LanguageParserBaseListener implements LanguageParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterLogicalControllerFunctionCall(LanguageParser.LogicalControllerFunctionCallContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLogicalControllerFunctionCall(LanguageParser.LogicalControllerFunctionCallContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterLiteralArrayExpression(LanguageParser.LiteralArrayExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -748,6 +772,18 @@ public class LanguageParserBaseListener implements LanguageParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterSharedVariableNameExpression(LanguageParser.SharedVariableNameExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSharedVariableNameExpression(LanguageParser.SharedVariableNameExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterMathematicalExpression(LanguageParser.MathematicalExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -767,6 +803,18 @@ public class LanguageParserBaseListener implements LanguageParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitIndexedVariableExpression(LanguageParser.IndexedVariableExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFormVariableNameExpression(LanguageParser.FormVariableNameExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFormVariableNameExpression(LanguageParser.FormVariableNameExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

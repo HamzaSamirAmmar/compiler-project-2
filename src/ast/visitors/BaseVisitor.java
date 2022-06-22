@@ -157,7 +157,10 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
             return visit(ctx.for_statement());
         } else if (ctx.variable_declaration() != null) {
             return visit(ctx.variable_declaration());
-        } else if (ctx.expression() != null) {
+        } else if(ctx.shared_data_declaration()!=null){
+            return visitShared_data_declaration(ctx.shared_data_declaration());
+        }
+        else if (ctx.expression() != null) {
             return visit(ctx.expression());
         } else {
             return visit(ctx.rawphp());
@@ -825,7 +828,7 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
     }
 
     @Override
-    public AbstractNode visitController_body_element(LanguageParser.Controller_body_elementContext ctx) {
+    public AbstractNode visitLogicalControllerFunctionCall(LanguageParser.LogicalControllerFunctionCallContext ctx) {
         if (ctx.CHECK_AUTH() != null) {
             return new AuthCheck();
         } else if (ctx.CHECK_VALID() != null) {
@@ -851,7 +854,13 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
                 errors.add(typeException.toString());
             }
             return new RoleCheck(role);
-        } else if (ctx.REDIRECT() != null) {
+        } else
+            return super.visitLogicalControllerFunctionCall(ctx);
+    }
+
+    @Override
+    public AbstractNode visitController_body_element(LanguageParser.Controller_body_elementContext ctx) {
+         if (ctx.REDIRECT() != null) {
             String goalPageId = ctx.ID().getText();
             return new Redirect(goalPageId);
         }
@@ -1003,5 +1012,26 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
         System.out.println("in literal object expression visitor");
         MapNode map=(MapNode) visit(ctx.map());
         return map;
+    }
+
+    @Override
+    public AbstractNode visitShared_data_declaration(LanguageParser.Shared_data_declarationContext ctx) {
+        SharedDataDeclaration sharedDataDeclaration = new SharedDataDeclaration();
+        sharedDataDeclaration.setId(ctx.ID().toString());
+        sharedDataDeclaration.setValue((Expression) visit(ctx.expression()));
+        if(sharedDataDeclaration.getValue() instanceof OneOperandMathematicalNode){
+            ((OneOperandMathematicalNode) sharedDataDeclaration.getValue()).setSolStatement(false);
+        }
+        return sharedDataDeclaration;
+    }
+
+    @Override
+    public AbstractNode visitSharedVariableNameExpression(LanguageParser.SharedVariableNameExpressionContext ctx) {
+        return new SharedDataNode(ctx.ID().getText());
+    }
+
+    @Override
+    public AbstractNode visitFormVariableNameExpression(LanguageParser.FormVariableNameExpressionContext ctx) {
+        return new FormDataNode(ctx.ID().getText());
     }
 }

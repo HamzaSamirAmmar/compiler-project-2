@@ -1,13 +1,14 @@
 package ast.nodes.controllerNodes.contollerElements;
 
 import ast.nodes.Element;
+import ast.nodes.basicNodes.expressions.Expression;
 import ast.nodes.basicNodes.expressions.Logical;
 import ast.nodes.basicNodes.expressions.Numeric;
 import ast.nodes.basicNodes.expressions.Valuable;
 import ast.nodes.controllerNodes.ControllerCallable;
 import ast.nodes.util.Formatter;
 
-public class AuthCheck extends Element implements ControllerCallable, Logical, Valuable, Numeric {
+public class AuthCheck extends Expression implements ControllerCallable, Logical, Valuable, Numeric {
 
     @Override
     protected String nodeName() {
@@ -20,6 +21,6 @@ public class AuthCheck extends Element implements ControllerCallable, Logical, V
     }
     @Override
     public String toPhpCode() {
-        return "checkAuth()\n";
+        return "checkAuth()";
     }
 }

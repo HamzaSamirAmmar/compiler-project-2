@@ -16,7 +16,8 @@
 <?php
 include 'util/checkInRoles.php';
 if(checkInRoles( [ 'admin' , 'user' ]  )){?>
-<?php $_SESSION['x']=[1.0 , 2.0 , 3.0 , 4.0 , 5.0 ] ?>
+<?php $x = [1.0 , 2.0 , 3.0 , 4.0 , 5.0 ];
+ ?>
 <?php } ?>
 </body>
 </html>
