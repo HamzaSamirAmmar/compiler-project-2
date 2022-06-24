@@ -30,6 +30,47 @@ public class IfStatement extends BasicElement {
     }
 
     @Override
+    public String toHtmlCode() {
+        String beginIf = "<? php if(" + condition.toCode() + ") : ?>\n";
+        String endIF = "\n<?php endif; ?>";
+        String elseStatement = "<?php else : ?>\n";
+        StringBuilder innerIfElementCode = new StringBuilder("");
+        for (Element element : bodyElements) {
+            innerIfElementCode.append(element.toHtmlCode());
+        }
+        StringBuilder innerElseElementCode = new StringBuilder("");
+        for (Element element : elseBodyElements) {
+            innerElseElementCode.append(element.toHtmlCode());
+        }
+        if (innerElseElementCode.isEmpty()) {
+            return beginIf + innerIfElementCode + endIF;
+        } else {
+            return beginIf + innerIfElementCode + elseStatement + innerElseElementCode + endIF;
+        }
+    }
+
+    @Override
+    public String toPhpCode() {
+        String beginIf = "(" + condition.toCode() + ") {\n";
+        String endIF = "\n}";
+        String beginElse = "else {\n";
+        String endElse = "\n}";
+        StringBuilder innerIfElementCode = new StringBuilder("");
+        for (Element element : bodyElements) {
+            innerIfElementCode.append(element.toPhpCode());
+        }
+        StringBuilder innerElseElementCode = new StringBuilder("");
+        for (Element element : elseBodyElements) {
+            innerElseElementCode.append(element.toPhpCode());
+        }
+        if (innerElseElementCode.isEmpty()) {
+            return beginIf + innerIfElementCode + endIF;
+        } else {
+            return beginIf + innerIfElementCode + endIF + beginElse + innerElseElementCode + endElse;
+        }
+    }
+
+    @Override
     protected String nodeName() {
         return "if statement";
     }
