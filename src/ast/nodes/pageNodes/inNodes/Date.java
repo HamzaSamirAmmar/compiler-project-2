@@ -66,4 +66,29 @@ public class Date extends Element implements PageCallable {
             formatter.object(extraAttributes.toString());
         return formatter;
     }
+
+    /*
+    // didn't add the class (class="input-group date") because it make a new line and does not affect style
+    <label  for="start">Start date:</label>
+
+<input type="date" id="start" name="trip-start"
+       value="2018-07-22"
+       min="2018-01-01" max="2018-12-31">
+    * */
+    @Override
+    public String toHtmlCode() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("<label for= " + name + ">")
+                .append(label,1,label.length()-1).append("</label>").append(System.getProperty("line.separator"))
+                .append(System.getProperty("line.separator"))
+                .append("<input type=\"date\" ");
+        if (extraAttributes != null) {
+            builder.append(extraAttributes.toHtmlCode());
+        }
+                builder.append("id =" + name).append("name= " + name + " ")
+                .append("value=<?php echo " + value.toCode() + " ?> ");
+        builder.append(">")
+                .append(System.getProperty("line.separator"));
+        return builder.toString();
+    }
 }

@@ -48,10 +48,28 @@ public class Button extends OutNode  /*why not? it can be in href for example*/ 
 
     @Override
     protected Formatter nodeValue(Formatter formatter) {
-        formatter.addProperty("text ",text);
-        formatter.addProperty("action ",action);
-        if(extraAttributes!=null)
+        formatter.addProperty("text ", text);
+        formatter.addProperty("action ", action);
+        if (extraAttributes != null)
             formatter.object(extraAttributes.toString());
-        return formatter ;
+        return formatter;
+    }
+
+    /*
+    <input class="btn btn-primary" type="button" value="Input">
+     <button type="submit" formaction="/action_page2.php">Submit to another page</button>
+    * */
+    @Override
+    public String toHtmlCode() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("<button");
+        if (extraAttributes != null) {
+            builder.append(" " + extraAttributes.toHtmlCode());
+        }
+        builder.append("class= \"btn btn-primary\" ")
+                .append("formaction= " + action + " ")
+                .append(">").append(text,1,text.length()-1).append("</button>")
+                .append(System.getProperty("line.separator"));
+        return builder.toString();
     }
 }

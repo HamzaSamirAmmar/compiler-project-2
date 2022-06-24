@@ -58,7 +58,7 @@ public class Compiler {
 			if(errorMessages.isEmpty()){
 				for (Page page:pageNodes) {
 					//make new html file
-					String fileName="generatedCode/"+page.getId()+".html";
+					String fileName="generatedCode/"+page.getId()+".php";
 					File file = new File(fileName); //initialize File object and passing path as argument
 					file.createNewFile();
 					FileWriter htmlFile = new FileWriter(fileName);

@@ -600,7 +600,7 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
             for (int i = 0; i < ctx.form_body().body_element().size(); i++) {
                 formBody.add((Element) visit(ctx.form_body().body_element().get(i)));
             }
-            form.setFromBody(formBody);
+            form.setFormBody(formBody);
             return form;
         }
         throw new RuntimeException("Invalid text");
@@ -609,7 +609,7 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
     @Override
     public AbstractNode visitForm_attributes(LanguageParser.Form_attributesContext ctx) {
         String method = ctx.METHOD().getText();
-        String action = ctx.getText();
+        String action = ctx.STRING().getText();
         return new Form(method, action, null, null);
     }
 

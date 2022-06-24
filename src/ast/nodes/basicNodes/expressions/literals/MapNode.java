@@ -46,4 +46,15 @@ public class MapNode extends Expression implements Iterable {
         code.append(" ]");
         return code.toString();
     }
+    @Override
+    public String toHtmlCode() {
+        StringBuilder code= new StringBuilder();
+        for (MapPairNode pair : pairs) {
+            if(pair.getValue() instanceof StringNode){
+                code.append(pair.toHtmlCode()).append(" ");
+            }
+            else code.append(pair.toHtmlCode()).append(" ");
+        }
+        return code.toString();
+    }
 }

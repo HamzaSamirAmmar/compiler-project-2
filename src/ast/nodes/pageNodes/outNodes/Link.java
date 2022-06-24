@@ -54,4 +54,22 @@ public class Link extends OutNode {
             formatter.object(extraAttributes.toString());
         return formatter ;
     }
+
+    /*
+    <a href="url">link body</a>
+    * */
+    @Override
+    public String toHtmlCode() {
+       StringBuilder builder = new StringBuilder();
+       builder.append("<a href= " + linkReference);
+        if (extraAttributes != null) {
+            builder.append(" " + extraAttributes.toHtmlCode());
+        }
+       builder.append(">").append(System.getProperty("line.separator"));
+        for (int i = 0; i < linkBody.size(); i++) {
+            builder.append(linkBody.get(i).toHtmlCode());
+        }
+        builder.append("</a>").append(System.getProperty("line.separator"));
+        return builder.toString();
+    }
 }

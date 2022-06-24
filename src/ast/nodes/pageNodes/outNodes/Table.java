@@ -40,4 +40,42 @@ public class Table extends OutNode {
         formatter.array("headers",new ArrayList<>(headers));
         return formatter ;
     }
+    /*
+    <table>
+  <tr>
+    <th>Company</th>
+    <th>Contact</th>
+    <th>Country</th>
+  </tr>
+   <tr>
+    <td>Alfreds Futterkiste</td>
+    <td>Maria Anders</td>
+    <td>Germany</td>
+  </tr>
+</table>
+    * */
+
+    @Override
+    public String toHtmlCode() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("<table class=\"table\">").append(System.getProperty("line.separator"))
+                .append("<tr>").append(System.getProperty("line.separator"));
+        for (int i = 0; i <headers.size() ; i++) {
+            builder.append("<th>").append(headers.get(i).toHtmlCode()).append("</th>")
+            .append(System.getProperty("line.separator"));
+        }
+        builder.append("</tr>").append(System.getProperty("line.separator"));
+        int bodyelement =0;
+        for(int i = 0; i < tableBody.size(); i++) {
+            builder.append("<tr>").append(System.getProperty("line.separator"));
+            for (int j = 0; j < headers.size() && bodyelement<tableBody.size(); j++) {
+                builder.append("<td>").append(tableBody.get(bodyelement).toHtmlCode()).append("</td>")
+                        .append(System.getProperty("line.separator"));
+                bodyelement++;
+            }
+            builder.append("</tr>").append(System.getProperty("line.separator"));
+        }
+        builder.append("</table>").append(System.getProperty("line.separator"));
+        return builder.toString();
+    }
 }
