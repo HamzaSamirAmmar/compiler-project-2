@@ -61,7 +61,12 @@ public class Controller extends AbstractNode {
             innerElementCode.append(element.toPhpCode());
         }
         String code=
-                "<?php "+innerElementCode;
+                "<?php \n" +
+                "include 'util/checkValid.php';\n" +
+                "include 'util/checkRole.php';\n" +
+                "include 'util/checkAuth.php';\n" +
+                "include 'util/redirect.php';\n"
+                +innerElementCode;
         return code;
     }
 }

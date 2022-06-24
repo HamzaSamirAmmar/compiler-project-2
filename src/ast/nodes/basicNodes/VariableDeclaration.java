@@ -6,6 +6,7 @@ import ast.nodes.util.Formatter;
 
 public class VariableDeclaration extends BasicElement {
     String id;
+    //TODO rn it doesn't accept checkRole or checkValid or checkAuth
     Expression value;//TODO should implement valuable
 
     public void setId(String id) {
@@ -14,6 +15,14 @@ public class VariableDeclaration extends BasicElement {
 
     public void setValue(Expression value) {
         this.value = value;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public Expression getValue() {
+        return value;
     }
 
     @Override
@@ -28,14 +37,14 @@ public class VariableDeclaration extends BasicElement {
 
     @Override
     public String toHtmlCode() {
-        String code="<?php $_SESSION['"+id+"']="+value.toHtmlCode()
+        String code="<?php $"+id+" = "+value.toHtmlCode() +";\n"
                 +" ?>\n";
         return code;
     }
 
     @Override
     public String toPhpCode() {
-        String code="$_SESSION['"+id+"']="+value.toPhpCode();
+        String code="$"+id+" = "+value.toPhpCode()+";\n";
         return code;
     }
 

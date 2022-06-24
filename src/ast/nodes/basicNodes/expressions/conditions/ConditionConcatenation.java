@@ -59,4 +59,8 @@ public class ConditionConcatenation extends Condition {
         formatter.object(leftCondition.toString("leftCondition")).addProperty("operator",operator).object(rightCondition.toString("rightCondition"));
         return formatter;
     }
+    @Override
+    public String toCode(){
+        return leftCondition.toCode()+operator+rightCondition.toCode();
+    }
 }

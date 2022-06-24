@@ -143,6 +143,12 @@ AT_END_INVERSE_ROLE
 AT_END_SECTION
     : '@endsection'
     ;
+SHARED_DATA
+    : 'shared_data'
+    ;
+FORM_DATA
+    : 'form_data'
+    ;
 BRACKET_OPEN
     : '('
     ;

@@ -33,4 +33,17 @@ public class MapNode extends Expression implements Iterable {
             formatter.object(pair.toString());
         return formatter;
     }
+    public String toCode() {
+        StringBuilder code= new StringBuilder("[");
+        for (int i = 0; i < pairs.size(); i++) {
+            MapPairNode pair = pairs.get(i);
+            code.append(pair.getKey());
+            code.append(" => ");
+            code.append(pair.getValue().toCode());
+            if(i!= pairs.size()-1)
+                code.append(" , ");
+        }
+        code.append(" ]");
+        return code.toString();
+    }
 }

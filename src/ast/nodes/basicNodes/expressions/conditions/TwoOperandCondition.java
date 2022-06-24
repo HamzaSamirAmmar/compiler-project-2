@@ -55,4 +55,9 @@ public class TwoOperandCondition extends Condition  {
         formatter.object(leftOperand.toString("leftOperand")).addProperty("operator",operator).object(rightOperand.toString("rightOperand"));
         return formatter;
     }
+
+    @Override
+    public String toCode() {
+        return leftOperand.toCode()+operator+rightOperand.toCode();
+    }
 }

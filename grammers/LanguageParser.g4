@@ -30,6 +30,7 @@ statement
     | switch_statement
     | for_statement
     | variable_declaration
+    | shared_data_declaration
     | expression
     | rawphp
     ;
@@ -57,6 +58,9 @@ switch_default
     ;
 variable_declaration
     : AT ID EQUAL expression
+    ;
+shared_data_declaration
+    : SHARED_DATA BRACKET_OPEN ID BRACKET_CLOSE EQUAL expression
     ;
 for_statement
     : FOR BRACKET_OPEN for_index SEMI_COLON expression SEMI_COLON expression BRACKET_CLOSE CURLEY_BRACKET_OPEN element* CURLEY_BRACKET_CLOSE
@@ -192,10 +196,16 @@ controller
     : CONTROLLER ID CONTROLES ID CURLEY_BRACKET_OPEN (controller_body_element|statement)* CURLEY_BRACKET_CLOSE
     ;
 controller_body_element
-    : CHECK_AUTH BRACKET_OPEN  BRACKET_CLOSE
-    | CHECK_VALID BRACKET_OPEN expression COMMA expression  BRACKET_CLOSE
-    | CHECK_ROLE BRACKET_OPEN expression BRACKET_CLOSE
-    | REDIRECT ID
+    : REDIRECT ID
+    ;
+array
+    : SQUARE_OPEN (expression COMMA)* expression COMMA? SQUARE_CLOSE
+    ;
+map_value
+    : ID COLON expression
+    ;
+map
+    : CURLEY_BRACKET_OPEN map_value(COMMA map_value)* COMMA? CURLEY_BRACKET_CLOSE
     ;
 expression
    : expression OPERATOR_TWO_OPERAND expression                #TwoOperandsConditionExpression
@@ -203,13 +213,19 @@ expression
    | expression MULTIPLICATIVE_OPERATOR expression             #MathematicalExpression
    | expression ADDITIVE_OPERATOR expression                   #MathematicalExpression
    | AT ID                                                     #VariableNameExpression
+   | SHARED_DATA BRACKET_OPEN ID BRACKET_CLOSE                 #SharedVariableNameExpression
+   | FORM_DATA BRACKET_OPEN ID BRACKET_CLOSE                   #FormVariableNameExpression
    | DECIMAL                                                   #LiteralNumericExpression
    | CHAR                                                      #LiteralCharExpression
    | STRING                                                    #LiteralStringExpression
    | BOOLEAN                                                   #LiteralBooleanExpression
+   | array                                                     #LiteralArrayExpression
+   | map                                                       #LiteralObjectExpression
    | expression (SQUARE_OPEN expression SQUARE_CLOSE)          #IndexedVariableExpression
    | ONE_LOGICAL_OPERAND expression                            #OneOperandConditionExpression
    | ONE_VALUABLE_OPERAND expression                           #OneOperandValuableExpression
    | expression ONE_VALUABLE_OPERAND                           #OneOperandValuableExpression
    | BRACKET_OPEN expression BRACKET_CLOSE                     #ParenthesizedExpression
-   ;
+   | ( CHECK_AUTH BRACKET_OPEN  BRACKET_CLOSE | CHECK_VALID BRACKET_OPEN expression COMMA expression  BRACKET_CLOSE |
+         CHECK_ROLE BRACKET_OPEN expression BRACKET_CLOSE)     #LogicalControllerFunctionCall
+   ;//TODO add semantic check the last exp should not be in page scope

@@ -1,13 +1,21 @@
 page p0 head("title") {
 @x=3
-@v=@x
+@v=shared_data(a)
+shared_data(a)=@v
 @g="this is a string"
 }
 page p1 head("title2") extends p0 {
-
+@x=[1,2,3,4]
+@auth
+@x++
+@else
+--@x
+@endauth
 }
 page p2 head("no head") extends p1 {
-
+@role(['admin','user'])
+@x=[1,2,3,4,5]
+@endrole
 }
 page p3 head("no head") extends p2 {
 
@@ -17,6 +25,12 @@ page p4 head("no head") extends p3 {
 }
 
 controller c1 controles p0{
+    @x=checkAuthenticated()
+    @name=form_data(name)
+    @rawphp
+    $s=5;
+    echo "i am here";
+    @endrawphp
 }
 
 controller c2 controles p0{

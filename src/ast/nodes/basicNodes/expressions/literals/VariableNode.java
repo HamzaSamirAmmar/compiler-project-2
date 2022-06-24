@@ -30,7 +30,7 @@ public class VariableNode extends Expression implements Valuable,Numeric, Iterab
     }
     @Override
     public String toCode(){
-        return  "$_SESSION['"+variableName+"']";
+        return  "$"+variableName+"";
 
     }
 }

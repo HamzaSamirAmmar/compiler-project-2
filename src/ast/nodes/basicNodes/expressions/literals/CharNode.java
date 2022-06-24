@@ -28,4 +28,8 @@ public class CharNode extends Expression implements Valuable {
     protected Formatter nodeValue(Formatter formatter) {
         return formatter.addProperty("charValue",charValue.toString());
     }
+    @Override
+    public String toCode(){
+        return String.valueOf(charValue);
+    }
 }

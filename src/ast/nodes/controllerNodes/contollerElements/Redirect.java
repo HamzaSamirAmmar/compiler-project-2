@@ -24,4 +24,8 @@ public class Redirect  extends Element implements ControllerCallable {
     protected Formatter nodeValue(Formatter formatter) {
         return formatter.addProperty("redirect to",goalPageId);
     }
+    @Override
+    public String toPhpCode() {
+        return "redirect("+goalPageId+");\n";
+    }
 }

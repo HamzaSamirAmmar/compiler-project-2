@@ -57,4 +57,9 @@ public class AdditiveNode extends Expression implements Valuable,Numeric{
         formatter.addProperty("rightOperand", rightOperand.toString());
         return formatter;
     }
+    @Override
+    public String toCode(){
+        return rightOperand.toCode()+operator+leftOperand.toCode();
+
+    }
 }
