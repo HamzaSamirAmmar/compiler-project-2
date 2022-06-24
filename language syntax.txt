@@ -40,7 +40,8 @@ date("start date","start",2018-07-22)
   "book1" , "algo1" : "story1" , "wimpy1"    }
   button("submit" ,"/compiler_tests/c1.php",["type"=>"submit"] )}
 @x=3
-@v=@x
+@v=shared_data(a)
+shared_data(a)=@v
 @g="this is a string"
 
 table(){header:{ text ("name" ,20,#050000), text ("pic" ,20,#050000) } ,
@@ -68,7 +69,10 @@ page p4 head("no head") extends p3 {
 }
 
 controller c1 controles p0{
+    @x=checkAuthenticated()
+    @name=form_data(name)
     @rawphp
+    $s=5;
     echo "i am here";
     @endrawphp
 }

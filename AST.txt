@@ -132,7 +132,7 @@ program: {
 		page: {
 			extended page ID: null,
 			ID: page0,
-			title: "Login Form Design",
+			title: "trying",
 			page body element: [
 				Form Node: {
 					Form Action: "c1",
@@ -253,8 +253,14 @@ program: {
 				},
 				variableDeclaration: {
 					id: v,
+					value(shared data node): {
+						name: a,
+					},
+				},
+				SharedDataDeclaration: {
+					id: a,
 					value(variable/functionName): {
-						name: x,
+						name: v,
 					},
 				},
 				variableDeclaration: {
@@ -388,8 +394,19 @@ program: {
 			controlled page ID: p0,
 			ID: c1,
 			controller body element: [
+				variableDeclaration: {
+					id: x,
+					value(Auth check): {},
+				},
+				variableDeclaration: {
+					id: name,
+					value(shared data node): {
+						name: name,
+					},
+				},
 				@RawPhp: {
 					rawPHP: 
+				    $s=5;
 				    echo "i am here";
 				    ,
 				}

@@ -10,11 +10,11 @@ public class ForStatement extends BasicElement {
 
     VariableDeclaration variableDeclaration;
 
-    Expression conditionExpression;//TODO logical
+    Expression conditionExpression;
 
-    Expression stepExpression;//TODO OneOperandValuableExpression
+    Expression stepExpression;
 
-    ArrayList<Element> bodyElements=new ArrayList<>();
+    ArrayList<Element> bodyElements = new ArrayList<>();
 
 
     public VariableDeclaration getVariableDeclaration() {
@@ -55,11 +55,33 @@ public class ForStatement extends BasicElement {
     }
 
     @Override
+    public String toPhpCode() {
+        String beginFor = "for (" + variableDeclaration.toPhpCode() + ";" + conditionExpression.toCode() + ";" + stepExpression.toCode() + ")" + " {\n";
+        StringBuilder innerElementCode = new StringBuilder("");
+        for (Element element : bodyElements) {
+            innerElementCode.append(element.toPhpCode());
+        }
+        String endFor = "\n}";
+        return beginFor + innerElementCode + endFor;
+    }
+
+    @Override
+    public String toHtmlCode() {
+        String beginFor = "<?php for(" + variableDeclaration.toPhpCode() + ";" + conditionExpression.toCode() + ";" + stepExpression.toCode() + ") : ?>\n";
+        StringBuilder innerElementCode = new StringBuilder("");
+        for (Element element : bodyElements) {
+            innerElementCode.append(element.toHtmlCode());
+        }
+        String endFor = "\n<?php endfor; ?>";
+        return beginFor + innerElementCode + endFor;
+    }
+
+    @Override
     protected Formatter nodeValue(Formatter formatter) {
         formatter.object(variableDeclaration.toString()).object(conditionExpression.toString("condition")).object(
                 stepExpression.toString("step")
         );
-        for (int i =0 ; i < bodyElements.size();i++){
+        for (int i = 0; i < bodyElements.size(); i++) {
             formatter.object(bodyElements.get(i).toString());
         }
         return formatter;

@@ -8,7 +8,7 @@ import ast.nodes.basicNodes.expressions.Valuable;
 import ast.nodes.controllerNodes.ControllerCallable;
 import ast.nodes.util.Formatter;
 
-public class RoleCheck extends Element implements ControllerCallable, Logical, Valuable, Numeric {
+public class RoleCheck extends Expression implements ControllerCallable, Logical, Valuable, Numeric {
     Expression role;//TODO either string,or a variable name
 
     public RoleCheck(Expression role) {
@@ -31,6 +31,6 @@ public class RoleCheck extends Element implements ControllerCallable, Logical, V
 
     @Override
     public String toPhpCode() {
-        return "checkRole("+role.toCode()+")\n";
+        return "checkRole("+role.toCode()+")";
     }
 }

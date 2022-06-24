@@ -36,6 +36,28 @@ public class SwitchCase extends AbstractNode {
     }
 
     @Override
+    public String toHtmlCode() {
+        String begin = expression == null ? "<?php default: ?>\n" : "<?php case " + expression.toCode() + ": ?>\n";
+        String end = expression == null ? "" : "\n<?php break; ?>"; // should I replace empty string with null when expression is null, or never return it when expression is null
+        StringBuilder innerElementCode = new StringBuilder("");
+        for (Element element : body) {
+            innerElementCode.append(element.toHtmlCode());
+        }
+        return begin + innerElementCode + end;
+    }
+
+    @Override
+    public String toPhpCode() {
+        String begin = expression == null ? "default:\n" : "case " + expression.toCode() + ":\n";
+        String end = expression == null ? "" : "\nbreak;"; // same question
+        StringBuilder innerElementCode = new StringBuilder("");
+        for (Element element : body) {
+            innerElementCode.append(element.toPhpCode());
+        }
+        return begin + innerElementCode + end;
+    }
+
+    @Override
     protected String nodeName() {
         return "SwitchCase Node";
     }
