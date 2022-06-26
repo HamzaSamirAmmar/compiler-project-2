@@ -82,9 +82,14 @@ public class Text extends OutNode {
                 }
                 else builder.append(" " + extraAttributes.getPairs().get(i).toHtmlCode());
             }
+
         builder.append(" style= \"font-size:" + fontSize.toString() + "px;")
-                .append(" color: " + color + " ; " + style + " \"");
-        builder.append(">").append(text.toCode(), 1, text.toCode().length()-1);
+                .append(" color: " + color + " ; " + style + " \"").append(">");
+        if(text.toCode().length()>2)
+        builder.append(text.toCode(), 1, text.toCode().length()-1);
+        else builder.append(text.toCode());
+
+
         builder.append("</div>").append(System.getProperty("line.separator"));
         return builder.toString();
     }

@@ -7,7 +7,7 @@ program: {
 			page body element: [
 				Image: {
 					height : 50,
-					imgReference : "background.jpg",
+					imgReference : "b.webp",
 					width : 50,
 					map: {
 						pair: {
@@ -22,7 +22,7 @@ program: {
 					},
 				},
 				text: {
-					color : #000000,
+					color : #ffffff,
 					fontSize : 30,
 					string: {
 						stringValue: Login,
@@ -30,8 +30,8 @@ program: {
 					map: {
 						pair: {
 							value: string: {
-							stringValue: position: relative; font-size:30px; color: #000000 ;  text-align: center; font-weight: bold; line-height: 2; padding-top: 80px; padding-left: 450px; padding-right: 450px;
-						                                        background-image: linear-gradient(to bottom, rgba(100, 100, 100, 1) 0%, rgba(211, 211, 211, 1) 100%), linear-gradient(to bottom, rgba(211, 211, 211, 1) 0%, rgba(211, 211, 211, 1) 100%);
+							stringValue: position: relative; font-size:30px ;  text-align: center; font-weight: bold; line-height: 2; padding-top: 200px; padding-left: 450px; padding-right: 450px;
+						                                        background-image: linear-gradient(to bottom, rgba(140, 140, 140, 1) 0%, rgba(0, 0, 0, 1) 100%), linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 100%);
 						                                        background-clip: content-box;,
 						},
 							key: "style",
@@ -45,7 +45,7 @@ program: {
 						pair: {
 							value: string: {
 							stringValue: text-align: center; padding-left: 450px; padding-right: 450px;
-						                             background-image: linear-gradient(to bottom, rgba(211, 211, 211, 1) 0%, rgba(240,230,240,1) 100%), linear-gradient(to bottom, rgba(140,140,140,1) 0%, rgba(140,140,140,1) 100%);
+						                             background-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0,0,0,1) 100%), linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 100%);
 						                             background-clip: content-box;,
 						},
 							key: "style",
@@ -54,7 +54,7 @@ program: {
 					formBody: [
 						TextField Node: {
 							TextField Name: "user",
-							TextField Label: "UserName",
+							TextField Label: "",
 							TextField Value: string: {
 							stringValue: enter your name,
 						},
@@ -73,7 +73,7 @@ program: {
 						},
 						TextField Node: {
 							TextField Name: "password",
-							TextField Label: "Password",
+							TextField Label: "",
 							TextField Value: string: {
 							stringValue: enter your password,
 						},
@@ -92,7 +92,7 @@ program: {
 						},
 						Button: {
 							text : "submit",
-							action : "/compiler_tests/c1.php",
+							action : "/compiler_tests/posts.php",
 							map: {
 								pair: {
 									value: string: {
@@ -107,23 +107,349 @@ program: {
 							listBody: [],
 						},
 						text: {
-							color : #000000,
+							color : #ffffff,
 							fontSize : 11,
 							string: {
 								stringValue: not yet a member?  ,
 							},
 						},
 						Link: {
-							linkReference : 'c2',
+							linkReference : 'registerPage.php',
 							linkBody: [
 								text: {
-									color : #050000,
+									color : #ffffff,
 									fontSize : 12,
 									string: {
 										stringValue: register,
 									},
 								}
 							],
+						}
+					],
+				}
+			],
+		},
+		page: {
+			extended page ID: null,
+			ID: registerPage,
+			title: "registration",
+			page body element: [
+				Image: {
+					height : 50,
+					imgReference : "background1.webp",
+					width : 50,
+					map: {
+						pair: {
+							value: string: {
+							stringValue:   background-position: center;
+						                                  background-repeat: no-repeat;
+						                                  background-size: cover;
+						                                  pointer-events: none; position: absolute; width: 100%; height: 100%; z-index: -1;,
+						},
+							key: "style",
+						},
+					},
+				},
+				text: {
+					color : #ffffff,
+					fontSize : 30,
+					string: {
+						stringValue: Register,
+					},
+					map: {
+						pair: {
+							value: string: {
+							stringValue: position: relative; font-size:30px ;  text-align: center; font-weight: bold; line-height: 2; padding-top: 200px; padding-left: 450px; padding-right: 450px;
+						                                        background-image: linear-gradient(to bottom, rgba(140, 140, 140, 1) 0%, rgba(0, 0, 0, 1) 100%), linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 100%);
+						                                        background-clip: content-box;,
+						},
+							key: "style",
+						},
+					},
+				},
+				Form Node: {
+					Form Action: "c1",
+					Form method: post,
+					map: {
+						pair: {
+							value: string: {
+							stringValue: text-align: center; padding-left: 450px; padding-right: 450px;
+						                             background-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0,0,0,1) 100%), linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 100%);
+						                             background-clip: content-box;,
+						},
+							key: "style",
+						},
+					},
+					formBody: [
+						TextField Node: {
+							TextField Name: "user",
+							TextField Label: "",
+							TextField Value: string: {
+							stringValue: enter your name,
+						},
+							map: {
+								pair: {
+									value: string: {
+									stringValue:  opacity: 0.5;,
+								},
+									key: "style",
+								},
+							},
+						},
+						list: {
+							isOrdered : true,
+							listBody: [],
+						},
+						TextField Node: {
+							TextField Name: "password",
+							TextField Label: "",
+							TextField Value: string: {
+							stringValue: enter your password,
+						},
+							map: {
+								pair: {
+									value: string: {
+									stringValue:  opacity: 0.5;,
+								},
+									key: "style",
+								},
+							},
+						},
+						list: {
+							isOrdered : true,
+							listBody: [],
+						},
+						TextField Node: {
+							TextField Name: "Email",
+							TextField Label: "",
+							TextField Value: string: {
+							stringValue: enter your email,
+						},
+							map: {
+								pair: {
+									value: string: {
+									stringValue:  opacity: 0.5;,
+								},
+									key: "style",
+								},
+							},
+						},
+						list: {
+							isOrdered : true,
+							listBody: [],
+						},
+						Button: {
+							text : "register",
+							action : "/compiler_tests/posts.php",
+							map: {
+								pair: {
+									value: string: {
+									stringValue: btn btn-success,
+								},
+									key: "class",
+								},
+								pair: {
+									value: string: {
+									stringValue: submit,
+								},
+									key: "type",
+								},
+							},
+						},
+						list: {
+							isOrdered : true,
+							listBody: [],
+						},
+						text: {
+							color : #ffffff,
+							fontSize : 11,
+							string: {
+								stringValue: already a member?  ,
+							},
+						},
+						Link: {
+							linkReference : 'p0.php',
+							linkBody: [
+								text: {
+									color : #ffffff,
+									fontSize : 12,
+									string: {
+										stringValue: login,
+									},
+								}
+							],
+						}
+					],
+				}
+			],
+		},
+		page: {
+			extended page ID: null,
+			ID: posts,
+			title: "my posts",
+			page body element: [
+				Button: {
+					text : "create a new one",
+					action : "/compiler_tests/c1.php",
+					map: {
+						pair: {
+							value: string: {
+							stringValue: btn btn-success,
+						},
+							key: "class",
+						},
+						pair: {
+							value: string: {
+							stringValue: submit,
+						},
+							key: "type",
+						},
+						pair: {
+							value: string: {
+							stringValue: margin-left: 120px; margin-top: 20px; margin-bottom: 50px;,
+						},
+							key: "style",
+						},
+					},
+				},
+				table: {
+					tableBody: [
+						text: {
+							color : #050000,
+							fontSize : 20,
+							charValue: {
+								charValue: 1,
+							},
+							map: {
+								pair: {
+									value: string: {
+									stringValue: margin-left: 120px; margin-top: 20px;,
+								},
+									key: "style",
+								},
+							},
+						},
+						text: {
+							color : #050000,
+							fontSize : 20,
+							string: {
+								stringValue: hello my posts,
+							},
+							map: {
+								pair: {
+									value: string: {
+									stringValue: margin-left: 120px; margin-top: 20px;,
+								},
+									key: "style",
+								},
+							},
+						},
+						text: {
+							color : #050000,
+							fontSize : 20,
+							string: {
+								stringValue: 2022-06-25 11:00:00,
+							},
+							map: {
+								pair: {
+									value: string: {
+									stringValue: margin-left: 120px; margin-top: 20px;,
+								},
+									key: "style",
+								},
+							},
+						},
+						text: {
+							color : #050000,
+							fontSize : 20,
+							charValue: {
+								charValue: 2,
+							},
+							map: {
+								pair: {
+									value: string: {
+									stringValue: margin-left: 120px; margin-top: 20px;,
+								},
+									key: "style",
+								},
+							},
+						},
+						text: {
+							color : #050000,
+							fontSize : 20,
+							string: {
+								stringValue: good news,
+							},
+							map: {
+								pair: {
+									value: string: {
+									stringValue: margin-left: 120px; margin-top: 20px;,
+								},
+									key: "style",
+								},
+							},
+						},
+						text: {
+							color : #050000,
+							fontSize : 20,
+							string: {
+								stringValue: 2022-06-25 16:00:00,
+							},
+							map: {
+								pair: {
+									value: string: {
+									stringValue: margin-left: 120px; margin-top: 20px;,
+								},
+									key: "style",
+								},
+							},
+						}
+					],
+					headers: [
+						text: {
+							color : #050000,
+							fontSize : 20,
+							string: {
+								stringValue: ID,
+							},
+							map: {
+								pair: {
+									value: string: {
+									stringValue: margin-left: 120px; margin-top: 20px;,
+								},
+									key: "style",
+								},
+							},
+						},
+						text: {
+							color : #050000,
+							fontSize : 20,
+							string: {
+								stringValue: title,
+							},
+							map: {
+								pair: {
+									value: string: {
+									stringValue: margin-left: 120px; margin-top: 20px;,
+								},
+									key: "style",
+								},
+							},
+						},
+						text: {
+							color : #050000,
+							fontSize : 20,
+							string: {
+								stringValue: created_at,
+							},
+							map: {
+								pair: {
+									value: string: {
+									stringValue: margin-left: 120px; margin-top: 20px;,
+								},
+									key: "style",
+								},
+							},
 						}
 					],
 				}

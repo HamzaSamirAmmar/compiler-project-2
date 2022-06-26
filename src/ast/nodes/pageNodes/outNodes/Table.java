@@ -66,12 +66,22 @@ public class Table extends OutNode {
         }
         builder.append("</tr>").append(System.getProperty("line.separator"));
         int bodyelement =0;
-        for(int i = 0; i < tableBody.size(); i++) {
+
+        label: for(int i = 0; i < tableBody.size(); i++) {
             builder.append("<tr>").append(System.getProperty("line.separator"));
             for (int j = 0; j < headers.size() && bodyelement<tableBody.size(); j++) {
+                System.out.println("///////////body : " + tableBody.size());
+                System.out.println("\nheader : " + headers.size());
+                System.out.println("\nbodyelement : " + bodyelement);
+                System.out.println("\ni,j : " +i + ", " +j +"//////////////" );
+                System.out.println( " tableBody.get(bodyelement)" + tableBody.get(bodyelement).toHtmlCode());
                 builder.append("<td>").append(tableBody.get(bodyelement).toHtmlCode()).append("</td>")
                         .append(System.getProperty("line.separator"));
                 bodyelement++;
+                if(bodyelement>=tableBody.size()){
+                    builder.append("</tr>").append(System.getProperty("line.separator"));
+                    break label;
+                }
             }
             builder.append("</tr>").append(System.getProperty("line.separator"));
         }

@@ -16,26 +16,26 @@
 <img style ='  background-position: center;
                                   background-repeat: no-repeat;
                                   background-size: cover;
-                                  pointer-events: none; position: absolute; width: 100%; height: 100%; z-index: -1;'  src= "background.jpg" width= 50 height= 50>
-<div style= "font-size:30px; color: #000000 ;  position: relative; font-size:30px; color: #000000 ;  text-align: center; font-weight: bold; line-height: 2; padding-top: 80px; padding-left: 450px; padding-right: 450px;
-                                        background-image: linear-gradient(to bottom, rgba(100, 100, 100, 1) 0%, rgba(211, 211, 211, 1) 100%), linear-gradient(to bottom, rgba(211, 211, 211, 1) 0%, rgba(211, 211, 211, 1) 100%);
+                                  pointer-events: none; position: absolute; width: 100%; height: 100%; z-index: -1;'  src= "b.webp" width= 50 height= 50>
+<div style= "font-size:30px; color: #ffffff ;  position: relative; font-size:30px ;  text-align: center; font-weight: bold; line-height: 2; padding-top: 200px; padding-left: 450px; padding-right: 450px;
+                                        background-image: linear-gradient(to bottom, rgba(140, 140, 140, 1) 0%, rgba(0, 0, 0, 1) 100%), linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 100%);
                                         background-clip: content-box; ">Login</div>
 <form action= "c1".php method="post"  style ='text-align: center; padding-left: 450px; padding-right: 450px;
-                             background-image: linear-gradient(to bottom, rgba(211, 211, 211, 1) 0%, rgba(240,230,240,1) 100%), linear-gradient(to bottom, rgba(140,140,140,1) 0%, rgba(140,140,140,1) 100%);
-                             background-clip: content-box;' ><label for= "user">UserName</label>
+                             background-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0,0,0,1) 100%), linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 100%);
+                             background-clip: content-box;' ><label for= "user"></label>
 <input type= "text" style =' opacity: 0.5;' id= "user" name= "user" value= " enter your name">
 <ol>
 </ol>
-<label for= "password">Password</label>
+<label for= "password"></label>
 <input type= "text" style =' opacity: 0.5;' id= "password" name= "password" value= " enter your password">
 <ol>
 </ol>
-<button type ='submit' class= "btn btn-primary" formaction= "/compiler_tests/c1.php" >submit</button>
+<button type ='submit' class= "btn btn-primary" formaction= "/compiler_tests/posts.php" >submit</button>
 <ol>
 </ol>
-<div style= "font-size:11px; color: #000000 ;   ">not yet a member?  </div>
-<a href= 'c2'>
-<div style= "font-size:12px; color: #050000 ;   ">register</div>
+<div style= "font-size:11px; color: #ffffff ;   ">not yet a member?  </div>
+<a href= 'registerPage.php'>
+<div style= "font-size:12px; color: #ffffff ;   ">register</div>
 </a>
 </form>
 </body>
