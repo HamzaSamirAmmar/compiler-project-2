@@ -63,12 +63,14 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
         ArrayList<Controller> controllers = new ArrayList<>();
         pages.add((Page) visit(ctx.start_page()));
         for (int i = 0; i < ctx.page().size(); i++) {
-            pages.add((Page) visit(ctx.page(i)));
+            Page page = (Page) visit(ctx.page(i));
+            pages.add(page);
+            pageNodes.add(page);
         }
         for (int i = 0; i < ctx.controller().size(); i++) {
             controllers.add((Controller) visit(ctx.controller(i)));
         }
-        pageNodes.addAll(pages);
+//        pageNodes.addAll(pages);
         controllerNodes.addAll(controllers);
         System.out.println("length of controller list is " + controllerNodes.size());
         System.out.println("length of page list is " + pageNodes.size());
