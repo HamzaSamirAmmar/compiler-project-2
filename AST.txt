@@ -706,13 +706,96 @@ program: {
 			extended page ID: p2,
 			ID: p3,
 			title: "no head",
-			page body element: [],
+			page body element: [
+				text: {
+					color : #0000,
+					fontSize : 24,
+					string: {
+						stringValue: My First Heading,
+					},
+					map: {
+						pair: {
+							value: string: {
+							stringValue: h1,
+						},
+							key: "heading tag",
+						},
+					},
+				},
+				@Yield: {
+					name: "test",
+				},
+				text: {
+					color : #0000,
+					fontSize : 10,
+					string: {
+						stringValue: My first paragraph.,
+					},
+					map: {
+						pair: {
+							value: charValue: {
+							charValue: p,
+						},
+							key: 'Paragraph',
+						},
+					},
+				}
+			],
 		},
 		page: {
 			extended page ID: p3,
 			ID: p4,
 			title: "no head",
-			page body element: [],
+			page body element: [
+				@Section: {
+					name: "test",
+					text: {
+						color : #0000,
+						fontSize : 24,
+						string: {
+							stringValue: My First Heading,
+						},
+						map: {
+							pair: {
+								value: string: {
+								stringValue: h1,
+							},
+								key: "heading tag",
+							},
+						},
+					},
+					text: {
+						color : #0000,
+						fontSize : 10,
+						string: {
+							stringValue: My test paragraph.,
+						},
+						map: {
+							pair: {
+								value: charValue: {
+								charValue: p,
+							},
+								key: 'Paragraph',
+							},
+						},
+					},
+					text: {
+						color : #0000,
+						fontSize : 10,
+						string: {
+							stringValue: My first paragraph.,
+						},
+						map: {
+							pair: {
+								value: charValue: {
+								charValue: p,
+							},
+								key: 'Paragraph',
+							},
+						},
+					},
+				}
+			],
 		}
 	],
 	controllers: [

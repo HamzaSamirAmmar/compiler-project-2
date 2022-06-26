@@ -63,12 +63,14 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
         ArrayList<Controller> controllers = new ArrayList<>();
         pages.add((Page) visit(ctx.start_page()));
         for (int i = 0; i < ctx.page().size(); i++) {
-            pages.add((Page) visit(ctx.page(i)));
+            Page page = (Page) visit(ctx.page(i));
+            pages.add(page);
+            pageNodes.add(page);
         }
         for (int i = 0; i < ctx.controller().size(); i++) {
             controllers.add((Controller) visit(ctx.controller(i)));
         }
-        pageNodes.addAll(pages);
+//        pageNodes.addAll(pages);
         controllerNodes.addAll(controllers);
         System.out.println("length of controller list is " + controllerNodes.size());
         System.out.println("length of page list is " + pageNodes.size());
@@ -157,10 +159,9 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
             return visit(ctx.for_statement());
         } else if (ctx.variable_declaration() != null) {
             return visit(ctx.variable_declaration());
-        } else if(ctx.shared_data_declaration()!=null){
+        } else if (ctx.shared_data_declaration() != null) {
             return visitShared_data_declaration(ctx.shared_data_declaration());
-        }
-        else if (ctx.expression() != null) {
+        } else if (ctx.expression() != null) {
             return visit(ctx.expression());
         } else {
             return visit(ctx.rawphp());
@@ -239,7 +240,7 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
         VariableDeclaration variableDeclaration = new VariableDeclaration();
         variableDeclaration.setId(ctx.ID().toString());
         variableDeclaration.setValue((Expression) visit(ctx.expression()));
-        if(variableDeclaration.getValue() instanceof OneOperandMathematicalNode){
+        if (variableDeclaration.getValue() instanceof OneOperandMathematicalNode) {
             ((OneOperandMathematicalNode) variableDeclaration.getValue()).setSolStatement(false);
         }
         return variableDeclaration;
@@ -261,9 +262,8 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
             Exception typeException = new IncompatibleExpressionTypeException(ctx.expression(1).stop.getLine(), ctx.expression(1).stop.getCharPositionInLine(),
                     "OneOperandMathematicalNode", forStatement.getStepExpression().getClass().getSimpleName());
             this.errors.add(typeException.toString());
-        }
-        else {
-           ( (OneOperandMathematicalNode)forStatement.getStepExpression()).setSolStatement(false);
+        } else {
+            ((OneOperandMathematicalNode) forStatement.getStepExpression()).setSolStatement(false);
         }
         ArrayList<Element> bodyElements = new ArrayList<>();
         for (int i = 0; i < ctx.element().size(); i++) {
@@ -404,10 +404,29 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
             for (int i = 0; i < ctx.body_element().size(); i++) {
                 bodyElements.add((Element) visit(ctx.body_element(i)));
             }
+            for (int i = 0; i < pageNodes.size(); i++) {
+                for (int j = 0; j < pageNodes.get(i).getBodyElements().size(); j++) {
+                    if (pageNodes.get(i).getBodyElements().get(j) instanceof Yield) {
+                        if (((Yield) pageNodes.get(i).getBodyElements().get(j)).getName().equals(
+                                section.getName()
+                        )) {
+                            for (int k = 0; k < pageNodes.get(i).getBodyElements().size(); k++) {
+                                if (k < j) {
+                                    bodyElements.add(0, pageNodes.get(i).getBodyElements().get(k));
+                                } else if (k > j) {
+                                    bodyElements.add(pageNodes.get(i).getBodyElements().get(k));
+                                }
+                            }
+//                            ((Yield) pageNodes.get(i).getBodyElements().get(j)).setBodyElements(((Section) section.getBodyElements().get(j)).getBodyElements());
+                        }
+                    }
+                }
+            }
             section.setBodyElements(bodyElements);
             return section;
         } else {
             Yield yield = new Yield();
+            /// get section elements and add them to yield
             yield.setName(ctx.STRING().getText());
             return yield;
         }
@@ -860,7 +879,7 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
 
     @Override
     public AbstractNode visitController_body_element(LanguageParser.Controller_body_elementContext ctx) {
-         if (ctx.REDIRECT() != null) {
+        if (ctx.REDIRECT() != null) {
             String goalPageId = ctx.ID().getText();
             return new Redirect(goalPageId);
         }
@@ -975,8 +994,8 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
 
     @Override
     public AbstractNode visitArray(LanguageParser.ArrayContext ctx) {
-        ArrayList<Expression> elements=new ArrayList<>();
-        for (int i = 0; i <ctx.expression().size() ; i++) {
+        ArrayList<Expression> elements = new ArrayList<>();
+        for (int i = 0; i < ctx.expression().size(); i++) {
             elements.add((Expression) visit(ctx.expression(i)));
         }
         return new ListNode(elements);
@@ -985,7 +1004,7 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
     @Override
     public AbstractNode visitMap_value(LanguageParser.Map_valueContext ctx) {
         System.out.println("in map_value visitor");
-        MapPairNode keyValue= new MapPairNode();
+        MapPairNode keyValue = new MapPairNode();
         keyValue.setKey(ctx.ID().getText());
         keyValue.setValue((Expression) visit(ctx.expression()));
         return keyValue;
@@ -994,8 +1013,8 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
     @Override
     public AbstractNode visitMap(LanguageParser.MapContext ctx) {
         System.out.println("in map visitor");
-        ArrayList<MapPairNode> pairNodes=new ArrayList<>();
-        for (int i = 0; i <ctx.map_value().size() ; i++) {
+        ArrayList<MapPairNode> pairNodes = new ArrayList<>();
+        for (int i = 0; i < ctx.map_value().size(); i++) {
             pairNodes.add((MapPairNode) visit(ctx.map_value(i)));
         }
         return new MapNode(pairNodes);
@@ -1010,7 +1029,7 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
     @Override
     public AbstractNode visitLiteralObjectExpression(LanguageParser.LiteralObjectExpressionContext ctx) {
         System.out.println("in literal object expression visitor");
-        MapNode map=(MapNode) visit(ctx.map());
+        MapNode map = (MapNode) visit(ctx.map());
         return map;
     }
 
@@ -1019,7 +1038,7 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
         SharedDataDeclaration sharedDataDeclaration = new SharedDataDeclaration();
         sharedDataDeclaration.setId(ctx.ID().toString());
         sharedDataDeclaration.setValue((Expression) visit(ctx.expression()));
-        if(sharedDataDeclaration.getValue() instanceof OneOperandMathematicalNode){
+        if (sharedDataDeclaration.getValue() instanceof OneOperandMathematicalNode) {
             ((OneOperandMathematicalNode) sharedDataDeclaration.getValue()).setSolStatement(false);
         }
         return sharedDataDeclaration;

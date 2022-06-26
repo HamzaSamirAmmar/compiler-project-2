@@ -34,4 +34,20 @@ public class Section extends Element implements PageCallable {
         return formatter;
     }
 
+    @Override
+    public String toHtmlCode() {
+                StringBuilder code = new StringBuilder("");
+        for (int i = 0; i < bodyElements.size(); i++) {
+            code.append(bodyElements.get(i).toHtmlCode() + "\n");
+        }
+        return code.toString();
+    }
+
+    public ArrayList<Element> getBodyElements() {
+        return bodyElements;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

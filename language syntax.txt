@@ -95,10 +95,13 @@ page p2 head("no head") extends p1 {
 @endrole
 }
 page p3 head("no head") extends p2 {
-
+text ("My First Heading" ,24,#0000, ["heading tag"=>'h1'])
+@yield("test")
+text ("My first paragraph." ,10,#0000, ['Paragraph'=> 'p'])
 }
 page p4 head("no head") extends p3 {
-
+@section("test") text ("My test paragraph." ,10,#0000, ['Paragraph'=> 'p'])
+ @endsection
 }
 
 controller c1 controles p0{
