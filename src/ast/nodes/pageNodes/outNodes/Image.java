@@ -69,4 +69,19 @@ public class Image extends OutNode {
         formatter.object(extraAttributes.toString());
         return formatter ;
     }
+    /*
+    <img src="img_girl.jpg" alt="Girl in a jacket" width="500" height="600">
+    */
+    @Override
+    public String toHtmlCode() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("<img");
+        if (extraAttributes != null) {
+            builder.append(" " + extraAttributes.toHtmlCode());
+        }
+        builder.append(" src= ").append(imgReference);
+        builder.append(" width= " + width + " height= "+ height);
+        builder.append(">").append(System.getProperty("line.separator"));
+        return builder.toString();
+    }
 }

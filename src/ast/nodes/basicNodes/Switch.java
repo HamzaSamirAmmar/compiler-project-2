@@ -9,11 +9,12 @@ import java.util.ArrayList;
 
 public class Switch extends BasicElement {
 
-    Expression expression;//TODO Variable ,indexed,concat
+    Expression expression;
     ArrayList<SwitchCase> switchCases;
 
     public Switch(Expression expression, ArrayList<SwitchCase> switchCaseExpressions) {
         this.expression = expression;
+
         this.switchCases = switchCaseExpressions;
     }
 
@@ -31,6 +32,28 @@ public class Switch extends BasicElement {
 
     public void setSwitchCaseExpressions(ArrayList<SwitchCase> switchCaseExpressions) {
         this.switchCases = switchCaseExpressions;
+    }
+
+    @Override
+    public String toHtmlCode() {
+        final String beginSwitch = "<?php switch (" + expression.toCode() + "): ?>\n";
+        final String endSwitch = "\n<?php endswitch; ?>";
+        StringBuilder switchCasesCode = new StringBuilder("");
+        for (SwitchCase switchCase : switchCases) {
+            switchCasesCode.append(switchCase.toHtmlCode());
+        }
+        return beginSwitch + switchCasesCode + endSwitch;
+    }
+
+    @Override
+    public String toPhpCode() {
+        final String beginSwitch = "Switch (" + expression.toCode() + ") {\n";
+        final String endSwitch = "\n}";
+        StringBuilder switchCasesCode = new StringBuilder("");
+        for (SwitchCase switchCase : switchCases) {
+            switchCasesCode.append(switchCase.toPhpCode());
+        }
+        return beginSwitch + switchCasesCode + endSwitch;
     }
 
     @Override

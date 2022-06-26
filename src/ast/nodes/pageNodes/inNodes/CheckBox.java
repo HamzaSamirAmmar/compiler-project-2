@@ -2,7 +2,7 @@ package ast.nodes.pageNodes.inNodes;
 
 import ast.nodes.Element;
 import ast.nodes.basicNodes.expressions.Expression;
-import ast.nodes.basicNodes.expressions.literals.MapNode;
+import ast.nodes.basicNodes.expressions.literals.*;
 import ast.nodes.pageNodes.PageCallable;
 import ast.nodes.util.Formatter;
 
@@ -65,5 +65,27 @@ public class CheckBox extends Element implements PageCallable {
         if (extraAttributes != null)
             formatter.object(extraAttributes.toString());
         return formatter;
+    }
+
+    @Override
+    public String toHtmlCode() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("<div class=\"form-check\">")
+                .append(System.getProperty("line.separator"))
+                .append("<input class=\"form-check-input\" type=\"checkbox\" ");
+        if (extraAttributes != null) {
+            builder.append(extraAttributes.toHtmlCode());
+        }
+                builder.append("name= " + name + " ")
+                .append("value=<?php echo " + value.toCode() + " ?> ")
+                .append("id =" + name);
+
+        builder.append(">")
+                .append(System.getProperty("line.separator"))
+                .append("<label class=\"form-check-label\" for= " + name + ">")
+                .append(label,1,label.length()-1).append("</label>").append(System.getProperty("line.separator"))
+                .append("</div>").append(System.getProperty("line.separator"));
+
+        return builder.toString();
     }
 }

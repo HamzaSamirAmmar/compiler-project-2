@@ -58,10 +58,34 @@ public class Text extends OutNode {
     @Override
     protected Formatter nodeValue(Formatter formatter) {
         formatter.object(text.toString());
-        formatter.addProperty("fontSize ",fontSize.toString());
-        formatter.addProperty("color ",color);
-        if(extraAttributes!=null)
+        formatter.addProperty("fontSize ", fontSize.toString());
+        formatter.addProperty("color ", color);
+        if (extraAttributes != null)
             formatter.object(extraAttributes.toString());
-        return formatter ;
+        return formatter;
+    }
+
+    /*
+     * <p style="font-size:5vw;">Resize the browser window to see how the text size scales.</p>
+     * */
+    @Override
+    public String toHtmlCode() {
+        StringBuilder builder = new StringBuilder();
+        StringBuilder style = new StringBuilder(" ");
+        builder.append("<div");
+        if (extraAttributes != null)
+            for (int i = 0; i < extraAttributes.getPairs().size(); i++) {
+
+                if (extraAttributes.getPairs().get(i).getKey().substring(1,extraAttributes.getPairs().get(i).getKey().length()-1)
+                        .equals("style")) {
+                    style.append(extraAttributes.getPairs().get(i).getValue().toCode(),1,extraAttributes.getPairs().get(i).getValue().toCode().length()-1);
+                }
+                else builder.append(" " + extraAttributes.getPairs().get(i).toHtmlCode());
+            }
+        builder.append(" style= \"font-size:" + fontSize.toString() + "px;")
+                .append(" color: " + color + " ; " + style + " \"");
+        builder.append(">").append(text.toCode(), 1, text.toCode().length()-1);
+        builder.append("</div>").append(System.getProperty("line.separator"));
+        return builder.toString();
     }
 }

@@ -3,8 +3,248 @@ program: {
 		page: {
 			extended page ID: null,
 			ID: p0,
-			title: "title",
+			title: "Login Form Design",
 			page body element: [
+				Image: {
+					height : 50,
+					imgReference : "background.jpg",
+					width : 50,
+					map: {
+						pair: {
+							value: string: {
+							stringValue:   background-position: center;
+						                                  background-repeat: no-repeat;
+						                                  background-size: cover;
+						                                  pointer-events: none; position: absolute; width: 100%; height: 100%; z-index: -1;,
+						},
+							key: "style",
+						},
+					},
+				},
+				text: {
+					color : #000000,
+					fontSize : 30,
+					string: {
+						stringValue: Login,
+					},
+					map: {
+						pair: {
+							value: string: {
+							stringValue: position: relative; font-size:30px; color: #000000 ;  text-align: center; font-weight: bold; line-height: 2; padding-top: 80px; padding-left: 450px; padding-right: 450px;
+						                                        background-image: linear-gradient(to bottom, rgba(100, 100, 100, 1) 0%, rgba(211, 211, 211, 1) 100%), linear-gradient(to bottom, rgba(211, 211, 211, 1) 0%, rgba(211, 211, 211, 1) 100%);
+						                                        background-clip: content-box;,
+						},
+							key: "style",
+						},
+					},
+				},
+				Form Node: {
+					Form Action: "c1",
+					Form method: post,
+					map: {
+						pair: {
+							value: string: {
+							stringValue: text-align: center; padding-left: 450px; padding-right: 450px;
+						                             background-image: linear-gradient(to bottom, rgba(211, 211, 211, 1) 0%, rgba(240,230,240,1) 100%), linear-gradient(to bottom, rgba(140,140,140,1) 0%, rgba(140,140,140,1) 100%);
+						                             background-clip: content-box;,
+						},
+							key: "style",
+						},
+					},
+					formBody: [
+						TextField Node: {
+							TextField Name: "user",
+							TextField Label: "UserName",
+							TextField Value: string: {
+							stringValue: enter your name,
+						},
+							map: {
+								pair: {
+									value: string: {
+									stringValue:  opacity: 0.5;,
+								},
+									key: "style",
+								},
+							},
+						},
+						list: {
+							isOrdered : true,
+							listBody: [],
+						},
+						TextField Node: {
+							TextField Name: "password",
+							TextField Label: "Password",
+							TextField Value: string: {
+							stringValue: enter your password,
+						},
+							map: {
+								pair: {
+									value: string: {
+									stringValue:  opacity: 0.5;,
+								},
+									key: "style",
+								},
+							},
+						},
+						list: {
+							isOrdered : true,
+							listBody: [],
+						},
+						Button: {
+							text : "submit",
+							action : "/compiler_tests/c1.php",
+							map: {
+								pair: {
+									value: string: {
+									stringValue: submit,
+								},
+									key: "type",
+								},
+							},
+						},
+						list: {
+							isOrdered : true,
+							listBody: [],
+						},
+						text: {
+							color : #000000,
+							fontSize : 11,
+							string: {
+								stringValue: not yet a member?  ,
+							},
+						},
+						Link: {
+							linkReference : 'c2',
+							linkBody: [
+								text: {
+									color : #050000,
+									fontSize : 12,
+									string: {
+										stringValue: register,
+									},
+								}
+							],
+						}
+					],
+				}
+			],
+		},
+		page: {
+			extended page ID: null,
+			ID: page0,
+			title: "trying",
+			page body element: [
+				Form Node: {
+					Form Action: "c1",
+					Form method: get,
+					formBody: [
+						CheckBox Node: {
+							CheckBox Value: decimalValue: {
+							decimalValue: 3.0,
+						},
+							CheckBox Name: "Default checkbox",
+							CheckBox Label: "flexCheckDefault",
+						},
+						Date Node: {
+							Date Label: "start",
+							Date Value: additiveNode: {
+							Operator: -,
+							leftOperand: additiveNode: {
+							Operator: -,
+							leftOperand: decimalValue: {
+							decimalValue: 2018.0,
+						},
+							rightOperand: decimalValue: {
+							decimalValue: 7.0,
+						},
+						},
+							rightOperand: decimalValue: {
+							decimalValue: 22.0,
+						},
+						},
+							Date Name: "start date",
+						},
+						list: {
+							isOrdered : true,
+							listBody: [
+								Link: {
+									linkReference : 'www.google.com',
+									linkBody: [
+										text: {
+											color : #050000,
+											fontSize : 30,
+											string: {
+												stringValue: hello,
+											},
+										}
+									],
+								},
+								Image: {
+									height : 50,
+									imgReference : "https://cdn.pixabay.com/photo/2015/09/16/08/55/online-942408_960_720.jpg",
+									width : 50,
+								}
+							],
+						},
+						TextField Node: {
+							TextField Name: "myField",
+							TextField Label: "enter your name",
+							TextField Value: string: {
+							stringValue: theValue,
+						},
+						},
+						list: {
+							isOrdered : true,
+							listBody: [],
+						},
+						Selection Node: {
+							Selection Name: "select your favorite",
+							SelectionOptions: [
+								Option Node: {
+									Label: "book",
+									string: {
+										stringValue: algo,
+									},
+								},
+								Option Node: {
+									Label: "story",
+									string: {
+										stringValue: wimpy,
+									},
+								}
+							],
+						},
+						Radio Node: {
+							Radio Name: newRadio,
+							RadioOptions: [
+								Option Node: {
+									Label: "book1",
+									string: {
+										stringValue: algo1,
+									},
+								},
+								Option Node: {
+									Label: "story1",
+									string: {
+										stringValue: wimpy1,
+									},
+								}
+							],
+						},
+						Button: {
+							text : "submit",
+							action : "/compiler_tests/c1.php",
+							map: {
+								pair: {
+									value: string: {
+									stringValue: submit,
+								},
+									key: "type",
+								},
+							},
+						}
+					],
+				},
 				variableDeclaration: {
 					id: x,
 					value(decimalValue): {
@@ -28,6 +268,38 @@ program: {
 					value(string): {
 						stringValue: this is a string,
 					},
+				},
+				table: {
+					tableBody: [
+						text: {
+							color : #050000,
+							fontSize : 20,
+							string: {
+								stringValue: rama,
+							},
+						},
+						Image: {
+							height : 50,
+							imgReference : "https://cdn.pixabay.com/photo/2015/09/16/08/55/online-942408_960_720.jpg",
+							width : 50,
+						}
+					],
+					headers: [
+						text: {
+							color : #050000,
+							fontSize : 20,
+							string: {
+								stringValue: name,
+							},
+						},
+						text: {
+							color : #050000,
+							fontSize : 20,
+							string: {
+								stringValue: pic,
+							},
+						}
+					],
 				}
 			],
 		},

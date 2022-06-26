@@ -63,8 +63,38 @@ public class TextField extends Element implements PageCallable {
         formatter.addProperty("TextField Name", name);
         formatter.addProperty("TextField Value", value.toString());
         formatter.addProperty("TextField Label", label);
-        if(extraAttributes!=null)
+        if (extraAttributes != null)
             formatter.object(extraAttributes.toString());
         return formatter;
+    }
+
+    /*
+    <label for="fname">First name:</label>
+  <input type="text" id="fname" name="fname"><br><br>
+    * */
+    @Override
+    public String toHtmlCode() {
+        String id = name;
+        StringBuilder builder = new StringBuilder();
+        if (extraAttributes != null)
+        for (int i = 0; i < extraAttributes.getPairs().size(); i++) {
+            if (extraAttributes.getPairs().get(i).getKey().equals("id")) {
+                id = extraAttributes.getPairs().get(i).getValue().toCode();
+            }
+        }
+        builder.append("<label ");
+        builder.append("for= " + id);
+        builder.append(">").append(label,1,label.length()-1).append("</label>").append(System.getProperty("line.separator"));
+        builder.append("<input type= \"text\"");
+        if (extraAttributes != null) {
+            builder.append(" " + extraAttributes.toHtmlCode());
+        }
+        System.out.println("///////////**********////*" +value.toCode() + "///////////**********////*");
+        builder.append("id= " + id + " ")
+                .append("name= " + name + " ").append("value= \" ")
+                .append( value.toCode(),1, value.toCode().length()-1)
+                .append("\"")
+                .append(">").append(System.getProperty("line.separator"));
+        return builder.toString();
     }
 }

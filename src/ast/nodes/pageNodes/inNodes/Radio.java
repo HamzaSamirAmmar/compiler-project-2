@@ -56,4 +56,34 @@ public class Radio extends Element implements PageCallable {
         formatter.array("RadioOptions", new ArrayList<>(options));
         return formatter;
     }
+    /*
+    * <div class="form-check">
+  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+  <label class="form-check-label" for="flexRadioDefault1">
+    Default radio
+  </label>
+</div>
+     */
+
+    @Override
+    public String toHtmlCode() {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i <options.size() ; i++) {
+        builder.append("<div class=\"form-check\">")
+                .append(System.getProperty("line.separator"))
+                .append("<input class=\"form-check-input\" type=\"radio\" ");
+        if (extraAttributes != null) {
+            builder.append(extraAttributes.toHtmlCode());
+        }
+        builder.append("name= " + name + " ")
+                .append("id =" + name);
+        builder.append(">")
+                .append(System.getProperty("line.separator"))
+                .append("<label class=\"form-check-label\" for= " + name + ">")
+                .append(options.get(i).toRadioHtmlCode()).append("</label>").append(System.getProperty("line.separator"))
+                .append("</div>").append(System.getProperty("line.separator"));
+        }
+        return builder.toString();
+
+    }
 }
