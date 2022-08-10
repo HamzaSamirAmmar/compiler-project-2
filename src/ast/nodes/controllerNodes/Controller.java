@@ -65,7 +65,8 @@ public class Controller extends AbstractNode {
                 "include 'util/checkValid.php';\n" +
                 "include 'util/checkRole.php';\n" +
                 "include 'util/checkAuth.php';\n" +
-                "include 'util/redirect.php';\n"
+                "include 'util/redirect.php';\n" +
+                 "session_start();\n"
                 +innerElementCode;
         return code;
     }

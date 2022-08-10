@@ -13,7 +13,14 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"></head>
 <body>
-<button class ='btn btn-success' type ='submit' style ='margin-left: 120px; margin-top: 20px; margin-bottom: 50px;' class= "btn btn-primary" formaction= "/compiler_tests/c1.php" >create a new one</button>
+<?php $_SESSION['welcome']='welcome to this page';
+ ?>
+<?php $name = $_SESSION['name'];
+ ?>
+<div class ='alert alert-info' style= "font-size:20px; color: #ffffff ;   "><?php echo $_SESSION['welcome']  ; ?></div>
+<a href= 'login.php'>
+<div class ='btn btn-success' type ='submit' style= "font-size:15px; color: #ffffff ;  margin-left: 120px; margin-top: 20px; margin-bottom: 50px; ">go back</div>
+</a>
 <table class="table">
 <tr>
 <th><div style= "font-size:20px; color: #050000 ;  margin-left: 120px; margin-top: 20px; ">ID</div>
@@ -40,5 +47,23 @@
 </td>
 </tr>
 </table>
+<?php
+include 'util/checkAuth.php';
+if(checkAuth()){?>
+<?php 
+                echo "i am logged in"
+         ?>
+<?php  } else { ?>
+<?php 
+                echo "i am not logged in"
+         ?>
+<?php } ?>
+<?php
+include 'util/checkInRoles.php';
+if(checkInRoles( [ 'admin' ]  )){?>
+<div class ='alert alert-success' style= "font-size:20px; color: #ffffff ;   ">i am an admin</div>
+<?php  } else { ?>
+<div class ='alert alert-danger' style= "font-size:20px; color: #ffffff ;   ">i am not an admin</div>
+<?php } ?>
 </body>
 </html>

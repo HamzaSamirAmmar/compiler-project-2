@@ -47,7 +47,7 @@ public class Switch extends BasicElement {
 
     @Override
     public String toPhpCode() {
-        final String beginSwitch = "Switch (" + expression.toCode() + ") {\n";
+        final String beginSwitch = "switch (" + expression.toCode() + ") {\n";
         final String endSwitch = "\n}";
         StringBuilder switchCasesCode = new StringBuilder("");
         for (SwitchCase switchCase : switchCases) {

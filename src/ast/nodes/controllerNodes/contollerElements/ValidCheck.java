@@ -38,6 +38,6 @@ public class ValidCheck extends Expression implements ControllerCallable, Logica
     }
     @Override
     public String toPhpCode() {
-        return "checkValid("+uniqueIdentifier.toCode()+" , "+password.toCode()+" )";
+        return "checkValid("+uniqueIdentifier.toCode()+" , "+password.toCode()+" );";
     }
 }

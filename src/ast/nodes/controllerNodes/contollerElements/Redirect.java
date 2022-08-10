@@ -26,6 +26,6 @@ public class Redirect  extends Element implements ControllerCallable {
     }
     @Override
     public String toPhpCode() {
-        return "redirect("+goalPageId+");\n";
+        return "redirect(\""+goalPageId+"\");\n";
     }
 }

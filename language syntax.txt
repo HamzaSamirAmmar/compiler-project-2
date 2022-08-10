@@ -1,9 +1,13 @@
-page p0 head ("Login Form Design") {
-   image("b.webp" ,50,50,
+page background head("no title") {
+image("https://i.pinimg.com/736x/5c/2b/29/5c2b2971110912a5de3afc97f25e909b--black-and-white-wallpaper.jpg" ,50,50,
    ["style" =>"  background-position: center;
                                   background-repeat: no-repeat;
                                   background-size: cover;
                                   pointer-events: none; position: absolute; width: 100%; height: 100%; z-index: -1;"])
+   @yield("content")
+}
+page p0 head ("Login Form Design") extends background{
+   @section("content")
    text ("Login" ,30,#ffffff,["style"=>"position: relative; font-size:30px ;  text-align: center; font-weight: bold; line-height: 2; padding-top: 200px; padding-left: 450px; padding-right: 450px;
                                         background-image: linear-gradient(to bottom, rgba(140, 140, 140, 1) 0%, rgba(0, 0, 0, 1) 100%), linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 100%);
                                         background-clip: content-box;"])
@@ -20,13 +24,15 @@ page p0 head ("Login Form Design") {
     link('registerPage.php'){
        text ("register" ,12,#ffffff)}
    }
+   @endsection
 }
 page registerPage head ("registration"){
- image("background1.webp" ,50,50,
+ image("https://i.pinimg.com/736x/5c/2b/29/5c2b2971110912a5de3afc97f25e909b--black-and-white-wallpaper.jpg" ,50,50,
    ["style" =>"  background-position: center;
                                   background-repeat: no-repeat;
                                   background-size: cover;
                                   pointer-events: none; position: absolute; width: 100%; height: 100%; z-index: -1;"])
+   text("credentials are not correct try to register",12,#000000,["class"=>"alert alert-warning"])
    text ("Register" ,30,#ffffff,["style"=>"position: relative; font-size:30px ;  text-align: center; font-weight: bold; line-height: 2; padding-top: 200px; padding-left: 450px; padding-right: 450px;
                                         background-image: linear-gradient(to bottom, rgba(140, 140, 140, 1) 0%, rgba(0, 0, 0, 1) 100%), linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 100%);
                                         background-clip: content-box;"])
@@ -48,11 +54,28 @@ page registerPage head ("registration"){
 }
 
 page posts head("my posts"){
+@rawphp
+echo $_SESSION['user'];
+@endrawphp
 button("create a new one" ,"/compiler_tests/c1.php",["class"=>"btn btn-success","type"=>"submit","style"=>"margin-left: 120px; margin-top: 20px; margin-bottom: 50px;"])
 table(){header:{ text ("ID" ,20,#050000,["style"=>"margin-left: 120px; margin-top: 20px;"]), text ("title" ,20,#050000,["style"=>"margin-left: 120px; margin-top: 20px;"]), text ("created_at" ,20,#050000,["style"=>"margin-left: 120px; margin-top: 20px;"]) } ,
         body: {  text ("1" ,20,#050000,["style"=>"margin-left: 120px; margin-top: 20px;"]),  text ("hello my posts" ,20,#050000,["style"=>"margin-left: 120px; margin-top: 20px;"]),text ("2022-06-25 11:00:00" ,20,#050000,["style"=>"margin-left: 120px; margin-top: 20px;"]),
                  text ("2" ,20,#050000,["style"=>"margin-left: 120px; margin-top: 20px;"]),text ("good news" ,20,#050000,["style"=>"margin-left: 120px; margin-top: 20px;"]),text ("2022-06-25 16:00:00" ,20,#050000,["style"=>"margin-left: 120px; margin-top: 20px;"])
         }}
+        @auth
+        @rawphp
+        echo "i am logged in"
+        @endrawphp
+        @else
+         @rawphp
+                echo "i am not logged in"
+         @endrawphp
+        @endauth
+@role(['admin'])
+    text("i am an admin",20,#ffffff,["class"=>"alert alert-success"])
+    @else
+    text("i am not an admin",20,#ffffff,["class"=>"alert alert-success"])
+@endrole
 }
 
 page page0 head("trying") {
@@ -105,12 +128,16 @@ page p4 head("no head") extends p3 {
 }
 
 controller c1 controles p0{
+    @name=form_data(user)
+    @password=form_data(password)
+    @s=checkValid(@name,@password)
     @x=checkAuthenticated()
-    @name=form_data(name)
-    @rawphp
-    $s=5;
-    echo "i am here";
-    @endrawphp
+    if(@s){
+        redirect posts
+    }
+    else {
+        redirect registerPage
+    }
 }
 
 controller c2 controles p0{

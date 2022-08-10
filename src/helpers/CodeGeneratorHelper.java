@@ -51,7 +51,7 @@ public class CodeGeneratorHelper {
                     "function checkRole($role) {\n" +
                     "    $usersRoles=$GLOBALS['usersRoles'];\n" +
                     "    $authorized=false;\n" +
-                    "    if(isset($_SESSION['user']){\n" +
+                    "    if(isset($_SESSION['user'])){\n" +
                     "     if(in_array($role,$usersRoles[$_SESSION['user']]))\n" +
                     "        {\n" +
                     "            $authorized=true;\n" +
@@ -120,7 +120,7 @@ public class CodeGeneratorHelper {
             file.createNewFile();
             fileWriter = new FileWriter(fileName);
             fileWriter.write("<?php \n" +
-                    "function redirct($targetPageId){\n" +
+                    "function redirect($targetPageId){\n" +
                     "header(\"Location:\".$targetPageId.'.php');\n" +
                     "exit;\n" +
                     "}");

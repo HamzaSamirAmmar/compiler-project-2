@@ -91,7 +91,7 @@ public class TextField extends Element implements PageCallable {
         }
         System.out.println("///////////**********////*" +value.toCode() + "///////////**********////*");
         builder.append("id= " + id + " ")
-                .append("name= " + name + " ").append("value= \" ")
+                .append("name= " + name + " ").append("placeholder= \" ")
                 .append( value.toCode(),1, value.toCode().length()-1)
                 .append("\"")
                 .append(">").append(System.getProperty("line.separator"));

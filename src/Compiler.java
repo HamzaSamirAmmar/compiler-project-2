@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class Compiler {
 
-	static String filePath = "language syntax.txt";
+	static String filePath = "samples/login_register_posts.blaze";
 	static String ASTPath = "AST.txt";
 	static String ErrorFilePath="errors.txt";
 

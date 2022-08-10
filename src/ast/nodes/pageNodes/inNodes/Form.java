@@ -84,7 +84,7 @@ public class Form extends Element implements PageCallable {
     @Override
     public String toHtmlCode() {
        StringBuilder builder = new StringBuilder();
-        builder.append("<form action= ").append(action+ ".php")
+        builder.append("<form action= \"").append(action,1,action.length()-1).append(".php\"")
                 .append(" method=").append("\""+method+"\" ");
         if (extraAttributes != null) {
             builder.append(" " + extraAttributes.toHtmlCode());

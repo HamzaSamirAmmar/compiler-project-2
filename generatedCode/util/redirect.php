@@ -1,5 +1,5 @@
 <?php 
-function redirct($targetPageId){
+function redirect($targetPageId){
 header("Location:".$targetPageId.'.php');
 exit;
 }

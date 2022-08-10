@@ -304,6 +304,7 @@ public class BaseListener extends LanguageParserBaseListener {
         ArrayList<Symbol> symbols = new ArrayList<>();
         AbstractMap.SimpleEntry<String, ArrayList<Symbol>> scope = new AbstractMap.SimpleEntry("controller", symbols);
         symbolTable.pushNewScope(scope);
+
     }
 
     @Override

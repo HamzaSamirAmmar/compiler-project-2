@@ -51,7 +51,7 @@ public class IfStatement extends BasicElement {
 
     @Override
     public String toPhpCode() {
-        String beginIf = "(" + condition.toCode() + ") {\n";
+        String beginIf = "if(" + condition.toCode() + ") {\n";
         String endIF = "\n}";
         String beginElse = "else {\n";
         String endElse = "\n}";

@@ -14,9 +14,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"></head>
 <body>
 <img style ='  background-position: center;
-                                  background-repeat: no-repeat;
-                                  background-size: cover;
-                                  pointer-events: none; position: absolute; width: 100%; height: 100%; z-index: -1;'  src= "https://i.pinimg.com/736x/5c/2b/29/5c2b2971110912a5de3afc97f25e909b--black-and-white-wallpaper.jpg" width= 50 height= 50>
+                 background-repeat: no-repeat;
+                 background-size: cover;
+                 pointer-events: none; position: absolute; width: 100%; height: 100%; z-index: -1;'  src= "https://i.pinimg.com/736x/5c/2b/29/5c2b2971110912a5de3afc97f25e909b--black-and-white-wallpaper.jpg" width= 50 height= 50>
 
 <div style= "font-size:30px; color: #ffffff ;  position: relative; font-size:30px ;  text-align: center; font-weight: bold; line-height: 2; padding-top: 200px; padding-left: 450px; padding-right: 450px;
                                         background-image: linear-gradient(to bottom, rgba(140, 140, 140, 1) 0%, rgba(0, 0, 0, 1) 100%), linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 100%);
@@ -33,12 +33,6 @@
 <ol>
 </ol>
 <button type ='submit' class= "btn btn-primary" >submit</button>
-<ol>
-</ol>
-<div style= "font-size:11px; color: #ffffff ;   ">not yet a member?  </div>
-<a href= 'registerPage.php'>
-<div style= "font-size:12px; color: #ffffff ;   ">register</div>
-</a>
 </form>
 
 </body>

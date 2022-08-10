@@ -67,7 +67,7 @@ public class Button extends OutNode  /*why not? it can be in href for example*/ 
             builder.append(" " + extraAttributes.toHtmlCode());
         }
         builder.append("class= \"btn btn-primary\" ")
-                .append("formaction= " + action + " ")
+//                .append("formaction= " + action + " ")
                 .append(">").append(text,1,text.length()-1).append("</button>")
                 .append(System.getProperty("line.separator"));
         return builder.toString();

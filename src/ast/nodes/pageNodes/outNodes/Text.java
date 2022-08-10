@@ -1,7 +1,7 @@
 package ast.nodes.pageNodes.outNodes;
 
 import ast.nodes.basicNodes.expressions.Expression;
-import ast.nodes.basicNodes.expressions.literals.MapNode;
+import ast.nodes.basicNodes.expressions.literals.*;
 import ast.nodes.util.Formatter;
 
 
@@ -85,9 +85,12 @@ public class Text extends OutNode {
 
         builder.append(" style= \"font-size:" + fontSize.toString() + "px;")
                 .append(" color: " + color + " ; " + style + " \"").append(">");
-        if(text.toCode().length()>2)
-        builder.append(text.toCode(), 1, text.toCode().length()-1);
-        else builder.append(text.toCode());
+        if(text.toCode().length()>2 && text instanceof StringNode)
+            builder.append(text.toCode(), 1, text.toCode().length()-1);
+        else if(text instanceof FormDataNode || text instanceof SharedDataNode || text instanceof VariableNode)
+            builder.append(text.toEchoHtmlCode());
+            else
+            builder.append(text.toCode());
 
 
         builder.append("</div>").append(System.getProperty("line.separator"));
