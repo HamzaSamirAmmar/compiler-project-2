@@ -56,6 +56,7 @@ public class AtInverseRole extends Element implements PageCallable {
             if(i!= roles.size()-1)
                 rolesArray.append(" , ");
         }
+        rolesArray.append(" ]");
         StringBuilder innerBodyElementCode= new StringBuilder("");
         for (Element element:bodyElements) {
             innerBodyElementCode.append(element.toHtmlCode());
@@ -66,7 +67,7 @@ public class AtInverseRole extends Element implements PageCallable {
         }
         StringBuilder code=new StringBuilder(
                 "<?php\n" +
-                        "include 'util/checkInRoles.php';\n" +
+                        "include_once 'util/checkInRoles.php';\n" +
                         "if( !checkInRoles( "+rolesArray+" )){?>\n" );
         code.append(innerBodyElementCode);
 

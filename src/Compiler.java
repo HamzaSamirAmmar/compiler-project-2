@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class Compiler {
 
 //	static String filePath = "samples/login_register_posts.blaze";
-	static String filePath = "semanticCheckTests/IncompatibleExpressionTypeTest.blaze";
+	static String filePath = "samples/authentication_authorization_tests.blaze";
 	static String ASTPath = "AST.txt";
 	static String ErrorFilePath="errors.txt";
 

@@ -1,5 +1,1 @@
-line 2 at column 4: Incompatible Expression type required :LogicalNode given :StringNode
-line 2 at column 4: Incompatible Expression type required :LogicalNode given :StringNode
-line 12 at column 15: Incompatible Expression type required :String or variable name given :DecimalNode
-line 12 at column 17: Incompatible Expression type required :String or variable name given :DecimalNode
-line 13 at column 14: Incompatible Expression type required :String or variable name given :DecimalNode
+line 37 at column 13: trying to set form action to undefined controller

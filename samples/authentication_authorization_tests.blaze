@@ -1,0 +1,94 @@
+page background head("no title") {
+image("https://png.pngtree.com/thumb_back/fh260/background/20211118/pngtree-technology-round-dashboard-image_908915.jpg" ,50,50,
+   ["style" =>"  background-position: center;
+                 background-repeat: no-repeat;
+                 background-size: cover;
+                 pointer-events: none; position: absolute; width: 100%; height: 100%; z-index: -1;"])
+   @yield("content")
+}
+page login head ("Login Form Design") extends background{
+    @guest
+        text("it is your first time in a while logging in, welcome!",12,#000000,["class"=>"alert alert-info"])
+    @else
+         text("you are already logged in!",12,#000000,["class"=>"alert alert-info"])
+    @endguest
+    @auth
+        text("this text will appear when you are authenticated",12,#000000,["class"=>"alert alert-success"])
+    @else
+        text("this text will appear when you are not authenticated",12,#000000,["class"=>"alert alert-success"])
+    @endauth
+   @section("content")
+   text ("Admin Panel Login" ,30,#ffffff,["style"=>"position: relative; font-size:30px ;  text-align: center; font-weight: bold; line-height: 2; padding-top: 200px; padding-left: 450px; padding-right: 450px;
+                                        background-image: linear-gradient(to bottom, rgba(140, 140, 140, 1) 0%, rgba(0, 0, 0, 1) 100%), linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 100%);
+                                        background-clip: content-box;"])
+   form(post,"redirector",["style"=>"text-align: center; padding-left: 450px; padding-right: 450px;
+                             background-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0,0,0,1) 100%), linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 100%);
+                             background-clip: content-box;"]){
+    textField("user","","enter your name",["style"=>" opacity: 0.5;"])
+    list(true){}
+    textField("password","","enter your password",["style"=>" opacity: 0.5;"])
+    list(true){}
+    button("submit" ,"/compiler_tests/posts.php",["type"=>"submit"] )
+
+   }
+   @endsection
+
+}
+
+page registerPage head ("error") extends background{
+  @section("content")
+   text("credentials are not correct try to register",12,#000000,["class"=>"alert alert-warning"])
+   text ("failed logging" ,30,#ffffff,["style"=>"position: relative; font-size:30px ;  text-align: center; font-weight: bold; line-height: 2; padding-top: 200px; padding-left: 450px; padding-right: 450px;
+                                        background-image: linear-gradient(to bottom, rgba(140, 140, 140, 1) 0%, rgba(0, 0, 0, 1) 100%), linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 100%);
+                                        background-clip: content-box;"])
+   form(post,"redirector",["style"=>"text-align: center; padding-left: 450px; padding-right: 450px;
+                             background-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0,0,0,1) 100%), linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 100%);
+                             background-clip: content-box;"]){
+    list(true){}
+    text ("try again?  " ,11,#ffffff)
+    link('login.php'){
+       text ("login" ,12,#ffffff)}
+   }
+   @endsection
+}
+page adminDashboard head("admin dashboard"){
+    image("https://wallpaperaccess.com/full/16668.jpg" ,50,50,
+       ["style" =>"  background-position: center;
+                     background-repeat: no-repeat;
+                     background-size: cover;
+                     pointer-events: none; position: absolute; width: 100%; height: 100%; z-index: -1;"])
+    @role(['admin'])
+         text("you are an admin,welcome to admin dashboard!",12,#000000,["class"=>"alert alert-info"])
+    @else
+         text("you are not an admin,get out!",12,#000000,["class"=>"alert alert-danger"])
+    @endrole
+}
+page intruder head("intruder"){
+    image("https://ak.picdn.net/shutterstock/videos/33417148/thumb/10.jpg" ,50,50,
+       ["style" =>"  background-position: center;
+                     background-repeat: no-repeat;
+                     background-size: cover;
+                     pointer-events: none; position: absolute; width: 100%; height: 100%; z-index: -1;"])
+    @inverserole(['admin'])
+         text("you are an intruder!",12,#000000,["class"=>"alert alert-danger"])
+    @else
+         text("you are not an intruder,sorry!",12,#000000,["class"=>"alert alert-warning"])
+    @endinverserole
+}
+
+controller redirector controles login{
+    @name=form_data(user)
+    @password=form_data(password)
+    @valid=checkValid(@name,@password)
+    @isAdmin=checkRole('admin')
+    if(@isAdmin && @valid ){
+        redirect adminDashboard
+    }
+    else {
+        if (!@valid ){
+            redirect registerPage
+      } else{
+            redirect intruder
+            }
+      }
+}
