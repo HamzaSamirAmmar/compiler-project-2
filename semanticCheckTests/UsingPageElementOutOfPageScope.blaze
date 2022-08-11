@@ -1,0 +1,8 @@
+page elements head("Page Elements") {
+@x = "Hello World"
+text(@x,20,#000000)
+}
+
+controller elementsController controles elements {
+text("I am a page element",20,#000000)
+}
