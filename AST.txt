@@ -2,531 +2,121 @@ program: {
 	pages: [
 		page: {
 			extended page ID: null,
-			ID: background,
-			title: "no title",
+			ID: p1,
+			title: "title",
 			page body element: [
-				Image: {
-					height : 50,
-					imgReference : "https://i.pinimg.com/736x/5c/2b/29/5c2b2971110912a5de3afc97f25e909b--black-and-white-wallpaper.jpg",
-					width : 50,
-					map: {
-						pair: {
-							value: string: {
-							stringValue:   background-position: center;
-						                 background-repeat: no-repeat;
-						                 background-size: cover;
-						                 pointer-events: none; position: absolute; width: 100%; height: 100%; z-index: -1;,
-						},
-							key: "style",
-						},
-					},
+				if statement: {
+					condition: string: {
+					stringValue: I am not a logical expression,
 				},
-				@Yield: {
-					name: "content",
-				}
-			],
-		},
-		page: {
-			extended page ID: background,
-			ID: login,
-			title: "Login Form Design",
-			page body element: [
-				@Section: {
-					name: "content",
-					Image: {
-						height : 50,
-						imgReference : "https://i.pinimg.com/736x/5c/2b/29/5c2b2971110912a5de3afc97f25e909b--black-and-white-wallpaper.jpg",
-						width : 50,
-						map: {
-							pair: {
-								value: string: {
-								stringValue:   background-position: center;
-							                 background-repeat: no-repeat;
-							                 background-size: cover;
-							                 pointer-events: none; position: absolute; width: 100%; height: 100%; z-index: -1;,
-							},
-								key: "style",
-							},
-						},
-					},
-					text: {
-						color : #ffffff,
-						fontSize : 30,
-						string: {
-							stringValue: Login,
-						},
-						map: {
-							pair: {
-								value: string: {
-								stringValue: position: relative; font-size:30px ;  text-align: center; font-weight: bold; line-height: 2; padding-top: 200px; padding-left: 450px; padding-right: 450px;
-							                                        background-image: linear-gradient(to bottom, rgba(140, 140, 140, 1) 0%, rgba(0, 0, 0, 1) 100%), linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 100%);
-							                                        background-clip: content-box;,
-							},
-								key: "style",
-							},
-						},
-					},
-					Form Node: {
-						Form Action: "c1",
-						Form method: post,
-						map: {
-							pair: {
-								value: string: {
-								stringValue: text-align: center; padding-left: 450px; padding-right: 450px;
-							                             background-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0,0,0,1) 100%), linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 100%);
-							                             background-clip: content-box;,
-							},
-								key: "style",
-							},
-						},
-						formBody: [
-							TextField Node: {
-								TextField Name: "user",
-								TextField Label: "",
-								TextField Value: string: {
-								stringValue: enter your name,
-							},
-								map: {
-									pair: {
-										value: string: {
-										stringValue:  opacity: 0.5;,
-									},
-										key: "style",
-									},
-								},
-							},
-							list: {
-								isOrdered : true,
-								listBody: [],
-							},
-							TextField Node: {
-								TextField Name: "password",
-								TextField Label: "",
-								TextField Value: string: {
-								stringValue: enter your password,
-							},
-								map: {
-									pair: {
-										value: string: {
-										stringValue:  opacity: 0.5;,
-									},
-										key: "style",
-									},
-								},
-							},
-							list: {
-								isOrdered : true,
-								listBody: [],
-							},
-							Button: {
-								text : "submit",
-								action : "/compiler_tests/posts.php",
-								map: {
-									pair: {
-										value: string: {
-										stringValue: submit,
-									},
-										key: "type",
-									},
-								},
-							}
-						],
-					},
-				}
-			],
-		},
-		page: {
-			extended page ID: background,
-			ID: registerPage,
-			title: "register",
-			page body element: [
-				@Section: {
-					name: "content",
-					Image: {
-						height : 50,
-						imgReference : "https://i.pinimg.com/736x/5c/2b/29/5c2b2971110912a5de3afc97f25e909b--black-and-white-wallpaper.jpg",
-						width : 50,
-						map: {
-							pair: {
-								value: string: {
-								stringValue:   background-position: center;
-							                 background-repeat: no-repeat;
-							                 background-size: cover;
-							                 pointer-events: none; position: absolute; width: 100%; height: 100%; z-index: -1;,
-							},
-								key: "style",
-							},
-						},
-					},
-					text: {
-						color : #000000,
-						fontSize : 12,
-						string: {
-							stringValue: credentials are not correct try to register,
-						},
-						map: {
-							pair: {
-								value: string: {
-								stringValue: alert alert-warning,
-							},
-								key: "class",
-							},
-						},
-					},
-					text: {
-						color : #ffffff,
-						fontSize : 30,
-						string: {
-							stringValue: failed logging,
-						},
-						map: {
-							pair: {
-								value: string: {
-								stringValue: position: relative; font-size:30px ;  text-align: center; font-weight: bold; line-height: 2; padding-top: 200px; padding-left: 450px; padding-right: 450px;
-							                                        background-image: linear-gradient(to bottom, rgba(140, 140, 140, 1) 0%, rgba(0, 0, 0, 1) 100%), linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 100%);
-							                                        background-clip: content-box;,
-							},
-								key: "style",
-							},
-						},
-					},
-					Form Node: {
-						Form Action: "c1",
-						Form method: post,
-						map: {
-							pair: {
-								value: string: {
-								stringValue: text-align: center; padding-left: 450px; padding-right: 450px;
-							                             background-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0,0,0,1) 100%), linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 100%);
-							                             background-clip: content-box;,
-							},
-								key: "style",
-							},
-						},
-						formBody: [
-							list: {
-								isOrdered : true,
-								listBody: [],
-							},
-							text: {
-								color : #ffffff,
-								fontSize : 11,
-								string: {
-									stringValue: try again?  ,
-								},
-							},
-							Link: {
-								linkReference : 'p0.php',
-								linkBody: [
-									text: {
-										color : #ffffff,
-										fontSize : 12,
-										string: {
-											stringValue: login,
-										},
-									}
-								],
-							}
-						],
-					},
-				}
-			],
-		},
-		page: {
-			extended page ID: null,
-			ID: posts,
-			title: "my posts",
-			page body element: [
-				SharedDataDeclaration: {
-					id: welcome,
-					value(string): {
-						stringValue: welcome to this page,
-					},
-				},
-				variableDeclaration: {
-					id: name,
-					value(shared data node): {
-						name: name,
-					},
-				},
-				text: {
-					color : #ffffff,
-					fontSize : 20,
-					shared data node: {
-						name: welcome,
-					},
-					map: {
-						pair: {
-							value: string: {
-							stringValue: alert alert-info,
-						},
-							key: "class",
-						},
-					},
-				},
-				Link: {
-					linkReference : 'login.php',
-					linkBody: [
+					if body elements: [
 						text: {
 							color : #ffffff,
-							fontSize : 15,
+							fontSize : 20,
 							string: {
-								stringValue: go back,
-							},
-							map: {
-								pair: {
-									value: string: {
-									stringValue: btn btn-success,
-								},
-									key: "class",
-								},
-								pair: {
-									value: string: {
-									stringValue: submit,
-								},
-									key: "type",
-								},
-								pair: {
-									value: string: {
-									stringValue: margin-left: 120px; margin-top: 20px; margin-bottom: 50px;,
-								},
-									key: "style",
-								},
+								stringValue: i am a text,
 							},
 						}
 					],
+					else body elements: [],
 				},
-				table: {
-					tableBody: [
-						text: {
-							color : #050000,
-							fontSize : 20,
-							charValue: {
-								charValue: 1,
-							},
-							map: {
-								pair: {
-									value: string: {
-									stringValue: margin-left: 120px; margin-top: 20px;,
-								},
-									key: "style",
-								},
-							},
+				if statement: {
+					condition: concatConcatenation: {
+					operator: &&,
+					leftCondition(TwoOperandCondition): {
+						operator: >,
+						leftOperand(decimalValue): {
+							decimalValue: 3.0,
 						},
+						rightOperand(decimalValue): {
+							decimalValue: 1.0,
+						},
+					},
+					rightCondition(TwoOperandCondition): {
+						operator: >,
+						leftOperand(decimalValue): {
+							decimalValue: 3.0,
+						},
+						rightOperand(decimalValue): {
+							decimalValue: 2.0,
+						},
+					},
+				},
+					if body elements: [
 						text: {
-							color : #050000,
+							color : #ffffff,
 							fontSize : 20,
 							string: {
-								stringValue: hello my posts,
-							},
-							map: {
-								pair: {
-									value: string: {
-									stringValue: margin-left: 120px; margin-top: 20px;,
-								},
-									key: "style",
-								},
-							},
-						},
-						text: {
-							color : #050000,
-							fontSize : 20,
-							string: {
-								stringValue: 2022-06-25 11:00:00,
-							},
-							map: {
-								pair: {
-									value: string: {
-									stringValue: margin-left: 120px; margin-top: 20px;,
-								},
-									key: "style",
-								},
-							},
-						},
-						text: {
-							color : #050000,
-							fontSize : 20,
-							charValue: {
-								charValue: 2,
-							},
-							map: {
-								pair: {
-									value: string: {
-									stringValue: margin-left: 120px; margin-top: 20px;,
-								},
-									key: "style",
-								},
-							},
-						},
-						text: {
-							color : #050000,
-							fontSize : 20,
-							string: {
-								stringValue: good news,
-							},
-							map: {
-								pair: {
-									value: string: {
-									stringValue: margin-left: 120px; margin-top: 20px;,
-								},
-									key: "style",
-								},
-							},
-						},
-						text: {
-							color : #050000,
-							fontSize : 20,
-							string: {
-								stringValue: 2022-06-25 16:00:00,
-							},
-							map: {
-								pair: {
-									value: string: {
-									stringValue: margin-left: 120px; margin-top: 20px;,
-								},
-									key: "style",
-								},
+								stringValue: i am a text,
 							},
 						}
 					],
-					headers: [
-						text: {
-							color : #050000,
-							fontSize : 20,
-							string: {
-								stringValue: ID,
-							},
-							map: {
-								pair: {
-									value: string: {
-									stringValue: margin-left: 120px; margin-top: 20px;,
-								},
-									key: "style",
-								},
-							},
-						},
-						text: {
-							color : #050000,
-							fontSize : 20,
-							string: {
-								stringValue: title,
-							},
-							map: {
-								pair: {
-									value: string: {
-									stringValue: margin-left: 120px; margin-top: 20px;,
-								},
-									key: "style",
-								},
-							},
-						},
-						text: {
-							color : #050000,
-							fontSize : 20,
-							string: {
-								stringValue: created_at,
-							},
-							map: {
-								pair: {
-									value: string: {
-									stringValue: margin-left: 120px; margin-top: 20px;,
-								},
-									key: "style",
-								},
-							},
-						}
-					],
-				},
-				@Auth: {
-					body(@RawPhp): {
-						rawPHP: 
-					                echo "i am logged in"
-					        ,
-					},
-					elseBody(@RawPhp): {
-						rawPHP: 
-					                echo "i am not logged in"
-					        ,
-					},
-				},
-				@Role: {
-					'admin',
-					text: {
-						color : #ffffff,
-						fontSize : 20,
-						string: {
-							stringValue: i am an admin,
-						},
-						map: {
-							pair: {
-								value: string: {
-								stringValue: alert alert-success,
-							},
-								key: "class",
-							},
-						},
-					},
-					text: {
-						color : #ffffff,
-						fontSize : 20,
-						string: {
-							stringValue: i am not an admin,
-						},
-						map: {
-							pair: {
-								value: string: {
-								stringValue: alert alert-danger,
-							},
-								key: "class",
-							},
-						},
-					},
+					else body elements: [],
 				}
 			],
 		}
 	],
 	controllers: [
 		controller: {
-			controlled page ID: login,
+			controlled page ID: p1,
 			ID: c1,
 			controller body element: [
+				Valid credentials check: {
+					password: decimalValue: {
+					decimalValue: 5.0,
+				},
+					unique identifier: decimalValue: {
+					decimalValue: 5.0,
+				},
+				},
+				Role check: {
+					check role : decimalValue: {
+					decimalValue: 55.0,
+				},
+				},
 				variableDeclaration: {
 					id: name,
-					value(shared data node): {
-						name: user,
+					value(string): {
+						stringValue: name,
 					},
 				},
 				variableDeclaration: {
 					id: password,
-					value(shared data node): {
-						name: password,
+					value(string): {
+						stringValue: password,
 					},
 				},
 				variableDeclaration: {
-					id: s,
-					value(Valid credentials check): {
-						password: variable/functionName: {
-						name: password,
-					},
-						unique identifier: variable/functionName: {
-						name: name,
-					},
+					id: adminRole,
+					value(string): {
+						stringValue: admin,
 					},
 				},
-				if statement: {
-					condition: variable/functionName: {
-					name: s,
+				Valid credentials check: {
+					password: variable/functionName: {
+					name: password,
 				},
-					if body elements: [
-						redirection: {
-							redirect to: posts,
-						}
-					],
-					else body elements: [
-						redirection: {
-							redirect to: registerPage,
-						}
-					],
+					unique identifier: variable/functionName: {
+					name: name,
+				},
+				},
+				Role check: {
+					check role : variable/functionName: {
+					name: adminRole,
+				},
+				},
+				Valid credentials check: {
+					password: string: {
+					stringValue: password,
+				},
+					unique identifier: string: {
+					stringValue: name,
+				},
+				},
+				Role check: {
+					check role : string: {
+					stringValue: role,
+				},
 				}
 			],
 		}
