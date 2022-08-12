@@ -16,6 +16,6 @@
 <img style ='  background-position: center;
                  background-repeat: no-repeat;
                  background-size: cover;
-                 pointer-events: none; position: absolute; width: 100%; height: 100%; z-index: -1;'  src= "https://i.pinimg.com/736x/5c/2b/29/5c2b2971110912a5de3afc97f25e909b--black-and-white-wallpaper.jpg" width= 50 height= 50>
+                 pointer-events: none; position: absolute; width: 100%; height: 100%; z-index: -1;'  src= "https://png.pngtree.com/thumb_back/fh260/background/20211118/pngtree-technology-round-dashboard-image_908915.jpg" width= 50 height= 50>
 </body>
 </html>

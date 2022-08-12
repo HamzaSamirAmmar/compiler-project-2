@@ -35,7 +35,8 @@ statement
     | rawphp
     ;
 element//either a page body element(ins,outs,auth,authorizations,statements,layout inheritance) or a controller element
-    : body_element
+    : statement
+    | body_element
     | controller_body_element
     ;
 if_statement
@@ -193,7 +194,7 @@ table_header_body
     : text (COMMA text)*
     ;
 controller
-    : CONTROLLER ID CONTROLES ID CURLEY_BRACKET_OPEN (controller_body_element|statement)* CURLEY_BRACKET_CLOSE
+    : CONTROLLER ID CONTROLES ID CURLEY_BRACKET_OPEN (controller_body_element | statement)* CURLEY_BRACKET_CLOSE
     ;
 controller_body_element
     : REDIRECT ID

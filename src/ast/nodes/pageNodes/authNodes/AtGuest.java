@@ -46,7 +46,7 @@ public class AtGuest extends Element implements PageCallable {
         }
         StringBuilder code=new StringBuilder(
                 "<?php\n" +
-                        "include 'util/checkAuth.php';\n" +
+                        "include_once 'util/checkAuth.php';\n" +
                         "if(!checkAuth()){?>\n" );
         code.append(innerBodyElementCode);
 

@@ -67,7 +67,7 @@ public class AtRole extends Element implements PageCallable {
         }
         StringBuilder code=new StringBuilder(
                 "<?php\n" +
-                        "include 'util/checkInRoles.php';\n" +
+                        "include_once 'util/checkInRoles.php';\n" +
                         "if(checkInRoles( "+rolesArray+" )){?>\n" );
         code.append(innerBodyElementCode);
 

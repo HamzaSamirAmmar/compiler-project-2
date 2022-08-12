@@ -174,8 +174,10 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
     public AbstractNode visitElement(LanguageParser.ElementContext ctx) {
         if (ctx.body_element() != null)
             return visit(ctx.body_element());
-        else
+        else if(ctx.controller_body_element() != null)
             return visit(ctx.controller_body_element());
+        else return visit(ctx.statement());
+
     }
 
     @Override
@@ -882,8 +884,9 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
     public AbstractNode visitController_body_element(LanguageParser.Controller_body_elementContext ctx) {
         if (ctx.REDIRECT() != null) {
             String goalPageId = ctx.ID().getText();
-            return new Redirect(goalPageId);
-        }
+            return new Redirect(goalPageId);}
+//        }else if(ctx.statement()!=null)
+//            return visit(ctx.statement());
         return super.visitController_body_element(ctx);
     }
 

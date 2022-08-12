@@ -18,7 +18,10 @@ import java.util.ArrayList;
 
 public class Compiler {
 
-	static String filePath = "samples/login_register_posts.blaze";
+
+	static String filePath = "samples/authentication_authorization_tests.blaze";
+//	static String filePath = "semanticCheckTests/IncompatibleExpressionTypeTest.blaze";
+
 	static String ASTPath = "AST.txt";
 	static String ErrorFilePath="errors.txt";
 
@@ -53,7 +56,16 @@ public class Compiler {
 			resultFile.write(document.toString());
 			resultFile.close();
 			//printing errors
-			System.err.println("errorMessages: " + errorMessages);
+			if(!errorMessages.isEmpty()) {
+				FileWriter errorFile = new FileWriter(ErrorFilePath);
+				System.err.println("Found Errors:");
+				for (String errorMessage : errorMessages) {
+					errorFile.write(errorMessage);
+					errorFile.write("\n");
+					System.err.println(errorMessage);
+				}
+				errorFile.close();
+			}
 			//code generation if there are no errors
 			if(errorMessages.isEmpty()){
 				for (Page page:pageNodes) {

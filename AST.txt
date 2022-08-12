@@ -7,7 +7,7 @@ program: {
 			page body element: [
 				Image: {
 					height : 50,
-					imgReference : "https://i.pinimg.com/736x/5c/2b/29/5c2b2971110912a5de3afc97f25e909b--black-and-white-wallpaper.jpg",
+					imgReference : "https://png.pngtree.com/thumb_back/fh260/background/20211118/pngtree-technology-round-dashboard-image_908915.jpg",
 					width : 50,
 					map: {
 						pair: {
@@ -31,11 +31,75 @@ program: {
 			ID: login,
 			title: "Login Form Design",
 			page body element: [
+				@Guest: {
+					[text: {
+						color : #000000,
+						fontSize : 12,
+						string: {
+							stringValue: it is your first time in a while logging in, welcome!,
+						},
+						map: {
+							pair: {
+								value: string: {
+								stringValue: alert alert-info,
+							},
+								key: "class",
+							},
+						},
+					}],
+					[text: {
+						color : #000000,
+						fontSize : 12,
+						string: {
+							stringValue: you are already logged in!,
+						},
+						map: {
+							pair: {
+								value: string: {
+								stringValue: alert alert-info,
+							},
+								key: "class",
+							},
+						},
+					}],
+				},
+				@Auth: {
+					body(text): {
+						color : #000000,
+						fontSize : 12,
+						string: {
+							stringValue: this text will appear when you are authenticated,
+						},
+						map: {
+							pair: {
+								value: string: {
+								stringValue: alert alert-success,
+							},
+								key: "class",
+							},
+						},
+					},
+					elseBody(text): {
+						color : #000000,
+						fontSize : 12,
+						string: {
+							stringValue: this text will appear when you are not authenticated,
+						},
+						map: {
+							pair: {
+								value: string: {
+								stringValue: alert alert-success,
+							},
+								key: "class",
+							},
+						},
+					},
+				},
 				@Section: {
 					name: "content",
 					Image: {
 						height : 50,
-						imgReference : "https://i.pinimg.com/736x/5c/2b/29/5c2b2971110912a5de3afc97f25e909b--black-and-white-wallpaper.jpg",
+						imgReference : "https://png.pngtree.com/thumb_back/fh260/background/20211118/pngtree-technology-round-dashboard-image_908915.jpg",
 						width : 50,
 						map: {
 							pair: {
@@ -53,7 +117,7 @@ program: {
 						color : #ffffff,
 						fontSize : 30,
 						string: {
-							stringValue: Login,
+							stringValue: Admin Panel Login,
 						},
 						map: {
 							pair: {
@@ -67,7 +131,7 @@ program: {
 						},
 					},
 					Form Node: {
-						Form Action: "c1",
+						Form Action: "redirector",
 						Form method: post,
 						map: {
 							pair: {
@@ -138,13 +202,13 @@ program: {
 		page: {
 			extended page ID: background,
 			ID: registerPage,
-			title: "register",
+			title: "error",
 			page body element: [
 				@Section: {
 					name: "content",
 					Image: {
 						height : 50,
-						imgReference : "https://i.pinimg.com/736x/5c/2b/29/5c2b2971110912a5de3afc97f25e909b--black-and-white-wallpaper.jpg",
+						imgReference : "https://png.pngtree.com/thumb_back/fh260/background/20211118/pngtree-technology-round-dashboard-image_908915.jpg",
 						width : 50,
 						map: {
 							pair: {
@@ -191,7 +255,7 @@ program: {
 						},
 					},
 					Form Node: {
-						Form Action: "c1",
+						Form Action: "redirector",
 						Form method: post,
 						map: {
 							pair: {
@@ -216,7 +280,7 @@ program: {
 								},
 							},
 							Link: {
-								linkReference : 'p0.php',
+								linkReference : 'login.php',
 								linkBody: [
 									text: {
 										color : #ffffff,
@@ -234,243 +298,47 @@ program: {
 		},
 		page: {
 			extended page ID: null,
-			ID: posts,
-			title: "my posts",
+			ID: adminDashboard,
+			title: "admin dashboard",
 			page body element: [
-				SharedDataDeclaration: {
-					id: welcome,
-					value(string): {
-						stringValue: welcome to this page,
-					},
-				},
-				variableDeclaration: {
-					id: name,
-					value(shared data node): {
-						name: name,
-					},
-				},
-				text: {
-					color : #ffffff,
-					fontSize : 20,
-					shared data node: {
-						name: welcome,
-					},
+				Image: {
+					height : 50,
+					imgReference : "https://wallpaperaccess.com/full/16668.jpg",
+					width : 50,
 					map: {
 						pair: {
 							value: string: {
-							stringValue: alert alert-info,
+							stringValue:   background-position: center;
+						                     background-repeat: no-repeat;
+						                     background-size: cover;
+						                     pointer-events: none; position: absolute; width: 100%; height: 100%; z-index: -1;,
 						},
-							key: "class",
+							key: "style",
 						},
-					},
-				},
-				Link: {
-					linkReference : 'login.php',
-					linkBody: [
-						text: {
-							color : #ffffff,
-							fontSize : 15,
-							string: {
-								stringValue: go back,
-							},
-							map: {
-								pair: {
-									value: string: {
-									stringValue: btn btn-success,
-								},
-									key: "class",
-								},
-								pair: {
-									value: string: {
-									stringValue: submit,
-								},
-									key: "type",
-								},
-								pair: {
-									value: string: {
-									stringValue: margin-left: 120px; margin-top: 20px; margin-bottom: 50px;,
-								},
-									key: "style",
-								},
-							},
-						}
-					],
-				},
-				table: {
-					tableBody: [
-						text: {
-							color : #050000,
-							fontSize : 20,
-							charValue: {
-								charValue: 1,
-							},
-							map: {
-								pair: {
-									value: string: {
-									stringValue: margin-left: 120px; margin-top: 20px;,
-								},
-									key: "style",
-								},
-							},
-						},
-						text: {
-							color : #050000,
-							fontSize : 20,
-							string: {
-								stringValue: hello my posts,
-							},
-							map: {
-								pair: {
-									value: string: {
-									stringValue: margin-left: 120px; margin-top: 20px;,
-								},
-									key: "style",
-								},
-							},
-						},
-						text: {
-							color : #050000,
-							fontSize : 20,
-							string: {
-								stringValue: 2022-06-25 11:00:00,
-							},
-							map: {
-								pair: {
-									value: string: {
-									stringValue: margin-left: 120px; margin-top: 20px;,
-								},
-									key: "style",
-								},
-							},
-						},
-						text: {
-							color : #050000,
-							fontSize : 20,
-							charValue: {
-								charValue: 2,
-							},
-							map: {
-								pair: {
-									value: string: {
-									stringValue: margin-left: 120px; margin-top: 20px;,
-								},
-									key: "style",
-								},
-							},
-						},
-						text: {
-							color : #050000,
-							fontSize : 20,
-							string: {
-								stringValue: good news,
-							},
-							map: {
-								pair: {
-									value: string: {
-									stringValue: margin-left: 120px; margin-top: 20px;,
-								},
-									key: "style",
-								},
-							},
-						},
-						text: {
-							color : #050000,
-							fontSize : 20,
-							string: {
-								stringValue: 2022-06-25 16:00:00,
-							},
-							map: {
-								pair: {
-									value: string: {
-									stringValue: margin-left: 120px; margin-top: 20px;,
-								},
-									key: "style",
-								},
-							},
-						}
-					],
-					headers: [
-						text: {
-							color : #050000,
-							fontSize : 20,
-							string: {
-								stringValue: ID,
-							},
-							map: {
-								pair: {
-									value: string: {
-									stringValue: margin-left: 120px; margin-top: 20px;,
-								},
-									key: "style",
-								},
-							},
-						},
-						text: {
-							color : #050000,
-							fontSize : 20,
-							string: {
-								stringValue: title,
-							},
-							map: {
-								pair: {
-									value: string: {
-									stringValue: margin-left: 120px; margin-top: 20px;,
-								},
-									key: "style",
-								},
-							},
-						},
-						text: {
-							color : #050000,
-							fontSize : 20,
-							string: {
-								stringValue: created_at,
-							},
-							map: {
-								pair: {
-									value: string: {
-									stringValue: margin-left: 120px; margin-top: 20px;,
-								},
-									key: "style",
-								},
-							},
-						}
-					],
-				},
-				@Auth: {
-					body(@RawPhp): {
-						rawPHP: 
-					                echo "i am logged in"
-					        ,
-					},
-					elseBody(@RawPhp): {
-						rawPHP: 
-					                echo "i am not logged in"
-					        ,
 					},
 				},
 				@Role: {
 					'admin',
 					text: {
-						color : #ffffff,
-						fontSize : 20,
+						color : #000000,
+						fontSize : 12,
 						string: {
-							stringValue: i am an admin,
+							stringValue: you are an admin,welcome to admin dashboard!,
 						},
 						map: {
 							pair: {
 								value: string: {
-								stringValue: alert alert-success,
+								stringValue: alert alert-info,
 							},
 								key: "class",
 							},
 						},
 					},
 					text: {
-						color : #ffffff,
-						fontSize : 20,
+						color : #000000,
+						fontSize : 12,
 						string: {
-							stringValue: i am not an admin,
+							stringValue: you are not an admin,get out!,
 						},
 						map: {
 							pair: {
@@ -483,12 +351,68 @@ program: {
 					},
 				}
 			],
+		},
+		page: {
+			extended page ID: null,
+			ID: intruder,
+			title: "intruder",
+			page body element: [
+				Image: {
+					height : 50,
+					imgReference : "https://ak.picdn.net/shutterstock/videos/33417148/thumb/10.jpg",
+					width : 50,
+					map: {
+						pair: {
+							value: string: {
+							stringValue:   background-position: center;
+						                     background-repeat: no-repeat;
+						                     background-size: cover;
+						                     pointer-events: none; position: absolute; width: 100%; height: 100%; z-index: -1;,
+						},
+							key: "style",
+						},
+					},
+				},
+				@inverseRole: {
+					'admin',
+					text: {
+						color : #000000,
+						fontSize : 12,
+						string: {
+							stringValue: you are an intruder!,
+						},
+						map: {
+							pair: {
+								value: string: {
+								stringValue: alert alert-danger,
+							},
+								key: "class",
+							},
+						},
+					},
+					text: {
+						color : #000000,
+						fontSize : 12,
+						string: {
+							stringValue: you are not an intruder,sorry!,
+						},
+						map: {
+							pair: {
+								value: string: {
+								stringValue: alert alert-warning,
+							},
+								key: "class",
+							},
+						},
+					},
+				}
+			],
 		}
 	],
 	controllers: [
 		controller: {
 			controlled page ID: login,
-			ID: c1,
+			ID: redirector,
 			controller body element: [
 				variableDeclaration: {
 					id: name,
@@ -503,7 +427,7 @@ program: {
 					},
 				},
 				variableDeclaration: {
-					id: s,
+					id: valid,
 					value(Valid credentials check): {
 						password: variable/functionName: {
 						name: password,
@@ -513,18 +437,46 @@ program: {
 					},
 					},
 				},
+				variableDeclaration: {
+					id: isAdmin,
+					value(Role check): {
+						check role : string: {
+						stringValue: admin,
+					},
+					},
+				},
 				if statement: {
-					condition: variable/functionName: {
-					name: s,
+					condition: concatConcatenation: {
+					operator: &&,
+					leftCondition(variable/functionName): {
+						name: isAdmin,
+					},
+					rightCondition(variable/functionName): {
+						name: valid,
+					},
 				},
 					if body elements: [
 						redirection: {
-							redirect to: posts,
+							redirect to: adminDashboard,
 						}
 					],
 					else body elements: [
-						redirection: {
-							redirect to: registerPage,
+						if statement: {
+							condition: oneOperandCondition: {
+							operand(variable/functionName): {
+								name: valid,
+							},
+						},
+							if body elements: [
+								redirection: {
+									redirect to: registerPage,
+								}
+							],
+							else body elements: [
+								redirection: {
+									redirect to: intruder,
+								}
+							],
 						}
 					],
 				}
