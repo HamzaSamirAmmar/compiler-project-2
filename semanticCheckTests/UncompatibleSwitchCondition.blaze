@@ -1,18 +1,23 @@
 page switchPage head("switches"){
-form (post,"switchController"){
-textField("role","","enter your role",["style"=>" opacity: 0.5;"])
-button("submit" ,"/compiler_tests/switchController.php",["type"=>"submit"] )
-}
+    form (post,"switchController"){
+        textField("role","","enter your role",
+			["style"=>" opacity: 0.5;"])
+        button("submit" ,
+			"/compiler_tests/switchController.php",
+			["type"=>"submit"] )
+    }
 }
 controller switchController controles switchPage{
-@user_role = form_data(role)
-@num_stars = 0
- switch (@user_role){
- case "admin" :;
- case "user" :;
- case "helper":;
- case 4:;
- }
+    @user_role = "default"
+    @num_stars = 0
+    switch (@user_role){
+        case "admin" :
+            @num_stars = 5;
+        case "user" :
+            @num_stars = 4;
+        case "default":
+            @num_stars = 3;
+        case @num_stars:
+            @num_stars = 1;
+    }
 }
-//في مشكلة عندما أضع شي في جسم ال case عم يطلع ان عم حاول استخدم element لل page برات ال page
-+ عم يشوف بما ان المتحول مأسندله قيمة مو معروفة من تابع يعني عم يعطي مشكلة

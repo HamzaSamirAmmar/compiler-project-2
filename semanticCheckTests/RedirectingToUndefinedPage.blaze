@@ -1,13 +1,16 @@
 page redirectingPage head("redirecting"){
-form (post,"redirectionController"){
-textField("redirect_to","","enter the page name to redirect",["style"=>" opacity: 0.5;"])
-button("submit" ,"/compiler_tests/redirectionController.php",["type"=>"submit"] )
-}
+    form (post,"redirectionController"){
+        textField("redirect_to","","enter the page name to redirect",
+                  ["style"=>" opacity: 0.5;"])
+        button("submit" ,
+               "/compiler_tests/redirectionController.php",
+              ["type"=>"submit"] )
+    }
 }
 
 controller redirectionController controles redirectingPage{
-@redirectPage = form_data(redirect_to)
-if(@redirectPage == "redirect"){
-redirect newNotExistPage
-}
+    @redirectPage = form_data(redirect_to)
+    if(@redirectPage == "redirect"){
+        redirect newNotExistPage
+    }
 }

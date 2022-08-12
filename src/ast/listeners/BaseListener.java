@@ -176,15 +176,18 @@ public class BaseListener extends LanguageParserBaseListener {
     @Override
     public void enterSwitch_statement(LanguageParser.Switch_statementContext ctx) {
         //push new switch scope
-        System.out.println(" lets try this before :)))" + ctx.expression().getClass());
+        //System.out.println(" lets try this before :)))" + ctx.expression().getClass());
+      //  System.out.println("switch expression : "+ctx.expression().getClass());
         ExpressionSymbol switchExpressionSymbol = ExpressionSymbolFactory.expressionLiteralResult(ctx.expression(), symbolTable);
         System.out.println("switchExpressionSymbol is " +/*((LiteralExpressionSymbol)*/ switchExpressionSymbol/*).getType()*/);
         for (int i = 0; i < ctx.switch_body().switch_case().size(); i++) {
-            System.out.println(" lets try this case :)))" + ctx.switch_body().switch_case(i).expression().getClass());
+           // System.out.println(" lets try this case :)))" + ctx.switch_body().switch_case(i).expression().getClass());
             ExpressionSymbol caseExpressionSymbol = ExpressionSymbolFactory.expressionLiteralResult(ctx.switch_body().switch_case(i).expression(), symbolTable);
-            System.out.println("caseExpressionSymbol is " +/*((LiteralExpressionSymbol)*/ caseExpressionSymbol/*).getType()*/);
+           // System.out.println("caseExpressionSymbol is " +/*((LiteralExpressionSymbol)*/ caseExpressionSymbol/*).getType()*/);
             if (switchExpressionSymbol instanceof LiteralExpressionSymbol && caseExpressionSymbol instanceof LiteralExpressionSymbol) {
-                if (!(((LiteralExpressionSymbol) switchExpressionSymbol).getType().equals(((LiteralExpressionSymbol) caseExpressionSymbol).getType()))) {
+                if ((!(((LiteralExpressionSymbol) switchExpressionSymbol).getType().equals(((LiteralExpressionSymbol) caseExpressionSymbol).getType())))&&
+                   (!(((LiteralExpressionSymbol) switchExpressionSymbol).getType().equals("no specific type")))&&
+                   (!(((LiteralExpressionSymbol) caseExpressionSymbol).getType().equals("no specific type")))) {
                     Exception incompatibleSwitchTypeWithCase =
                             new IncompatibleExpressionTypeException(ctx.switch_body().switch_case(i).expression().start.getLine(),
                                     ctx.switch_body().switch_case(i).expression().start.getCharPositionInLine(),
