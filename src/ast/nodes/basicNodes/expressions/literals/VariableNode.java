@@ -31,6 +31,9 @@ public class VariableNode extends Expression implements Valuable,Numeric, Iterab
     @Override
     public String toCode(){
         return  "$"+variableName+"";
-
+    }
+    @Override
+    public String toEchoHtmlCode() {
+        return "<?php echo $"+variableName+"?>";
     }
 }

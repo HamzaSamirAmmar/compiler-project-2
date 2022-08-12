@@ -1,0 +1,12 @@
+page element head("Controller Element") {
+    @name="name"
+    @password="password"
+    @s = checkValid(@name,@password)
+    if (@s){
+    redirect valid
+    }
+}
+
+page valid head("Valid"){
+text("Valid",20,#000000)
+}

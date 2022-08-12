@@ -16,21 +16,23 @@
 <img style ='  background-position: center;
                                   background-repeat: no-repeat;
                                   background-size: cover;
-                                  pointer-events: none; position: absolute; width: 100%; height: 100%; z-index: -1;'  src= "b.webp" width= 50 height= 50>
+                                  pointer-events: none; position: absolute; width: 100%; height: 100%; z-index: -1;'  src= "https://i.pinimg.com/736x/5c/2b/29/5c2b2971110912a5de3afc97f25e909b--black-and-white-wallpaper.jpg" width= 50 height= 50>
+
 <div style= "font-size:30px; color: #ffffff ;  position: relative; font-size:30px ;  text-align: center; font-weight: bold; line-height: 2; padding-top: 200px; padding-left: 450px; padding-right: 450px;
                                         background-image: linear-gradient(to bottom, rgba(140, 140, 140, 1) 0%, rgba(0, 0, 0, 1) 100%), linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 100%);
                                         background-clip: content-box; ">Login</div>
-<form action= "c1".php method="post"  style ='text-align: center; padding-left: 450px; padding-right: 450px;
+
+<form action= "c1.php" method="post"  style ='text-align: center; padding-left: 450px; padding-right: 450px;
                              background-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0,0,0,1) 100%), linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 100%);
                              background-clip: content-box;' ><label for= "user"></label>
-<input type= "text" style =' opacity: 0.5;' id= "user" name= "user" value= " enter your name">
+<input type= "text" style =' opacity: 0.5;' id= "user" name= "user" placeholder= " enter your name">
 <ol>
 </ol>
 <label for= "password"></label>
-<input type= "text" style =' opacity: 0.5;' id= "password" name= "password" value= " enter your password">
+<input type= "text" style =' opacity: 0.5;' id= "password" name= "password" placeholder= " enter your password">
 <ol>
 </ol>
-<button type ='submit' class= "btn btn-primary" formaction= "/compiler_tests/posts.php" >submit</button>
+<button type ='submit' class= "btn btn-primary" >submit</button>
 <ol>
 </ol>
 <div style= "font-size:11px; color: #ffffff ;   ">not yet a member?  </div>
@@ -38,5 +40,6 @@
 <div style= "font-size:12px; color: #ffffff ;   ">register</div>
 </a>
 </form>
+
 </body>
 </html>

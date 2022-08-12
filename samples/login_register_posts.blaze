@@ -1,0 +1,83 @@
+page background head("no title") {
+image("https://i.pinimg.com/736x/5c/2b/29/5c2b2971110912a5de3afc97f25e909b--black-and-white-wallpaper.jpg" ,50,50,
+   ["style" =>"  background-position: center;
+                 background-repeat: no-repeat;
+                 background-size: cover;
+                 pointer-events: none; position: absolute; width: 100%; height: 100%; z-index: -1;"])
+   @yield("content")
+}
+page login head ("Login Form Design") extends background{
+   @section("content")
+   text ("Login" ,30,#ffffff,["style"=>"position: relative; font-size:30px ;  text-align: center; font-weight: bold; line-height: 2; padding-top: 200px; padding-left: 450px; padding-right: 450px;
+                                        background-image: linear-gradient(to bottom, rgba(140, 140, 140, 1) 0%, rgba(0, 0, 0, 1) 100%), linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 100%);
+                                        background-clip: content-box;"])
+   form(post,"c1",["style"=>"text-align: center; padding-left: 450px; padding-right: 450px;
+                             background-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0,0,0,1) 100%), linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 100%);
+                             background-clip: content-box;"]){
+    textField("user","","enter your name",["style"=>" opacity: 0.5;"])
+    list(true){}
+    textField("password","","enter your password",["style"=>" opacity: 0.5;"])
+    list(true){}
+    button("submit" ,"/compiler_tests/posts.php",["type"=>"submit"] )
+
+   }
+   @endsection
+}
+
+page registerPage head ("register") extends background{
+  @section("content")
+   text("credentials are not correct try to register",12,#000000,["class"=>"alert alert-warning"])
+   text ("failed logging" ,30,#ffffff,["style"=>"position: relative; font-size:30px ;  text-align: center; font-weight: bold; line-height: 2; padding-top: 200px; padding-left: 450px; padding-right: 450px;
+                                        background-image: linear-gradient(to bottom, rgba(140, 140, 140, 1) 0%, rgba(0, 0, 0, 1) 100%), linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 100%);
+                                        background-clip: content-box;"])
+   form(post,"c1",["style"=>"text-align: center; padding-left: 450px; padding-right: 450px;
+                             background-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0,0,0,1) 100%), linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 100%);
+                             background-clip: content-box;"]){
+    list(true){}
+    text ("try again?  " ,11,#ffffff)
+    link('p0.php'){
+       text ("login" ,12,#ffffff)}
+   }
+   @endsection
+}
+
+page posts head("my posts"){
+shared_data(welcome)="welcome to this page"
+@name=shared_data(name)
+text(shared_data(welcome),20,#ffffff,["class"=>"alert alert-info"])
+ link('login.php'){
+  text("go back" ,15,#ffffff,["class"=>"btn btn-success","type"=>"submit","style"=>"margin-left: 120px; margin-top: 20px; margin-bottom: 50px;"])
+  }
+
+table(){header:{ text ("ID" ,20,#050000,["style"=>"margin-left: 120px; margin-top: 20px;"]), text ("title" ,20,#050000,["style"=>"margin-left: 120px; margin-top: 20px;"]), text ("created_at" ,20,#050000,["style"=>"margin-left: 120px; margin-top: 20px;"]) } ,
+        body: {  text ("1" ,20,#050000,["style"=>"margin-left: 120px; margin-top: 20px;"]),  text ("hello my posts" ,20,#050000,["style"=>"margin-left: 120px; margin-top: 20px;"]),text ("2022-06-25 11:00:00" ,20,#050000,["style"=>"margin-left: 120px; margin-top: 20px;"]),
+                 text ("2" ,20,#050000,["style"=>"margin-left: 120px; margin-top: 20px;"]),text ("good news" ,20,#050000,["style"=>"margin-left: 120px; margin-top: 20px;"]),text ("2022-06-25 16:00:00" ,20,#050000,["style"=>"margin-left: 120px; margin-top: 20px;"])
+        }}
+ @auth
+        @rawphp
+                echo "i am logged in"
+        @endrawphp
+@else
+        @rawphp
+                echo "i am not logged in"
+        @endrawphp
+@endauth
+
+@role(['admin'])
+    text("i am an admin",20,#ffffff,["class"=>"alert alert-success"])
+@else
+    text("i am not an admin",20,#ffffff,["class"=>"alert alert-danger"])
+@endrole
+}
+
+controller c1 controles login{
+    @name=form_data(user)
+    @password=form_data(password)
+    @s=checkValid(@name,@password)
+    if(@s){
+        redirect posts
+    }
+    else {
+        redirect registerPage
+    }
+}

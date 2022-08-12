@@ -13,7 +13,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"></head>
 <body>
-<form action= "c1".php method="get" ><div class="form-check">
+<form action= "c1.php" method="get" ><div class="form-check">
 <input class="form-check-input" type="checkbox" name= "Default checkbox" value=<?php echo 3.0 ?> id ="Default checkbox">
 <label class="form-check-label" for= "Default checkbox">flexCheckDefault</label>
 </div>
@@ -29,7 +29,7 @@
 </li>
 </ol>
 <label for= "myField">enter your name</label>
-<input type= "text"id= "myField" name= "myField" value= " theValue">
+<input type= "text"id= "myField" name= "myField" placeholder= " theValue">
 <ol>
 </ol>
 <select name= "select your favorite" id= "select your favorite" multiple>
@@ -44,7 +44,7 @@
 <input class="form-check-input" type="radio" name= newRadio id =newRadio>
 <label class="form-check-label" for= newRadio>story1</label>
 </div>
-<button type ='submit' class= "btn btn-primary" formaction= "/compiler_tests/c1.php" >submit</button>
+<button type ='submit' class= "btn btn-primary" >submit</button>
 </form>
 <?php $x = 3.0;
  ?>

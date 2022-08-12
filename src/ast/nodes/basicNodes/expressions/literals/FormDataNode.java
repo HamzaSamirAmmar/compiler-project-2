@@ -33,4 +33,17 @@ public class FormDataNode extends Expression implements Valuable, Numeric, Itera
     public String toCode() {
         return "$_POST['"+variableName+"']";
     }
+
+    @Override
+    public String toHtmlCode() {
+        return "<?php $_POST['"+variableName+"']  ; ?>";
+    }
+    @Override
+    public String toEchoHtmlCode() {
+        return "<?php echo $_POST['"+variableName+"']  ; ?>";
+    }
+    @Override
+    public String toPhpCode() {
+        return super.toPhpCode();
+    }
 }

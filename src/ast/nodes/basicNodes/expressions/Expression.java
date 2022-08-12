@@ -6,6 +6,7 @@ public abstract class Expression extends BasicElement
 {
     public String toCode(){return"";}
 
+    public String toEchoHtmlCode() {return"";}
     @Override
     public String toHtmlCode() {
         return toCode();

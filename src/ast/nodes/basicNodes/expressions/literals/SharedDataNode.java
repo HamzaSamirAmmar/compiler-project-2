@@ -33,4 +33,9 @@ public class SharedDataNode extends Expression implements Valuable, Numeric, Ite
     public String toCode() {
         return "$_SESSION['"+variableName+"']";
     }
+
+    @Override
+    public String toEchoHtmlCode() {
+        return "<?php echo $_SESSION['"+variableName+"']  ; ?>";
+    }
 }
