@@ -188,7 +188,7 @@ public class SymbolTable {
         return false;
     }
 
-    public boolean checkIfYieldIsExist(SectionSymbol sectionSymbol, boolean first) {
+    public boolean checkIfYieldIsExist(SectionSymbol sectionSymbol) {
         final ArrayList<Symbol> programSymbols = symbolTable.get(0).getValue();
         final ArrayList<YieldSymbol> yieldSymbols = new ArrayList<>();
         for (Symbol symbol : programSymbols) {
@@ -207,7 +207,7 @@ public class SymbolTable {
                         }
                     }
                     if (((PageSymbol) symbol).getExtendedPageId() != null) {
-                        return this.checkIfYieldIsExist(new SectionSymbol(sectionSymbol.getName(), ((PageSymbol) symbol).getName(), ((PageSymbol) symbol).getExtendedPageId()), false);
+                        return this.checkIfYieldIsExist(new SectionSymbol(sectionSymbol.getName(), ((PageSymbol) symbol).getName(), ((PageSymbol) symbol).getExtendedPageId()));
                     }
                 }
             }
