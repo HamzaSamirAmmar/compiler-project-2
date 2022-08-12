@@ -1,0 +1,6 @@
+page p1 head("title") extends p0{
+    @x="Hello world"
+}
+page p2 head("title") extends p5{
+    @x="Hello Others"
+}
