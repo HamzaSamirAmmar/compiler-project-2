@@ -1,0 +1,6 @@
+page newPage head("redirecting"){
+form (post,"undefinedController"){
+textField("name","","enter your name",["style"=>" opacity: 0.5;"])
+button("submit" ,"/compiler_tests/undefinedController.php",["type"=>"submit"] )
+}
+}
