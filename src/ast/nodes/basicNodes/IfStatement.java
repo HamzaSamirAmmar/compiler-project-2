@@ -51,7 +51,7 @@ public class IfStatement extends BasicElement {
 
     @Override
     public String toPhpCode() {
-        String beginIf = "(" + condition.toCode() + ") {\n";
+        String beginIf = "if (" + condition.toCode() + ") {\n";
         String endIF = "\n}";
         String beginElse = "else {\n";
         String endElse = "\n}";
@@ -79,9 +79,8 @@ public class IfStatement extends BasicElement {
     protected Formatter nodeValue(Formatter formatter) {
         formatter.addProperty("condition", condition.toString());
         if (this.bodyElements != null)
-            formatter.array("if body elements", new ArrayList<>(this.bodyElements)); // TODO null pointer exception
+            formatter.array("if body elements", new ArrayList<>(this.bodyElements));
         formatter.array("else body elements", new ArrayList<>(this.elseBodyElements));
-
         return formatter;
     }
 }
