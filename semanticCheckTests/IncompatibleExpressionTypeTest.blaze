@@ -7,6 +7,10 @@ page p1 head("title"){
             {
                 text("i am a text",20,#ffffff)
             }
+    for(@i=0;"text";"another text" )
+            {
+                text("i am a text",20,#ffffff)
+            }
 }
 controller c1 controles p1 {
     checkValid(5,5)
