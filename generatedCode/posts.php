@@ -48,7 +48,7 @@
 </tr>
 </table>
 <?php
-include 'util/checkAuth.php';
+include_once 'util/checkAuth.php';
 if(checkAuth()){?>
 <?php 
                 echo "i am logged in"
@@ -59,7 +59,7 @@ if(checkAuth()){?>
          ?>
 <?php } ?>
 <?php
-include 'util/checkInRoles.php';
+include_once 'util/checkInRoles.php';
 if(checkInRoles( [ 'admin' ]  )){?>
 <div class ='alert alert-success' style= "font-size:20px; color: #ffffff ;   ">i am an admin</div>
 <?php  } else { ?>

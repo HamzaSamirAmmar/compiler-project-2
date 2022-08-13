@@ -7,7 +7,7 @@ session_start();
 $name = $_POST['user'];
 $password = $_POST['password'];
 $s = checkValid($name , $password );;
-if($s) {
+if ($s) {
 redirect("posts");
 
 }else {

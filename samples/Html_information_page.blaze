@@ -1,0 +1,15 @@
+page html head("information about HTML") {
+image("https://i.pinimg.com/originals/7a/0d/e2/7a0de2c425b99bd0f4490e1480fa89e5.jpg" ,50,50,
+   ["style" =>"  background-position: center;
+                 background-repeat: no-repeat;
+                 background-size: cover;
+                 pointer-events: none; position: absolute; width: 100%; height: 100%; z-index: -1;"])
+link('https://www.w3schools.com/html/'){
+       text ("learning html" ,24,#ffffff
+            ,["style"=>" text-align: center;line-height: 3;"])}
+text ("HTML has out elements like..." ,21,#ffffff
+            ,["style"=>" text-align: left;line-height: 2;padding-left: 20px;"])
+
+
+
+}
