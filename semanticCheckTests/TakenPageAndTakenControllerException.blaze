@@ -1,0 +1,14 @@
+page p1 head("title"){
+    @x="Hello world"
+}
+
+page p1 head("title") extends p1{
+    @c="Hello Others"
+}
+page p2 head("title") extends p1{
+    @c="Hello Others Others"
+}
+
+controller c1 controles p1 {}
+
+controller c1 controles p2 {}

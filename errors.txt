@@ -1,1 +1,2 @@
-line 2 at column 19: extraneous input ';' expecting {'if', 'checkAuthenticated', 'checkValid', 'checkRole', 'text', 'image', 'list', 'table', 'button', BOOLEAN, 'form', 'textField', 'date', 'checkbox', 'selection', 'radio', 'switch', 'link', '@auth', '@guest', '@role', '@inverserole', '@rawphp', '@section', '@yield', 'for', 'shared_data', 'form_data', '(', '[', '{', '}', '!', ONE_VALUABLE_OPERAND, '@', DECIMAL, STRING, CHAR}
+line 5 at column 5: this page is already defined
+line 14 at column 24: this controller is already defined
