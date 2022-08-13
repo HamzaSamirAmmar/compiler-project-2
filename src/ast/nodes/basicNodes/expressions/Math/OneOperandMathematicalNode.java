@@ -12,13 +12,9 @@ public class OneOperandMathematicalNode extends Expression implements Valuable, 
 
     public OneOperandMathematicalNode(boolean operandIsLeft, String operator, Expression operand)
     {
-        if (operand instanceof VariableNode || operand instanceof ConcatenableNode || operand instanceof IndexedExpressionNode) {
             this.operandIsLeft = operandIsLeft;
             this.operator = operator;
             this.operand = operand;
-        } else {
-            throw new RuntimeException("Invalid one operand mathematical");
-        }
     }
 
     public void setSolStatement(boolean solStatement) {
