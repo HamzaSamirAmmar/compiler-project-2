@@ -117,7 +117,7 @@ list_attributes
     : BOOLEAN
     ;
 table
-    : TABLE BRACKET_OPEN BRACKET_CLOSE CURLEY_BRACKET_OPEN table_body CURLEY_BRACKET_CLOSE
+    : TABLE BRACKET_OPEN (extra_attributes)? BRACKET_CLOSE CURLEY_BRACKET_OPEN table_body CURLEY_BRACKET_CLOSE
     ;
 link
     : LINK BRACKET_OPEN link_attributes (COMMA extra_attributes)? BRACKET_CLOSE CURLEY_BRACKET_OPEN body_options* CURLEY_BRACKET_CLOSE

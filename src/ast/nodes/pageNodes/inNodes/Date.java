@@ -78,16 +78,25 @@ public class Date extends Element implements PageCallable {
     @Override
     public String toHtmlCode() {
         StringBuilder builder = new StringBuilder();
-        builder.append("<label for= " + name + ">")
-                .append(label,1,label.length()-1).append("</label>").append(System.getProperty("line.separator"))
-                .append(System.getProperty("line.separator"))
-                .append("<input type=\"date\" ");
-        if (extraAttributes != null) {
-            builder.append(extraAttributes.toHtmlCode());
+        StringBuilder dateAttributeBuilder = new StringBuilder();
+        StringBuilder labelBuilder = new StringBuilder(" ");
+        if (extraAttributes != null){
+            for (int i = 0; i < extraAttributes.getPairs().size(); i++) {
+
+                if (extraAttributes.getPairs().get(i).getKey().contains("label")) {
+                    String labelKey = extraAttributes.getPairs().get(i).getKey().replaceAll("label","").replaceAll("\"","");
+                    labelBuilder.append(labelKey +"= \"" + extraAttributes.getPairs().get(i).getValue().toCode().substring(1,extraAttributes.getPairs().get(i).getValue().toCode().length()-1)+"\" ");
+                }
+                else dateAttributeBuilder.append(" " + extraAttributes.getPairs().get(i).toHtmlCode());
+            }
         }
+        builder.append("<label ").append(labelBuilder).append(" for= " + name + ">")
+                .append(label,1,label.length()-1).append("</label>").append(System.getProperty("line.separator"))
+                .append("<input type=\"date\" ");
+
                 builder.append("id =" + name).append("name= " + name + " ")
                 .append("value=<?php echo " + value.toCode() + " ?> ");
-        builder.append(">")
+                builder.append(dateAttributeBuilder).append(" >")
                 .append(System.getProperty("line.separator"));
         return builder.toString();
     }

@@ -13,16 +13,30 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"></head>
 <body>
+<?php
+include_once 'util/checkAuth.php';
+if(!checkAuth()){?>
+<div class ='alert alert-info' style= "font-size:12px; color: #000000 ;   ">it is your first time in a while logging in, welcome!</div>
+<?php  } else { ?>
+<div class ='alert alert-info' style= "font-size:12px; color: #000000 ;   ">you are already logged in!</div>
+<?php } ?>
+<?php
+include_once 'util/checkAuth.php';
+if(checkAuth()){?>
+<div class ='alert alert-success' style= "font-size:12px; color: #000000 ;   ">this text will appear when you are authenticated</div>
+<?php  } else { ?>
+<div class ='alert alert-success' style= "font-size:12px; color: #000000 ;   ">this text will appear when you are not authenticated</div>
+<?php } ?>
 <img style ='  background-position: center;
                  background-repeat: no-repeat;
                  background-size: cover;
-                 pointer-events: none; position: absolute; width: 100%; height: 100%; z-index: -1;'  src= "https://i.pinimg.com/736x/5c/2b/29/5c2b2971110912a5de3afc97f25e909b--black-and-white-wallpaper.jpg" width= 50 height= 50>
+                 pointer-events: none; position: absolute; width: 100%; height: 100%; z-index: -1;'  src= "https://png.pngtree.com/thumb_back/fh260/background/20211118/pngtree-technology-round-dashboard-image_908915.jpg" width= 50 height= 50>
 
 <div style= "font-size:30px; color: #ffffff ;  position: relative; font-size:30px ;  text-align: center; font-weight: bold; line-height: 2; padding-top: 200px; padding-left: 450px; padding-right: 450px;
                                         background-image: linear-gradient(to bottom, rgba(140, 140, 140, 1) 0%, rgba(0, 0, 0, 1) 100%), linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 100%);
-                                        background-clip: content-box; ">Login</div>
+                                        background-clip: content-box; ">Admin Panel Login</div>
 
-<form action= "c1.php" method="post"  style ='text-align: center; padding-left: 450px; padding-right: 450px;
+<form action= "redirector.php" method="post"  style ='text-align: center; padding-left: 450px; padding-right: 450px;
                              background-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0,0,0,1) 100%), linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 100%);
                              background-clip: content-box;' ><label for= "user"></label>
 <input type= "text" style =' opacity: 0.5;' id= "user" name= "user" placeholder= " enter your name">

@@ -68,18 +68,26 @@ public class Radio extends Element implements PageCallable {
     @Override
     public String toHtmlCode() {
         StringBuilder builder = new StringBuilder();
+        StringBuilder labelBuilder = new StringBuilder(" ");
         for (int i = 0; i <options.size() ; i++) {
         builder.append("<div class=\"form-check\">")
                 .append(System.getProperty("line.separator"))
                 .append("<input class=\"form-check-input\" type=\"radio\" ");
-        if (extraAttributes != null) {
-            builder.append(extraAttributes.toHtmlCode());
-        }
+            if (extraAttributes != null){
+                for (int j = 0; j < extraAttributes.getPairs().size(); j++) {
+
+                    if (extraAttributes.getPairs().get(j).getKey().contains("label")) {
+                        String labelKey = extraAttributes.getPairs().get(j).getKey().replaceAll("label","").replaceAll("\"","");
+                        labelBuilder.append(labelKey +"= \"" + extraAttributes.getPairs().get(j).getValue().toCode().substring(1,extraAttributes.getPairs().get(j).getValue().toCode().length()-1)+"\" ");
+                    }
+                    else builder.append(" " + extraAttributes.getPairs().get(j).toHtmlCode());
+                }
+            }
         builder.append("name= " + name + " ")
-                .append("id =" + name);
+                .append("id =" + name) .append(" value="+ options.get(i).toRadioHtmlCode()  );
         builder.append(">")
                 .append(System.getProperty("line.separator"))
-                .append("<label class=\"form-check-label\" for= " + name + ">")
+                .append("<label class=\"form-check-label\" ").append(labelBuilder).append("for= " + name + ">")
                 .append(options.get(i).toRadioHtmlCode()).append("</label>").append(System.getProperty("line.separator"))
                 .append("</div>").append(System.getProperty("line.separator"));
         }

@@ -1,0 +1,99 @@
+page background head("no title") {
+image("https://i.pinimg.com/originals/7a/0d/e2/7a0de2c425b99bd0f4490e1480fa89e5.jpg" ,100,100,
+   ["style" =>"  background-position: center;
+                 background-repeat: no-repeat;
+                 background-size: cover;
+                 pointer-events: none; position: absolute; width: 100%; height: 100%; z-index: -1;"])
+   @yield("content")
+}
+
+page html head("information about HTML") extends background {
+@section("content")
+link('https://www.w3schools.com/html/'){
+       text ("learning html" ,24,#ffffff
+            ,["style"=>" text-align: center;line-height: 3;"])}
+list(false,["style"=>"color: Tomato"]){
+text("HTML stands for Hyper Text Markup Language",16,#ffffff,["style"=>" text-align: left;line-height: 1;"])
+text("HTML is the standard markup language for creating Web pages",16,#ffffff,["style"=>" text-align: left;line-height: 1;"])
+text("HTML describes the structure of a Web page",16,#ffffff,["style"=>" text-align: left;line-height: 1;"])
+}
+text ("HTML has out elements like..." ,21,#ffffff
+            ,["style"=>" text-align: left;line-height: 2;padding-left: 20px;clear: right;"])
+image("https://en.number13.de/content/images/2021/08/photo-1542831371-29b0f74f9713-2.jpg",40,40,
+["style"=>"float: right;  width: 40%; height: 40%;padding-right: 20px;
+border-radius: 30%;opacity: 0.7;margin-top:-100px" ])
+list(true,["style"=>"content: counter(li); color: AliceBlue;"]){
+  text ("links. Links allow users to click their way from page to page." ,16,#ffffff
+                   ,["style"=>" text-align: left;line-height: 1;"
+                   ])
+  text ("lists. allow web developers to group a set of related items." ,16,#ffffff
+                     ,["style"=>" text-align: left;line-height: 1;"])
+  text ("images. improve the design and the appearance of a web page." ,16,#ffffff
+                       ,["style"=>" text-align: left;line-height: 1;"])
+}
+table(["style"=>" margin-left:10px; margin-top:-5px;width: 30%; border: 3px solid;"]){header:{text("browser",24,#fffff0),text("support",24,#fffff0)} ,
+        body :{image("https://i.pngimg.me/thumb/f/720/4687314999574528.jpg",40,60),text("99%",20,#0ffff0),
+               image("https://i.pngimg.me/thumb/f/350/comhiclipartsjmxh.jpg",50,60),text("95%",20,#0ffff0)}}
+link('submitForm.php'){
+        text ("give your opinion on this form" ,13,#ffffff,
+        ["style"=>"margin-left:10px;margin-top:10px; "])}
+@endsection
+}
+
+page submitForm head("submission about HTML") extends background {
+@section("content")
+text ("YOUR OPINION..." ,30,#e9967a,["style"=>"position: relative; font-size:30px ;  text-align: center; font-weight: bold; line-height: 2; padding-top: 50px; padding-left: 450px; padding-right: 450px;
+                                        background-image: linear-gradient(to bottom, rgba(140, 140, 140, 1) 0%, rgba(0, 0, 0, 1) 100%), linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 100%);
+                                        background-clip: content-box;"])
+ form(post,"submission",["style"=>"text-align: center; padding-left: 450px; padding-right: 450px;
+                             background-image: linear-gradient(to bottom, rgba(3, 0, 0, 1) 0%, rgba(50,0,0,1) 100%), linear-gradient(to bottom, rgba(3,0,0,1) 0%, rgba(3,0,0,1) 100%);
+                             background-clip: content-box;"]){
+    textField("user","","enter your name",["style"=>" opacity: 0.5;"])
+    list(true){}
+    date("HTMLusing","start using HTML at: ","2018-07-22",["label style"=>"color: white;"])
+    text("browsers you use: ", 16 ,#ffffff)
+    checkbox("browser1","chrome","chrome",["label style"=>"color: white;"])
+    checkbox("browser2","edge","edge",["label style"=>"color: white;"])
+    checkbox("browser3","firefox","firefox",["label style"=>"color: white;"])
+    checkbox("browser4","opera","opera",["label style"=>"color: white;"])
+    text("editor you use: ", 16 ,#ffffff)
+    selection (true,"selectIDE"){
+            "vs code" , "vsCode"  : "sublime" , "sublime" :
+            "notepad" , "notepad" : "Brackets" ,"Brackets": "Other" , "other"
+    }
+    text("your laptop brand: ", 16 ,#ffffff)
+    radio laptopBrand (["label style"=>"color: white;"]){
+        "ASUS" , "asus"  : "Lenovo" , "lenovo" :
+         "HP" , "hp"     : "Other" , "other"  }
+    button("submit" ,"console.log('button clicked')",["type"=>"submit"] )
+   }
+ @endsection
+}
+
+page information head("submission information"){
+text("result of submission",24,#000000,["style"=>"font-weight: bold; line-height: 2;"])
+text(shared_data(user),16,#000000)
+text("start date of using html:",20,#000000,["style"=>"font-weight: bold; line-height: 1;"])
+text(shared_data(HTMLusing),16,#000000)
+text("browsers used:",20,#000000,["style"=>"font-weight: bold; line-height: 1;"])
+text(shared_data(browser1),16,#000000)
+text(shared_data(browser2),16,#000000)
+text(shared_data(browser3),16,#000000)
+text(shared_data(browser4),16,#000000)
+text("editor used:",20,#000000,["style"=>"font-weight: bold; line-height: 1;"])
+text(shared_data(selectIDE),16,#000000)
+text("laptop used:",20,#000000,["style"=>"font-weight: bold; line-height: 1;"])
+text(shared_data(laptopBrand),16,#000000)
+}
+
+controller submission controles submitForm {
+    shared_data(user)=form_data(user)
+    shared_data(HTMLusing)=form_data(HTMLusing)
+    shared_data(browser1)=form_data(browser1)
+    shared_data(browser2)=form_data(browser2)
+    shared_data(browser3)=form_data(browser3)
+    shared_data(browser4)=form_data(browser4)
+    shared_data(selectIDE)=form_data(selectIDE)
+    shared_data(laptopBrand)=form_data(laptopBrand)
+    redirect information
+}

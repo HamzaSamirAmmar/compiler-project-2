@@ -1,4 +1,4 @@
-// Generated from C:/Users/ASUS/Desktop/cloned compiler/compiler-project-2/grammers\LanguageParser.g4 by ANTLR 4.9.2
+// Generated from F:/Programming/compiler/compiler 22_6/codeGenerationVersion/grammers\LanguageParser.g4 by ANTLR 4.9.1
 package generated;
 
 import org.antlr.v4.runtime.ParserRuleContext;

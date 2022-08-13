@@ -564,7 +564,11 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
         for (int i = 0; i < ctx.table_body().body_options().size(); i++) {
             tableBody.add((OutNode) visit(ctx.table_body().body_options().get(i).getChild(0)));
         }
-        return new Table(headers, tableBody);
+        MapNode extraAttributes =null;
+        if (ctx.extra_attributes() != null) {
+            extraAttributes = (MapNode) visit(ctx.extra_attributes());
+        }
+        return new Table(headers, tableBody,extraAttributes);
     }
 
     @Override

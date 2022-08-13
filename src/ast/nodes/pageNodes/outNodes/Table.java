@@ -1,5 +1,6 @@
 package ast.nodes.pageNodes.outNodes;
 
+import ast.nodes.basicNodes.expressions.literals.MapNode;
 import ast.nodes.util.Formatter;
 
 import java.util.ArrayList;
@@ -7,10 +8,12 @@ import java.util.ArrayList;
 public class Table extends OutNode {
     ArrayList<Text> headers;
     ArrayList<OutNode> tableBody;
+    MapNode extraAttributes;
 
-    public Table(ArrayList<Text> headers, ArrayList<OutNode> tableBody) {
+    public Table(ArrayList<Text> headers, ArrayList<OutNode> tableBody,MapNode extraAttributes) {
         this.headers = headers;
         this.tableBody = tableBody;
+        this.extraAttributes = extraAttributes;
     }
 
     public ArrayList<Text> getHeaders() {
@@ -27,6 +30,14 @@ public class Table extends OutNode {
 
     public void setTableBody(ArrayList<OutNode> tableBody) {
         this.tableBody = tableBody;
+    }
+
+    public MapNode getExtraAttributes() {
+        return extraAttributes;
+    }
+
+    public void setExtraAttributes(MapNode extraAttributes) {
+        this.extraAttributes = extraAttributes;
     }
 
     @Override
@@ -58,8 +69,24 @@ public class Table extends OutNode {
     @Override
     public String toHtmlCode() {
         StringBuilder builder = new StringBuilder();
-        builder.append("<table class=\"table\">").append(System.getProperty("line.separator"))
+        StringBuilder style = new StringBuilder(" ");
+        builder.append("<table ").append(style);
+        if (extraAttributes != null){
+            for (int i = 0; i < extraAttributes.getPairs().size(); i++) {
+
+                if (extraAttributes.getPairs().get(i).getKey().substring(1,extraAttributes.getPairs().get(i).getKey().length()-1)
+                        .equals("style")) {
+                    style.append(extraAttributes.getPairs().get(i).getValue().toCode(),1,extraAttributes.getPairs().get(i).getValue().toCode().length()-1);
+                }
+                else builder.append(" " + extraAttributes.getPairs().get(i).toHtmlCode());
+            }
+            builder.append("style= \"" + style);
+        }
+        else builder.append(" class=\"table");
+
+                builder.append("\">").append(System.getProperty("line.separator"))
                 .append("<tr>").append(System.getProperty("line.separator"));
+        System.out.println("+++++++++++++++"+ builder.toString() + "+++++++");
         for (int i = 0; i <headers.size() ; i++) {
             builder.append("<th>").append(headers.get(i).toHtmlCode()).append("</th>")
             .append(System.getProperty("line.separator"));

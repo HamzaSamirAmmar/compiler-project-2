@@ -16,10 +16,59 @@
 <img style ='  background-position: center;
                  background-repeat: no-repeat;
                  background-size: cover;
-                 pointer-events: none; position: absolute; width: 100%; height: 100%; z-index: -1;'  src= "https://i.pinimg.com/originals/7a/0d/e2/7a0de2c425b99bd0f4490e1480fa89e5.jpg" width= 50 height= 50>
+                 pointer-events: none; position: absolute; width: 100%; height: 100%; z-index: -1;'  src= "https://i.pinimg.com/originals/7a/0d/e2/7a0de2c425b99bd0f4490e1480fa89e5.jpg" width= 100 height= 100>
+
 <a href= 'https://www.w3schools.com/html/'>
 <div style= "font-size:24px; color: #ffffff ;   text-align: center;line-height: 3; ">learning html</div>
 </a>
-<div style= "font-size:21px; color: #ffffff ;   text-align: left;line-height: 2;padding-left: 20px; ">HTML has out elements like...</div>
+
+<ul style ='color: Tomato' >
+<li><div style= "font-size:16px; color: #ffffff ;   text-align: left;line-height: 1; ">HTML stands for Hyper Text Markup Language</div>
+</li>
+<li><div style= "font-size:16px; color: #ffffff ;   text-align: left;line-height: 1; ">HTML is the standard markup language for creating Web pages</div>
+</li>
+<li><div style= "font-size:16px; color: #ffffff ;   text-align: left;line-height: 1; ">HTML describes the structure of a Web page</div>
+</li>
+</ul>
+
+<div style= "font-size:21px; color: #ffffff ;   text-align: left;line-height: 2;padding-left: 20px;clear: right; ">HTML has out elements like...</div>
+
+<img style ='float: right;  width: 40%; height: 40%;padding-right: 20px;
+border-radius: 30%;opacity: 0.7;margin-top:-100px'  src= "https://en.number13.de/content/images/2021/08/photo-1542831371-29b0f74f9713-2.jpg" width= 40 height= 40>
+
+<ol style ='content: counter(li); color: AliceBlue;' >
+<li><div style= "font-size:16px; color: #ffffff ;   text-align: left;line-height: 1; ">links. Links allow users to click their way from page to page.</div>
+</li>
+<li><div style= "font-size:16px; color: #ffffff ;   text-align: left;line-height: 1; ">lists. allow web developers to group a set of related items.</div>
+</li>
+<li><div style= "font-size:16px; color: #ffffff ;   text-align: left;line-height: 1; ">images. improve the design and the appearance of a web page.</div>
+</li>
+</ol>
+
+<table  style= "  margin-left:10px; margin-top:-5px;width: 30%; border: 3px solid;">
+<tr>
+<th><div style= "font-size:24px; color: #fffff0 ;   ">browser</div>
+</th>
+<th><div style= "font-size:24px; color: #fffff0 ;   ">support</div>
+</th>
+</tr>
+<tr>
+<td><img src= "https://i.pngimg.me/thumb/f/720/4687314999574528.jpg" width= 60 height= 40>
+</td>
+<td><div style= "font-size:20px; color: #0ffff0 ;   ">99%</div>
+</td>
+</tr>
+<tr>
+<td><img src= "https://i.pngimg.me/thumb/f/350/comhiclipartsjmxh.jpg" width= 60 height= 50>
+</td>
+<td><div style= "font-size:20px; color: #0ffff0 ;   ">95%</div>
+</td>
+</tr>
+</table>
+
+<a href= 'submitForm.php'>
+<div style= "font-size:13px; color: #ffffff ;  margin-left:10px;margin-top:10px;  ">give your opinion on this form</div>
+</a>
+
 </body>
 </html>
