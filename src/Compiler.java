@@ -20,7 +20,7 @@ public class Compiler {
 
 
 	static String filePath = "samples/authentication_authorization_tests.blaze";
-//	static String filePath = "semanticCheckTests/IncompatibleExpressionTypeTest.blaze";
+//	static String filePath = "semanticCheckTests/UsingUndefinedYieldException.blaze";
 
 	static String ASTPath = "AST.txt";
 	static String ErrorFilePath="errors.txt";

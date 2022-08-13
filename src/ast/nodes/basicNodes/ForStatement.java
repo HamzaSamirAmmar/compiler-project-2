@@ -56,7 +56,7 @@ public class ForStatement extends BasicElement {
 
     @Override
     public String toPhpCode() {
-        String beginFor = "for (" + variableDeclaration.toPhpCode() + ";" + conditionExpression.toCode() + ";" + stepExpression.toCode() + ")" + " {\n";
+        String beginFor = "for (" + variableDeclaration.toPhpCode()  + conditionExpression.toCode() + ";" + stepExpression.toPhpCode() + ")" + " {\n";
         StringBuilder innerElementCode = new StringBuilder("");
         for (Element element : bodyElements) {
             innerElementCode.append(element.toPhpCode());
@@ -67,7 +67,7 @@ public class ForStatement extends BasicElement {
 
     @Override
     public String toHtmlCode() {
-        String beginFor = "<?php for(" + variableDeclaration.toPhpCode() + ";" + conditionExpression.toCode() + ";" + stepExpression.toCode() + ") : ?>\n";
+        String beginFor = "<?php for(" + variableDeclaration.toPhpCode()  + conditionExpression.toCode() + ";" + stepExpression.toPhpCode() + ") : ?>\n";
         StringBuilder innerElementCode = new StringBuilder("");
         for (Element element : bodyElements) {
             innerElementCode.append(element.toHtmlCode());

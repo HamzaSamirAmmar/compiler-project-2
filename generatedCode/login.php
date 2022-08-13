@@ -32,7 +32,7 @@
 <input type= "text" style =' opacity: 0.5;' id= "password" name= "password" placeholder= " enter your password">
 <ol>
 </ol>
-<button type ='submit' class= "btn btn-primary" onclick= "/compiler_tests/posts.php" >submit</button>
+<button type ='submit' class= "btn btn-primary" onclick= "console.log('button clicked')" >submit</button>
 </form>
 
 </body>

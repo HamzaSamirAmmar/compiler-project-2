@@ -184,7 +184,7 @@ program: {
 							},
 							Button: {
 								text : "submit",
-								action : "/compiler_tests/posts.php",
+								action : "console.log('button clicked')",
 								map: {
 									pair: {
 										value: string: {

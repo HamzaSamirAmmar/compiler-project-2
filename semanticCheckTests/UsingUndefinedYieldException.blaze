@@ -1,0 +1,10 @@
+page p1 head("title"){
+    @yield("firstYield")
+}
+page p2 head("title") extends p1{}
+page p3 head("title") extends p2{}
+page p4 head("title") extends p3{}
+page p5 head("title") extends p4{
+    @section("secondYield")
+    @endsection("secondYield")
+}
