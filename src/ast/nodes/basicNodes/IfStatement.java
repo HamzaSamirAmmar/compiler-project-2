@@ -31,7 +31,7 @@ public class IfStatement extends BasicElement {
 
     @Override
     public String toHtmlCode() {
-        String beginIf = "<? php if(" + condition.toCode() + ") : ?>\n";
+        String beginIf = "<?php if(" + condition.toCode() + ") : ?>\n";
         String endIF = "\n<?php endif; ?>";
         String elseStatement = "<?php else : ?>\n";
         StringBuilder innerIfElementCode = new StringBuilder("");

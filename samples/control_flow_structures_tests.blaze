@@ -1,0 +1,37 @@
+page controlTest head("control"){
+    @condition=true
+    if(@condition){
+        text("passed test",20,#ffffee,["class"=>"alert alert-success"])
+    }
+    else {
+        text("did not pass test",20,#ffffee,["class"=>"alert alert-danger"])
+    }
+    @times=3
+    for(@i=0;@i<@times;@i++)
+    {
+        text("repeated",20,#ffffee,["class"=>"alert alert-info"])
+    }
+    @name="Peter Pan"
+    switch(@name){
+        case "Peter Pan" : text("name is Peter Pan",20,#ffffee,["class"=>"alert alert-info"]) ;
+        case "Mr. Hook" : text("name is Mr. Hook",20,#ffffee,["class"=>"alert alert-info"]) ;
+    }
+    shared_data(variable)=4
+    link("decider.php"){
+         text("run",20,#ffffee,["class"=>"btn btn-primary"])
+    }
+}
+page result head("result"){
+    text("result is : ",20,#ffffee,["class"=>"alert alert-info"])
+    text(shared_data(variable),20,#0000ff,["class"=>"alert alert-info"])
+}
+
+controller decider controles controlTest {
+    @x=3
+    for(@i=0;@i<3;@i++){
+        @x++
+    }
+    if(@x>3 && shared_data(variable)>3){
+        redirect result
+    }
+}

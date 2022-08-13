@@ -8,11 +8,11 @@ $name = $_POST['user'];
 $password = $_POST['password'];
 $valid = checkValid($name , $password );;
 $isAdmin = checkRole('admin');
-if($isAdmin&&$valid) {
+if ($isAdmin&&$valid) {
 redirect("adminDashboard");
 
 }else {
-if(!$valid) {
+if (!$valid) {
 redirect("registerPage");
 
 }else {

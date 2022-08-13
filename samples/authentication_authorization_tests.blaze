@@ -28,7 +28,7 @@ page login head ("Login Form Design") extends background{
     list(true){}
     textField("password","","enter your password",["style"=>" opacity: 0.5;"])
     list(true){}
-    button("submit" ,"/compiler_tests/posts.php",["type"=>"submit"] )
+    button("submit" ,"console.log('button clicked')",["type"=>"submit"] )
 
    }
    @endsection

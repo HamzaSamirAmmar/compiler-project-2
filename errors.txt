@@ -1,1 +1,1 @@
-line 8 at column 13: trying to make a section of undefined yield
+line 2 at column 19: extraneous input ';' expecting {'if', 'checkAuthenticated', 'checkValid', 'checkRole', 'text', 'image', 'list', 'table', 'button', BOOLEAN, 'form', 'textField', 'date', 'checkbox', 'selection', 'radio', 'switch', 'link', '@auth', '@guest', '@role', '@inverserole', '@rawphp', '@section', '@yield', 'for', 'shared_data', 'form_data', '(', '[', '{', '}', '!', ONE_VALUABLE_OPERAND, '@', DECIMAL, STRING, CHAR}
