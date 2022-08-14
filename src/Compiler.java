@@ -19,8 +19,8 @@ import java.util.ArrayList;
 public class Compiler {
 
 
-//	static String filePath = "samples/authentication_authorization_tests.blaze";
-	static String filePath = "semanticCheckTests/TakenPageAndTakenControllerException.blaze";
+	static String filePath = "samples/html_information_page.blaze";
+//	static String filePath = "semanticCheckTests/TakenPageAndTakenControllerException.blaze";
 
 	static String ASTPath = "AST.txt";
 	static String ErrorFilePath="errors.txt";
