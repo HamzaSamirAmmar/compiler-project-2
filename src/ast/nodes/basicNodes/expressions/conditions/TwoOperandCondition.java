@@ -10,12 +10,9 @@ public class TwoOperandCondition extends Condition  {
 
 
     public TwoOperandCondition(Expression leftOperand, Expression rightOperand, String operator) {
-        if(leftOperand instanceof Numeric)
+
             this.leftOperand = leftOperand;
-        else throw new RuntimeException("left operand should be a numeric expression");
-        if(rightOperand instanceof Numeric)
             this.rightOperand = rightOperand;
-        else  throw new RuntimeException("right operand should be a numeric expression");
         this.operator = operator;
     }
 

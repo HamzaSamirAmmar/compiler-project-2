@@ -13,12 +13,8 @@ public class ConditionConcatenation extends Condition {
 
     public ConditionConcatenation(String operator, Expression leftCondition, Expression rightCondition) {
         this.operator = operator;
-        if(leftCondition instanceof Logical)
-            this.leftCondition = leftCondition;
-        else  throw new RuntimeException("the left condition should be logical expression ");
-        if(rightCondition instanceof Logical)
-            this.rightCondition = rightCondition;
-        else  throw new RuntimeException("the right condition should be logical expression ");
+        this.leftCondition = leftCondition;
+        this.rightCondition = rightCondition;
     }
 
     public String getOperator() {
@@ -34,9 +30,9 @@ public class ConditionConcatenation extends Condition {
     }
 
     public void setLeftCondition(Expression leftCondition) {
-        if(leftCondition instanceof Logical)
+        if (leftCondition instanceof Logical)
             this.leftCondition = leftCondition;
-        else  throw new RuntimeException("the left condition should be logical expression ");
+        else throw new RuntimeException("the left condition should be logical expression ");
     }
 
     public Expression getRightCondition() {
@@ -44,9 +40,9 @@ public class ConditionConcatenation extends Condition {
     }
 
     public void setRightCondition(Expression rightCondition) {
-        if(rightCondition instanceof Logical)
+        if (rightCondition instanceof Logical)
             this.rightCondition = rightCondition;
-        else  throw new RuntimeException("the right condition should be logical expression ");
+        else throw new RuntimeException("the right condition should be logical expression ");
     }
 
     @Override
@@ -56,11 +52,12 @@ public class ConditionConcatenation extends Condition {
 
     @Override
     protected Formatter nodeValue(Formatter formatter) {
-        formatter.object(leftCondition.toString("leftCondition")).addProperty("operator",operator).object(rightCondition.toString("rightCondition"));
+        formatter.object(leftCondition.toString("leftCondition")).addProperty("operator", operator).object(rightCondition.toString("rightCondition"));
         return formatter;
     }
+
     @Override
-    public String toCode(){
-        return leftCondition.toCode()+operator+rightCondition.toCode();
+    public String toCode() {
+        return leftCondition.toCode() + operator + rightCondition.toCode();
     }
 }

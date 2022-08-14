@@ -3,22 +3,15 @@ package ast.nodes.basicNodes.expressions.Math;
 import ast.nodes.basicNodes.expressions.*;
 import ast.nodes.util.Formatter;
 
-public class MultiplicativeNode extends Expression implements Valuable,Numeric {
+public class MultiplicativeNode extends Expression implements Valuable, Numeric {
     Expression leftOperand;//should be valuable
     Expression rightOperand;//should be valuable
     String operator;
 
     public MultiplicativeNode(Expression leftOperand, Expression rightOperand, String operator) {
-        if (leftOperand instanceof Numeric)
-        {
-            if (rightOperand instanceof Numeric) {
-                this.leftOperand = leftOperand;
-                this.rightOperand = rightOperand;
-                this.operator = operator;
-            }
-        } else {
-            throw new RuntimeException("Invalid multiplicative");
-        }
+        this.leftOperand = leftOperand;
+        this.rightOperand = rightOperand;
+        this.operator = operator;
     }
 
     public Expression getLeftOperand() {
@@ -58,9 +51,10 @@ public class MultiplicativeNode extends Expression implements Valuable,Numeric {
                 .addProperty("rightOperand", rightOperand.toString())
                 ;
     }
+
     @Override
-    public String toCode(){
-        return rightOperand.toCode()+operator+leftOperand.toCode();
+    public String toCode() {
+        return rightOperand.toCode() + operator + leftOperand.toCode();
 
     }
 }

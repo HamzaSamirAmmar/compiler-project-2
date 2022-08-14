@@ -10,9 +10,7 @@ public class OneOperandCondition extends Condition {
 
 
     public OneOperandCondition(Expression operand) {
-        if(operand instanceof Logical)
             this.operand = operand;
-        else  throw new RuntimeException("operand should be logical expression");
     }
 
     public Expression getOperand() {

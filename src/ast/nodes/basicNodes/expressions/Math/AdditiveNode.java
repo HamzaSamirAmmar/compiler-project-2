@@ -3,22 +3,15 @@ package ast.nodes.basicNodes.expressions.Math;
 import ast.nodes.basicNodes.expressions.*;
 import ast.nodes.util.Formatter;
 
-public class AdditiveNode extends Expression implements Valuable,Numeric{
+public class AdditiveNode extends Expression implements Valuable, Numeric {
     Expression leftOperand;//should be valuable
     Expression rightOperand;//should be valuable
     String operator;
 
     public AdditiveNode(Expression leftOperand, Expression rightOperand, String operator) {
-        if (leftOperand instanceof Numeric)
-        {
-            if (rightOperand instanceof Numeric) {
-                this.leftOperand = leftOperand;
-                this.rightOperand = rightOperand;
-                this.operator = operator;
-            }
-        } else {
-            throw new RuntimeException("Invalid additive");
-        }
+        this.leftOperand = leftOperand;
+        this.rightOperand = rightOperand;
+        this.operator = operator;
     }
 
     public Expression getLeftOperand() {
@@ -57,9 +50,10 @@ public class AdditiveNode extends Expression implements Valuable,Numeric{
         formatter.addProperty("rightOperand", rightOperand.toString());
         return formatter;
     }
+
     @Override
-    public String toCode(){
-        return rightOperand.toCode()+operator+leftOperand.toCode();
+    public String toCode() {
+        return rightOperand.toCode() + operator + leftOperand.toCode();
 
     }
 }

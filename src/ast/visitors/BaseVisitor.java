@@ -916,7 +916,14 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
         Expression leftOperand = (Expression) visit(ctx.expression(0));
         Expression rightOperand = (Expression) visit(ctx.expression(1));
         String operator = ctx.OPERATOR_TWO_OPERAND().getText();
-
+        if (!(leftOperand instanceof Numeric)) {
+            errors.add("line" + " " + ctx.expression(0).start.getLine() + " " + "column" + " : " + ctx.expression(0).start.getCharPositionInLine() + " " + "left operand should be a numeric expression");
+            return new InvalidExpression();
+        }
+        if (!(rightOperand instanceof Numeric)) {
+            errors.add("line" + " " + ctx.expression(1).start.getLine() + " " + "column" + " : " + ctx.expression(1).start.getCharPositionInLine() + " " + "right operand should be a numeric expression");
+            return new InvalidExpression();
+        }
         return new TwoOperandCondition(leftOperand, rightOperand, operator);
     }
 
@@ -926,7 +933,14 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
         Expression leftOperand = (Expression) visit(ctx.expression(0));
         Expression rightOperand = (Expression) visit(ctx.expression(1));
         String operator = ctx.CONDITIONAL_CONCAT_OPERATOR().getText();
-
+        if (!(leftOperand instanceof Logical)) {
+            errors.add("line" + " " + ctx.expression(0).start.getLine() + " " + "column" + " : " + ctx.expression(0).start.getCharPositionInLine() + " " + "the left condition should be logical expression ");
+            return new InvalidExpression();
+        }
+        if (!(rightOperand instanceof Logical)) {
+            errors.add("line" + " " + ctx.expression(1).start.getLine() + " " + "column" + " : " + ctx.expression(1).start.getCharPositionInLine() + " " + "the right condition should be logical expression ");
+            return new InvalidExpression();
+        }
         return new ConditionConcatenation(operator, leftOperand, rightOperand);
     }
 
@@ -938,12 +952,28 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
             String operator = ctx.ADDITIVE_OPERATOR().getText();
             Expression leftOperand = (Expression) visit(ctx.expression(0));
             Expression rightOperand = (Expression) visit(ctx.expression(1));
+            if (!(leftOperand instanceof Numeric)) {
+                errors.add("line" + " " + ctx.expression(0).start.getLine() + " " + "column" + " : " + ctx.expression(0).start.getCharPositionInLine() + " " + "Invalid additive");
+                return new InvalidExpression();
+            }
+            if (!(rightOperand instanceof Numeric)) {
+                errors.add("line" + " " + ctx.expression(1).start.getLine() + " " + "column" + " : " + ctx.expression(1).start.getCharPositionInLine() + " " + "Invalid additive");
+                return new InvalidExpression();
+            }
             return new AdditiveNode(leftOperand, rightOperand, operator);
         } else {
             System.out.println("Multiplication");
             String operator = ctx.MULTIPLICATIVE_OPERATOR().getText();
             Expression leftOperand = (Expression) visit(ctx.expression(0));
             Expression rightOperand = (Expression) visit(ctx.expression(1));
+            if (!(leftOperand instanceof Numeric)) {
+                errors.add("line" + " " + ctx.expression(0).start.getLine() + " " + "column" + " : " + ctx.expression(0).start.getCharPositionInLine() + " " + "Invalid multiplicative");
+                return new InvalidExpression();
+            }
+            if (!(rightOperand instanceof Numeric)) {
+                errors.add("line" + " " + ctx.expression(1).start.getLine() + " " + "column" + " " + ctx.expression(1).start.getCharPositionInLine() + " " + "Invalid multiplicative");
+                return new InvalidExpression();
+            }
             return new MultiplicativeNode(leftOperand, rightOperand, operator);
         }
     }
@@ -954,10 +984,13 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
         if (ctx.SQUARE_OPEN() != null && ctx.SQUARE_CLOSE() != null) {
             Expression indexed = (Expression) visit(ctx.expression(0));
             Expression index = (Expression) visit(ctx.expression(1));
-            if (indexed instanceof Iterable && index instanceof Numeric)
+            if (indexed instanceof Iterable && index instanceof Numeric) {
                 return new IndexedExpressionNode(indexed, index);
+            } else {
+                errors.add("line" + " " + ctx.expression(0).start.getLine() + " " + "column" + " : " + ctx.expression(0).start.getCharPositionInLine() + " " + "Invalid Indexed Variable Expression");
+            }
         }
-        throw new RuntimeException("Invalid Indexed Variable Expression");
+        return new InvalidExpression();
     }
 
     @Override
@@ -966,6 +999,10 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
         boolean operandIsLeft = (ctx.children.get(0) == ctx.ONE_VALUABLE_OPERAND());
         String operator = ctx.ONE_VALUABLE_OPERAND().getText();
         Expression operand = (Expression) visit(ctx.expression());
+        if (!(operand instanceof VariableNode || operand instanceof ConcatenableNode || operand instanceof IndexedExpressionNode)) {
+            errors.add("line" + " " + ctx.expression().start.getLine() + " " + "column" + " : " + ctx.expression().start.getCharPositionInLine() + " " + "Invalid one operand mathematical");
+            return new InvalidExpression();
+        }
         return new OneOperandMathematicalNode(operandIsLeft, operator, operand);
     }
 
@@ -979,6 +1016,10 @@ public class BaseVisitor extends LanguageParserBaseVisitor<AbstractNode> {
     public AbstractNode visitOneOperandConditionExpression(LanguageParser.OneOperandConditionExpressionContext ctx) {
         System.out.println("in one operand condition visitor");
         Expression operand = (Expression) visit(ctx.expression());
+        if (!(operand instanceof Logical)) {
+            errors.add("line" + " " + ctx.expression().start.getLine() + " " + "column" + " : " + ctx.expression().start.getCharPositionInLine() + " " + "operand should be logical expression");
+            return new InvalidExpression();
+        }
         return new OneOperandCondition(operand);
     }
 
