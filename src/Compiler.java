@@ -15,12 +15,14 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Compiler {
 
 
-	static String filePath = "samples/html_information_page.blaze";
-//	static String filePath = "semanticCheckTests/TakenPageAndTakenControllerException.blaze";
+//	static String filePath = "samples/html_information_page.blaze";
+	static String filePath = "semanticCheckTests/IncompatibleExpressionTypeTest.blaze";
 
 	static String ASTPath = "AST.txt";
 	static String ErrorFilePath="errors.txt";
@@ -42,6 +44,7 @@ public class Compiler {
 				@Override
 				public void syntaxError(Recognizer<?, ?> recognizer, Object offendingSymbol, int line, int charPositionInLine, String msg, RecognitionException e) {
 					errorMessages.add("line "+line+" at column "+charPositionInLine+": "+msg);
+					throw new RuntimeException();
 				}
 			});
 			//base visitor
@@ -58,8 +61,9 @@ public class Compiler {
 			//printing errors
 			if(!errorMessages.isEmpty()) {
 				FileWriter errorFile = new FileWriter(ErrorFilePath);
+				Set<String> uniqueMessages = new HashSet<String>(errorMessages);
 				System.err.println("Found Errors:");
-				for (String errorMessage : errorMessages) {
+				for (String errorMessage : uniqueMessages) {
 					errorFile.write(errorMessage);
 					errorFile.write("\n");
 					System.err.println(errorMessage);
@@ -94,7 +98,13 @@ public class Compiler {
 			}
 
 
-		} catch (IOException e) {
+		} catch (RuntimeException e){
+			for (String errorMessage : errorMessages) {
+				System.err.println(errorMessage);
+			}
+			System.err.println("\nBuild couldn't complete due to syntax errors!");
+		}
+		catch (IOException e) {
 			e.printStackTrace();
 		}
 	}

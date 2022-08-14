@@ -2,677 +2,76 @@ program: {
 	pages: [
 		page: {
 			extended page ID: null,
-			ID: background,
-			title: "no title",
+			ID: p1,
+			title: "title",
 			page body element: [
-				Image: {
-					height : 100,
-					imgReference : "https://i.pinimg.com/originals/7a/0d/e2/7a0de2c425b99bd0f4490e1480fa89e5.jpg",
-					width : 100,
-					map: {
-						pair: {
-							value: string: {
-							stringValue:   background-position: center;
-						                 background-repeat: no-repeat;
-						                 background-size: cover;
-						                 pointer-events: none; position: absolute; width: 100%; height: 100%; z-index: -1;,
+				if statement: {
+					condition: string: {
+					stringValue: I am not a logical expression,
+				},
+					if body elements: [
+						text: {
+							color : #ffffff,
+							fontSize : 20,
+							string: {
+								stringValue: i am a text,
+							},
+						}
+					],
+					else body elements: [],
+				},
+				if statement: {
+					condition: concatConcatenation: {
+					operator: &&,
+					leftCondition(TwoOperandCondition): {
+						operator: >,
+						leftOperand(decimalValue): {
+							decimalValue: 3.0,
 						},
-							key: "style",
+						rightOperand(decimalValue): {
+							decimalValue: 1.0,
+						},
+					},
+					rightCondition(TwoOperandCondition): {
+						operator: >,
+						leftOperand(decimalValue): {
+							decimalValue: 3.0,
+						},
+						rightOperand(decimalValue): {
+							decimalValue: 2.0,
 						},
 					},
 				},
-				@Yield: {
-					name: "content",
-				}
-			],
-		},
-		page: {
-			extended page ID: background,
-			ID: html,
-			title: "information about HTML",
-			page body element: [
-				@Section: {
-					name: "content",
-					Image: {
-						height : 100,
-						imgReference : "https://i.pinimg.com/originals/7a/0d/e2/7a0de2c425b99bd0f4490e1480fa89e5.jpg",
-						width : 100,
-						map: {
-							pair: {
-								value: string: {
-								stringValue:   background-position: center;
-							                 background-repeat: no-repeat;
-							                 background-size: cover;
-							                 pointer-events: none; position: absolute; width: 100%; height: 100%; z-index: -1;,
+					if body elements: [
+						text: {
+							color : #ffffff,
+							fontSize : 20,
+							string: {
+								stringValue: i am a text,
 							},
-								key: "style",
-							},
+						}
+					],
+					else body elements: [],
+				},
+				forStatment: {
+					variableDeclaration: {
+						id: i,
+						value(decimalValue): {
+							decimalValue: 0.0,
 						},
 					},
-					Link: {
-						linkReference : 'https://www.w3schools.com/html/',
-						linkBody: [
-							text: {
-								color : #ffffff,
-								fontSize : 24,
-								string: {
-									stringValue: learning html,
-								},
-								map: {
-									pair: {
-										value: string: {
-										stringValue:  text-align: center;line-height: 3;,
-									},
-										key: "style",
-									},
-								},
-							}
-						],
+					condition(string): {
+						stringValue: text,
 					},
-					list: {
-						isOrdered : false,
-						map: {
-							pair: {
-								value: string: {
-								stringValue: color: Tomato,
-							},
-								key: "style",
-							},
-						},
-						listBody: [
-							text: {
-								color : #ffffff,
-								fontSize : 16,
-								string: {
-									stringValue: HTML stands for Hyper Text Markup Language,
-								},
-								map: {
-									pair: {
-										value: string: {
-										stringValue:  text-align: left;line-height: 1;,
-									},
-										key: "style",
-									},
-								},
-							},
-							text: {
-								color : #ffffff,
-								fontSize : 16,
-								string: {
-									stringValue: HTML is the standard markup language for creating Web pages,
-								},
-								map: {
-									pair: {
-										value: string: {
-										stringValue:  text-align: left;line-height: 1;,
-									},
-										key: "style",
-									},
-								},
-							},
-							text: {
-								color : #ffffff,
-								fontSize : 16,
-								string: {
-									stringValue: HTML describes the structure of a Web page,
-								},
-								map: {
-									pair: {
-										value: string: {
-										stringValue:  text-align: left;line-height: 1;,
-									},
-										key: "style",
-									},
-								},
-							}
-						],
+					step(string): {
+						stringValue: another text,
 					},
 					text: {
 						color : #ffffff,
-						fontSize : 21,
+						fontSize : 20,
 						string: {
-							stringValue: HTML has out elements like...,
+							stringValue: i am a text,
 						},
-						map: {
-							pair: {
-								value: string: {
-								stringValue:  text-align: left;line-height: 2;padding-left: 20px;clear: right;,
-							},
-								key: "style",
-							},
-						},
-					},
-					Image: {
-						height : 40,
-						imgReference : "https://en.number13.de/content/images/2021/08/photo-1542831371-29b0f74f9713-2.jpg",
-						width : 40,
-						map: {
-							pair: {
-								value: string: {
-								stringValue: float: right;  width: 40%; height: 40%;padding-right: 20px;
-							border-radius: 30%;opacity: 0.7;margin-top:-100px,
-							},
-								key: "style",
-							},
-						},
-					},
-					list: {
-						isOrdered : true,
-						map: {
-							pair: {
-								value: string: {
-								stringValue: content: counter(li); color: AliceBlue;,
-							},
-								key: "style",
-							},
-						},
-						listBody: [
-							text: {
-								color : #ffffff,
-								fontSize : 16,
-								string: {
-									stringValue: links. Links allow users to click their way from page to page.,
-								},
-								map: {
-									pair: {
-										value: string: {
-										stringValue:  text-align: left;line-height: 1;,
-									},
-										key: "style",
-									},
-								},
-							},
-							text: {
-								color : #ffffff,
-								fontSize : 16,
-								string: {
-									stringValue: lists. allow web developers to group a set of related items.,
-								},
-								map: {
-									pair: {
-										value: string: {
-										stringValue:  text-align: left;line-height: 1;,
-									},
-										key: "style",
-									},
-								},
-							},
-							text: {
-								color : #ffffff,
-								fontSize : 16,
-								string: {
-									stringValue: images. improve the design and the appearance of a web page.,
-								},
-								map: {
-									pair: {
-										value: string: {
-										stringValue:  text-align: left;line-height: 1;,
-									},
-										key: "style",
-									},
-								},
-							}
-						],
-					},
-					table: {
-						tableBody: [
-							Image: {
-								height : 40,
-								imgReference : "https://i.pngimg.me/thumb/f/720/4687314999574528.jpg",
-								width : 60,
-							},
-							text: {
-								color : #0ffff0,
-								fontSize : 20,
-								string: {
-									stringValue: 99%,
-								},
-							},
-							Image: {
-								height : 50,
-								imgReference : "https://i.pngimg.me/thumb/f/350/comhiclipartsjmxh.jpg",
-								width : 60,
-							},
-							text: {
-								color : #0ffff0,
-								fontSize : 20,
-								string: {
-									stringValue: 95%,
-								},
-							}
-						],
-						headers: [
-							text: {
-								color : #fffff0,
-								fontSize : 24,
-								string: {
-									stringValue: browser,
-								},
-							},
-							text: {
-								color : #fffff0,
-								fontSize : 24,
-								string: {
-									stringValue: support,
-								},
-							}
-						],
-					},
-					Link: {
-						linkReference : 'submitForm.php',
-						linkBody: [
-							text: {
-								color : #ffffff,
-								fontSize : 13,
-								string: {
-									stringValue: give your opinion on this form,
-								},
-								map: {
-									pair: {
-										value: string: {
-										stringValue: margin-left:10px;margin-top:10px; ,
-									},
-										key: "style",
-									},
-								},
-							}
-						],
-					},
-				}
-			],
-		},
-		page: {
-			extended page ID: background,
-			ID: submitForm,
-			title: "submission about HTML",
-			page body element: [
-				@Section: {
-					name: "content",
-					Image: {
-						height : 100,
-						imgReference : "https://i.pinimg.com/originals/7a/0d/e2/7a0de2c425b99bd0f4490e1480fa89e5.jpg",
-						width : 100,
-						map: {
-							pair: {
-								value: string: {
-								stringValue:   background-position: center;
-							                 background-repeat: no-repeat;
-							                 background-size: cover;
-							                 pointer-events: none; position: absolute; width: 100%; height: 100%; z-index: -1;,
-							},
-								key: "style",
-							},
-						},
-					},
-					text: {
-						color : #e9967a,
-						fontSize : 30,
-						string: {
-							stringValue: YOUR OPINION...,
-						},
-						map: {
-							pair: {
-								value: string: {
-								stringValue: position: relative; font-size:30px ;  text-align: center; font-weight: bold; line-height: 2; padding-top: 50px; padding-left: 450px; padding-right: 450px;
-							                                        background-image: linear-gradient(to bottom, rgba(140, 140, 140, 1) 0%, rgba(0, 0, 0, 1) 100%), linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 100%);
-							                                        background-clip: content-box;,
-							},
-								key: "style",
-							},
-						},
-					},
-					Form Node: {
-						Form Action: "submission",
-						Form method: post,
-						map: {
-							pair: {
-								value: string: {
-								stringValue: text-align: center; padding-left: 450px; padding-right: 450px;
-							                             background-image: linear-gradient(to bottom, rgba(3, 0, 0, 1) 0%, rgba(50,0,0,1) 100%), linear-gradient(to bottom, rgba(3,0,0,1) 0%, rgba(3,0,0,1) 100%);
-							                             background-clip: content-box;,
-							},
-								key: "style",
-							},
-						},
-						formBody: [
-							TextField Node: {
-								TextField Name: "user",
-								TextField Label: "",
-								TextField Value: string: {
-								stringValue: enter your name,
-							},
-								map: {
-									pair: {
-										value: string: {
-										stringValue:  opacity: 0.5;,
-									},
-										key: "style",
-									},
-								},
-							},
-							list: {
-								isOrdered : true,
-								listBody: [],
-							},
-							Date Node: {
-								Date Label: "start using HTML at: ",
-								Date Value: string: {
-								stringValue: 2018-07-22,
-							},
-								Date Name: "HTMLusing",
-								map: {
-									pair: {
-										value: string: {
-										stringValue: color: white;,
-									},
-										key: "label style",
-									},
-								},
-							},
-							text: {
-								color : #ffffff,
-								fontSize : 16,
-								string: {
-									stringValue: browsers you use: ,
-								},
-							},
-							CheckBox Node: {
-								CheckBox Value: string: {
-								stringValue: chrome,
-							},
-								CheckBox Name: "browser1",
-								CheckBox Label: "chrome",
-								map: {
-									pair: {
-										value: string: {
-										stringValue: color: white;,
-									},
-										key: "label style",
-									},
-								},
-							},
-							CheckBox Node: {
-								CheckBox Value: string: {
-								stringValue: edge,
-							},
-								CheckBox Name: "browser2",
-								CheckBox Label: "edge",
-								map: {
-									pair: {
-										value: string: {
-										stringValue: color: white;,
-									},
-										key: "label style",
-									},
-								},
-							},
-							CheckBox Node: {
-								CheckBox Value: string: {
-								stringValue: firefox,
-							},
-								CheckBox Name: "browser3",
-								CheckBox Label: "firefox",
-								map: {
-									pair: {
-										value: string: {
-										stringValue: color: white;,
-									},
-										key: "label style",
-									},
-								},
-							},
-							CheckBox Node: {
-								CheckBox Value: string: {
-								stringValue: opera,
-							},
-								CheckBox Name: "browser4",
-								CheckBox Label: "opera",
-								map: {
-									pair: {
-										value: string: {
-										stringValue: color: white;,
-									},
-										key: "label style",
-									},
-								},
-							},
-							text: {
-								color : #ffffff,
-								fontSize : 16,
-								string: {
-									stringValue: editor you use: ,
-								},
-							},
-							Selection Node: {
-								Selection Name: "selectIDE",
-								SelectionOptions: [
-									Option Node: {
-										Label: "vs code",
-										string: {
-											stringValue: vsCode,
-										},
-									},
-									Option Node: {
-										Label: "sublime",
-										string: {
-											stringValue: sublime,
-										},
-									},
-									Option Node: {
-										Label: "notepad",
-										string: {
-											stringValue: notepad,
-										},
-									},
-									Option Node: {
-										Label: "Brackets",
-										string: {
-											stringValue: Brackets,
-										},
-									},
-									Option Node: {
-										Label: "Other",
-										string: {
-											stringValue: other,
-										},
-									}
-								],
-							},
-							text: {
-								color : #ffffff,
-								fontSize : 16,
-								string: {
-									stringValue: your laptop brand: ,
-								},
-							},
-							Radio Node: {
-								Radio Name: laptopBrand,
-								map: {
-									pair: {
-										value: string: {
-										stringValue: color: white;,
-									},
-										key: "label style",
-									},
-								},
-								RadioOptions: [
-									Option Node: {
-										Label: "ASUS",
-										string: {
-											stringValue: asus,
-										},
-									},
-									Option Node: {
-										Label: "Lenovo",
-										string: {
-											stringValue: lenovo,
-										},
-									},
-									Option Node: {
-										Label: "HP",
-										string: {
-											stringValue: hp,
-										},
-									},
-									Option Node: {
-										Label: "Other",
-										string: {
-											stringValue: other,
-										},
-									}
-								],
-							},
-							Button: {
-								text : "submit",
-								action : "console.log('button clicked')",
-								map: {
-									pair: {
-										value: string: {
-										stringValue: submit,
-									},
-										key: "type",
-									},
-								},
-							}
-						],
-					},
-				}
-			],
-		},
-		page: {
-			extended page ID: null,
-			ID: information,
-			title: "submission information",
-			page body element: [
-				text: {
-					color : #000000,
-					fontSize : 24,
-					string: {
-						stringValue: result of submission,
-					},
-					map: {
-						pair: {
-							value: string: {
-							stringValue: font-weight: bold; line-height: 2;,
-						},
-							key: "style",
-						},
-					},
-				},
-				text: {
-					color : #000000,
-					fontSize : 16,
-					shared data node: {
-						name: user,
-					},
-				},
-				text: {
-					color : #000000,
-					fontSize : 20,
-					string: {
-						stringValue: start date of using html:,
-					},
-					map: {
-						pair: {
-							value: string: {
-							stringValue: font-weight: bold; line-height: 1;,
-						},
-							key: "style",
-						},
-					},
-				},
-				text: {
-					color : #000000,
-					fontSize : 16,
-					shared data node: {
-						name: HTMLusing,
-					},
-				},
-				text: {
-					color : #000000,
-					fontSize : 20,
-					string: {
-						stringValue: browsers used:,
-					},
-					map: {
-						pair: {
-							value: string: {
-							stringValue: font-weight: bold; line-height: 1;,
-						},
-							key: "style",
-						},
-					},
-				},
-				text: {
-					color : #000000,
-					fontSize : 16,
-					shared data node: {
-						name: browser1,
-					},
-				},
-				text: {
-					color : #000000,
-					fontSize : 16,
-					shared data node: {
-						name: browser2,
-					},
-				},
-				text: {
-					color : #000000,
-					fontSize : 16,
-					shared data node: {
-						name: browser3,
-					},
-				},
-				text: {
-					color : #000000,
-					fontSize : 16,
-					shared data node: {
-						name: browser4,
-					},
-				},
-				text: {
-					color : #000000,
-					fontSize : 20,
-					string: {
-						stringValue: editor used:,
-					},
-					map: {
-						pair: {
-							value: string: {
-							stringValue: font-weight: bold; line-height: 1;,
-						},
-							key: "style",
-						},
-					},
-				},
-				text: {
-					color : #000000,
-					fontSize : 16,
-					shared data node: {
-						name: selectIDE,
-					},
-				},
-				text: {
-					color : #000000,
-					fontSize : 20,
-					string: {
-						stringValue: laptop used:,
-					},
-					map: {
-						pair: {
-							value: string: {
-							stringValue: font-weight: bold; line-height: 1;,
-						},
-							key: "style",
-						},
-					},
-				},
-				text: {
-					color : #000000,
-					fontSize : 16,
-					shared data node: {
-						name: laptopBrand,
 					},
 				}
 			],
@@ -680,59 +79,65 @@ program: {
 	],
 	controllers: [
 		controller: {
-			controlled page ID: submitForm,
-			ID: submission,
+			controlled page ID: p1,
+			ID: c1,
 			controller body element: [
-				SharedDataDeclaration: {
-					id: user,
-					value(shared data node): {
-						name: user,
+				Valid credentials check: {
+					password: decimalValue: {
+					decimalValue: 5.0,
+				},
+					unique identifier: decimalValue: {
+					decimalValue: 5.0,
+				},
+				},
+				Role check: {
+					check role : decimalValue: {
+					decimalValue: 55.0,
+				},
+				},
+				variableDeclaration: {
+					id: name,
+					value(string): {
+						stringValue: name,
 					},
 				},
-				SharedDataDeclaration: {
-					id: HTMLusing,
-					value(shared data node): {
-						name: HTMLusing,
+				variableDeclaration: {
+					id: password,
+					value(string): {
+						stringValue: password,
 					},
 				},
-				SharedDataDeclaration: {
-					id: browser1,
-					value(shared data node): {
-						name: browser1,
+				variableDeclaration: {
+					id: adminRole,
+					value(string): {
+						stringValue: admin,
 					},
 				},
-				SharedDataDeclaration: {
-					id: browser2,
-					value(shared data node): {
-						name: browser2,
-					},
+				Valid credentials check: {
+					password: variable/functionName: {
+					name: password,
 				},
-				SharedDataDeclaration: {
-					id: browser3,
-					value(shared data node): {
-						name: browser3,
-					},
+					unique identifier: variable/functionName: {
+					name: name,
 				},
-				SharedDataDeclaration: {
-					id: browser4,
-					value(shared data node): {
-						name: browser4,
-					},
 				},
-				SharedDataDeclaration: {
-					id: selectIDE,
-					value(shared data node): {
-						name: selectIDE,
-					},
+				Role check: {
+					check role : variable/functionName: {
+					name: adminRole,
 				},
-				SharedDataDeclaration: {
-					id: laptopBrand,
-					value(shared data node): {
-						name: laptopBrand,
-					},
 				},
-				redirection: {
-					redirect to: information,
+				Valid credentials check: {
+					password: string: {
+					stringValue: password,
+				},
+					unique identifier: string: {
+					stringValue: name,
+				},
+				},
+				Role check: {
+					check role : string: {
+					stringValue: role,
+				},
 				}
 			],
 		}

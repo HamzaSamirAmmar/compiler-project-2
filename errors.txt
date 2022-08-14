@@ -1,2 +1,6 @@
-line 5 at column 5: this page is already defined
-line 14 at column 24: this controller is already defined
+line 2 at column 4: Incompatible Expression type required :LogicalNode given :StringNode
+line 17 at column 14: Incompatible Expression type required :String or variable name given :DecimalNode
+line 16 at column 15: Incompatible Expression type required :String or variable name given :DecimalNode
+line 10 at column 20: Incompatible Expression type required :OneOperandMathematicalNode given :StringNode
+line 16 at column 17: Incompatible Expression type required :String or variable name given :DecimalNode
+line 10 at column 13: Incompatible Expression type required :LogicalNode given :StringNode
